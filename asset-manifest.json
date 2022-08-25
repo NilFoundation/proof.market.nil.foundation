@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/proof.market.nil.foundation/static/css/main.64c27132.css",
+    "main.js": "/proof.market.nil.foundation/static/js/main.2173bb5e.js",
+    "static/media/fontawesome-webfont.svg?v=4.4.0": "/proof.market.nil.foundation/static/media/fontawesome-webfont.10e9a51de1085c8dfe13.svg",
+    "static/media/fontawesome-webfont.ttf?v=4.4.0": "/proof.market.nil.foundation/static/media/fontawesome-webfont.f0af1680f082547a7aae.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.4.0": "/proof.market.nil.foundation/static/media/fontawesome-webfont.f7f1738ca345185e0185.woff",
+    "static/media/fontawesome-webfont.eot": "/proof.market.nil.foundation/static/media/fontawesome-webfont.09b9015b1ecaf95655b1.eot",
+    "static/media/fontawesome-webfont.woff2?v=4.4.0": "/proof.market.nil.foundation/static/media/fontawesome-webfont.0317d582b93c20f68e05.woff2",
+    "index.html": "/proof.market.nil.foundation/index.html",
+    "main.64c27132.css.map": "/proof.market.nil.foundation/static/css/main.64c27132.css.map",
+    "main.2173bb5e.js.map": "/proof.market.nil.foundation/static/js/main.2173bb5e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.64c27132.css",
+    "static/js/main.2173bb5e.js"
+  ]
+}
