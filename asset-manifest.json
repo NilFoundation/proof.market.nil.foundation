@@ -1,18 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.ffb5e437.css",
-    "main.js": "/static/js/main.da4ece16.js",
-    "static/media/fontawesome-webfont.svg?v=4.4.0": "/static/media/fontawesome-webfont.10e9a51de1085c8dfe13.svg",
-    "static/media/fontawesome-webfont.ttf?v=4.4.0": "/static/media/fontawesome-webfont.f0af1680f082547a7aae.ttf",
-    "static/media/fontawesome-webfont.woff?v=4.4.0": "/static/media/fontawesome-webfont.f7f1738ca345185e0185.woff",
-    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.09b9015b1ecaf95655b1.eot",
-    "static/media/fontawesome-webfont.woff2?v=4.4.0": "/static/media/fontawesome-webfont.0317d582b93c20f68e05.woff2",
+    "main.css": "/static/css/main.2752814f.css",
+    "main.js": "/static/js/main.ecfefe5c.js",
+    "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.b48ad290d0335879a92b.ttf",
+    "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.f9ee61fab3c11e2f3ed3.ttf",
+    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.66104b766c3d0462b3c5.woff2",
+    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.e1a247a5ef41e1975742.woff2",
     "index.html": "/index.html",
-    "main.ffb5e437.css.map": "/static/css/main.ffb5e437.css.map",
-    "main.da4ece16.js.map": "/static/js/main.da4ece16.js.map"
+    "main.2752814f.css.map": "/static/css/main.2752814f.css.map",
+    "main.ecfefe5c.js.map": "/static/js/main.ecfefe5c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ffb5e437.css",
-    "static/js/main.da4ece16.js"
+    "static/css/main.2752814f.css",
+    "static/js/main.ecfefe5c.js"
   ]
 }
