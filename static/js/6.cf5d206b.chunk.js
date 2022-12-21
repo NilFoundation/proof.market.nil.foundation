@@ -1,2 +1,0 @@
-(this["webpackJsonpproof.market.nil.foundation"]=this["webpackJsonpproof.market.nil.foundation"]||[]).push([[6],{750:function(t,c,e){"use strict";e.r(c);var n=e(3),s=e(120),i=e(1);c.default=function(){return Object(i.jsx)(n.d,{as:"main",fluid:!0,children:Object(i.jsx)(n.t,{children:Object(i.jsxs)(s.z,{children:[Object(i.jsx)(n.c,{xs:12,md:3,children:Object(i.jsx)(s.s,{})}),Object(i.jsx)(n.c,{xs:12,md:9,children:Object(i.jsx)(s.t,{})})]})})})}}}]);
-//# sourceMappingURL=6.cf5d206b.chunk.js.map
