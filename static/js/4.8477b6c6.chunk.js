@@ -1,0 +1,2 @@
+(this["webpackJsonpproof.market.nil.foundation"]=this["webpackJsonpproof.market.nil.foundation"]||[]).push([[4],{787:function(t,n,e){"use strict";e.r(n);var i=e(184),o=e(115),r=e(1);n.default=function(){return Object(r.jsxs)(r.Fragment,{children:[Object(r.jsx)(i.a,{children:Object(r.jsx)("title",{children:"Login"})}),Object(r.jsx)(o.o,{})]})}}}]);
+//# sourceMappingURL=4.8477b6c6.chunk.js.map
