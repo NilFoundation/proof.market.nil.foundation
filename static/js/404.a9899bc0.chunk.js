@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkproof_market_nil_foundation=self.webpackChunkproof_market_nil_foundation||[]).push([[404],{2404:function(n,e,r){r.r(e);var t=r(6907),i=r(27032),s=r(80184);e.default=function(){return(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)(t.ql,{children:(0,s.jsx)("title",{children:"Register"})}),(0,s.jsx)(i.B2,{})]})}}}]);
-//# sourceMappingURL=404.a9899bc0.chunk.js.map
