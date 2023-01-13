@@ -41,6 +41,7 @@ jobs:
         echo "REACT_APP_READONLY_USER=${{ secrets.READONLY_USER }}" >> .env.local
         echo "REACT_APP_SITE_DEFAULT_TITLE=${{ secrets.SITE_DEFAULT_TITLE }}" >> .env.local
         echo "REACT_APP_GA_TRACKING_ID=${{ secrets.GA_TRACKING_ID }}" >> .env.local
+        echo "REACT_APP_PROOFMARKET_TOOLCHAIN_REPO=${{ secrets.PROOFMARKET_TOOLCHAIN_REPO }}" >> .env.local
 
     - name: Build
       run: |

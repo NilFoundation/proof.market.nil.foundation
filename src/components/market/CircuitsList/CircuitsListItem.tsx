@@ -40,6 +40,7 @@ export const CurcuitsListItem = ({
                     <CircuitsListItemInfo
                         cost={cost}
                         change={change}
+                        isSelected={isSelected}
                     />
                 </Media>
             </Link>

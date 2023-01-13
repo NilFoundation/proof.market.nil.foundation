@@ -27,7 +27,7 @@ export const OrderBook = (): ReactElement => {
         'displayUserOrdersInOrderbook',
         true,
     );
-    const orderBookData = useGetOrderBookData({ priceStep });
+    const data = useGetOrderBookData({ priceStep });
 
     return (
         <DashboardCard>
@@ -36,11 +36,9 @@ export const OrderBook = (): ReactElement => {
             >
                 <div className={styles.header}>
                     <h4>Order book</h4>
-                    <OrderBookToolbar
-                        disabled={!orderBookData.data.length && orderBookData.loadingData}
-                    />
+                    <OrderBookToolbar disabled={data.loadingAsks || data.loadingBids} />
                 </div>
-                <div className={styles.orderBook}>{OrderBookViewFactory(orderBookData)}</div>
+                <div className={styles.orderBook}>{OrderBookViewFactory(data)}</div>
             </OrderBookSettingsContext.Provider>
         </DashboardCard>
     );
@@ -53,26 +51,43 @@ export const OrderBook = (): ReactElement => {
  * @returns React element.
  */
 const OrderBookViewFactory = ({
-    data,
-    columns,
-    loadingData,
+    asks,
+    bids,
+    loadingAsks,
+    loadingBids,
     isError,
     lastOrderData,
     maxVolume,
 }: UseGetOrderBookDataReturnType) => {
     switch (true) {
-        case loadingData && !data.length:
+        case (loadingAsks || loadingBids) && !asks.length && !bids.length:
             return <Spinner grow />;
         case isError:
             return <h5>Error while loading data.</h5>;
-        case !!data.length:
+        case !!asks.length || !!bids.length:
             return (
-                <OrderBookTable
-                    data={data}
-                    columns={columns}
-                    lastOrderData={lastOrderData}
-                    maxVolume={maxVolume}
-                />
+                <>
+                    <OrderBookTable
+                        type="asks"
+                        data={asks}
+                        maxVolume={maxVolume}
+                    />
+                    {lastOrderData && (
+                        <div className={styles.lastDeal}>
+                            <div className={styles.lastDealTitle}>Last deal:</div>
+                            {lastOrderData.cost && (
+                                <div className={`${lastOrderData.type}TextColor`}>
+                                    {`${lastOrderData.cost.toFixed(4)} $`}
+                                </div>
+                            )}
+                        </div>
+                    )}
+                    <OrderBookTable
+                        type="bids"
+                        data={bids}
+                        maxVolume={maxVolume}
+                    />
+                </>
             );
         default:
             return <h5>No orders.</h5>;

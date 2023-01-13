@@ -31,7 +31,11 @@ export const SocialLinks = ({ className, bottomIndent }: SocialLinksProps): Reac
     >
         {socialLinks.map(({ icon, url }) => (
             <li key={icon}>
-                <a href={url}>
+                <a
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                >
                     <Icon
                         iconName={`fa-brands fa-${icon}`}
                         srOnlyText={`${icon} link`}

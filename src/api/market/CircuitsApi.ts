@@ -47,3 +47,24 @@ export const getCircuitsInfo = (): Promise<CircuitInfo> =>
  */
 export const getCircuitsStats = (): Promise<CircuitStats> =>
     newFetcher.get(`/${databaseUrl}/${dbName}/circuit/statistics`);
+
+/**
+ *
+ * @returns .
+ */
+export const getLastProofProducerData = (): Promise<
+    Array<{ circuit_id: string; sender: string }> | undefined
+> =>
+    httpFetcher
+        .post('cursor', {
+            query: `
+                FOR s IN circuit
+                LET temp = first(for doc in ask
+                    filter doc.status == 'completed'
+                    filter doc.circuit_id == s.id
+                    sort doc.timestamp desc
+                    return {circuit_id: s.id, sender: doc.sender})
+                RETURN temp
+            `,
+        })
+        .then((x: any) => x.result);

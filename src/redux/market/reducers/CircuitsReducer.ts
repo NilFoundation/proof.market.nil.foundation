@@ -14,6 +14,7 @@ import {
     UpdateIsLoadingCircuitsInfo,
     UpdateCircuitsStats,
     UpdateIsLoadingCircuitsStats,
+    UpdateLastProofProducer,
 } from '../actions';
 
 /**
@@ -28,6 +29,7 @@ export type CircuitsReducerState = {
     isLoadingCircuitsInfo: boolean;
     circuitsStats: CircuitStats[];
     isLoadingCircuitsStats: boolean;
+    lastProofProducer?: Array<{ circuit_id: string; sender: string }>;
 };
 
 /**
@@ -42,6 +44,7 @@ const initialState: CircuitsReducerState = {
     isLoadingCircuitsInfo: false,
     circuitsStats: [],
     isLoadingCircuitsStats: false,
+    lastProofProducer: undefined,
 };
 
 /**
@@ -80,5 +83,8 @@ export const CircuitsReducer = createReducer(initialState, builder =>
         .addCase(UpdateIsLoadingCircuitsStats, (state, { payload }) => ({
             ...state,
             isLoadingCircuitsStats: payload,
-        })),
+        }))
+        .addCase(UpdateLastProofProducer, (state, { payload }) => {
+            state.lastProofProducer = payload;
+        }),
 );

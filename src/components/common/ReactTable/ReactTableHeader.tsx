@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { KeyboardEventHandler, ReactElement, useLayoutEffect, useMemo } from 'react';
+import { KeyboardEventHandler, ReactElement } from 'react';
 import { Icon } from '@nilfoundation/react-components';
 import { ColumnInstance } from 'react-table';
 import { THeader } from '../Table';
@@ -14,8 +14,6 @@ import styles from './ReactTable.module.scss';
  */
 type ReactTableHeaderProps<T extends Record<string, unknown>> = {
     column: ColumnInstance<T>;
-    // TODO - refactor after upgrading to react-table@v8
-    onlySortBy?: 'asc' | 'desc';
 };
 
 /**
@@ -26,7 +24,6 @@ type ReactTableHeaderProps<T extends Record<string, unknown>> = {
  */
 export const ReactTableHeader = <T extends Record<string, unknown>>({
     column,
-    onlySortBy,
 }: ReactTableHeaderProps<T>): ReactElement => {
     const { canSort, isSorted, isSortedDesc, toggleSortBy } = column;
 
@@ -38,20 +35,6 @@ export const ReactTableHeader = <T extends Record<string, unknown>>({
         e.preventDefault();
         toggleSortBy();
     };
-
-    // TODO - refactor after upgrading to react-table@v8
-    const shouldToggleSort = useMemo(() => {
-        if (onlySortBy === undefined) {
-            return false;
-        }
-
-        const toggleSortCondition = onlySortBy === 'asc' ? isSortedDesc : !isSortedDesc;
-        return isSorted && !!toggleSortCondition;
-    }, [onlySortBy, isSortedDesc, isSorted]);
-
-    useLayoutEffect(() => {
-        shouldToggleSort && toggleSortBy();
-    }, [shouldToggleSort, toggleSortBy]);
 
     return (
         <THeader

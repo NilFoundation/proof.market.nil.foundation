@@ -5,7 +5,7 @@
 
 import { call, put, select, takeLatest, fork, all } from 'redux-saga/effects';
 import { SagaIterator } from '@redux-saga/core';
-import { getCircuits, getCircuitsInfo, getCircuitsStats } from 'src/api';
+import { getCircuits, getCircuitsInfo, getCircuitsStats, getLastProofProducerData } from 'src/api';
 import { Circuit, CircuitInfo, CircuitStats } from 'src/models';
 import {
     UpdateCircuitsError,
@@ -15,6 +15,7 @@ import {
     UpdateIsLoadingCircuits,
     UpdateIsLoadingCircuitsInfo,
     UpdateIsLoadingCircuitsStats,
+    UpdateLastProofProducer,
     UpdateSelectedCircuitId,
 } from '../actions';
 import { ProtectedCall, UpdateUserName } from '../../login';
@@ -33,6 +34,7 @@ export function* CircuitsSaga(): SagaIterator<void> {
     yield takeLatest(UpdateUserName, GetCircuitsSaga);
     yield takeLatest(UpdateCircuitsList, SelectCircuitSaga);
     yield fork(RevalidateSaga, GetCircuitsAdditionalData, revalidateCircuitsInfoInterval);
+    yield takeLatest(UpdateCircuitsList, GetLastProofProducer);
 }
 
 /**
@@ -127,4 +129,17 @@ function* GetCircuitsStatsSaga() {
  */
 function* GetCircuitsAdditionalData() {
     yield all([fork(GetCircuitsInfoSaga), fork(GetCircuitsStatsSaga)]);
+}
+
+/**
+ * Get last proof producer data.
+ *
+ * @yields
+ */
+function* GetLastProofProducer() {
+    const result: Array<{ circuit_id: string; sender: string }> | undefined = yield call(
+        getLastProofProducerData,
+    );
+
+    yield put(UpdateLastProofProducer(result));
 }

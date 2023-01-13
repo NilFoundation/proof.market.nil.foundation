@@ -4,7 +4,7 @@
 @import "src/styles/mixins/overflowFade";
 
 .container {
-  height: 372px;
+  height: 400px;
 }
 
 .inputGroup {
@@ -22,7 +22,7 @@ div.selected {
 .listGroup {
   @include styledList;
   @include hideScrollbar;
-  height: 330px;
+  height: 360px;
   overflow: auto;
   padding-top: 8px;
   @include overflowFade(8px, true);

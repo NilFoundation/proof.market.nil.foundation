@@ -9,6 +9,7 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@sentry/react": "^7.21.1",
     "@sentry/tracing": "^7.21.1",
+    "@tanstack/react-table": "^8.7.6",
     "axios": "^0.27.2",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.5",

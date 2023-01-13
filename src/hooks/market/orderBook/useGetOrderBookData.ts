@@ -5,18 +5,10 @@
 
 import { useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { SortByFn } from 'react-table';
 import { dequal as deepEqual } from 'dequal';
 import sum from 'lodash/sum';
 import round from 'lodash/round';
-import {
-    Ask,
-    Bid,
-    CostAndEvalTime,
-    LastOrderData,
-    OrderBookTableColumn,
-    OrderBookTableData,
-} from 'src/models';
+import { Ask, Bid, CostAndEvalTime, LastOrderData, OrderBookTableData } from 'src/models';
 import {
     selectBidsList,
     selectAsksList,
@@ -38,9 +30,10 @@ export type UseGetOrderBookDataProps = {
  * Hook return type.
  */
 export type UseGetOrderBookDataReturnType = {
-    columns: OrderBookTableColumn[];
-    data: OrderBookTableData[];
-    loadingData: boolean;
+    bids: OrderBookTableData[];
+    asks: OrderBookTableData[];
+    loadingBids: boolean;
+    loadingAsks: boolean;
     isError: boolean;
     lastOrderData?: LastOrderData;
     maxVolume: number;
@@ -61,7 +54,8 @@ export const useGetOrderBookData = ({
     priceStep,
     itemsLimit = 25,
 }: UseGetOrderBookDataProps): UseGetOrderBookDataReturnType => {
-    const loadingData = useAppSelector(s => s.bidsState.isLoading || s.asksState.isLoading);
+    const loadingBids = useAppSelector(s => s.bidsState.isLoading);
+    const loadingAsks = useAppSelector(s => s.asksState.isLoading);
     const asks = useSelector(selectAsksList, deepEqual);
     const bids = useSelector(selectBidsList, deepEqual);
     const userAsks = useSelector(selectCurrentUserAsks, deepEqual);
@@ -69,35 +63,6 @@ export const useGetOrderBookData = ({
     const isError = useAppSelector(s => s.asksState.error || s.bidsState.error);
 
     const lastOrderData: LastOrderData = useMemo(() => getLastOrderData(asks), [asks]);
-
-    const columns = useMemo(
-        (): OrderBookTableColumn[] => [
-            {
-                Header: 'Orders',
-                accessor: 'ordersAmount',
-                disableSortBy: true,
-            },
-            {
-                Header: 'Cost',
-                accessor: 'cost',
-                sortType: customSortFunction,
-                sortDescFirst: true,
-            },
-            {
-                Header: 'Generation time',
-                accessor: 'eval_time',
-                sortType: customSortFunction,
-                sortDescFirst: true,
-            },
-            {
-                accessor: 'type',
-            },
-            {
-                accessor: 'userOrdersAmount',
-            },
-        ],
-        [],
-    );
 
     /**
      * Takes orders array and returns dict, where keys are costs, and values are arrays of orders.
@@ -149,11 +114,6 @@ export const useGetOrderBookData = ({
         ).slice(0, itemsLimit);
     }, [bids, userBids, itemsLimit, reduceOrdersByCostAndEvalTime]);
 
-    const data = useMemo(
-        (): OrderBookTableData[] => asksData.concat(bidsData),
-        [asksData, bidsData],
-    );
-
     const maxVolume = useMemo(
         () =>
             Math.max(
@@ -163,7 +123,15 @@ export const useGetOrderBookData = ({
         [asksData, bidsData],
     );
 
-    return { columns, data, loadingData, isError, lastOrderData, maxVolume };
+    return {
+        asks: asksData,
+        bids: bidsData,
+        loadingBids,
+        loadingAsks,
+        isError,
+        lastOrderData,
+        maxVolume,
+    };
 };
 
 /**
@@ -217,23 +185,4 @@ const getLastOrderData = (currentAsks: Ask[]): LastOrderData => {
         eval_time: completedAsks.at(-1)?.eval_time,
         type,
     };
-};
-
-/**
- * Creates react table sort by provided field fucntion.
- *
- * @param firstRow First row.
- * @param  secondRow Second row.
- * @param columnId Sorted column id.
- * @returns Sort function.
- */
-const customSortFunction: SortByFn<OrderBookTableData> = (firstRow, secondRow, columnId) => {
-    const firstValue = firstRow.values[columnId];
-    const secondValue = secondRow.values[columnId];
-
-    if (firstValue === secondValue) {
-        return 0;
-    }
-
-    return firstValue - secondValue > 0 ? -1 : 1;
 };

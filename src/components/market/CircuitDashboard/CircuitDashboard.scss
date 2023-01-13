@@ -37,7 +37,7 @@
   background-color: $c-base-darker;
 
   .circuitChart {
-    height: calc(100% - 80px);
+    height: calc(100% - 135px);
   }
 
   @include responsive(sm) {

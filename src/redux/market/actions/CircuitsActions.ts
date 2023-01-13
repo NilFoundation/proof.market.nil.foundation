@@ -49,3 +49,10 @@ export const UpdateCircuitsStats = createAction<CircuitStats[]>('@circuits/UPDAT
 export const UpdateIsLoadingCircuitsStats = createAction<boolean>(
     '@circuits/UPDATE_IS_LOADING_CIRCUITS_STATS',
 );
+
+/**
+ * Update last proof producer.
+ */
+export const UpdateLastProofProducer = createAction<
+    Array<{ circuit_id: string; sender: string }> | undefined
+>('@circuits/UPDATE_LAST_PROOF_PRODUCER');

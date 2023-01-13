@@ -8,7 +8,6 @@ import { Container, Row, Col } from '@nilfoundation/react-components';
 import { Helmet } from 'react-helmet-async';
 import {
     CircuitsList,
-    CircuitDetailedInfo,
     OrderManagementContextProvider,
     CircuitDashboard,
     OrderBook,
@@ -16,6 +15,7 @@ import {
     TradeHistory,
     ManageOrdersPanel,
     CircuitInfoPanel,
+    LastProofProducer,
 } from '../components';
 
 /**
@@ -37,58 +37,26 @@ const MarketView = (): ReactElement => (
                 md={3}
             >
                 <CircuitsList />
-                <CircuitDetailedInfo />
+                <TradeHistory />
+                <LastProofProducer />
             </Col>
-            <Col
-                xs={12}
-                md={9}
-            >
-                <Row>
-                    <Col
-                        xs={12}
-                        md={7}
-                        lg={8}
-                    >
-                        <Row>
-                            <Col xs={12}>
-                                <CircuitInfoPanel />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12}>
-                                <CircuitDashboard />
-                            </Col>
-                        </Row>
-                    </Col>
-                    <OrderManagementContextProvider>
-                        <Col
-                            xs={12}
-                            md={5}
-                            lg={4}
-                        >
-                            <OrderBook />
-                        </Col>
-                        <Col
-                            xs={12}
-                            md={4}
-                        >
-                            <CreateOrdersPanel />
-                        </Col>
-                        <Col
-                            xs={12}
-                            md={4}
-                        >
-                            <ManageOrdersPanel />
-                        </Col>
-                        <Col
-                            xs={12}
-                            md={4}
-                        >
-                            <TradeHistory />
-                        </Col>
-                    </OrderManagementContextProvider>
-                </Row>
-            </Col>
+            <OrderManagementContextProvider>
+                <Col
+                    xs={12}
+                    md={6}
+                >
+                    <CircuitInfoPanel />
+                    <CircuitDashboard />
+                    <OrderBook />
+                </Col>
+                <Col
+                    xs={12}
+                    md={3}
+                >
+                    <CreateOrdersPanel />
+                    <ManageOrdersPanel />
+                </Col>
+            </OrderManagementContextProvider>
         </Row>
     </Container>
 );

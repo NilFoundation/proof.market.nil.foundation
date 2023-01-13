@@ -6,10 +6,9 @@
 import { ReactElement, useState } from 'react';
 import { useAppSelector } from 'src/redux';
 import { TradeOrderType } from 'src/models';
-import { DashboardCard, Details } from '../../common';
+import { DashboardCard } from '../../common';
 import { ProtectedContent } from '../../login';
 import { CreateBidForm } from '../CreateBidForm';
-import { CreateAskForm } from '../CreateAskForm';
 import { CreateOrdersTabs } from './CreateOrdersTabs';
 import './CreateOrdersPanel.scss';
 
@@ -24,17 +23,16 @@ export const CreateOrdersPanel = (): ReactElement => {
 
     return (
         <DashboardCard>
-            <Details title={<h4>Create orders</h4>}>
-                <div className="cerateOrdersPanel">
-                    <ProtectedContent overlayTitle="Authorization is required to create orders">
-                        <CreateOrdersTabs
-                            currentTab={tab}
-                            onSetTab={setTab}
-                        />
-                        {tabFactory(tab, selectedCircuitId)}
-                    </ProtectedContent>
-                </div>
-            </Details>
+            <h4>Create orders</h4>
+            <div className="cerateOrdersPanel">
+                <ProtectedContent overlayTitle="Authorization is required to create orders">
+                    <CreateOrdersTabs
+                        currentTab={tab}
+                        onSetTab={setTab}
+                    />
+                    {tabFactory(tab, selectedCircuitId)}
+                </ProtectedContent>
+            </div>
         </DashboardCard>
     );
 };
@@ -55,7 +53,18 @@ const tabFactory = (tab: TradeOrderType, selectedCircuitId?: number) => {
         case TradeOrderType.buy:
             return <CreateBidForm />;
         case TradeOrderType.sell:
-            return <CreateAskForm />;
+            return (
+                <div className="text-center">
+                    If you want generate proofs, please consider to use our{' '}
+                    <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href={process.env.REACT_APP_PROOFMARKET_TOOLCHAIN_REPO}
+                    >
+                        proof-market toolchain repository
+                    </a>
+                </div>
+            );
         default:
             return <></>;
     }

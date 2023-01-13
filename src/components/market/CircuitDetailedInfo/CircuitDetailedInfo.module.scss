@@ -1,55 +1,16 @@
 @import "src/styles/constants.scss";
-@import "src/styles/mixins/responsive";
-@import "src/styles/mixins/hideScrollbar";
 
 .container {
-  position: relative;
-}
-
-.content {
-  height: 594px;
-  overflow: auto;
-  @include hideScrollbar;
-
-  @include responsive(sm) {
-    height: auto;
-  }
-
-  p {
-    position: relative;
-  }
-}
-
-.jsonView {
-  > div {
-    line-break: anywhere;
-  }
+  height: 65px;
+  padding: 0 15px;
+  background-color: $c-base-darker;
 }
 
 .description {
-  word-wrap: break-word;
-}
+  margin-bottom: 0.5rem;
+  // TODO - add overflow ellipsis
 
-.imageContainer {
-  position: absolute;
-  top: 100;
-  left: 0;
-  background-color: transparent;
-  aspect-ratio: 1/1;
-  width: 100%;
-  padding: 5rem;
-  z-index: 0;
-  filter: grayscale(1);
-
-  > img {
-    height: 100%;
-    width: 100%;
-    opacity: 0.15;
+  span {
+    margin-right: 0.5rem;
   }
-}
-
-.toolbar {
-  height: 64px;
-  padding-top: 8px;
-  margin-bottom: 12px !important;
 }

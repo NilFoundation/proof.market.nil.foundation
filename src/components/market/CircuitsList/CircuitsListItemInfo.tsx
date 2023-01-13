@@ -15,6 +15,7 @@ import styles from './CircuitsList.module.scss';
 type CircuitsListItemInfoProps = {
     cost?: number | null;
     change?: number | null;
+    isSelected?: boolean;
 };
 
 /**
@@ -26,6 +27,7 @@ type CircuitsListItemInfoProps = {
 export const CircuitsListItemInfo = memo(function CircuitsListItemInfo({
     cost,
     change,
+    isSelected,
 }: CircuitsListItemInfoProps): ReactElement {
     const isLoadingInfo = useAppSelector(s => s.circuitsState.isLoadingCircuitsInfo);
 
@@ -36,6 +38,7 @@ export const CircuitsListItemInfo = memo(function CircuitsListItemInfo({
                 <PriceChangeIndicator
                     change={change}
                     className={styles.dailyChangeIndicator}
+                    plainColor={isSelected}
                 />
             )}
             {isLoadingInfo && cost === undefined && change === undefined && <Spinner />}

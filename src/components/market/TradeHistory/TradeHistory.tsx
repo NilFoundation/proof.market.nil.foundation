@@ -6,7 +6,7 @@
 import { ReactElement } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import { useGetTradeHistoryData, UseGetTradeHistoryDataReturnType } from 'src/hooks';
-import { Details, DashboardCard } from '../../common';
+import { DashboardCard } from '../../common';
 import { TradeHistoryTable } from './TradeHistoryTable';
 import styles from './TradeHistory.module.scss';
 
@@ -20,9 +20,8 @@ export const TradeHistory = (): ReactElement => {
 
     return (
         <DashboardCard>
-            <Details title={<h4>Trades</h4>}>
-                <div className={styles.container}>{TradeHistoryViewFactory({ ...data })}</div>
-            </Details>
+            <h4>Trades</h4>
+            <div className={styles.container}>{TradeHistoryViewFactory({ ...data })}</div>
         </DashboardCard>
     );
 };

@@ -8,7 +8,7 @@ import { Spinner } from '@nilfoundation/react-components';
 import { useAppSelector } from 'src/redux';
 import { useGetManageOrdersData } from 'src/hooks';
 import { ManageOrdersData } from 'src/models';
-import { DashboardCard, Details } from '../../common';
+import { DashboardCard } from '../../common';
 import { ProtectedContent } from '../../login';
 import { ManageOrdersTab } from './ManageOrdersTab';
 import { ManageOrdersPanelTabs } from './ManageOrdersPanelTabs';
@@ -28,28 +28,25 @@ export const ManageOrdersPanel = (): ReactElement => {
 
     return (
         <DashboardCard>
-            <Details title={<h4>Manage orders</h4>}>
-                <div className="manageOrdersPanel">
-                    <ProtectedContent overlayTitle="Authorization is required to manage orders">
-                        <ManageOrdersPanelTabs
-                            currentTab={tab}
-                            onSetTab={setTab}
-                        />
-                        {selectedCircuitId !== undefined ? (
-                            tabFactory(
-                                tab,
-                                isError,
-                                loadingData,
-                                tab === ManageOrdersTab.active
-                                    ? activeOrdersData
-                                    : historyOrdersData,
-                            )
-                        ) : (
-                            <h5>Please, select circuit to display orders.</h5>
-                        )}
-                    </ProtectedContent>
-                </div>
-            </Details>
+            <h4>Manage orders</h4>
+            <div className="manageOrdersPanel">
+                <ProtectedContent overlayTitle="Authorization is required to manage orders">
+                    <ManageOrdersPanelTabs
+                        currentTab={tab}
+                        onSetTab={setTab}
+                    />
+                    {selectedCircuitId !== undefined ? (
+                        tabFactory(
+                            tab,
+                            isError,
+                            loadingData,
+                            tab === ManageOrdersTab.active ? activeOrdersData : historyOrdersData,
+                        )
+                    ) : (
+                        <h5>Please, select circuit to display orders.</h5>
+                    )}
+                </ProtectedContent>
+            </div>
         </DashboardCard>
     );
 };

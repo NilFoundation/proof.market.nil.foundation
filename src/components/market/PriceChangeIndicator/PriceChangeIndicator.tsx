@@ -15,6 +15,7 @@ type PriceChangeIndicatorProps = {
     change: number;
     className?: string;
     toFixed?: number;
+    plainColor?: boolean;
 };
 
 /**
@@ -27,12 +28,13 @@ export const PriceChangeIndicator = ({
     change,
     className,
     toFixed = 4,
+    plainColor,
 }: PriceChangeIndicatorProps): ReactElement => {
     const isGrow = !!change && change > 0;
     const iconName = `fa-solid fa-arrow-${isGrow ? 'up' : 'down'}`;
     const computedClassName = clsx(
         styles.priceChangeIndicator,
-        isGrow ? 'growTextColor' : 'lossTextColor',
+        plainColor ? '' : isGrow ? 'growTextColor' : 'lossTextColor',
         className,
     );
 

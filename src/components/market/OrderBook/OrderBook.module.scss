@@ -4,7 +4,7 @@
 @import "src/styles/mixins/transparentButton";
 
 .orderBook {
-  height: 548px;
+  height: 493px;
 }
 
 .checkboxContainer {
@@ -40,13 +40,13 @@
 }
 
 .rowsContainer {
-  height: 224px;
+  height: 196px;
   overflow: auto;
   @include hideScrollbar;
 
   &:first-child {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 
     div[role="cell"] {
       height: 28px;
@@ -82,56 +82,34 @@
         margin-left: 4px;
         background-color: $c-base-light !important;
       }
-
-      &:first-child {
-        justify-content: flex-start;
-        padding-left: 5%;
-      }
     }
   }
 }
 
 .ask {
-  &::after {
-    background-color: $c-danger;
-  }
-
   div[role="cell"]:first-child {
     color: $c-danger;
   }
 }
 
 .bid {
-  &::after {
-    background-color: $c-success;
-  }
-
   div[role="cell"]:first-child {
     color: $c-success;
   }
 }
 
-.lastOrderDataContainer {
+.lastDeal {
   width: 100%;
   background-color: $c-base-darker;
   z-index: 3;
-  height: 64px;
+  height: 36px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+}
 
-  > div:first-of-type {
-    font-size: 1.75rem;
-
-    &.grow {
-      color: $c-success;
-    }
-
-    &.loss {
-      color: $c-danger;
-    }
-  }
+.lastDealTitle {
+  margin-right: 0.5rem;
+  font-weight: bold;
 }
 
 .changePriceStepButton {

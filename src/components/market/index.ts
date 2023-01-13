@@ -15,3 +15,4 @@ export * from './TradeHistory';
 export * from './ManageOrdersPanel';
 export * from './PriceChangeIndicator';
 export * from './CircuitInfoPanel';
+export * from './LastProofProducer';

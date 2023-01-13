@@ -4,10 +4,11 @@
  */
 
 import { ReactElement } from 'react';
+import { dequal as deepEqual } from 'dequal';
 import { DashboardCard } from 'src/components/common';
 import { selectCurrentCircuit, useAppSelector } from 'src/redux';
 import { renderDashOnEmptyValue } from 'src/utils';
-import { PriceChangeIndicator } from '../PriceChangeIndicator';
+import { CircuitDetailedInfo } from '../CircuitDetailedInfo';
 import styles from './CircuitInfoPanel.module.scss';
 
 /**
@@ -17,10 +18,10 @@ import styles from './CircuitInfoPanel.module.scss';
  */
 export const CircuitInfoPanel = (): ReactElement => {
     const currentCircuit = useAppSelector(selectCurrentCircuit);
-    const circuitInfo = useAppSelector(s =>
-        s.circuitsState.circuitsInfo.find(x => x.circuit_id === currentCircuit?.id),
+    const stats = useAppSelector(
+        s => s.circuitsState.circuitsStats.find(x => x.circuit_id === currentCircuit?.id),
+        deepEqual,
     );
-    const change = circuitInfo?.daily_change;
 
     return (
         <DashboardCard className={styles.panel}>
@@ -31,32 +32,19 @@ export const CircuitInfoPanel = (): ReactElement => {
                     </div>
                 )}
                 <div>
-                    <div className={`text-muted ${styles.title}`}>Current cost</div>
-                    <div>{renderDashOnEmptyValue(circuitInfo?.current)}</div>
+                    <div className={`text-muted ${styles.title}`}>Average cost</div>
+                    <div>{renderDashOnEmptyValue(stats?.avg_cost)}</div>
                 </div>
                 <div>
-                    <div className={`text-muted ${styles.title}`}>24h Change</div>
-                    <div>
-                        {!!change ? (
-                            <PriceChangeIndicator change={change} />
-                        ) : (
-                            renderDashOnEmptyValue(undefined)
-                        )}
-                    </div>
+                    <div className={`text-muted ${styles.title}`}>Average generation time</div>
+                    <div>{renderDashOnEmptyValue(stats?.avg_eval_time)}</div>
                 </div>
                 <div>
-                    <div className={`text-muted ${styles.title}`}>24h High</div>
-                    <div>{renderDashOnEmptyValue(circuitInfo?.max)}</div>
-                </div>
-                <div>
-                    <div className={`text-muted ${styles.title}`}>24h Low</div>
-                    <div>{renderDashOnEmptyValue(circuitInfo?.min)}</div>
-                </div>
-                <div>
-                    <div className={`text-muted ${styles.title}`}>24h Volume</div>
-                    <div>{renderDashOnEmptyValue(circuitInfo?.volume, 0)}</div>
+                    <div className={`text-muted ${styles.title}`}>Completed</div>
+                    <div>{renderDashOnEmptyValue(stats?.completed, 0)}</div>
                 </div>
             </div>
+            <CircuitDetailedInfo />
         </DashboardCard>
     );
 };
