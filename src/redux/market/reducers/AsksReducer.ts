@@ -45,7 +45,7 @@ export const AsksReducer = createReducer(initialState, builder =>
         }))
         .addCase(UpdateUserAsksList, (state, { payload }) => ({
             ...state,
-            asks: payload,
+            userAsks: payload,
         }))
         .addCase(AddAsk, (state, { payload }) => {
             state.userAsks.push(payload);

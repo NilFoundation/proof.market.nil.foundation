@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { call, fork, put, takeLatest, select } from 'redux-saga/effects';
+import { call, fork, put, takeLatest, select, all } from 'redux-saga/effects';
 import { SagaIterator } from '@redux-saga/core';
 import { getAsks } from 'src/api';
 import { Ask } from 'src/models';
@@ -13,9 +13,11 @@ import {
     UpdateAsksList,
     UpdateIsLoadingAsks,
     UpdateAsksError,
+    UpdateUserAsksList,
 } from '../actions';
 import { selectCurrentCircuitId } from '../selectors';
 import { RevalidateSaga } from '../../common';
+import { selectUserName } from '../../login';
 
 const revalidateAsksDelay = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVAL) || 3000;
 
@@ -27,6 +29,7 @@ const revalidateAsksDelay = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVA
 export function* AsksSaga(): SagaIterator<void> {
     yield takeLatest(UpdateSelectedCircuitId, function* () {
         yield put(UpdateAsksList([]));
+        yield put(UpdateUserAsksList([]));
         yield fork(GetAsksSaga);
     });
     yield fork(RevalidateSaga, GetAsksSaga, revalidateAsksDelay);
@@ -39,8 +42,9 @@ export function* AsksSaga(): SagaIterator<void> {
  */
 function* GetAsksSaga(): SagaIterator<void> {
     const circuitId: string | undefined = yield select(selectCurrentCircuitId);
+    const user: string | undefined = yield select(selectUserName);
 
-    if (circuitId === undefined) {
+    if (circuitId === undefined || !user) {
         return;
     }
 
@@ -48,10 +52,17 @@ function* GetAsksSaga(): SagaIterator<void> {
         yield put(UpdateAsksError(false));
         yield put(UpdateIsLoadingAsks(true));
 
-        const asks: Ask[] = yield call(ProtectedCall, getAsks, { statement_key: circuitId }, 1000);
+        const [asks, userAsks]: Array<Ask[]> = yield all([
+            call(ProtectedCall, getAsks, { statement_key: circuitId }, 200),
+            call(ProtectedCall, getAsks, { statement_key: circuitId, sender: user }, 100000),
+        ]);
 
         if (asks !== undefined) {
             yield put(UpdateAsksList(asks));
+        }
+
+        if (userAsks !== undefined) {
+            yield put(UpdateUserAsksList(userAsks));
         }
     } catch (e) {
         yield put(UpdateAsksError(true));

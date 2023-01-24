@@ -23,7 +23,7 @@ export const getAsks = (parameters: GetOrdersParameters, limit?: number): Promis
     httpFetcher.get(
         `?${limit !== undefined ? `limit=${limit}&` : ''}q=[{${Object.entries(parameters)
             .map(([x, y]) => `"key": "${x}", "value": "${y}"`)
-            .join('')}}]`,
+            .join(', ')}}]`,
     );
 
 /**

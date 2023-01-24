@@ -96,7 +96,7 @@ export const useGetOrderBookData = ({
 
     const asksData = useMemo(() => {
         return createOrderBookData(
-            [...asks, ...userAsks]
+            [...new Map([...asks, ...userAsks].map(x => [x._key, x])).values()]
                 .filter(x => x.status === 'created')
                 .reduce(reduceOrdersByCostAndEvalTime, new Map()),
             'ask',
@@ -106,7 +106,7 @@ export const useGetOrderBookData = ({
 
     const bidsData = useMemo(() => {
         return createOrderBookData(
-            [...bids, ...userBids]
+            [...new Map([...bids, ...userBids].map(x => [x._key, x])).values()]
                 .filter(x => x.status === 'created')
                 .reduce(reduceOrdersByCostAndEvalTime, new Map()),
             'bid',

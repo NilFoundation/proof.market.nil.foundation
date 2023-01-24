@@ -10,10 +10,8 @@ import { createBearerHttpClient } from '../common';
  * Get order parameters.
  */
 export type GetOrdersParameters = {
-    statement_key?: string;
     limit?: number;
-    status?: TradeOrder['status'];
-};
+} & Partial<TradeOrder>;
 
 const db = process.env.REACT_APP_DBMS_DEFAULT_DATABASE;
 const apiVersion = process.env.REACT_APP_API_VERSION;
@@ -31,7 +29,7 @@ export const getBids = (parameters: GetOrdersParameters, limit?: number): Promis
     httpFetcher.get(
         `?${limit !== undefined ? `limit=${limit}&` : ''}q=[{${Object.entries(parameters)
             .map(([x, y]) => `"key": "${x}", "value": "${y}"`)
-            .join('')}}]`,
+            .join(', ')}}]`,
     );
 
 /**

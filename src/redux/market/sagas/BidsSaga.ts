@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { call, fork, put, select, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, select, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from '@redux-saga/core';
 import { getBids } from 'src/api';
 import { Bid } from 'src/models';
@@ -13,9 +13,11 @@ import {
     UpdateBidsList,
     UpdateIsLoadingBids,
     UpdateBidsError,
+    UpdateUserBidsList,
 } from '../actions';
 import { selectCurrentCircuitId } from '../selectors';
 import { RevalidateSaga } from '../../common';
+import { selectUserName } from '../../login';
 
 const revalidateBidsDelay = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVAL) || 3000;
 
@@ -27,6 +29,7 @@ const revalidateBidsDelay = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVA
 export function* BidsSaga(): SagaIterator<void> {
     yield takeLatest(UpdateSelectedCircuitId, function* () {
         yield put(UpdateBidsList([]));
+        yield put(UpdateUserBidsList([]));
         yield fork(GetBidsSaga);
     });
     yield fork(RevalidateSaga, GetBidsSaga, revalidateBidsDelay);
@@ -39,8 +42,9 @@ export function* BidsSaga(): SagaIterator<void> {
  */
 function* GetBidsSaga(): SagaIterator<void> {
     const circuitId: string | undefined = yield select(selectCurrentCircuitId);
+    const user: string | undefined = yield select(selectUserName);
 
-    if (circuitId === undefined) {
+    if (circuitId === undefined || !user) {
         return;
     }
 
@@ -48,10 +52,17 @@ function* GetBidsSaga(): SagaIterator<void> {
         yield put(UpdateBidsError(false));
         yield put(UpdateIsLoadingBids(true));
 
-        const bids: Bid[] = yield call(ProtectedCall, getBids, { statement_key: circuitId }, 1000);
+        const [bids, userBids]: Array<Bid[]> = yield all([
+            call(ProtectedCall, getBids, { statement_key: circuitId }, 200),
+            call(ProtectedCall, getBids, { statement_key: circuitId, sender: user }, 100000),
+        ]);
 
         if (bids !== undefined) {
             yield put(UpdateBidsList(bids));
+        }
+
+        if (userBids !== undefined) {
+            yield put(UpdateUserBidsList(userBids));
         }
     } catch (e) {
         yield put(UpdateBidsError(true));
