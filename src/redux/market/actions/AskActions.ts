@@ -12,6 +12,11 @@ import { Ask } from 'src/models';
 export const UpdateAsksList = createAction<Ask[]>('@asks/UPDATE_ASKS_LIST');
 
 /**
+ * Update user asks list.
+ */
+export const UpdateUserAsksList = createAction<Ask[]>('@asks/UPDATE_USER_ASKS_LIST');
+
+/**
  * Add ask.
  */
 export const AddAsk = createAction<Ask>('@asks/ADD_ASK');

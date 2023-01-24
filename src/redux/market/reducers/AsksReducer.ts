@@ -11,6 +11,7 @@ import {
     UpdateAsksError,
     UpdateIsLoadingAsks,
     RemoveAsk,
+    UpdateUserAsksList,
 } from '../actions';
 
 /**
@@ -18,6 +19,7 @@ import {
  */
 export type AsksReducerState = {
     asks: Ask[];
+    userAsks: Ask[];
     isLoading: boolean;
     error: boolean;
 };
@@ -27,6 +29,7 @@ export type AsksReducerState = {
  */
 const initialState: AsksReducerState = {
     asks: [],
+    userAsks: [],
     isLoading: false,
     error: false,
 };
@@ -40,8 +43,12 @@ export const AsksReducer = createReducer(initialState, builder =>
             ...state,
             asks: payload,
         }))
+        .addCase(UpdateUserAsksList, (state, { payload }) => ({
+            ...state,
+            asks: payload,
+        }))
         .addCase(AddAsk, (state, { payload }) => {
-            state.asks.push(payload);
+            state.userAsks.push(payload);
         })
         .addCase(UpdateIsLoadingAsks, (state, { payload }) => ({
             ...state,

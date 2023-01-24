@@ -11,6 +11,7 @@ import {
     UpdateBidsError,
     UpdateIsLoadingBids,
     RemoveBid,
+    UpdateUserBidsList,
 } from '../actions';
 
 /**
@@ -18,6 +19,7 @@ import {
  */
 export type BidsReducerState = {
     bids: Bid[];
+    userBids: Bid[];
     isLoading: boolean;
     error: boolean;
 };
@@ -27,6 +29,7 @@ export type BidsReducerState = {
  */
 const initialState: BidsReducerState = {
     bids: [],
+    userBids: [],
     isLoading: false,
     error: false,
 };
@@ -40,8 +43,12 @@ export const BidsReducer = createReducer(initialState, builder =>
             ...state,
             bids: payload,
         }))
+        .addCase(UpdateUserBidsList, (state, { payload }) => ({
+            ...state,
+            userBids: payload,
+        }))
         .addCase(AddBid, (state, { payload }) => {
-            state.bids.push(payload);
+            state.userBids.push(payload);
         })
         .addCase(UpdateIsLoadingBids, (state, { payload }) => ({
             ...state,

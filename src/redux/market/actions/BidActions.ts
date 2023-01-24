@@ -12,6 +12,11 @@ import { Bid } from 'src/models';
 export const UpdateBidsList = createAction<Bid[]>('@bids/UPDATE_BIDS_LIST');
 
 /**
+ * Update user bids list.
+ */
+export const UpdateUserBidsList = createAction<Bid[]>('@bids/UPDATE_USER_BIDS_LIST');
+
+/**
  * Add bid.
  */
 export const AddBid = createAction<Bid>('@bids/ADD_BID');
