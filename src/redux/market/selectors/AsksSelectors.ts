@@ -6,7 +6,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { Ask } from 'src/models';
 import { RootStateType } from 'src/redux';
-import { selectUserName } from '../../login';
 
 /**
  * Select all asks from state.
@@ -17,17 +16,18 @@ import { selectUserName } from '../../login';
 export const selectAsksList = (s: RootStateType): Ask[] => s.asksState.asks;
 
 /**
+ * Select all user asks.
+ *
+ * @param s State.
+ * @returns User asks.
+ */
+export const selectCurrentUserAsks = (s: RootStateType): Ask[] => s.asksState.userAsks;
+
+/**
  * Select all completed asks.
  */
 export const selectCompletedAsks = createSelector(selectAsksList, asks =>
     asks.filter(x => x.status === 'completed'),
-);
-
-/**
- * Select asks, created by current user.
- */
-export const selectCurrentUserAsks = createSelector(selectAsksList, selectUserName, (asks, user) =>
-    asks.filter(x => x.sender === user),
 );
 
 /**
