@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkproof_market_nil_foundation=self.webpackChunkproof_market_nil_foundation||[]).push([[768],{63768:function(n,e,r){r.r(e);var t=r(6907),i=r(16142),o=r(80184);e.default=function(){return(0,o.jsxs)(o.Fragment,{children:[(0,o.jsx)(t.ql,{children:(0,o.jsx)("title",{children:"Login"})}),(0,o.jsx)(i.U0,{})]})}}}]);
+//# sourceMappingURL=768.12acbffe.chunk.js.map
