@@ -53,7 +53,7 @@ function* GetBidsSaga(): SagaIterator<void> {
         yield put(UpdateIsLoadingBids(true));
 
         const [bids, userBids]: Array<Bid[]> = yield all([
-            call(ProtectedCall, getBids, { statement_key: circuitId }, 200),
+            call(ProtectedCall, getBids, { statement_key: circuitId, status: 'created' }, 200),
             call(ProtectedCall, getBids, { statement_key: circuitId, sender: user }, 100000),
         ]);
 
