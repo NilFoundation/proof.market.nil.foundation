@@ -41,7 +41,7 @@ function* HandlePageVisibilityChange({
 
         notificationActions?.create({
             title: 'Network warning',
-            message: 'You may need to wait before data updates',
+            message: 'Please wait before data updates',
             variant: Variant.warning,
         });
 
