@@ -60,6 +60,7 @@ export const BidsReducer = createReducer(initialState, builder =>
         }))
         .addCase(RemoveBid, (state, { payload }) => ({
             ...state,
-            asks: state.bids.filter(x => payload !== x._key),
+            bids: state.bids.filter(x => payload !== x._key),
+            userBids: state.userBids.filter(x => payload !== x._key),
         })),
 );
