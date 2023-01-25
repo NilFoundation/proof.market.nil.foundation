@@ -4,7 +4,7 @@
  */
 
 import { Bid, CreateBid, TradeOrder } from 'src/models';
-import { createBearerHttpClient } from '../common';
+import { apiBaseUrl, createBearerHttpClient } from '../common';
 
 /**
  * Get order parameters.
@@ -13,10 +13,7 @@ export type GetOrdersParameters = {
     limit?: number;
 } & Partial<TradeOrder>;
 
-const db = process.env.REACT_APP_DBMS_DEFAULT_DATABASE;
-const apiVersion = process.env.REACT_APP_API_VERSION;
-
-const httpFetcher = createBearerHttpClient(`_db/${db}/${apiVersion}/bid`);
+const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/bid`);
 
 /**
  * Get bids by parameters.

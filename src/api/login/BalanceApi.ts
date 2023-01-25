@@ -3,12 +3,9 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { createBearerHttpClient } from '../common';
+import { apiBaseUrl, createBearerHttpClient } from '../common';
 
-const db = process.env.REACT_APP_DBMS_DEFAULT_DATABASE;
-const apiVersion = process.env.REACT_APP_API_VERSION;
-
-const httpFetcher = createBearerHttpClient(`_db/${db}/${apiVersion}/user`);
+const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/user`);
 
 /**
  * Get user balance.

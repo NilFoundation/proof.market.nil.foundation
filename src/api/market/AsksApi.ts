@@ -4,13 +4,10 @@
  */
 
 import { Ask, CreateAsk } from '../../models';
-import { createBearerHttpClient } from '../common';
+import { apiBaseUrl, createBearerHttpClient } from '../common';
 import { GetOrdersParameters } from './BidsApi';
 
-const db = process.env.REACT_APP_DBMS_DEFAULT_DATABASE;
-const apiVersion = process.env.REACT_APP_API_VERSION;
-
-const httpFetcher = createBearerHttpClient(`_db/${db}/${apiVersion}/ask`);
+const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/ask`);
 
 /**
  * Get asks by parameters.

@@ -3,14 +3,10 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { createBearerHttpClient } from '../common';
+import { apiBaseUrl, createBearerHttpClient } from '../common';
 import { RegisterData } from '../../models';
 
-const db = process.env.REACT_APP_DBMS_DEFAULT_DATABASE;
-const apiVersion = process.env.REACT_APP_API_VERSION;
-
-const newFetcher = createBearerHttpClient(`_db/${db}/${apiVersion}`, false, false);
-const httpFetcher = createBearerHttpClient(`_db/${db}/_api/`);
+const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/user`, false, false);
 
 /**
  * Register user.
@@ -19,7 +15,7 @@ const httpFetcher = createBearerHttpClient(`_db/${db}/_api/`);
  * @returns .
  */
 export const signUp = (registerData: RegisterData): Promise<RegisterData> =>
-    newFetcher.post('/user/signup', registerData);
+    httpFetcher.post('/signup', registerData);
 
 /**
  * Check if username is unique.
@@ -28,12 +24,4 @@ export const signUp = (registerData: RegisterData): Promise<RegisterData> =>
  * @returns True if username is unique.
  */
 export const checkIsUsernameUnique = (userNameToCheck: string): Promise<boolean> =>
-    httpFetcher
-        .post('cursor', {
-            query: `
-            for doc in user
-            filter doc.user.user == '${userNameToCheck}'
-            return doc
-        `,
-        })
-        .then((x: any) => x.result.length === 0);
+    httpFetcher.head(`/${userNameToCheck}`);

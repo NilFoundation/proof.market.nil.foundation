@@ -53,6 +53,6 @@ export const UpdateIsLoadingCircuitsStats = createAction<boolean>(
 /**
  * Update last proof producer.
  */
-export const UpdateLastProofProducer = createAction<Array<LastProofProducer> | undefined>(
+export const UpdateLastProofProducer = createAction<Array<LastProofProducer | null> | undefined>(
     '@circuits/UPDATE_LAST_PROOF_PRODUCER',
 );

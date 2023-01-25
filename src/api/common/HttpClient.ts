@@ -84,4 +84,16 @@ export class HttpClient {
         const response = await this.client.delete(url, config);
         return response.data;
     }
+
+    /**
+     * HEAD.
+     *
+     * @param url - Url.
+     * @param config - Config.
+     * @memberof HttpClient
+     */
+    public async head<TResponse>(url: string, config?: AxiosRequestConfig): Promise<TResponse> {
+        const response = await this.client.head<TResponse>(url, config);
+        return response.data;
+    }
 }

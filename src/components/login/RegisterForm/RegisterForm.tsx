@@ -28,6 +28,7 @@ import { AuthCard } from '../AuthCard';
 import styles from './RegisterForm.module.scss';
 
 const usernameRequiredMinLength = 3;
+const usernameAndPwdMaxLength = 30;
 
 /**
  * Password input type.
@@ -84,6 +85,7 @@ export const RegisterForm = (): ReactElement => {
     const { ref, ...restRegister } = register('user', {
         required: true,
         minLength: usernameRequiredMinLength,
+        maxLength: usernameAndPwdMaxLength,
     });
     const showPasswdInput = useMemo(() => !!dirtyFields.user, [dirtyFields.user]);
     const showSubmitButton = useMemo(() => !!dirtyFields.passwd, [dirtyFields.passwd]);
@@ -94,8 +96,14 @@ export const RegisterForm = (): ReactElement => {
                 return;
             }
 
-            const result = await checkIsUsernameUnique(name);
-            setUserNameIsUnique(result);
+            try {
+                await checkIsUsernameUnique(name);
+                setUserNameIsUnique(false);
+            } catch (e) {
+                if (e?.response?.status === 404) {
+                    setUserNameIsUnique(true);
+                }
+            }
         }, 180),
     ).current;
 
@@ -160,7 +168,10 @@ export const RegisterForm = (): ReactElement => {
                                         placeholder="password"
                                         aria-label="password"
                                         autoComplete="off"
-                                        {...register('passwd', { required: true })}
+                                        {...register('passwd', {
+                                            required: true,
+                                            maxLength: usernameAndPwdMaxLength,
+                                        })}
                                     />
                                     <InputGroup.Buttons>
                                         <Button onClick={switchPwdInputType}>

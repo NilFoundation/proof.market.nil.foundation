@@ -29,7 +29,7 @@ export type CircuitsReducerState = {
     isLoadingCircuitsInfo: boolean;
     circuitsStats: CircuitStats[];
     isLoadingCircuitsStats: boolean;
-    lastProofProducer?: Array<LastProofProducer>;
+    lastProofProducer?: Array<LastProofProducer | null>;
 };
 
 /**

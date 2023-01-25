@@ -5,3 +5,4 @@
 
 export * from './HttpClient';
 export * from './BearerHttpClient';
+export * from './apiHelpers';
