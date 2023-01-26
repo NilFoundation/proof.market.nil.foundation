@@ -1,4 +1,5 @@
 @import "src/styles/constants.scss";
+@import "src/styles/mixins/responsive";
 
 .loginContainer {
   background-color: $c-base;
@@ -6,6 +7,11 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+
+  @include responsive(sm) {
+    background-color: $c-base-darker;
+    padding-top: 4rem;
+  }
 }
 
 .copyright {
