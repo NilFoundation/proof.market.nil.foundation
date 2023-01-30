@@ -26,5 +26,10 @@ export const configureSentry = (): void => {
         dsn,
         integrations: [new BrowserTracing()],
         tracesSampleRate: 0.2,
+        denyUrls: [
+            // Chrome extensions
+            /extensions\//i,
+            /^chrome:\/\//i,
+        ],
     });
 };
