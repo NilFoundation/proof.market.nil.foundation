@@ -6,25 +6,27 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpClient } from './HttpClient';
 import { getItemFromLocalStorage } from '../../packages/LocalStorage';
+import { apiBaseUrl } from './apiHelpers';
 
 const { REACT_APP_BASE_API_URL } = process.env;
+const baseUrl = `${REACT_APP_BASE_API_URL}/${apiBaseUrl}`;
 
 /**
  * Creates HTTP client with authorization.
  *
- * @param baseUrl - Base api url.
+ * @param url - Url to make api calls with.
  * @param withCredentials - Include credentials.
  * @param injectToken - Should inject token.
  * @returns Bearer http client.
  */
 export const createBearerHttpClient = (
-    baseUrl?: string,
+    url?: string,
     withCredentials?: boolean,
     injectToken = true,
 ): HttpClient =>
     new HttpClient(
         {
-            baseURL: baseUrl ? `${REACT_APP_BASE_API_URL}/${baseUrl}` : `${REACT_APP_BASE_API_URL}`,
+            baseURL: url ? `${baseUrl}/${url}` : baseUrl,
             withCredentials,
         },
         injectToken ? client => client.interceptors.request.use(injectJwtToken) : undefined,

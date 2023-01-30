@@ -16,11 +16,9 @@ import App from './App';
 import { store } from './redux';
 import { configureSentry } from './sentry';
 import { reportWebVitals } from './reportWebVitals';
-import { checkEnvVariablesAreDefined } from './checkEnv';
 import configureGA from './ga';
 import './index.scss';
 
-checkEnvVariablesAreDefined();
 configureSentry();
 configureGA();
 

@@ -4,9 +4,9 @@
  */
 
 import { Proof } from '../../models';
-import { apiBaseUrl, createBearerHttpClient } from '../common';
+import { createBearerHttpClient } from '../common';
 
-const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/proof`);
+const httpFetcher = createBearerHttpClient('/proof');
 
 /**
  * Get current user proofs.

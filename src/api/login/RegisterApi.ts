@@ -3,10 +3,10 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { apiBaseUrl, createBearerHttpClient } from '../common';
+import { createBearerHttpClient } from '../common';
 import { RegisterData } from '../../models';
 
-const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/user`, false, false);
+const httpFetcher = createBearerHttpClient('/user', false, false);
 
 /**
  * Register user.

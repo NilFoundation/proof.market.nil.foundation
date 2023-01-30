@@ -4,10 +4,10 @@
  */
 
 import { Ask, CreateAsk } from '../../models';
-import { apiBaseUrl, createBearerHttpClient } from '../common';
+import { createBearerHttpClient } from '../common';
 import { GetOrdersParameters } from './BidsApi';
 
-const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/ask`);
+const httpFetcher = createBearerHttpClient('/ask');
 
 /**
  * Get asks by parameters.

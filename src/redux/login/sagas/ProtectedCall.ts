@@ -4,10 +4,12 @@
  */
 
 import { call, put, StrictEffect } from 'redux-saga/effects';
+import { SetIsOnline } from 'src/redux';
 import { UpdateUserName } from '../actions';
 
 /**
  * Removes current user if api call response returns 401 error.
+ * Handles network error by dispatching SetIsOnline action.
  * Consider to wrap all significant api calls into this.
  *
  * @param fn Api call.
@@ -28,9 +30,16 @@ export function* ProtectedCall<T extends (...args: any[]) => any>(
     try {
         const result: unknown = yield call(fn, ...args);
 
+        yield put(SetIsOnline(true));
         return result;
     } catch (e) {
-        if (e.response.data.code === 401) {
+        if (e?.code === 'ERR_NETWORK') {
+            yield put(SetIsOnline(false));
+        } else {
+            yield put(SetIsOnline(true));
+        }
+
+        if (e?.response?.data?.code === 401) {
             yield put(UpdateUserName(null));
         }
 

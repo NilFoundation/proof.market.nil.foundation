@@ -3,9 +3,9 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { apiBaseUrl, createBearerHttpClient } from '../common';
+import { createBearerHttpClient } from '../common';
 
-const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/user`);
+const httpFetcher = createBearerHttpClient('/user');
 
 /**
  * Get user balance.

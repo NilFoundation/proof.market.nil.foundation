@@ -4,5 +4,5 @@
  */
 
 export * from './LoginApi';
-export * from './BalanceApi';
+export * from './UserApi';
 export * from './RegisterApi';

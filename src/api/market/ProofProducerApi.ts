@@ -4,9 +4,9 @@
  */
 
 import { LastProofProducer } from 'src/models';
-import { apiBaseUrl, createBearerHttpClient } from '../common';
+import { createBearerHttpClient } from '../common';
 
-const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/producer`);
+const httpFetcher = createBearerHttpClient('/producer');
 
 /**
  * Get last proof producer data for all circuits.

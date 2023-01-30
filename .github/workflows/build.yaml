@@ -10,13 +10,12 @@ on:
     inputs:
       environment:
         type: string
-        default: test
 
 jobs:
   build:
     name: Build
     runs-on: [ubuntu-latest]
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.environment || 'test' }}
     steps:
     - name: Checkout
       uses: actions/checkout@v3

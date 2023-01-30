@@ -4,9 +4,9 @@
  */
 
 import { Circuit, CircuitInfo, CircuitStats } from 'src/models';
-import { apiBaseUrl, createBearerHttpClient } from '../common';
+import { createBearerHttpClient } from '../common';
 
-const httpFetcher = createBearerHttpClient(`${apiBaseUrl}/statement`);
+const httpFetcher = createBearerHttpClient('/statement');
 
 /**
  * Get circuits.
