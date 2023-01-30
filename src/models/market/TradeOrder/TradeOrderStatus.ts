@@ -6,4 +6,4 @@
 /**
  * Trade order status.
  */
-export type TradeOrderStatus = 'created' | 'processing' | 'completed';
+export type TradeOrderStatus = 'created' | 'processing' | 'completed' | 'withdrawn';
