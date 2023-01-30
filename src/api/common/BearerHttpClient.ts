@@ -26,7 +26,7 @@ export const createBearerHttpClient = (
 ): HttpClient =>
     new HttpClient(
         {
-            baseURL: url ? `${baseUrl}/${url}` : baseUrl,
+            baseURL: url ? `${baseUrl}${url}` : baseUrl,
             withCredentials,
         },
         injectToken ? client => client.interceptors.request.use(injectJwtToken) : undefined,
