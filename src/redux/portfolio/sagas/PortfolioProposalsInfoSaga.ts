@@ -5,7 +5,7 @@
 
 import { call, put, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getProofProducerInfo } from 'src/api';
+import { getPortfolioProposalsInfo } from 'src/api';
 import type { RootStateType } from 'src/redux/RootStateType';
 import { createUrlParamSelector } from 'src/redux/common';
 import { RouterParam } from 'src/enums';
@@ -33,10 +33,10 @@ export function* PortfolioProposalsInfoSaga(): SagaIterator<void> {
         yield put(UpdateIsErrorPortfolioProposalsInfo(false));
         yield put(UpdateIsLoadingPortfolioProposalsInfo(true));
 
-        const proofProducerInfo = yield call(ProtectedCall, getProofProducerInfo);
+        const proposalsInfo = yield call(ProtectedCall, getPortfolioProposalsInfo);
 
-        if (proofProducerInfo !== undefined) {
-            yield put(UpdatePortfolioProposalsInfo(proofProducerInfo));
+        if (proposalsInfo !== undefined) {
+            yield put(UpdatePortfolioProposalsInfo(proposalsInfo));
         }
     } catch (e) {
         yield put(UpdateIsErrorPortfolioProposalsInfo(true));
@@ -52,17 +52,17 @@ export function* PortfolioProposalsInfoSaga(): SagaIterator<void> {
  * @yields
  */
 export function* SelectPortfolioProposalsInfoSaga({
-    payload: proofProducerInfo,
+    payload: proposalsInfo,
 }: ReturnType<typeof UpdatePortfolioProposalsInfo>): SagaIterator<void> {
-    const currentSelectedProofProducerInfoKey = yield select(
+    const currentSelectedProposalsInfoKey = yield select(
         (s: RootStateType) => s.portfolioProposalsInfo.selectedKey,
     );
 
-    if (currentSelectedProofProducerInfoKey !== undefined) {
+    if (currentSelectedProposalsInfoKey !== undefined) {
         return;
     }
 
-    if (!proofProducerInfo.length) {
+    if (!proposalsInfo.length) {
         return;
     }
 
@@ -70,8 +70,8 @@ export function* SelectPortfolioProposalsInfoSaga({
         createUrlParamSelector(RouterParam.portfolioProposalsInfoStatementName),
     );
 
-    const shouldSelectFromUrl = proofProducerInfo.some(x => x._key === urlParamKey);
-    const keyToSelect = shouldSelectFromUrl ? urlParamKey : proofProducerInfo[0]._key;
+    const shouldSelectFromUrl = proposalsInfo.some(x => x._key === urlParamKey);
+    const keyToSelect = shouldSelectFromUrl ? urlParamKey : proposalsInfo[0]._key;
 
     yield put(UpdateSelectedPortfolioProposalsInfoKey(keyToSelect));
 }

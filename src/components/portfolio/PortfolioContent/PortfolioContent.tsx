@@ -13,7 +13,6 @@ import styles from './PortfolioContent.module.scss';
  */
 type PortfolioContentProps = {
     list: ReactNode;
-    title: ReactNode;
     content: ReactNode;
 };
 
@@ -23,7 +22,7 @@ type PortfolioContentProps = {
  * @param {PortfolioContentProps} props Props.
  * @returns React component.
  */
-export const PortfolioContent = ({ list, title, content }: PortfolioContentProps): ReactElement => {
+export const PortfolioContent = ({ list, content }: PortfolioContentProps): ReactElement => {
     return (
         <Row>
             <Col
@@ -37,7 +36,6 @@ export const PortfolioContent = ({ list, title, content }: PortfolioContentProps
                 md={9}
             >
                 <DashboardCard>
-                    <div className={styles.header}>{title}</div>
                     <div className={styles.container}>{content}</div>
                 </DashboardCard>
             </Col>

@@ -30,3 +30,11 @@ export const selectCurrentCircuit = createSelector(
     selectCurrentCircuitKey,
     (circuits, selectedid) => circuits.find(x => x._key === selectedid),
 );
+
+/**
+ * Selected statement name selector.
+ */
+export const selectCurrentStatementName = createSelector(
+    selectCurrentCircuit,
+    selectedStatement => selectedStatement?.name,
+);

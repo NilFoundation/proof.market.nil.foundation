@@ -4,17 +4,27 @@
  */
 
 import type { DownloadProgress } from 'ky';
-import { createApiClient } from '../common';
+import { createApiClient, getApiUrlByParameters } from '../common';
 import type { Proof } from '../../models';
 
 const httpFetcher = createApiClient('/proof');
 
 /**
- * Get current user proofs.
+ * Get current user proofs by parameters.
  *
+ * @param {Partial<Proof>} parameters Parameters.
+ * @param limit Response limit.
+ * @param startFrom Start from.
  * @returns Proofs.
  */
-export const getProofs = (): Promise<Proof[]> => httpFetcher.get('owner').json();
+export const getProofs = (
+    parameters: Partial<Proof>,
+    limit?: number,
+    startFrom?: number,
+): Promise<Proof[]> =>
+    httpFetcher
+        .get(getApiUrlByParameters<Partial<Proof>>(parameters, limit, startFrom, 'owner'))
+        .json();
 
 /**
  * Get proof by key.

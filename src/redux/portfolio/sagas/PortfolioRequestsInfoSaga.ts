@@ -33,10 +33,10 @@ export function* PortfolioRequestsInfoSaga(): SagaIterator<void> {
         yield put(UpdateIsErrorPortfolioRequestsInfo(false));
         yield put(UpdateIsLoadingPortfolioRequestsInfo(true));
 
-        const proofProducerInfo = yield call(ProtectedCall, getPortfolioRequestsInfo);
+        const requestsInfo = yield call(ProtectedCall, getPortfolioRequestsInfo);
 
-        if (proofProducerInfo !== undefined) {
-            yield put(UpdatePortfolioRequestsInfo(proofProducerInfo));
+        if (requestsInfo !== undefined) {
+            yield put(UpdatePortfolioRequestsInfo(requestsInfo));
         }
     } catch (e) {
         yield put(UpdateIsErrorPortfolioRequestsInfo(true));

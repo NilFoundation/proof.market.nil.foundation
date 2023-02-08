@@ -16,7 +16,6 @@ import {
 import {
     PortfolioRequestsInfoReducer,
     PortfolioPorposalsInfoReducer,
-    ProofReducer,
     UserStatementsInfoReducer,
 } from './portfolio';
 import type { RootStateType } from './RootStateType';
@@ -26,7 +25,6 @@ import type { RootStateType } from './RootStateType';
  */
 export const RootReducer = combineReducers<RootStateType>({
     circuitsState: CircuitsReducer,
-    proofState: ProofReducer,
     userState: UserReducer,
     routerState: RouterReducer,
     orderBookState: OrderBookReducer,

@@ -6,6 +6,7 @@
 import type { ReactElement } from 'react';
 import { Nav } from '@nilfoundation/react-components';
 import { ManageOrdersTab } from './ManageOrdersTab';
+import styles from './ManageOrdersPanel.module.scss';
 
 /**
  * Props.
@@ -26,7 +27,10 @@ export const ManageOrdersPanelTabs = ({
     onSetTab,
 }: ManageOrdersPanelTabsProps): ReactElement => {
     return (
-        <Nav justified>
+        <Nav
+            justified
+            className={styles.nav}
+        >
             {Object.values(ManageOrdersTab).map(t => (
                 <Nav.Item
                     key={t}

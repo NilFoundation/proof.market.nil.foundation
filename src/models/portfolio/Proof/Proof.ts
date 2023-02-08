@@ -14,10 +14,6 @@ export type Proof = {
      */
     _key: string;
     /**
-     * Internal id.
-     */
-    _id: string;
-    /**
      * Key of bid.
      */
     bid_key: string;
@@ -41,6 +37,22 @@ export type Proof = {
      * Generation time.
      */
     generation_time: number;
+    /**
+     * Statement key.
+     */
+    statement_key: string;
+    /**
+     * Statement name.
+     */
+    statement_name: string;
+    /**
+     * Input.
+     */
+    input: Record<string, string>;
+    /**
+     * Statement description.
+     */
+    statement_description: string;
 };
 
 /**

@@ -5,10 +5,10 @@
 
 import { call, fork, put, takeLatest, select, all } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import type { GetOrdersParameters } from 'src/api';
 import { getBids, getAsks } from 'src/api';
 import { ProtectedCall, selectUserName } from 'src/redux/login';
 import { getRuntimeConfigOrThrow } from 'src/utils';
+import type { TradeOrder } from 'src/models';
 import {
     UpdateSelectedCircuitKey,
     UpdateUserAsksList,
@@ -48,7 +48,7 @@ function* GetUserOrdersSaga(): SagaIterator<void> {
         return;
     }
 
-    const apiCallOptions: GetOrdersParameters = {
+    const apiCallOptions: Partial<TradeOrder> = {
         statement_key: selectedStatementKey,
         sender: currentUser,
     };

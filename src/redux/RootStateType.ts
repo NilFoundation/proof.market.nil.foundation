@@ -15,7 +15,6 @@ import type {
 import type {
     PortfolioRequestsInfoReducerState,
     PortfolioPorposalsInfoReducerState,
-    ProofReducerState,
     UserStatementsInfoReducerState,
 } from './portfolio';
 
@@ -24,7 +23,6 @@ import type {
  */
 export interface RootStateType {
     circuitsState: CircuitsReducerState;
-    proofState: ProofReducerState;
     userState: UserReducerState;
     routerState: RouterReducerState;
     orderBookState: OrderBookReducerState;

@@ -7,7 +7,6 @@
  * React router param.
  */
 export const enum RouterParam {
-    proofKey = 'proofKey',
     statementName = 'statementName',
     portfolioUserStatementsInfoName = 'portfolioUserStatementsInfoName',
     portfolioProposalsInfoStatementName = 'portfolioProposalsInfoStatementName',

@@ -32,8 +32,8 @@ const UserStatementInfoContent = (): ReactElement => {
         deepEqual,
     );
     const selectedStatementInfo = useAppSelector(selectSelectedUserStatementInfo, deepEqual);
-    const isLoading = useAppSelector(s => s.proofState.isLoadingProofs);
-    const isError = useAppSelector(s => s.proofState.error);
+    const isLoading = useAppSelector(s => s.userStatementInfoState.isLoading);
+    const isError = useAppSelector(s => s.userStatementInfoState.isError);
 
     useSyncUrlAndSelectedItem<UserStatementInfo>({
         actionToUpdateSelectedItem: UpdateSelectedUserStatementsInfoKey,
@@ -46,24 +46,27 @@ const UserStatementInfoContent = (): ReactElement => {
         <PortfolioContent
             list={
                 <PortfolioInfoList
+                    title="Statements list"
                     items={statementsInfo}
                     isLoadingItems={isLoading}
                     isError={isError}
                     itemsLinksSubPath={Path.statements}
                 />
             }
-            title={
-                <>
-                    <h4>Statement info</h4>
-                    <span className="text-muted">Aggregated information about your statement</span>
-                </>
-            }
             content={
-                <StatementInfoViewFactory
-                    info={selectedStatementInfo}
-                    isLoadingInfo={isLoading}
-                    isError={isError}
-                />
+                <>
+                    <div className="portfolioHeader">
+                        <h4>Statement info</h4>
+                        <span className="text-muted">
+                            Aggregated information about your statement
+                        </span>
+                    </div>
+                    <StatementInfoViewFactory
+                        info={selectedStatementInfo}
+                        isLoadingInfo={isLoading}
+                        isError={isError}
+                    />
+                </>
             }
         />
     );

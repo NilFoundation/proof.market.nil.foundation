@@ -12,15 +12,23 @@ import type { PortfolioOrdersInfo } from '../PortfolioOrdersInfo';
 export type PortfolioProposalsInfo = PortfolioOrdersInfo;
 
 /**
- * @param proposalsInfo Portfolio proposals info.
+ * @param {PortfolioProposalsInfo} proposalsInfo Portfolio proposals info.
  * @returns Human readable portfolio proposals info.
  */
-export const mapToHumanReadablePortfolioProposalsInfo = (
-    proposalsInfo: PortfolioProposalsInfo,
-) => ({
-    ['Name']: proposalsInfo.name,
-    ['Overall asks amount']: proposalsInfo.amount,
-    ['Total sum of all asks costs']: `${proposalsInfo.fees} ${siteMoneyTickerAbbreviation}`,
-    ['Average generation time']: `${proposalsInfo.avg_generation_time?.toFixed(2)} min`,
-    ['Average cost']: `${proposalsInfo.avg_cost?.toFixed(2)} ${siteMoneyTickerAbbreviation}`,
+export const mapToHumanReadablePortfolioProposalsInfo = ({
+    name,
+    amount,
+    avg_cost,
+    avg_generation_time,
+    fees,
+}: PortfolioProposalsInfo) => ({
+    ['Name']: name,
+    ['Overall asks amount']: amount,
+    ['Total sum of all asks costs']: fees ? `${fees} ${siteMoneyTickerAbbreviation}` : undefined,
+    ['Average generation time']: avg_generation_time
+        ? `${avg_generation_time?.toFixed(2)} min`
+        : undefined,
+    ['Average cost']: avg_cost
+        ? `${avg_cost?.toFixed(2)} ${siteMoneyTickerAbbreviation}`
+        : undefined,
 });

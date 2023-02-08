@@ -30,6 +30,7 @@ export const createApiClient = (
                 },
             ],
         },
+        timeout: 20000,
         ...options,
     });
 };

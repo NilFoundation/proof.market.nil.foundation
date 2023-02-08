@@ -13,9 +13,9 @@ import { DashboardCard } from '../../common';
 import { ProtectedContent } from '../../login';
 import { ManageOrdersTab } from './ManageOrdersTab';
 import { ManageOrdersPanelTabs } from './ManageOrdersPanelTabs';
-import { ActiveOrdersTable } from './ActiveOrdersTable';
+import { ActiveOrdersTable } from '../ActiveOrdersPanel';
 import { HistoryOrdersTable } from './HistoryOrdersTable';
-import './ManageOrdersPanel.scss';
+import styles from './ManageOrdersPanel.module.scss';
 
 /**
  * Manage orders panel.
@@ -31,7 +31,7 @@ export const ManageOrdersPanel = (): ReactElement => {
         <DashboardCard>
             <h4>Manage orders</h4>
             <div
-                className="manageOrdersPanel"
+                className={styles.manageOrdersPanel}
                 data-sb="manageOrdersPanel"
             >
                 <ProtectedContent overlayTitle="Authorization is required to manage orders">
@@ -40,7 +40,7 @@ export const ManageOrdersPanel = (): ReactElement => {
                         onSetTab={setTab}
                     />
                     {selectedCircuitKey !== undefined ? (
-                        tabFactory(
+                        viewFactory(
                             tab,
                             isError,
                             loadingData,
@@ -56,7 +56,7 @@ export const ManageOrdersPanel = (): ReactElement => {
 };
 
 /**
- * Renders tab content conditionally.
+ * Renders content conditionally.
  *
  * @param tab - Tab.
  * @param error - Error.
@@ -64,7 +64,7 @@ export const ManageOrdersPanel = (): ReactElement => {
  * @param data - Data.
  * @returns React Element.
  */
-const tabFactory = (
+const viewFactory = (
     tab: ManageOrdersTab,
     error: boolean,
     loading: boolean,

@@ -1,0 +1,21 @@
+@import "src/styles/constants.scss";
+@import "src/styles/mixins/tableColumns";
+@import "src/styles/mixins/responsive";
+
+.manageOrdersPanel {
+  height: 548px;
+  position: relative;
+}
+
+.nav {
+  padding: 8px 0 16px;
+}
+
+.historyOrdersTable {
+  @include tableColumns(24%, 16%, 20%, 40%);
+  height: 488px;
+
+  @include responsive(sm) {
+    height: 430px;
+  }
+}

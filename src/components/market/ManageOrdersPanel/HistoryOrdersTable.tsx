@@ -10,6 +10,7 @@ import { TradeOrderType } from 'src/models';
 import { ReactTable, TRow, TCell } from 'src/components';
 import { renderDashOnEmptyValue } from 'src/utils';
 import type { ManageOrdersData } from 'src/models';
+import styles from './ManageOrdersPanel.module.scss';
 
 /**
  * Props.
@@ -97,7 +98,7 @@ export const HistoryOrdersTable = memo(function ActiveOrdersTable({
     return (
         <ReactTable
             name="historyOrdersTable"
-            className="historyOrdersTable"
+            className={styles.historyOrdersTable}
             data={data}
             columns={columns}
             disableSortRemove={true}

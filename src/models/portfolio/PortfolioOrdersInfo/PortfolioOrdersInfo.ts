@@ -22,7 +22,7 @@ export type PortfolioOrdersInfo = {
     /**
      * Overall orders costs amount.
      */
-    fees: string;
+    fees: string | null;
     /**
      * Average orders generation time.
      */

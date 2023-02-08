@@ -3,12 +3,14 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import type { ReactElement } from 'react';
-import { ListGroup, Media } from '@nilfoundation/react-components';
-import { Link } from 'react-router-dom';
-import { Path } from 'src/routing';
-import { selectSelectedProofKey, useAppSelector } from 'src/redux';
+import type { HTMLAttributes, KeyboardEventHandler, ReactElement } from 'react';
+import { useCallback, useState, memo } from 'react';
+import { Button, Spinner, Variant } from '@nilfoundation/react-components';
+import { getProofById } from 'src/api';
+import { ObjectAsPlainTextViewer, ProgressBar } from 'src/components/common';
+import { useDownloadJson } from 'src/hooks';
 import type { Proof } from 'src/models';
+import { mapToHumanReadableProof } from 'src/models';
 import styles from './ProofList.module.scss';
 
 /**
@@ -16,7 +18,7 @@ import styles from './ProofList.module.scss';
  */
 type ProofListItemProps = {
     proof: Proof;
-};
+} & HTMLAttributes<HTMLDivElement>;
 
 /**
  * Proof list item.
@@ -24,17 +26,68 @@ type ProofListItemProps = {
  * @param {ProofListItemProps} props Props.
  * @returns React component.
  */
-export const ProofListItem = ({ proof: { _key } }: ProofListItemProps): ReactElement => {
-    const selectedProofId = useAppSelector(selectSelectedProofKey);
-    const isSelected = _key === selectedProofId;
+export const ProofListItem = memo(function ProofListItem({
+    proof,
+    ...restProps
+}: ProofListItemProps): ReactElement {
+    const [showProgress, setShowProgress] = useState(false);
+    const [downloadPergent, setDownloadPercent] = useState(0);
+
+    const fetcher = useCallback(async () => {
+        setShowProgress(true);
+        const result = await getProofById(proof!._key, ({ percent }) =>
+            setDownloadPercent(percent * 100),
+        );
+        setDownloadPercent(0);
+        setShowProgress(false);
+
+        return result;
+    }, [proof, setDownloadPercent, setShowProgress]);
+
+    const { downloadJson, loading } = useDownloadJson({
+        fileName: `proof-${proof?._key}`,
+        fetcher: proof?._key !== undefined ? fetcher : undefined,
+    });
+
+    const keyDownHandler: KeyboardEventHandler = e => {
+        if (e.key !== 'Enter' && e.key !== ' ') {
+            return;
+        }
+
+        downloadJson();
+    };
 
     return (
-        <ListGroup.Item active={isSelected}>
-            <Link to={`${Path.portfolio}/${Path.requests}/${_key}`}>
-                <Media className={isSelected ? styles.selected : ''}>
-                    <Media.Body className={styles.itemBody}>{`id: ${_key}`}</Media.Body>
-                </Media>
-            </Link>
-        </ListGroup.Item>
+        <div
+            {...restProps}
+            className={styles.item}
+        >
+            <Button
+                variant={Variant.primary}
+                disabled={proof === undefined || loading}
+                onClick={downloadJson}
+                onKeyDown={keyDownHandler}
+                aria-label="Download proof as JSON file"
+                className={styles.button}
+            >
+                JSON
+                {loading && <Spinner />}
+            </Button>
+            {showProgress && (
+                <div className={styles.progressContainer}>
+                    <ProgressBar
+                        className={styles.progress}
+                        showPercent={false}
+                        percent={Number(downloadPergent.toFixed(2))}
+                    />
+                </div>
+            )}
+            <ObjectAsPlainTextViewer data={mapToHumanReadableProof(proof)} />
+        </div>
     );
-};
+},
+arePropsEqual);
+
+function arePropsEqual(prevProps: ProofListItemProps, nextprops: ProofListItemProps) {
+    return prevProps.proof._key === nextprops.proof._key;
+}

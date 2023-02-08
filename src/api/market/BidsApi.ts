@@ -3,8 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import type { Bid, CreateBid } from 'src/models';
-import type { GetOrdersParameters } from '../common';
+import type { Bid, CreateBid, TradeOrder } from 'src/models';
 import { createApiClient, getApiUrlByParameters } from '../common';
 
 const httpFetcher = createApiClient('/bid');
@@ -12,13 +11,13 @@ const httpFetcher = createApiClient('/bid');
 /**
  * Get bids by parameters.
  *
- * @param {GetOrdersParameters} parameters Parameters.
+ * @param {Partial<TradeOrder>} parameters Parameters.
  * @param limit Response limit.
  * @param startFrom Start from.
  * @returns Bids.
  */
 export const getBids = (
-    parameters: GetOrdersParameters,
+    parameters: Partial<TradeOrder>,
     limit?: number,
     startFrom?: number,
 ): Promise<Bid[]> => httpFetcher.get(getApiUrlByParameters(parameters, limit, startFrom)).json();

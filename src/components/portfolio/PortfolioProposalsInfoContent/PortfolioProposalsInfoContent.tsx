@@ -8,7 +8,7 @@ import { useMemo, memo } from 'react';
 import { dequal as deepEqual } from 'dequal';
 import { Spinner } from '@nilfoundation/react-components';
 import {
-    selectCurrentCircuit,
+    selectCurrentStatementName,
     selectSelectedPortfolioProposalsInfo,
     UpdateSelectedPortfolioProposalsInfoKey,
     useAppSelector,
@@ -29,14 +29,11 @@ import { PortfolioContent } from '../PortfolioContent';
  */
 const PortfolioProposalsInfoContent = (): ReactElement => {
     const portfolioProposalsInfo = useAppSelector(s => s.portfolioProposalsInfo.info, deepEqual);
-    const selectedProofProducerInfo = useAppSelector(selectSelectedPortfolioProposalsInfo);
+    const selectedProposalsInfo = useAppSelector(selectSelectedPortfolioProposalsInfo);
     const isLoadingInfo = useAppSelector(s => s.portfolioProposalsInfo.isLoading);
     const isError = useAppSelector(s => s.portfolioProposalsInfo.isError);
 
-    const selectedStatement = useAppSelector(
-        selectCurrentCircuit,
-        (prev, next) => prev?.name === next?.name,
-    );
+    const selectedStatementName = useAppSelector(selectCurrentStatementName);
 
     useSyncUrlAndSelectedItem({
         urlParamToSync: RouterParam.portfolioProposalsInfoStatementName,
@@ -49,26 +46,27 @@ const PortfolioProposalsInfoContent = (): ReactElement => {
         <PortfolioContent
             list={
                 <PortfolioInfoList
+                    title="Statements list"
                     items={portfolioProposalsInfo}
                     isLoadingItems={false}
                     isError={false}
                     itemsLinksSubPath={Path.proposals}
                 />
             }
-            title={
-                <>
-                    <h4>Proposal info</h4>
-                    <span className="text-muted">
-                        {`Aggregated information about your proposals in ${selectedStatement?.name} statement`}
-                    </span>
-                </>
-            }
             content={
-                <ProposalContentViewFactory
-                    info={selectedProofProducerInfo}
-                    isLoadingInfo={isLoadingInfo}
-                    isError={isError}
-                />
+                <>
+                    <div className="portfolioHeader">
+                        <h4>Proposal info</h4>
+                        <span className="text-muted">
+                            {`Aggregated information about your proposals in ${selectedStatementName} statement`}
+                        </span>
+                    </div>
+                    <ProposalContentViewFactory
+                        info={selectedProposalsInfo}
+                        isLoadingInfo={isLoadingInfo}
+                        isError={isError}
+                    />
+                </>
             }
         />
     );

@@ -1,0 +1,92 @@
+@import "src/styles/constants.scss";
+@import "src/styles/mixins/tableColumns";
+@import "src/styles/mixins/responsive";
+@import "src/styles/mixins/styledList";
+@import "src/styles/mixins/hideScrollbar";
+@import "src/styles/mixins/overflowFade";
+
+.table {
+  @include tableColumns(25%, 25%, 25%, 25%);
+  height: 488px;
+}
+
+.confirmationCard {
+  width: 100%;
+  height: 48px;
+  border-radius: 6px;
+  padding: 6px 12px;
+  background-color: $c-base-light;
+  z-index: 4;
+  top: 0;
+  right: 0;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirmationCardButtons {
+  display: flex;
+
+  > button + button {
+    margin-left: 8px;
+    margin-top: 0 !important;
+  }
+}
+
+.confirmationCardMessage {
+  padding-right: 1rem;
+  text-align: center;
+  font-size: 1.15rem;
+  color: $c-secondary;
+}
+
+.listGroup {
+  @include styledList;
+  @include hideScrollbar;
+  overflow: auto;
+  padding: 8px 0;
+  @include overflowFade(8px, true);
+
+  height: 480px;
+
+  @include responsive(sm) {
+    height: 406px;
+  }
+}
+
+.listGroupItem {
+  position: relative;
+  height: 100%;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover {
+    color: $c-secondary;
+  }
+}
+
+.status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  opacity: 0.75;
+}
+
+.date {
+  font-size: 1.15rem;
+}
+
+.removeIcon {
+  i {
+    font-size: 1.5rem;
+  }
+}
+
+.error {
+  color: $c-danger;
+}

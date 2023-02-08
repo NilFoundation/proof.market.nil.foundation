@@ -12,5 +12,5 @@ import type { RootStateType } from 'src/redux';
 export const selectSelectedPortfolioProposalsInfo = createSelector(
     (s: RootStateType) => s.portfolioProposalsInfo.info,
     (s: RootStateType) => s.portfolioProposalsInfo.selectedKey,
-    (proofProducerInfo, key) => proofProducerInfo.find(s => s._key === key),
+    (proposalsInfo, key) => proposalsInfo.find(s => s._key === key),
 );

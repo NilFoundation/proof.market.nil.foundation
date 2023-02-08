@@ -4,3 +4,4 @@
  */
 
 export * from './useDownloadJson';
+export * from './useInfiniteLoadProofs';

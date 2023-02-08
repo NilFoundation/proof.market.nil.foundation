@@ -4,21 +4,20 @@
  */
 
 import { createApiClient, getApiUrlByParameters } from '../common';
-import type { GetOrdersParameters } from '../common';
-import type { Ask } from '../../models';
+import type { Ask, TradeOrder } from '../../models';
 
 const httpFetcher = createApiClient('/ask');
 
 /**
  * Get asks by parameters.
  *
- * @param {GetOrdersParameters} parameters Parameters.
+ * @param {Partial<TradeOrder>} parameters Parameters.
  * @param limit Response limit.
  * @param startFrom Start from.
  * @returns Asks.
  */
 export const getAsks = (
-    parameters: GetOrdersParameters,
+    parameters: Partial<TradeOrder>,
     limit?: number,
     startFrom?: number,
 ): Promise<Ask[]> => httpFetcher.get(getApiUrlByParameters(parameters, limit, startFrom)).json();

@@ -19,6 +19,7 @@ type PortfolioInfoListProps<T extends { _key: string; name: string }> = {
     isLoadingItems: boolean;
     isError: boolean;
     itemsLinksSubPath: Path;
+    title: string;
 };
 
 /**
@@ -32,6 +33,7 @@ export const PortfolioInfoList = <T extends { _key: string; name: string }>({
     isLoadingItems,
     isError,
     itemsLinksSubPath,
+    title,
 }: PortfolioInfoListProps<T>): ReactElement => {
     const renderItemsList = useCallback(
         () => (
@@ -40,7 +42,6 @@ export const PortfolioInfoList = <T extends { _key: string; name: string }>({
                     <PortfolioInfoListItem
                         name={name}
                         key={_key}
-                        itemKey={_key}
                         path={`${Path.portfolio}/${itemsLinksSubPath}/${name}`}
                     />
                 ))}
@@ -51,7 +52,7 @@ export const PortfolioInfoList = <T extends { _key: string; name: string }>({
 
     return (
         <DashboardCard>
-            <h4>Statements list</h4>
+            <h4>{title}</h4>
             <div className={styles.container}>
                 <PortfolioInfoListViewFactory
                     itemsLength={items.length}

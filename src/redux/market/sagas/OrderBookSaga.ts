@@ -5,10 +5,10 @@
 
 import { call, fork, put, takeLatest, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import type { GetOrdersParameters, OrderBookDataOptions } from 'src/api';
+import type { OrderBookDataOptions } from 'src/api';
 import { getAsks, getOrderBookData } from 'src/api';
 import { ProtectedCall } from 'src/redux';
-import type { Ask, LastOrderData, OrderBookData } from 'src/models';
+import type { Ask, LastOrderData, OrderBookData, TradeOrder } from 'src/models';
 import { getRuntimeConfigOrThrow } from 'src/utils';
 import {
     UpdateSelectedCircuitKey,
@@ -91,7 +91,7 @@ function* GetLastOrderDataSaga(): SagaIterator<void> {
     }
 
     try {
-        const apiCallParameters: GetOrdersParameters = {
+        const apiCallParameters: Partial<TradeOrder> = {
             statement_key: currentStatementKey,
             status: 'completed',
         };
