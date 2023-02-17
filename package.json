@@ -8,6 +8,7 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@sentry/react": "^7.21.1",
     "@sentry/tracing": "^7.21.1",
+    "bootstrap-sass": "^3.4.3",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.5",
     "dequal": "^2.0.3",
@@ -52,8 +53,7 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all",
-      "ie 11"
+      "not op_mini all"
     ],
     "development": [
       "last 1 chrome version",

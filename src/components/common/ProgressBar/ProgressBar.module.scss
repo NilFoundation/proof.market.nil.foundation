@@ -1,0 +1,11 @@
+@import "src/styles/constants.scss";
+
+.progress {
+  width: 100%;
+  margin-bottom: 0 !important;
+  background-color: $c-base-lighter !important;
+
+  > div[role="progressbar"] {
+    background-color: $c-base-light !important;
+  }
+}

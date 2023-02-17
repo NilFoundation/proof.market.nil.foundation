@@ -4,11 +4,12 @@
  */
 
 import type { KeyboardEventHandler, ReactElement } from 'react';
-import { useMemo } from 'react';
+import { useCallback, useState } from 'react';
 import { Button, Icon, Spinner, Variant } from '@nilfoundation/react-components';
 import { getProofById } from 'src/api';
 import { useDownloadJson } from 'src/hooks';
 import type { Proof } from 'src/models';
+import { ProgressBar } from 'src/components/common';
 import styles from './ProofContentCard.module.scss';
 
 /**
@@ -25,13 +26,22 @@ type ProofViewHeaderProps = {
  * @returns React component.
  */
 export const ProofContentCardToolbar = ({ proof }: ProofViewHeaderProps): ReactElement => {
-    const fetcher = useMemo(
-        () => (proof?._key !== undefined ? () => getProofById(proof._key) : undefined),
-        [proof?._key],
-    );
+    const [showProgress, setShowProgress] = useState(false);
+    const [downloadPergent, setDownloadPercent] = useState(0);
+    const fetcher = useCallback(async () => {
+        setShowProgress(true);
+        const result = await getProofById(proof!._key, ({ percent }) =>
+            setDownloadPercent(percent * 100),
+        );
+        setDownloadPercent(0);
+        setShowProgress(false);
+
+        return result;
+    }, [proof, setDownloadPercent, setShowProgress]);
+
     const { downloadJson, loading } = useDownloadJson({
         fileName: `proof-${proof?._key}`,
-        fetcher,
+        fetcher: proof?._key !== undefined ? fetcher : undefined,
     });
 
     const keyDownHandler: KeyboardEventHandler = e => {
@@ -55,6 +65,11 @@ export const ProofContentCardToolbar = ({ proof }: ProofViewHeaderProps): ReactE
                 JSON
                 {loading && <Spinner />}
             </Button>
+            {showProgress && (
+                <div className={styles.progressContainer}>
+                    <ProgressBar percent={Number(downloadPergent.toFixed(2))} />
+                </div>
+            )}
         </div>
     );
 };

@@ -7,3 +7,4 @@ export * from './CircuitsSaga';
 export * from './OrderBookSaga';
 export * from './ChartsSaga';
 export * from './UserOrdersSaga';
+export * from './LastProofProducerSaga';

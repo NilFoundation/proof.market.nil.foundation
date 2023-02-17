@@ -1,6 +1,11 @@
 @import "./styles/constants.scss";
 @import "./styles/gridOverrides.scss";
 
+/** Some additional bootstrap@3.4 styles */
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/progress-bars";
+
 .form-control,
 .input-group-addon,
 .form-control[readonly],

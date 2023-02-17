@@ -37,14 +37,20 @@ export const DashboardToolbar = ({
                 active={displayVolumes}
                 onClick={() => setDisplayVolumes(!displayVolumes)}
             >
-                <Icon iconName="fa-solid fa-chart-simple" />
+                <Icon
+                    iconName="fa-solid fa-chart-simple"
+                    srOnlyText="Toggles volumes display"
+                />
             </Nav.Item>
             <Nav.Item
                 disabled={disabled}
                 active={isFullscreen}
                 onClick={() => setFullScreen(!isFullscreen)}
             >
-                <Icon iconName={`fa-solid fa-${isFullscreen ? 'compress' : 'expand'}`} />
+                <Icon
+                    iconName={`fa-solid fa-${isFullscreen ? 'compress' : 'expand'}`}
+                    srOnlyText="Toggles fullscreen view"
+                />
             </Nav.Item>
         </Nav>
     );

@@ -4,7 +4,7 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { Circuit, CircuitInfo, CircuitStats, LastProofProducer } from 'src/models';
+import type { Circuit, CircuitInfo, CircuitStats } from 'src/models';
 
 /**
  * Update circuits list.
@@ -50,11 +50,4 @@ export const UpdateCircuitsStats = createAction<CircuitStats[]>('@circuits/UPDAT
  */
 export const UpdateIsLoadingCircuitsStats = createAction<boolean>(
     '@circuits/UPDATE_IS_LOADING_CIRCUITS_STATS',
-);
-
-/**
- * Update last proof producer.
- */
-export const UpdateLastProofProducer = createAction<Array<LastProofProducer | null> | undefined>(
-    '@circuits/UPDATE_LAST_PROOF_PRODUCER',
 );

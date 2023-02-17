@@ -35,7 +35,7 @@ function* HandleOnlineStatusChange({
         offlineNotificationId = notificationActions?.create({
             title: 'Network error',
             message:
-                'Something is temporarily wrong with your network connection. Trying to reconnect.',
+                'Something is temporarily wrong with receiving site data. You could wait for a reconnect or try to reload the page.',
             variant: Variant.danger,
         });
 

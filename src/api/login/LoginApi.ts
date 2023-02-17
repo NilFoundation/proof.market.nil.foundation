@@ -6,7 +6,7 @@
 import { createApiClient } from '../common';
 import type { LoginData, AuthData } from '../../models';
 
-const httpFetcher = createApiClient('/user', false, false);
+const httpFetcher = createApiClient('/user', false);
 
 /**
  * Login.
@@ -18,7 +18,7 @@ export const login = (loginData: LoginData): Promise<AuthData> =>
     httpFetcher.post('signin', { json: loginData }).json();
 
 /**
- * Renew jtw tocken.
+ * Renew jtw token.
  *
  * @param username Username.
  * @returns .

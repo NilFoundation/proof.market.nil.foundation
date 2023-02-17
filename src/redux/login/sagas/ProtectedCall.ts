@@ -34,13 +34,13 @@ export function* ProtectedCall<T extends (...args: any[]) => any>(
         yield put(SetIsOnline(true));
         return result;
     } catch (e) {
-        if (e?.code === 'ERR_NETWORK') {
+        if (!e.response) {
             yield put(SetIsOnline(false));
         } else {
             yield put(SetIsOnline(true));
         }
 
-        if (e?.response?.status === 401) {
+        if (e.response?.status === 401) {
             yield put(UpdateUserName(null));
         }
 

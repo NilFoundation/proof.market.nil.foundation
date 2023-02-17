@@ -10,6 +10,7 @@ import type {
     OrderBookReducerState,
     ChartsReducerState,
     UserOrdersReducerState,
+    LastProofProducerReducerState,
 } from './market';
 import type { ProofReducerState } from './portfolio';
 
@@ -24,4 +25,5 @@ export interface RootStateType {
     orderBookState: OrderBookReducerState;
     chartsState: ChartsReducerState;
     userOrdersState: UserOrdersReducerState;
+    lastProofProducerState: LastProofProducerReducerState;
 }

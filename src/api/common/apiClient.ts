@@ -12,14 +12,12 @@ import { apiBaseUrl } from './apiHelpers';
  * Create api client.
  *
  * @param baseUrl Base api url.
- * @param withCredentials Include credentials.
  * @param injectToken Add Authorization header with token to all requests.
  * @param options Other options.
  * @returns Api client.
  */
 export const createApiClient = (
     baseUrl = '',
-    withCredentials?: boolean,
     injectToken = true,
     options?: Omit<Options, 'prefixUrl'>,
 ) => {

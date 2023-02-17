@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { Circuit, CircuitInfo, CircuitStats, LastProofProducer } from 'src/models';
+import type { Circuit, CircuitInfo, CircuitStats } from 'src/models';
 import {
     UpdateCircuitsList,
     UpdateSelectedCircuitKey,
@@ -14,7 +14,6 @@ import {
     UpdateIsLoadingCircuitsInfo,
     UpdateCircuitsStats,
     UpdateIsLoadingCircuitsStats,
-    UpdateLastProofProducer,
 } from '../actions';
 
 /**
@@ -29,7 +28,6 @@ export type CircuitsReducerState = {
     isLoadingCircuitsInfo: boolean;
     circuitsStats: CircuitStats[];
     isLoadingCircuitsStats: boolean;
-    lastProofProducer?: Array<LastProofProducer | null>;
 };
 
 /**
@@ -44,7 +42,6 @@ const initialState: CircuitsReducerState = {
     isLoadingCircuitsInfo: false,
     circuitsStats: [],
     isLoadingCircuitsStats: false,
-    lastProofProducer: undefined,
 };
 
 /**
@@ -84,8 +81,5 @@ export const CircuitsReducer = createReducer(initialState, builder =>
         .addCase(UpdateIsLoadingCircuitsStats, (state, { payload }) => ({
             ...state,
             isLoadingCircuitsStats: payload,
-        }))
-        .addCase(UpdateLastProofProducer, (state, { payload }) => {
-            state.lastProofProducer = payload;
-        }),
+        })),
 );
