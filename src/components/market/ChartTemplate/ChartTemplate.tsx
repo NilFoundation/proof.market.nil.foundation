@@ -81,7 +81,7 @@ export const ChartTemplate = <T extends 'Line' | 'Candlestick'>({
 
     const { chart } = useChart({ ref, options });
 
-    const { price } = useRenderChartData({
+    const { currentChartData } = useRenderChartData({
         seriesType,
         seriesData,
         chart,
@@ -96,7 +96,7 @@ export const ChartTemplate = <T extends 'Line' | 'Candlestick'>({
             className="circuitChart"
         >
             <ChartLegend
-                price={price}
+                currentData={currentChartData}
                 name={chartName}
             />
             {loadingData && seriesData.length === 0 && <Spinner grow />}

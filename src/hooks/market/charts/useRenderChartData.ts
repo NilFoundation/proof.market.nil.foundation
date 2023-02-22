@@ -6,8 +6,7 @@
 import { useEffect, useState } from 'react';
 import type {
     IChartApi,
-    BarPrice,
-    BarPrices,
+    BarData,
     LineData,
     CandlestickData,
     MouseEventHandler,
@@ -30,9 +29,9 @@ import colors from 'src/styles/export.module.scss';
  */
 type UseRenderChartDataReturnType = {
     /**
-     * Current price value (when user hovers chart).
+     * Current chart data (when user hovers chart).
      */
-    price?: BarPrice | BarPrices;
+    currentChartData?: LineData | BarData;
 };
 
 /**
@@ -65,7 +64,7 @@ export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
     markers,
     volumes,
 }: UseRenderChartDataProps<T>): UseRenderChartDataReturnType => {
-    const [price, setPrice] = useState<BarPrice | BarPrices>();
+    const [currentChartData, setCurrentChartData] = useState<LineData | BarData>();
 
     useEffect(() => {
         if (!chart) {
@@ -88,16 +87,22 @@ export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
         markers && series.setMarkers(markers);
 
         const volumeSeries = chart.addHistogramSeries(volumeSeriesDefaultOptions);
+        volumeSeries.priceScale().applyOptions({
+            scaleMargins: {
+                top: 0.8,
+                bottom: 0,
+            },
+        });
         volumes && volumeSeries.setData(volumes);
 
         const crosshairMoveHandler: MouseEventHandler = param => {
             if (!param.time) {
-                setPrice(undefined);
+                setCurrentChartData(undefined);
                 return;
             }
 
-            const price = param.seriesPrices.get(series);
-            price && setPrice(price);
+            const hoveredChartItemData = param.seriesData.get(series);
+            hoveredChartItemData && setCurrentChartData(hoveredChartItemData);
         };
 
         chart.subscribeCrosshairMove(crosshairMoveHandler);
@@ -106,7 +111,7 @@ export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
             chart.removeSeries(series);
             chart.removeSeries(volumeSeries);
             chart.unsubscribeCrosshairMove(crosshairMoveHandler);
-            setPrice(undefined);
+            setCurrentChartData(undefined);
         };
     }, [seriesData, chart, seriesType, options, markers, volumes]);
 
@@ -123,7 +128,7 @@ export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
         chart.timeScale().setVisibleLogicalRange(getDataRange(seriesData.length, visibleRange));
     }, [chart, visibleRange, seriesData]);
 
-    return { price };
+    return { currentChartData };
 };
 
 /**
@@ -146,10 +151,6 @@ const volumeSeriesDefaultOptions: DeepPartial<HistogramStyleOptions & SeriesOpti
         type: 'volume',
     },
     priceScaleId: '',
-    scaleMargins: {
-        top: 0.8,
-        bottom: 0,
-    },
 };
 
 /**

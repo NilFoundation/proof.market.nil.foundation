@@ -4,7 +4,8 @@
  */
 
 import type { ReactElement } from 'react';
-import type { BarPrice, BarPrices } from 'lightweight-charts';
+import type { BarData, LineData } from 'lightweight-charts';
+import { isLineData } from 'src/utils';
 import styles from './ChartLegend.module.scss';
 
 /**
@@ -12,7 +13,7 @@ import styles from './ChartLegend.module.scss';
  */
 type ChartLegendProps = {
     name: string;
-    price?: BarPrice | BarPrices;
+    currentData?: LineData | BarData;
 };
 
 /**
@@ -21,21 +22,29 @@ type ChartLegendProps = {
  * @param {ChartLegendProps} props Props.
  * @returns React component.
  */
-export const ChartLegend = ({ name, price }: ChartLegendProps): ReactElement => {
+export const ChartLegend = ({ name, currentData }: ChartLegendProps): ReactElement => {
+    if (currentData === undefined) {
+        return <></>;
+    }
+
     return (
         <div className={styles.chartLegend}>
             <h5 className={styles.chartName}>{name.toUpperCase()}</h5>
-            {typeof price === 'object' ? (
-                Object.keys(price).map(x => (
-                    <div
-                        className="text-muted"
-                        key={x}
-                    >
-                        {`${x}: ${price[x as keyof BarPrices]?.toFixed(2)}`}
-                    </div>
-                ))
+            {isLineData(currentData) ? (
+                <div className="text-muted">{currentData?.value?.toFixed(2)}</div>
             ) : (
-                <div className="text-muted">{price?.toFixed(2)}</div>
+                (Object.keys(currentData) as Array<keyof BarData>).map(x =>
+                    x !== 'time' && x !== 'color' ? (
+                        <div
+                            className="text-muted"
+                            key={x}
+                        >
+                            {`${x}: ${currentData[x].toFixed(2)}`}
+                        </div>
+                    ) : (
+                        <></>
+                    ),
+                )
             )}
         </div>
     );
