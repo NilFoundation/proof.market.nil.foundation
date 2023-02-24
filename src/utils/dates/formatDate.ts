@@ -8,9 +8,9 @@ import dayjs from 'dayjs';
 /**
  * Formats date string.
  *
- * @param dateString - Date string.
+ * @param date - Date string.
  * @param format - Format.
  * @returns Formatted date string representation.
  */
-export const formatDate = (dateString: string, format: string): string =>
-    dayjs(dateString).format(format);
+export const formatDate = (date: string | number, format: string): string =>
+    dayjs(date).format(format);

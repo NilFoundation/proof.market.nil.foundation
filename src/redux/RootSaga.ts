@@ -13,7 +13,7 @@ import {
     LastProofProducerSaga,
 } from './market';
 import { AuthSaga, UserSaga } from './login';
-import { ProofSaga } from './portfolio';
+import { PortfolioSaga } from './portfolio';
 import { DataRevalidationSaga, HadnleNetworkStateSaga } from './common';
 
 /**
@@ -30,7 +30,7 @@ export default function* RootSaga(): Iterator<AllEffect<ForkEffect>> {
         fork(UserOrdersSaga),
         fork(OrderBookSaga),
         fork(LastProofProducerSaga),
-        fork(ProofSaga),
+        fork(PortfolioSaga),
         fork(DataRevalidationSaga),
         fork(HadnleNetworkStateSaga),
     ]);

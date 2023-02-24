@@ -13,7 +13,12 @@ import {
     UserOrdersReducer,
     LastProofProducerReducer,
 } from './market';
-import { ProofReducer } from './portfolio';
+import {
+    PortfolioRequestsInfoReducer,
+    PortfolioPorposalsInfoReducer,
+    ProofReducer,
+    UserStatementsInfoReducer,
+} from './portfolio';
 import type { RootStateType } from './RootStateType';
 
 /**
@@ -28,4 +33,7 @@ export const RootReducer = combineReducers<RootStateType>({
     chartsState: ChartsReducer,
     userOrdersState: UserOrdersReducer,
     lastProofProducerState: LastProofProducerReducer,
+    userStatementInfoState: UserStatementsInfoReducer,
+    portfolioProposalsInfo: PortfolioPorposalsInfoReducer,
+    portfolioRequestsInfo: PortfolioRequestsInfoReducer,
 });

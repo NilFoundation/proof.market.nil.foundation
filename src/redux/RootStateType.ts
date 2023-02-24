@@ -12,7 +12,12 @@ import type {
     UserOrdersReducerState,
     LastProofProducerReducerState,
 } from './market';
-import type { ProofReducerState } from './portfolio';
+import type {
+    PortfolioRequestsInfoReducerState,
+    PortfolioPorposalsInfoReducerState,
+    ProofReducerState,
+    UserStatementsInfoReducerState,
+} from './portfolio';
 
 /**
  * Root state type.
@@ -26,4 +31,7 @@ export interface RootStateType {
     chartsState: ChartsReducerState;
     userOrdersState: UserOrdersReducerState;
     lastProofProducerState: LastProofProducerReducerState;
+    userStatementInfoState: UserStatementsInfoReducerState;
+    portfolioProposalsInfo: PortfolioPorposalsInfoReducerState;
+    portfolioRequestsInfo: PortfolioRequestsInfoReducerState;
 }

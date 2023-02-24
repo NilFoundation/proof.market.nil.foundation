@@ -38,7 +38,7 @@ export const ProgressBar = ({
                 aria-valuenow={percent}
                 aria-valuemin={0}
                 aria-valuemax={100}
-                style={{ width: percentDisplay }}
+                style={{ width: percentDisplay, minWidth: '2em' }}
             >
                 {showPercent ? (
                     percentDisplay

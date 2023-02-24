@@ -22,3 +22,4 @@ export * from './GALocationTracker';
 export * from './VirtualList';
 export * from './PageVisibilityDetector';
 export * from './ProgressBar';
+export * from './RouterLink';

@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { RouterParam } from 'src/enums';
+import type { RouterParam } from 'src/enums';
 import type { RootStateType } from 'src/redux';
 
 /**
@@ -15,23 +15,13 @@ import type { RootStateType } from 'src/redux';
 export const selectLocation = (s: RootStateType) => s.routerState.location;
 
 /**
- * Select statement key url param.
+ * Creates router param selector.
  *
- * @param s State.
- * @returns Statement key.
+ * @param routerParam Router param to select.
+ * @returns Router param selector.
  */
-export const selectUrlParamStatementName = (s: RootStateType) =>
-    selectUrlParamByKey(s, RouterParam.statementName);
-
-/**
- * Select proof key url param.
- *
- * @param s State.
- * @returns Proof key.
- */
-export const selectUrlParamProofKey = (s: RootStateType) =>
-    selectUrlParamByKey(s, RouterParam.proofKey);
-
+export const createUrlParamSelector = (routerParam: RouterParam) => (s: RootStateType) =>
+    selectUrlParamByKey(s, routerParam);
 /**
  * Select param from state.
  *

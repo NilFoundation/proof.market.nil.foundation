@@ -13,4 +13,7 @@ export enum Path {
     portfolio = '/portfolio',
     register = '/register',
     market = '/market',
+    requests = 'requests',
+    proposals = 'proposals',
+    statements = 'statements',
 }

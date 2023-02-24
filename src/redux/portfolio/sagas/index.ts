@@ -4,3 +4,5 @@
  */
 
 export * from './ProofSaga';
+export * from './PortfolioSaga';
+export * from './UserStatementsInfoSaga';

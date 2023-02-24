@@ -40,8 +40,8 @@
   &:focus {
     outline: 1.5px solid $c-secondary !important;
   }
+}
 
-  > i:first-child {
-    margin-right: 12px;
-  }
+.icon {
+  margin-right: 1rem;
 }

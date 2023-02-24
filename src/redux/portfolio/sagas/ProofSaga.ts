@@ -3,40 +3,28 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
 import { getProofs } from 'src/api';
 import type { Proof } from 'src/models';
-import { selectUrlParamProofKey } from 'src/redux/common';
+import { createUrlParamSelector } from 'src/redux/common';
+import { RouterParam } from 'src/enums';
 import {
     UpdateProofList,
     UpdateIsLoadingProofs,
     UpdateProofsError,
     UpdateSelectedProofKey,
 } from '../actions';
-import { ProtectedCall, UpdateUserName } from '../../login';
+import { ProtectedCall, selectUserName } from '../../login';
 import { selectSelectedProofKey } from '../selectors';
-import type { RootStateType } from '../../RootStateType';
-
-const selectUser = (s: RootStateType) => s.userState.name;
-
-/**
- * Proof main saga.
- *
- * @yields
- */
-export function* ProofSaga(): SagaIterator<void> {
-    yield takeLatest(UpdateUserName, GetProofSaga);
-    yield takeLatest(UpdateProofList, SelectProofSaga);
-}
 
 /**
  * Get proof saga.
  *
  * @yields
  */
-function* GetProofSaga(): SagaIterator<void> {
-    const user: ReturnType<typeof selectUser> = yield select(selectUser);
+export function* GetProofSaga(): SagaIterator<void> {
+    const user: ReturnType<typeof selectUserName> = yield select(selectUserName);
 
     if (!user) {
         return;
@@ -46,7 +34,7 @@ function* GetProofSaga(): SagaIterator<void> {
         yield put(UpdateProofsError(false));
         yield put(UpdateIsLoadingProofs(true));
 
-        const proofList: Proof[] = yield call(ProtectedCall, getProofs, user);
+        const proofList: Proof[] = yield call(ProtectedCall, getProofs);
 
         if (proofList !== undefined) {
             yield put(UpdateProofList(proofList));
@@ -64,7 +52,7 @@ function* GetProofSaga(): SagaIterator<void> {
  * @param {ReturnType<typeof UpdateProofList>} action - Action.
  * @yields
  */
-function* SelectProofSaga({
+export function* SelectProofSaga({
     payload: proofs,
 }: ReturnType<typeof UpdateProofList>): SagaIterator<void> {
     const currentProofId = yield select(selectSelectedProofKey);
@@ -77,7 +65,7 @@ function* SelectProofSaga({
         return;
     }
 
-    const urlParamKey: string = yield select(selectUrlParamProofKey);
+    const urlParamKey: string = yield select(createUrlParamSelector(RouterParam.proofKey));
 
     const shouldSelectFromUrl = proofs.some(x => x._key === urlParamKey);
     const keyToSelect = shouldSelectFromUrl ? urlParamKey : proofs[0]._key;

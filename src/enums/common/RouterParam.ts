@@ -9,4 +9,7 @@
 export const enum RouterParam {
     proofKey = 'proofKey',
     statementName = 'statementName',
+    portfolioUserStatementsInfoName = 'portfolioUserStatementsInfoName',
+    portfolioProposalsInfoStatementName = 'portfolioProposalsInfoStatementName',
+    portfolioRequestsInfoStatementName = 'portfolioRequestsInfoStatementName',
 }

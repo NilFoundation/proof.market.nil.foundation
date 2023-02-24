@@ -9,21 +9,21 @@ import { createApiClient } from '../common';
 const httpFetcher = createApiClient('/statement');
 
 /**
- * Get circuits.
+ * Get statements.
  *
  * @returns Circuit list.
  */
 export const getCircuits = (): Promise<Circuit[]> => httpFetcher.get('').json();
 
 /**
- * Get circuits info.
+ * Get statements info.
  *
  * @returns .
  */
 export const getCircuitsInfo = (): Promise<CircuitInfo> => httpFetcher.get('?info').json();
 
 /**
- * Get circuits stats.
+ * Get statements statistics.
  *
  * @returns .
  */

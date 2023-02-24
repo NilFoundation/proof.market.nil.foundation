@@ -9,6 +9,9 @@ import type { RouteObject } from 'react-router-dom';
 import { RouterParam } from 'src/enums';
 import ProtectedRoute from 'src/components/login/ProtectedRoute/ProtectedRoute';
 import RouterReduxConnector from 'src/components/common/RouterReduxConnector/RouterReduxConnector';
+import RequestsContent from 'src/components/portfolio/PortfolioRequestsInfoContent/PortfolioRequestsInfoContent';
+import UserStatementInfoContent from 'src/components/portfolio/UserStatementInfoContent/UserStatementInfoContent';
+import ProposalContent from 'src/components/portfolio/PortfolioProposalsInfoContent/PortfolioProposalsInfoContent';
 import { Path } from './Paths';
 import AuthLayout from '../layouts/AuthLayout';
 import MainLayout from '../layouts/MainLayout';
@@ -78,15 +81,50 @@ export const routesConfig: RouteObject[] = [
                                 element: <PortfolioView />,
                                 children: [
                                     {
-                                        path: `:${RouterParam.proofKey}`,
-                                        element: <PortfolioView />,
+                                        index: true,
+                                        element: (
+                                            <Navigate
+                                                to={Path.requests}
+                                                replace
+                                            />
+                                        ),
+                                    },
+                                    {
+                                        path: `${Path.requests}`,
+                                        element: <RequestsContent />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.portfolioRequestsInfoStatementName}`,
+                                                element: <RequestsContent />,
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        path: `${Path.proposals}`,
+                                        element: <ProposalContent />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.portfolioProposalsInfoStatementName}`,
+                                                element: <ProposalContent />,
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        path: Path.statements,
+                                        element: <UserStatementInfoContent />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.portfolioUserStatementsInfoName}`,
+                                                element: <UserStatementInfoContent />,
+                                            },
+                                        ],
                                     },
                                 ],
                             },
                         ],
                     },
                     {
-                        path: Path.any, // This should always be the last
+                        path: Path.any,
                         element: <Page404 />,
                     },
                 ],

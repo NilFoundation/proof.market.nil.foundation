@@ -4,3 +4,6 @@
  */
 
 export * from './ProofSelectors';
+export * from './UserStatementsInfoSelectors';
+export * from './PortfolioProposalsInfoSelectors';
+export * from './PortfolioRequestsInfoSelectors';

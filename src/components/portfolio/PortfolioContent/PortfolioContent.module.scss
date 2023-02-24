@@ -1,0 +1,17 @@
+@import "src/styles/mixins/hideScrollbar";
+
+.container {
+  height: calc(100vh - 264px);
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: auto;
+  @include hideScrollbar;
+}
+
+.header {
+  > h4 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  margin-bottom: 1rem;
+}

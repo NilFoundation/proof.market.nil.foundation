@@ -5,9 +5,15 @@
 
 import type { ReactElement } from 'react';
 import { ListGroup, Spinner } from '@nilfoundation/react-components';
-import { selectProofList, useAppSelector } from 'src/redux';
-import { useSelectedProofKeyUrlSync } from 'src/hooks';
-import { DashboardCard } from 'src/components';
+import {
+    selectProofList,
+    selectSelectedProofKey,
+    UpdateSelectedProofKey,
+    useAppSelector,
+} from 'src/redux';
+import { useSyncUrlAndSelectedItem } from 'src/hooks';
+import { RouterParam } from 'src/enums';
+import { DashboardCard } from 'src/components/common';
 import { ProofListItem } from './ProofListItem';
 import styles from './ProofList.module.scss';
 
@@ -20,8 +26,6 @@ export const ProofList = (): ReactElement => {
     const proofList = useAppSelector(selectProofList);
     const loadingProofs = useAppSelector(s => s.proofState.isLoadingProofs);
     const getProofsError = useAppSelector(s => s.proofState.error);
-
-    useSelectedProofKeyUrlSync();
 
     return (
         <DashboardCard>

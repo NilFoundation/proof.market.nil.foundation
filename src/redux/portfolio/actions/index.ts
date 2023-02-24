@@ -4,3 +4,6 @@
  */
 
 export * from './ProofActions';
+export * from './UserStatementsInfoActions';
+export * from './PortfolioProposalsInfoActions';
+export * from './PortfolioRequestsInfoActions';

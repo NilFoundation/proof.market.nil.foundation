@@ -8,6 +8,7 @@ import type { SagaIterator } from '@redux-saga/core';
 import { getCircuits, getCircuitsInfo, getCircuitsStats } from 'src/api';
 import type { Circuit, CircuitInfo, CircuitStats } from 'src/models';
 import { getRuntimeConfigOrThrow } from 'src/utils';
+import { RouterParam } from 'src/enums';
 import {
     UpdateCircuitsError,
     UpdateCircuitsInfoList,
@@ -20,7 +21,7 @@ import {
 } from '../actions';
 import { ProtectedCall, UpdateUserName } from '../../login';
 import { selectCurrentCircuitKey } from '../selectors';
-import { RevalidateSaga, selectUrlParamStatementName } from '../../common';
+import { RevalidateSaga, createUrlParamSelector } from '../../common';
 
 const revalidateCircuitsInfoInterval =
     Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
@@ -75,7 +76,9 @@ function* SelectCircuitSaga({
     payload: circuitsList,
 }: ReturnType<typeof UpdateCircuitsList>): SagaIterator<void> {
     const currentCircuitKey = yield select(selectCurrentCircuitKey);
-    const urlParamStatementName: string = yield select(selectUrlParamStatementName);
+    const urlParamStatementName: string = yield select(
+        createUrlParamSelector(RouterParam.statementName),
+    );
 
     if (currentCircuitKey) {
         return;

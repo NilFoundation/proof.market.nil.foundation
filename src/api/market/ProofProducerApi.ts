@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import type { LastProofProducer } from 'src/models';
+import type { LastProofProducer, PortfolioProposalsInfo } from 'src/models';
 import { createApiClient } from '../common';
 
 const httpFetcher = createApiClient('/producer');
@@ -15,3 +15,11 @@ const httpFetcher = createApiClient('/producer');
  */
 export const getLastProofProducerData = (): Promise<Array<LastProofProducer | null>> =>
     httpFetcher.get('last').json();
+
+/**
+ * Get proof producer data.
+ *
+ * @returns .
+ */
+export const getProofProducerInfo = (): Promise<PortfolioProposalsInfo[]> =>
+    httpFetcher.get('').json();

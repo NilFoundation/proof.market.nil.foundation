@@ -34,7 +34,10 @@ export const UserMenu = (): ReactElement => {
                 className={styles.button}
                 onClick={() => navigate(Path.login)}
             >
-                <Icon iconName="fa-solid fa-circle-user" />
+                <Icon
+                    iconName="fa-solid fa-circle-user"
+                    className={styles.icon}
+                />
                 Sign In
             </Button>
         );
@@ -44,7 +47,10 @@ export const UserMenu = (): ReactElement => {
         <div className={styles.menu}>
             <Dropdown className={styles.dropdown}>
                 <Dropdown.Button className={styles.button}>
-                    <Icon iconName="fa-solid fa-circle-user" />
+                    <Icon
+                        iconName="fa-solid fa-circle-user"
+                        className={styles.icon}
+                    />
                     {user}
                 </Dropdown.Button>
                 <Dropdown.Menu align="right">
@@ -53,7 +59,13 @@ export const UserMenu = (): ReactElement => {
                         <UserBalance className={styles.balance} />
                     </Menu.Header>
                     <Menu.Divider />
-                    <Dropdown.Item onSelect={processLogout}>Logout</Dropdown.Item>
+                    <Dropdown.Item onSelect={processLogout}>
+                        <Icon
+                            iconName="fa-solid fa-power-off"
+                            className={styles.icon}
+                        />
+                        Logout
+                    </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         </div>

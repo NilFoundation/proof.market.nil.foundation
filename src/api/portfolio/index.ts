@@ -4,3 +4,4 @@
  */
 
 export * from './ProofApi';
+export * from './PortfolioInfoApi';

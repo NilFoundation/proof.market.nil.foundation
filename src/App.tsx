@@ -14,6 +14,11 @@ import ErrorView from './views/ErrorView';
 import { getRuntimeConfigOrThrow } from './utils';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
+const renderLoader = () => (
+    <div style={{ height: '100vh' }}>
+        <Spinner grow />
+    </div>
+);
 
 /**
  * @returns App.
@@ -26,7 +31,7 @@ function App(): ReactElement {
                     titleTemplate={`${baseDocumentTitle} | %s`}
                     defaultTitle={baseDocumentTitle}
                 />
-                <Suspense fallback={<Spinner grow />}>
+                <Suspense fallback={renderLoader()}>
                     <Router />
                 </Suspense>
             </NotificationProvider>

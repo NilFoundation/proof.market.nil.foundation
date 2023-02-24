@@ -30,7 +30,7 @@ export const ProofListItem = ({ proof: { _key } }: ProofListItemProps): ReactEle
 
     return (
         <ListGroup.Item active={isSelected}>
-            <Link to={`${Path.portfolio}/${_key}`}>
+            <Link to={`${Path.portfolio}/${Path.requests}/${_key}`}>
                 <Media className={isSelected ? styles.selected : ''}>
                     <Media.Body className={styles.itemBody}>{`id: ${_key}`}</Media.Body>
                 </Media>

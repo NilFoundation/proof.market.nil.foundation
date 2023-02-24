@@ -4,3 +4,6 @@
  */
 
 export * from './ProofReducer';
+export * from './UserStatementsInfoReducer';
+export * from './PortfolioPorposalsInfoReducer';
+export * from './PortfolioRequestsInfoReducer';

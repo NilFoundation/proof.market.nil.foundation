@@ -1,0 +1,26 @@
+@import "src/styles/constants";
+@import "src/styles/mixins/styledList";
+@import "src/styles/mixins/hideScrollbar";
+@import "src/styles/mixins/overflowFade";
+
+.container {
+  height: calc(100vh - 238px);
+}
+
+.list {
+  @include styledList;
+  height: 100%;
+  overflow: auto;
+  padding-top: 0.5rem;
+  @include hideScrollbar;
+  @include overflowFade(0.5rem, true);
+}
+
+.itemBody {
+  vertical-align: middle !important;
+  height: calc(48px - 1rem);
+}
+
+div.selected {
+  color: $c-secondary !important;
+}
