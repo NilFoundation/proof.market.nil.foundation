@@ -13,7 +13,7 @@ import type { Path } from 'src/routing';
  */
 type RouterLinkProps = {
     title: string;
-    to: Path;
+    to: Path | string;
 };
 
 /**

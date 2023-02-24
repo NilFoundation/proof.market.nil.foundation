@@ -8,15 +8,15 @@ import { Spinner } from '@nilfoundation/react-components';
 import { selectSelectedProofKey, useAppSelector } from 'src/redux';
 import { DashboardCard, ObjectAsPlainTextViewer } from 'src/components';
 import type { Proof } from 'src/models';
-import { ProofContentCardToolbar } from './ProofContentCardToolbar';
-import styles from './ProofContentCard.module.scss';
+import { ProofContentToolbar } from './ProofContentToolbar';
+import styles from './ProofContent.module.scss';
 
 /**
  * Proof content card.
  *
  * @returns React component.
  */
-const ProofContentCard = (): ReactElement => {
+const ProofContent = (): ReactElement => {
     const selectedProofId = useAppSelector(selectSelectedProofKey);
     const isLoadingProofs = useAppSelector(s => s.proofState.isLoadingProofs);
     const proofData = useAppSelector(s =>
@@ -30,6 +30,8 @@ const ProofContentCard = (): ReactElement => {
         </DashboardCard>
     );
 };
+
+export default ProofContent;
 
 /**
  * Conditionally renders proof data. First true case renders.
@@ -46,12 +48,10 @@ const ProofViewFactory = (loadingProofs: boolean, proof?: Proof) => {
             return (
                 <>
                     <ObjectAsPlainTextViewer data={proof!} />
-                    <ProofContentCardToolbar proof={proof} />
+                    <ProofContentToolbar proof={proof} />
                 </>
             );
         case proof === undefined:
             return <h5>No proof data was found.</h5>;
     }
 };
-
-export default ProofContentCard;

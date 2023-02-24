@@ -5,9 +5,14 @@
 
 import type { ReactElement } from 'react';
 import { ListGroup, Spinner } from '@nilfoundation/react-components';
-import { selectProofList, useAppSelector } from 'src/redux';
-import { useSelectedProofKeyUrlSync } from 'src/hooks';
-import { DashboardCard } from 'src/components';
+import {
+    selectProofList,
+    selectSelectedProofKey,
+    UpdateSelectedProofKey,
+    useAppSelector,
+} from 'src/redux';
+import { useSyncUrlAndSelectedItem } from 'src/hooks';
+import { RouterParam } from 'src/enums';
 import { ProofListItem } from './ProofListItem';
 import styles from './ProofList.module.scss';
 
@@ -16,22 +21,28 @@ import styles from './ProofList.module.scss';
  *
  * @returns React component.
  */
-export const ProofList = (): ReactElement => {
+const ProofList = (): ReactElement => {
     const proofList = useAppSelector(selectProofList);
     const loadingProofs = useAppSelector(s => s.proofState.isLoadingProofs);
     const getProofsError = useAppSelector(s => s.proofState.error);
 
-    useSelectedProofKeyUrlSync();
+    useSyncUrlAndSelectedItem({
+        actionToUpdateSelectedItem: UpdateSelectedProofKey,
+        urlParamToSync: RouterParam.proofKey,
+        itemSelector: selectSelectedProofKey,
+    });
 
     return (
-        <DashboardCard>
+        <>
             <h4>Proof list</h4>
             <div className={styles.container}>
                 {ProofListViewFactory(proofList, loadingProofs, getProofsError)}
             </div>
-        </DashboardCard>
+        </>
     );
 };
+
+export default ProofList;
 
 /**
  * Conditionally renders proof data. First true case renders.

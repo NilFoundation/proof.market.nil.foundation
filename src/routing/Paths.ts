@@ -13,7 +13,7 @@ export enum Path {
     portfolio = '/portfolio',
     register = '/register',
     market = '/market',
-    proofs = 'proofs',
+    proof = 'proof',
     generatedProofs = 'genrated-proofs',
-    circuits = 'circuits',
+    statements = 'statements',
 }

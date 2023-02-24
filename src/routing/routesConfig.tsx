@@ -9,7 +9,7 @@ import type { RouteObject } from 'react-router-dom';
 import { RouterParam } from 'src/enums';
 import ProtectedRoute from 'src/components/login/ProtectedRoute/ProtectedRoute';
 import RouterReduxConnector from 'src/components/common/RouterReduxConnector/RouterReduxConnector';
-import ProofContentCard from 'src/components/portfolio/ProofContentCard/ProofContentCard';
+import ProofContentCard from 'src/components/portfolio/ProofContentCard/ProofContent';
 import { Path } from './Paths';
 import AuthLayout from '../layouts/AuthLayout';
 import MainLayout from '../layouts/MainLayout';
@@ -75,12 +75,31 @@ export const routesConfig: RouteObject[] = [
                         element: <ProtectedRoute />,
                         children: [
                             {
-                                path: Path.proofs,
-                                element: <ProofContentCard />,
+                                path: Path.portfolio,
+                                element: <PortfolioView />,
                                 children: [
                                     {
-                                        path: `:${RouterParam.proofKey}`,
+                                        index: true,
+                                        element: (
+                                            <Navigate
+                                                to={Path.proof}
+                                                replace
+                                            />
+                                        ),
+                                    },
+                                    {
+                                        path: `${Path.proof}`,
                                         element: <ProofContentCard />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.proofKey}`,
+                                                element: <ProofContentCard />,
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        path: Path.statements,
+                                        element: <div>Div</div>,
                                     },
                                 ],
                             },

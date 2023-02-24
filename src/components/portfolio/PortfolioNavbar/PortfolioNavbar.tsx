@@ -1,6 +1,6 @@
 /**
  * @file React component.
- * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
+ * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
 import { Nav } from '@nilfoundation/react-components';
@@ -35,14 +35,14 @@ export const PortfolioNavbar = () => {
 const navConfig = [
     {
         text: 'My proofs',
-        link: Path.proofs,
+        link: `${Path.portfolio}/${Path.proof}`,
     },
     {
         text: 'Generated proofs',
-        link: Path.generatedProofs,
+        link: `${Path.portfolio}/${Path.generatedProofs}`,
     },
     {
         text: 'My circuits',
-        link: Path.circuits,
+        link: `${Path.portfolio}/${Path.statements}`,
     },
 ];

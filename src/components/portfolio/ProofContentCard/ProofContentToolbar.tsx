@@ -10,7 +10,7 @@ import { getProofById } from 'src/api';
 import { useDownloadJson } from 'src/hooks';
 import type { Proof } from 'src/models';
 import { ProgressBar } from 'src/components/common';
-import styles from './ProofContentCard.module.scss';
+import styles from './ProofContent.module.scss';
 
 /**
  * Props.
@@ -25,7 +25,7 @@ type ProofViewHeaderProps = {
  * @param {ProofViewHeaderProps} props Props.
  * @returns React component.
  */
-export const ProofContentCardToolbar = ({ proof }: ProofViewHeaderProps): ReactElement => {
+export const ProofContentToolbar = ({ proof }: ProofViewHeaderProps): ReactElement => {
     const [showProgress, setShowProgress] = useState(false);
     const [downloadPergent, setDownloadPercent] = useState(0);
     const fetcher = useCallback(async () => {

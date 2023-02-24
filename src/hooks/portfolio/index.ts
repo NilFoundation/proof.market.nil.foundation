@@ -3,5 +3,4 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-export * from './useSelectedProofKeyUrlSync';
 export * from './useDownloadJson';
