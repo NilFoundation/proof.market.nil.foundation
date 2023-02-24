@@ -13,7 +13,7 @@ const httpFetcher = createApiClient('/statement');
  *
  * @returns Circuit list.
  */
-export const getCircuits = (): Promise<Circuit> => httpFetcher.get('').json();
+export const getCircuits = (): Promise<Circuit[]> => httpFetcher.get('').json();
 
 /**
  * Get circuits info.
