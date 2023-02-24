@@ -16,7 +16,7 @@ import styles from './ProofContentCard.module.scss';
  *
  * @returns React component.
  */
-export const ProofContentCard = (): ReactElement => {
+const ProofContentCard = (): ReactElement => {
     const selectedProofId = useAppSelector(selectSelectedProofKey);
     const isLoadingProofs = useAppSelector(s => s.proofState.isLoadingProofs);
     const proofData = useAppSelector(s =>
@@ -53,3 +53,5 @@ const ProofViewFactory = (loadingProofs: boolean, proof?: Proof) => {
             return <h5>No proof data was found.</h5>;
     }
 };
+
+export default ProofContentCard;

@@ -2,7 +2,7 @@
 @import "src/styles/mixins/hideScrollbar";
 
 .container {
-  height: calc(100vh - 176px);
+  height: calc(100vh - 188px - 7rem);
   display: flex;
   flex-flow: column nowrap;
   overflow: auto;

@@ -5,8 +5,9 @@
 
 import type { ReactElement } from 'react';
 import { Container, Row, Col } from '@nilfoundation/react-components';
+import { Outlet } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ProofList, ProofContentCard } from '../components';
+import { PortfolioNavbar, ProofList } from '../components';
 
 /**
  * Portfolio view.
@@ -33,7 +34,8 @@ const PortfolioView = (): ReactElement => (
                 xs={12}
                 md={9}
             >
-                <ProofContentCard />
+                <PortfolioNavbar />
+                <Outlet />
             </Col>
         </Row>
     </Container>

@@ -11,18 +11,18 @@ import type { Path } from 'src/routing';
 /**
  * Props.
  */
-type HeaderLinkProps = {
+type RouterLinkProps = {
     title: string;
     to: Path;
 };
 
 /**
- * Header link.
+ * Router link.
  *
- * @param {HeaderLinkProps} props Props.
+ * @param {RouterLinkProps} props Props.
  * @returns React component.
  */
-export const HeaderLink = ({ title, to }: HeaderLinkProps): ReactElement => {
+export const RouterLink = ({ title, to }: RouterLinkProps): ReactElement => {
     const match = useMatch({
         path: to,
         end: false,

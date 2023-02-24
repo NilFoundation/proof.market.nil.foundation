@@ -9,7 +9,7 @@ import { documentationUrl, navigationLinks } from 'src/constants';
 import { MobileMenu } from '../MobileMenu';
 import { UserMenu } from '../../login';
 import { Breadcrumbs } from '../BreadCrumbs';
-import { HeaderLink } from './HeaderLink';
+import { RouterLink } from '../RouterLink';
 import styles from './Header.module.scss';
 
 /**
@@ -27,7 +27,7 @@ export const Header = (): ReactElement => {
                 <Breadcrumbs />
                 <Nav className={styles.nav}>
                     {navigationLinks.map(({ title, path }) => (
-                        <HeaderLink
+                        <RouterLink
                             key={path}
                             title={title}
                             to={path}

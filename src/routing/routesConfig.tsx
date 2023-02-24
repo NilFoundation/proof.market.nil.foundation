@@ -9,6 +9,7 @@ import type { RouteObject } from 'react-router-dom';
 import { RouterParam } from 'src/enums';
 import ProtectedRoute from 'src/components/login/ProtectedRoute/ProtectedRoute';
 import RouterReduxConnector from 'src/components/common/RouterReduxConnector/RouterReduxConnector';
+import ProofContentCard from 'src/components/portfolio/ProofContentCard/ProofContentCard';
 import { Path } from './Paths';
 import AuthLayout from '../layouts/AuthLayout';
 import MainLayout from '../layouts/MainLayout';
@@ -74,12 +75,12 @@ export const routesConfig: RouteObject[] = [
                         element: <ProtectedRoute />,
                         children: [
                             {
-                                path: Path.portfolio,
-                                element: <PortfolioView />,
+                                path: Path.proofs,
+                                element: <ProofContentCard />,
                                 children: [
                                     {
                                         path: `:${RouterParam.proofKey}`,
-                                        element: <PortfolioView />,
+                                        element: <ProofContentCard />,
                                     },
                                 ],
                             },
