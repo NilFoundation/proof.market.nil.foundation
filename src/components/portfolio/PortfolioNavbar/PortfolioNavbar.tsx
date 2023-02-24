@@ -16,10 +16,7 @@ import styles from './PortfolioNavbar.module.scss';
 export const PortfolioNavbar = () => {
     return (
         <DashboardCard className={styles.container}>
-            <Nav
-                tabs
-                justified
-            >
+            <Nav>
                 {navConfig.map(({ text, link }) => (
                     <RouterLink
                         key={text}
