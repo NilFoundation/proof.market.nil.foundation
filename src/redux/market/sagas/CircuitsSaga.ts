@@ -7,6 +7,7 @@ import { call, put, select, takeLatest, fork, all } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
 import { getCircuits, getCircuitsInfo, getCircuitsStats } from 'src/api';
 import type { Circuit, CircuitInfo, CircuitStats } from 'src/models';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 import {
     UpdateCircuitsError,
     UpdateCircuitsInfoList,
@@ -22,7 +23,7 @@ import { selectCurrentCircuitKey } from '../selectors';
 import { RevalidateSaga, selectUrlParamStatementName } from '../../common';
 
 const revalidateCircuitsInfoInterval =
-    Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVAL) || 3000;
+    Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
 
 /**
  * Circuits main saga.

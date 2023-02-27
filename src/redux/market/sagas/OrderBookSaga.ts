@@ -9,6 +9,7 @@ import type { GetOrdersParameters, OrderBookDataOptions } from 'src/api';
 import { getAsks, getOrderBookData } from 'src/api';
 import { ProtectedCall } from 'src/redux';
 import type { Ask, LastOrderData, OrderBookData } from 'src/models';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 import {
     UpdateSelectedCircuitKey,
     UpdateOrderBookData,
@@ -20,7 +21,7 @@ import {
 import { selectCurrentCircuitKey, selectOrderBookPriceStep } from '../selectors';
 import { RevalidateSaga } from '../../common';
 
-const revalidateDataDelay = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVAL) || 3000;
+const revalidateDataDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
 
 /**
  * Orderbook saga.

@@ -62,7 +62,7 @@
       rel="manifest"
       href="%PUBLIC_URL%/manifest.json"
     />
-    <title>%REACT_APP_SITE_DEFAULT_TITLE%</title>
+    <title>=nil; Foundation - Proof Market</title>
     <link rel="stylesheet" href="%PUBLIC_URL%/critical.css" />
     <!-- Preconnect to required origins -->
     <link
@@ -83,10 +83,6 @@
     />
     <link
       rel="preconnect"
-      href="%REACT_APP_BASE_API_URL%"
-    />
-    <link
-      rel="preconnect"
       href="https://kit.fontawesome.com"
     />
     <script
@@ -94,6 +90,19 @@
       src="https://kit.fontawesome.com/9264f6e460.js"
       crossorigin="anonymous">
     </script>
+    <% if (process.env.NODE_ENV === 'production') { %>
+      <script
+        defer
+        src="./runtimeConfig.js"
+        >
+      </script>
+    <% } else { %>
+      <script
+        defer
+        src="./runtimeConfig.dev.js"
+        >
+      </script>
+    <% } %>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

@@ -34,18 +34,24 @@ jobs:
         npm config set "//npm.pkg.github.com/:_authToken" ${{ secrets.AUTH_TOKEN }}
         npm ci
 
-    - name: Setup env
+    - name: Setup runtime config
+      working-directory: public
       run: |
-        touch .env.local
-        echo "REACT_APP_BASE_API_URL=${{ secrets.BASE_API_URL }}" >> .env.local
-        echo "REACT_APP_DBMS_DEFAULT_DATABASE=${{ secrets.DBMS_DEFAULT_DATABASE }}" >> .env.local
-        echo "REACT_APP_SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> .env.local
-        echo "REACT_APP_READONLY_USER=${{ secrets.READONLY_USER }}" >> .env.local
-        echo "REACT_APP_SITE_DEFAULT_TITLE=${{ secrets.SITE_DEFAULT_TITLE }}" >> .env.local
-        echo "REACT_APP_GA_TRACKING_ID=${{ secrets.GA_TRACKING_ID }}" >> .env.local
-        echo "REACT_APP_PROOFMARKET_TOOLCHAIN_REPO=${{ secrets.PROOFMARKET_TOOLCHAIN_REPO }}" >> .env.local
-        echo "REACT_APP_API_VERSION=${{ secrets.API_VERSION }}" >> .env.local
-        echo "REACT_APP_REVALIDATE_DATA_INTERVAL=${{ secrets.REVALIDATE_DATA_INTERVAL }}" >> .env.local
+        config="
+        window['RUNTIME_CONFIG'] = {
+          BASE_API_URL: '${{ secrets.BASE_API_URL }}',
+          DBMS_DEFAULT_DATABASE: '${{ secrets.DBMS_DEFAULT_DATABASE }}',
+          API_VERSION: '${{ secrets.API_VERSION }}',
+          REVALIDATE_DATA_INTERVAL: '${{ secrets.REVALIDATE_DATA_INTERVAL }}',
+          READONLY_USER: '${{ secrets.READONLY_USER }}',
+          SITE_DEFAULT_TITLE: '${{ secrets.SITE_DEFAULT_TITLE }}',
+          GA_TRACKING_ID: '${{ secrets.GA_TRACKING_ID }}',
+          PROOFMARKET_TOOLCHAIN_REPO: '${{ secrets.PROOFMARKET_TOOLCHAIN_REPO }}',
+          SENTRY_DSN: '${{ secrets.SENTRY_DSN }}',
+        }
+        "
+        echo "$config" > runtimeConfig.js
+        echo runtimeConfig.js
 
     - name: Build
       run: |

@@ -7,6 +7,7 @@ import type { SagaIterator } from '@redux-saga/core';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getUserBalance } from 'src/api';
 import type { UserBalance } from 'src/models';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 import {
     UpdateUserBalance,
     UpdateUserBalanceIsLoading,
@@ -33,7 +34,7 @@ export function* UserSaga(): SagaIterator<void> {
  */
 function* GetUserBalance(): SagaIterator<void> {
     const user = yield select(selectUserName);
-    const isReadonly = user === process.env.REACT_APP_READONLY_USER;
+    const isReadonly = user === getRuntimeConfigOrThrow().READONLY_USER;
     if (isReadonly || !user) {
         return;
     }

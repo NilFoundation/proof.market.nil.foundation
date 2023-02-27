@@ -7,6 +7,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { login } from 'src/api';
 import { useAuth, useLogin } from 'src/hooks';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 
 /**
  * Props.
@@ -33,7 +34,7 @@ export const ReadonlyAccessProvider = ({
     const { isAuthentificated } = useAuth();
 
     useEffect(() => {
-        const readonlyUser = process.env.REACT_APP_READONLY_USER;
+        const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 
         const loginWithReadonly = async (user: string) => {
             try {

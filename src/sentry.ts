@@ -5,6 +5,7 @@
 
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
+import { getRuntimeConfigOrThrow } from './utils';
 
 /**
  * Configures sentry for app.
@@ -16,7 +17,7 @@ export const configureSentry = (): void => {
         return;
     }
 
-    const dsn = process.env.REACT_APP_SENTRY_DSN;
+    const dsn = getRuntimeConfigOrThrow().SENTRY_DSN;
 
     if (!dsn) {
         return;

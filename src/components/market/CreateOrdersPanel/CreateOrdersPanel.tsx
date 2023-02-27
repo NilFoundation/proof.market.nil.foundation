@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useAppSelector } from 'src/redux';
 import { TradeOrderType } from 'src/models';
 import { socialLinks as links } from 'src/constants';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 import { DashboardCard, SocialLinks } from '../../common';
 import { ProtectedContent } from '../../login';
 import { CreateBidForm } from '../CreateBidForm';
@@ -63,7 +64,7 @@ const tabFactory = (tab: TradeOrderType, selectedCircuitKey?: string) => {
                     <a
                         target="_blank"
                         rel="noreferrer"
-                        href={process.env.REACT_APP_PROOFMARKET_TOOLCHAIN_REPO}
+                        href={getRuntimeConfigOrThrow().PROOFMARKET_TOOLCHAIN_REPO}
                     >
                         <strong>toolchain repository</strong>
                     </a>

@@ -8,6 +8,7 @@ import type { SagaIterator } from '@redux-saga/core';
 import { getAsks } from 'src/api';
 import { ProtectedCall } from 'src/redux';
 import type { Ask } from 'src/models';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 import {
     UpdateSelectedCircuitKey,
     UpdateChartsData,
@@ -17,7 +18,7 @@ import {
 import { selectCurrentCircuitKey } from '../selectors';
 import { RevalidateSaga } from '../../common';
 
-const revalidateDataDelay = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVAL) || 3000;
+const revalidateDataDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
 
 /**
  * Charts saga.

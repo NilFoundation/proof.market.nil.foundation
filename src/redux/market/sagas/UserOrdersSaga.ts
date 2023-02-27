@@ -8,6 +8,7 @@ import type { SagaIterator } from '@redux-saga/core';
 import type { GetOrdersParameters } from 'src/api';
 import { getBids, getAsks } from 'src/api';
 import { ProtectedCall, selectUserName } from 'src/redux/login';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 import {
     UpdateSelectedCircuitKey,
     UpdateUserAsksList,
@@ -18,7 +19,7 @@ import {
 import { selectCurrentCircuitKey } from '../selectors';
 import { RevalidateSaga } from '../../common';
 
-const revalidateAsksDelay = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVAL) || 3000;
+const revalidateAsksDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
 
 /**
  * User orders saga.

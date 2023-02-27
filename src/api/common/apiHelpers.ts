@@ -4,10 +4,11 @@
  */
 
 import type { TradeOrder } from 'src/models';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 
-const db = process.env.REACT_APP_DBMS_DEFAULT_DATABASE;
-const apiVersion = process.env.REACT_APP_API_VERSION;
-const baseUrl = process.env.REACT_APP_BASE_API_URL;
+const db = getRuntimeConfigOrThrow().DBMS_DEFAULT_DATABASE;
+const apiVersion = getRuntimeConfigOrThrow().API_VERSION;
+const baseUrl = getRuntimeConfigOrThrow().BASE_API_URL;
 
 /**
  * Get orders parameters.

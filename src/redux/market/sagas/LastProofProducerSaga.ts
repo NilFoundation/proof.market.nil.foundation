@@ -7,6 +7,7 @@ import { call, put, takeLatest, fork } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
 import { getLastProofProducerData } from 'src/api';
 import type { LastProofProducer } from 'src/models';
+import { getRuntimeConfigOrThrow } from 'src/utils';
 import {
     UpdateLastProofProducer,
     UpdateIsLoadingLastProofProducer,
@@ -15,7 +16,7 @@ import {
 import { ProtectedCall, UpdateUserName } from '../../login';
 import { RevalidateSaga } from '../../common';
 
-const revalidateDataInterval = Number(process.env.REACT_APP_REVALIDATE_DATA_INTERVAL) || 3000;
+const revalidateDataInterval = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
 
 /**
  * Last proof producer saga.

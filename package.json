@@ -12,7 +12,6 @@
     "clsx": "^1.2.1",
     "dayjs": "^1.11.5",
     "dequal": "^2.0.3",
-    "dotenv": "^16.0.3",
     "jwt-decode": "^3.1.2",
     "ky": "^0.33.2",
     "lightweight-charts": "^4.0.0",
@@ -46,7 +45,6 @@
     "lint:ts": "eslint --ext=ts,tsx src",
     "lint:editorconfig": "npx editorconfig-checker",
     "prepare": "husky install",
-    "prebuild": "node ./scripts/checkEnv",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "browserslist": {

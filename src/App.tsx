@@ -11,8 +11,9 @@ import { Helmet } from 'react-helmet-async';
 import { GALocationTracker, PageVisibilityDetector } from './components';
 import { Router } from './routing';
 import ErrorView from './views/ErrorView';
+import { getRuntimeConfigOrThrow } from './utils';
 
-const baseDocumentTitle = process.env.REACT_APP_SITE_DEFAULT_TITLE;
+const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
 
 /**
  * @returns App.

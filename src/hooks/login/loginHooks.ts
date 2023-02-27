@@ -9,10 +9,10 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { removeItemFromLocalStorage, setItemIntoLocalStorage } from 'src/packages/LocalStorage';
 import { selectUserName, SetJwtRevalidateTimeout, UpdateUserName, useAppSelector } from 'src/redux';
-import { calculateRenewJwtTimeGap, getUserFromJwt } from 'src/utils';
+import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from 'src/utils';
 import { Path } from 'src/routing';
 
-const readonlyUser = process.env.REACT_APP_READONLY_USER;
+const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 
 /**
  * Provides access to auth state.
