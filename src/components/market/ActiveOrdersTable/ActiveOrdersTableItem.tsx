@@ -3,8 +3,8 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { ReactElement, useEffect } from 'react';
-import { useRef, forwardRef, useCallback, useState } from 'react';
+import type { ReactElement } from 'react';
+import { useEffect, useRef, forwardRef, useCallback, useState } from 'react';
 import { ListGroup } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import type { Row } from 'react-table';
@@ -14,11 +14,8 @@ import { removeAsk, removeBid } from 'src/api';
 import { RemoveUserAsk, RemoveUserBid } from 'src/redux';
 import { useOnClickOutside } from 'src/hooks';
 import type { ManageOrdersData } from 'src/models';
-import { capitalizeFirstChar, renderDashOnEmptyValue } from 'src/utils';
-import { ClicableIcon } from 'src/components/common';
 import { RemoveOrderConfirmationCard } from './RemoveOrderConfirmationCard';
-import { OrderStatusMarker } from '../OrderStatusMarker';
-import styles from './ActiveOrdersTable.module.scss';
+import { OrdersTableItem } from '../OrdersTableItem';
 
 /**
  * Props.
@@ -28,7 +25,7 @@ type ActiveOrdersTableItemProps = {
 };
 
 /**
- * Active orders table.
+ * Active orders table item.
  *
  * @param {ActiveOrdersTableItemProps} props Props.
  * @returns React component.
@@ -41,7 +38,7 @@ export const ActiveOrdersTableItem = forwardRef<HTMLDivElement, ActiveOrdersTabl
         const dispatch = useDispatch();
 
         const { values } = data;
-        const { type, orderId, status, eval_time, cost, init_time } = values as ManageOrdersData;
+        const { type, orderId, ...restData } = values as ManageOrdersData;
 
         const confirmationCardRef = useRef(null);
         const closeConfirmationCard = useCallback(() => setShowConfirmationCard(false), []);
@@ -76,35 +73,12 @@ export const ActiveOrdersTableItem = forwardRef<HTMLDivElement, ActiveOrdersTabl
 
         return (
             <ListGroup.Item>
-                <div
-                    className={styles.listGroupItem}
+                <OrdersTableItem
                     ref={ref}
+                    onClickRemoveIcon={() => setShowConfirmationCard(true)}
+                    type={type}
+                    {...restData}
                 >
-                    <OrderStatusMarker
-                        status={status}
-                        className={styles.status}
-                    />
-                    <div>
-                        <div>{capitalizeFirstChar(status)}</div>
-                        <div className={styles.date}>{init_time}</div>
-                    </div>
-                    <div className={getTypeClassName(type)}>{type}</div>
-                    <div>
-                        <div>
-                            <span className="text-muted">Cost: </span>
-                            {cost.toFixed(4)}
-                        </div>
-                        <div>
-                            <span className="text-muted">Generation time: </span>
-                            {renderDashOnEmptyValue(eval_time)}
-                        </div>
-                    </div>
-                    <ClicableIcon
-                        iconName="fa-solid fa-cancel"
-                        title="Cancel order"
-                        onClick={() => setShowConfirmationCard(true)}
-                        className={styles.removeIcon}
-                    />
                     <CSSTransition
                         classNames="slide"
                         timeout={300}
@@ -121,18 +95,8 @@ export const ActiveOrdersTableItem = forwardRef<HTMLDivElement, ActiveOrdersTabl
                             ref={confirmationCardRef}
                         />
                     </CSSTransition>
-                </div>
+                </OrdersTableItem>
             </ListGroup.Item>
         );
     },
 );
-
-/**
- * Generate type className.
- *
- * @param type Type.
- * @returns Class name.
- */
-const getTypeClassName = (type: TradeOrderType) => {
-    return `${type === TradeOrderType.buy ? 'grow' : 'loss'}TextColor`;
-};

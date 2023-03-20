@@ -14,7 +14,6 @@ import {
     selectUserCompletedBids,
 } from 'src/redux';
 import { TradeOrderType } from 'src/models';
-import { formatDate } from 'src/utils';
 import type { Ask, Bid, ManageOrdersData } from 'src/models';
 
 /**
@@ -68,8 +67,8 @@ const mapToManageOrdersData = <T extends Ask | Bid>(
     { createdOn, matched_time, cost, eval_time, _key, status }: T,
     type: TradeOrderType,
 ): ManageOrdersData => ({
-    init_time: formatDate(createdOn, 'DD.MM HH:mm'),
-    timestamp: formatDate(matched_time!, 'DD.MM HH:mm'),
+    init_time: createdOn,
+    timestamp: matched_time!,
     cost,
     eval_time,
     type,

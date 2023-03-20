@@ -10,12 +10,3 @@
 .nav {
   padding: 8px 0 16px;
 }
-
-.historyOrdersTable {
-  @include tableColumns(24%, 16%, 20%, 40%);
-  height: 488px;
-
-  @include responsive(sm) {
-    height: 430px;
-  }
-}

@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { Label, Spinner } from '@nilfoundation/react-components';
 import { selectUserBalance, useAppSelector } from 'src/redux';
 import { useLocalStorage } from 'src/hooks';
-import { ClicableIcon } from 'src/components';
+import { ClickableIcon } from 'src/components';
 import { longDash } from 'src/utils';
 import { siteMoneyTickerAbbreviation } from 'src/constants';
 import styles from './UserBalance.module.scss';
@@ -45,7 +45,7 @@ const UserBalance = ({ className, canToggleVisibility }: UserBalanceProps): Reac
     return (
         <div className={`${styles.balance} ${className ?? ''}`}>
             {canToggleVisibility && (
-                <ClicableIcon
+                <ClickableIcon
                     onClick={() => setHidden(!hidden)}
                     iconName={`fa-solid ${iconName}`}
                 />

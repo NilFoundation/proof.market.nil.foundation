@@ -47,7 +47,7 @@ export const Details = ({
 
     const iconClassName = `fa-solid fa-angle-${isOpen ? 'up' : 'down'} ${
         disabled ? 'text-muted' : ''
-    }`;
+    } ${styles.icon}`;
 
     return (
         <>

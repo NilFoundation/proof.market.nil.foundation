@@ -1,0 +1,37 @@
+@import "src/styles/constants.scss";
+
+.item {
+  position: relative;
+  height: 100%;
+  padding: 0.5rem 1rem 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:hover {
+    color: $c-secondary;
+  }
+}
+
+.status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  opacity: 0.75;
+}
+
+.date {
+  font-size: 1.15rem;
+}
+
+.removeIcon {
+  i {
+    font-size: 1.5rem;
+  }
+}
+
+.error {
+  color: $c-danger;
+}

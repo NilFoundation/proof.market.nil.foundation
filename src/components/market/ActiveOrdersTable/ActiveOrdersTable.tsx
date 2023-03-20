@@ -60,7 +60,6 @@ const defaultTableState: Partial<TableState<ManageOrdersData>> = {
             desc: true,
         },
     ],
-    hiddenColumns: ['type', 'orderId', 'eval_time', 'cost'],
 };
 
 /**

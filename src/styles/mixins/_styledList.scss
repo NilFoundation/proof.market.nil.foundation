@@ -3,7 +3,7 @@
 @mixin styledList {
   margin-bottom: 0 !important;
 
-  > div {
+  div[role="listitem"] {
     border: none !important;
     border-radius: 6px !important;
     padding: 0 !important;
@@ -13,7 +13,7 @@
       background-color: $c-base-light;
     }
 
-    + div {
+    + div[role="listitem"] {
       margin-top: 8px;
     }
 

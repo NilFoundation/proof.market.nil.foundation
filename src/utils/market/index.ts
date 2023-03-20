@@ -4,3 +4,4 @@
  */
 
 export * from './isLineData';
+export * from './groupManageOrdersDataByDate';

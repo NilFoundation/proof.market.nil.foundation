@@ -5,7 +5,7 @@
 
 import { Button, Icon } from '@nilfoundation/react-components';
 import type { ButtonProps } from '@nilfoundation/react-components';
-import styles from './ClicableIcon.module.scss';
+import styles from './ClickableIcon.module.scss';
 
 /**
  * Props.
@@ -20,7 +20,7 @@ type ClicableIconProps = {
  * @param {ClicableIconProps} props Props.
  * @returns React component.
  */
-export const ClicableIcon = ({ iconName, className, ...rest }: ClicableIconProps): JSX.Element => {
+export const ClickableIcon = ({ iconName, className, ...rest }: ClicableIconProps): JSX.Element => {
     return (
         <Button
             className={`${styles.button} ${className ?? ''}`}

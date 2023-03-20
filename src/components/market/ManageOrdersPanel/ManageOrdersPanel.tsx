@@ -13,8 +13,8 @@ import { DashboardCard } from '../../common';
 import { ProtectedContent } from '../../login';
 import { ManageOrdersTab } from './ManageOrdersTab';
 import { ManageOrdersPanelTabs } from './ManageOrdersPanelTabs';
-import { ActiveOrdersTable } from '../ActiveOrdersPanel';
-import { HistoryOrdersTable } from './HistoryOrdersTable';
+import { ActiveOrdersTable } from '../ActiveOrdersTable';
+import { HistoryOrdersTable } from '../HistoryOrdersTable/HistoryOrdersTable';
 import styles from './ManageOrdersPanel.module.scss';
 
 /**
