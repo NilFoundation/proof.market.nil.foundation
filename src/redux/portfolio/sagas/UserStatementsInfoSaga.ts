@@ -5,9 +5,9 @@
 
 import { call, put, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getUserStatementsInfo } from 'src/api';
-import { createUrlParamSelector } from 'src/redux/common';
-import { RouterParam } from 'src/enums';
+import { getUserStatementsInfo } from '@/api';
+import { createUrlParamSelector } from '@/redux/common';
+import { RouterParam } from '@/enums';
 import {
     UpdateUserStatementsInfo,
     UpdateIsLoadingUserStatementsInfo,

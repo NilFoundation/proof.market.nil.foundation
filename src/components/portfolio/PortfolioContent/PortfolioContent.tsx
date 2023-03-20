@@ -5,7 +5,7 @@
 
 import type { ReactElement, ReactNode } from 'react';
 import { Col, Row } from '@nilfoundation/react-components';
-import { DashboardCard } from 'src/components';
+import { DashboardCard } from '@/components';
 import styles from './PortfolioContent.module.scss';
 
 /**

@@ -8,7 +8,7 @@ import { useRef, useState } from 'react';
 import { Icon, Input, InputGroup } from '@nilfoundation/react-components';
 import debounce from 'lodash/debounce';
 import type { FilterProps } from 'react-table';
-import type { CircuitsListData } from 'src/models';
+import type { CircuitsListData } from '@/models';
 import styles from './CircuitsList.module.scss';
 
 /**

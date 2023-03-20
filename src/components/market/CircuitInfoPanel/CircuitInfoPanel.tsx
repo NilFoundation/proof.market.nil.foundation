@@ -6,10 +6,10 @@
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import { dequal as deepEqual } from 'dequal';
-import { DashboardCard } from 'src/components/common';
-import { selectCurrentCircuit, useAppSelector } from 'src/redux';
-import { renderDashOnEmptyValue } from 'src/utils';
-import { siteMoneyTickerAbbreviation } from 'src/constants';
+import { DashboardCard } from '@/components/common';
+import { selectCurrentCircuit, useAppSelector } from '@/redux';
+import { renderDashOnEmptyValue } from '@/utils';
+import { siteMoneyTickerAbbreviation } from '@/constants';
 import { CircuitDetailedInfo } from '../CircuitDetailedInfo';
 import styles from './CircuitInfoPanel.module.scss';
 

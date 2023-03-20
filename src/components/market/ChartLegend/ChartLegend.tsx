@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import type { BarData, LineData } from 'lightweight-charts';
-import { isLineData } from 'src/utils';
+import { isLineData } from '@/utils';
 import styles from './ChartLegend.module.scss';
 
 /**

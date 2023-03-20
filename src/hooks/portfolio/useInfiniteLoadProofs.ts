@@ -4,8 +4,8 @@
  */
 
 import { useCallback, useState, useRef } from 'react';
-import { getProofs } from 'src/api';
-import type { PortfolioRequestsInfo, Proof } from 'src/models';
+import { getProofs } from '@/api';
+import type { PortfolioRequestsInfo, Proof } from '@/models';
 
 /**
  * Hook parameters type.

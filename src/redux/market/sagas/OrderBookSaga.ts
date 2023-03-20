@@ -5,11 +5,11 @@
 
 import { call, fork, put, takeLatest, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import type { OrderBookDataOptions } from 'src/api';
-import { getAsks, getOrderBookData } from 'src/api';
-import { ProtectedCall } from 'src/redux';
-import type { Ask, LastOrderData, OrderBookData, TradeOrder } from 'src/models';
-import { getRuntimeConfigOrThrow } from 'src/utils';
+import type { OrderBookDataOptions } from '@/api';
+import { getAsks, getOrderBookData } from '@/api';
+import { ProtectedCall } from '@/redux';
+import type { Ask, LastOrderData, OrderBookData, TradeOrder } from '@/models';
+import { getRuntimeConfigOrThrow } from '@/utils';
 import {
     UpdateSelectedCircuitKey,
     UpdateOrderBookData,

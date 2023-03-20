@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Container, Row, Col } from '@nilfoundation/react-components';
-import { mainSiteUrl } from 'src/constants';
+import { mainSiteUrl } from '@/constants';
 
 /**
  * App Error view.

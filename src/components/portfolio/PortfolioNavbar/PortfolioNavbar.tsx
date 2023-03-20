@@ -4,8 +4,8 @@
  */
 
 import { Nav } from '@nilfoundation/react-components';
-import { DashboardCard, RouterLink } from 'src/components';
-import { Path } from 'src/routing';
+import { DashboardCard, RouterLink } from '@/components';
+import { Path } from '@/routing';
 import styles from './PortfolioNavbar.module.scss';
 
 /**

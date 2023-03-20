@@ -5,7 +5,7 @@
 
 import type { ReactElement, ReactNode } from 'react';
 import { useState } from 'react';
-import type { CostAndEvalTime } from 'src/models';
+import type { CostAndEvalTime } from '@/models';
 import { OrderManagementContext } from './OrderManagementContext';
 
 /**

@@ -4,8 +4,8 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { OrderBookPriceStep } from 'src/enums';
-import type { LastOrderData, OrderBookData } from 'src/models';
+import type { OrderBookPriceStep } from '@/enums';
+import type { LastOrderData, OrderBookData } from '@/models';
 
 /**
  * Update orderbook data.

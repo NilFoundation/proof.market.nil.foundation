@@ -6,7 +6,7 @@
 import type { ReactElement } from 'react';
 import { memo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
-import { selectCurrentCircuitKey, useAppSelector } from 'src/redux';
+import { selectCurrentCircuitKey, useAppSelector } from '@/redux';
 import { DashboardCard } from '../../common';
 import { TradeHistoryTable } from './TradeHistoryTable';
 import styles from './TradeHistory.module.scss';

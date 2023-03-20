@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Icon } from '@nilfoundation/react-components';
-import type { socialLinks as links } from 'src/constants';
+import type { socialLinks as links } from '@/constants';
 import styles from './SocialLinks.module.scss';
 
 /**

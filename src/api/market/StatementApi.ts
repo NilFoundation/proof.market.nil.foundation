@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import type { Circuit, CircuitInfo, CircuitStats } from 'src/models';
+import type { Circuit, CircuitInfo, CircuitStats } from '@/models';
 import { createApiClient } from '../common';
 
 const httpFetcher = createApiClient('/statement');

@@ -5,10 +5,10 @@
 
 import type { ReactElement } from 'react';
 import { useState } from 'react';
-import { useAppSelector } from 'src/redux';
-import { TradeOrderType } from 'src/models';
-import { socialLinks as links } from 'src/constants';
-import { getRuntimeConfigOrThrow } from 'src/utils';
+import { useAppSelector } from '@/redux';
+import { TradeOrderType } from '@/models';
+import { socialLinks as links } from '@/constants';
+import { getRuntimeConfigOrThrow } from '@/utils';
 import { DashboardCard, SocialLinks } from '../../common';
 import { ProtectedContent } from '../../login';
 import { CreateBidForm } from '../CreateBidForm';

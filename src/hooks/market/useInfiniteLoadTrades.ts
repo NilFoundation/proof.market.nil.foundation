@@ -4,8 +4,8 @@
  */
 
 import { useCallback, useState, useRef } from 'react';
-import { getAsks } from 'src/api';
-import type { Ask } from 'src/models';
+import { getAsks } from '@/api';
+import type { Ask } from '@/models';
 
 /**
  * Hook parameters type.

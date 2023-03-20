@@ -6,8 +6,8 @@
 import type { ReactElement } from 'react';
 import { memo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
-import { DashboardCard } from 'src/components';
-import { useAppSelector } from 'src/redux';
+import { DashboardCard } from '@/components';
+import { useAppSelector } from '@/redux';
 import styles from './LastProofProdcuer.module.scss';
 
 /**

@@ -7,10 +7,10 @@ import type { ReactElement } from 'react';
 import { memo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import type { ListChildComponentProps } from 'react-window';
-import { Table, TRow, TCell, THead, THeader, TBody, VirtualList } from 'src/components';
-import { formatDate, renderDashOnEmptyValue } from 'src/utils';
-import type { Ask } from 'src/models';
-import { useInfiniteLoadTrades } from 'src/hooks';
+import { Table, TRow, TCell, THead, THeader, TBody, VirtualList } from '@/components';
+import { formatDate, renderDashOnEmptyValue } from '@/utils';
+import type { Ask } from '@/models';
+import { useInfiniteLoadTrades } from '@/hooks';
 import styles from './TradeHistory.module.scss';
 
 /**

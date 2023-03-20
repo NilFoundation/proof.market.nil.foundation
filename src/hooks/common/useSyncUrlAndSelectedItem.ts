@@ -9,9 +9,9 @@ import { dequal as deepEqual } from 'dequal';
 import type { EqualityFn, NoInfer } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import type { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import type { RootStateType } from 'src/redux';
-import { useAppSelector } from 'src/redux';
-import type { RouterParam } from 'src/enums';
+import type { RootStateType } from '@/redux';
+import { useAppSelector } from '@/redux';
+import type { RouterParam } from '@/enums';
 
 /**
  * Hook settings.

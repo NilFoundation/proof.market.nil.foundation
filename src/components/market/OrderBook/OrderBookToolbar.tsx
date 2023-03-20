@@ -7,9 +7,9 @@ import type { ReactElement } from 'react';
 import { useCallback, useContext } from 'react';
 import { Dropdown } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
-import { OrderBookPriceStep } from 'src/enums';
-import { useAuth } from 'src/hooks';
-import { selectOrderBookPriceStep, UpdateOrderBookPriceStep, useAppSelector } from 'src/redux';
+import { OrderBookPriceStep } from '@/enums';
+import { useAuth } from '@/hooks';
+import { selectOrderBookPriceStep, UpdateOrderBookPriceStep, useAppSelector } from '@/redux';
 import { OrderBookSettingsContext } from './OrderBookSettingsContext';
 import styles from './OrderBook.module.scss';
 

@@ -21,8 +21,8 @@ import type {
     HistogramData,
     HistogramStyleOptions,
 } from 'lightweight-charts';
-import { DateUnit } from 'src/enums';
-import colors from 'src/styles/export.module.scss';
+import { DateUnit } from '@/enums';
+import colors from '@/styles/export.module.scss';
 
 /**
  * Return type.

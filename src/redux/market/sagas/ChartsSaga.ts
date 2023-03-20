@@ -5,10 +5,10 @@
 
 import { call, fork, put, takeLatest, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getAsks } from 'src/api';
-import { ProtectedCall } from 'src/redux';
-import type { Ask } from 'src/models';
-import { getRuntimeConfigOrThrow } from 'src/utils';
+import { getAsks } from '@/api';
+import { ProtectedCall } from '@/redux';
+import type { Ask } from '@/models';
+import { getRuntimeConfigOrThrow } from '@/utils';
 import {
     UpdateSelectedCircuitKey,
     UpdateChartsData,

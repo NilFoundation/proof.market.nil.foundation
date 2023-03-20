@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Nav, useBreakpoints } from '@nilfoundation/react-components';
-import { ChartType } from 'src/enums';
+import { ChartType } from '@/enums';
 
 /**
  * Props.

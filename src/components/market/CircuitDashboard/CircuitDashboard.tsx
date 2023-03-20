@@ -5,8 +5,8 @@
 
 import type { ReactElement } from 'react';
 import { useState } from 'react';
-import { ChartType } from 'src/enums';
-import { selectCurrentCircuit, useAppSelector } from 'src/redux';
+import { ChartType } from '@/enums';
+import { selectCurrentCircuit, useAppSelector } from '@/redux';
 import { DashboardCard, FullScreenView } from '../../common';
 import { ChartTypeSelect } from './ChartTypeSelect';
 import { DataRangeSelect } from './DataRangeSelect';

@@ -5,8 +5,8 @@
 
 import { Breadcrumbs as NativeBreadcrumbs } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
-import { mainSiteUrl } from 'src/constants';
-import { Path } from 'src/routing';
+import { mainSiteUrl } from '@/constants';
+import { Path } from '@/routing';
 import styles from './Breadcrumbs.module.scss';
 
 /**

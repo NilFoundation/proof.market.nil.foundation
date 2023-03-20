@@ -1,6 +1,6 @@
-@import "src/styles/mixins/hideScrollbar";
-@import "src/styles/constants.scss";
-@import "src/styles/mixins/overflowEllipsis";
+@import "@/styles/mixins/hideScrollbar";
+@import "@/styles/constants.scss";
+@import "@/styles/mixins/overflowEllipsis";
 
 .table {
   display: flex;

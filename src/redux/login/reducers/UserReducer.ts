@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { UserBalance } from 'src/models';
+import type { UserBalance } from '@/models';
 import {
     UpdateUserBalance,
     UpdateUserBalanceIsLoading,

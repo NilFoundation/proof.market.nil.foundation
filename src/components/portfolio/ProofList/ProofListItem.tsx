@@ -6,11 +6,11 @@
 import type { HTMLAttributes, KeyboardEventHandler, ReactElement } from 'react';
 import { useCallback, useState, memo } from 'react';
 import { Button, Spinner, Variant } from '@nilfoundation/react-components';
-import { getProofById } from 'src/api';
-import { ObjectAsPlainTextViewer, ProgressBar } from 'src/components/common';
-import { useDownloadJson } from 'src/hooks';
-import type { Proof } from 'src/models';
-import { mapToHumanReadableProof } from 'src/models';
+import { getProofById } from '@/api';
+import { ObjectAsPlainTextViewer, ProgressBar } from '@/components/common';
+import { useDownloadJson } from '@/hooks';
+import type { Proof } from '@/models';
+import { mapToHumanReadableProof } from '@/models';
 import styles from './ProofList.module.scss';
 
 /**

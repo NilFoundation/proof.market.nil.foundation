@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import type { OrderBookPriceStep } from 'src/enums';
+import type { OrderBookPriceStep } from '@/enums';
 import { createApiClient } from '../common';
 import type { Circuit, OrderBookData } from '../../models';
 

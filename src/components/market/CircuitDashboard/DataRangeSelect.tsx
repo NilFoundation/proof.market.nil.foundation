@@ -6,7 +6,7 @@
 import type { ReactElement } from 'react';
 import { useContext } from 'react';
 import { Nav } from '@nilfoundation/react-components';
-import { DateUnit } from 'src/enums';
+import { DateUnit } from '@/enums';
 import { ChartSettingsContext } from './ChartSettingsContext';
 
 /**

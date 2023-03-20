@@ -14,11 +14,11 @@ import type {
     UTCTimestamp,
     WhitespaceData,
 } from 'lightweight-charts';
-import { useAppSelector, selectChartData } from 'src/redux';
-import { getUTCTimestamp } from 'src/utils';
-import { DateUnit } from 'src/enums';
-import colors from 'src/styles/export.module.scss';
-import type { Ask, Bid } from 'src/models';
+import { useAppSelector, selectChartData } from '@/redux';
+import { getUTCTimestamp } from '@/utils';
+import { DateUnit } from '@/enums';
+import colors from '@/styles/export.module.scss';
+import type { Ask, Bid } from '@/models';
 
 /**
  * Hook return type.

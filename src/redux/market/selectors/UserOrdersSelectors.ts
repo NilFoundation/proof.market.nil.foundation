@@ -4,8 +4,8 @@
  */
 
 import { createSelector } from '@reduxjs/toolkit';
-import type { Ask } from 'src/models';
-import type { RootStateType } from 'src/redux';
+import type { Ask } from '@/models';
+import type { RootStateType } from '@/redux';
 
 /**
  * Select all user asks.

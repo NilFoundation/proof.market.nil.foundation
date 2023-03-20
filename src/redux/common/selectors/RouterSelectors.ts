@@ -3,8 +3,8 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import type { RouterParam } from 'src/enums';
-import type { RootStateType } from 'src/redux';
+import type { RouterParam } from '@/enums';
+import type { RootStateType } from '@/redux';
 
 /**
  * Select location object.

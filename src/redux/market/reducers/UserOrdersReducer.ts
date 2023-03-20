@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { Ask, Bid } from 'src/models';
+import type { Ask, Bid } from '@/models';
 import {
     UpdateUserAsksList,
     UpdateUserBidsList,

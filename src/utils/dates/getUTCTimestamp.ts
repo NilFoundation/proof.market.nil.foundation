@@ -4,7 +4,7 @@
  */
 
 import type { UTCTimestamp } from 'lightweight-charts';
-import type { DateUnit } from 'src/enums';
+import type { DateUnit } from '@/enums';
 import { floorDateTo } from './floorDateTo';
 
 /**

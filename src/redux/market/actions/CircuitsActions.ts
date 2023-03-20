@@ -4,7 +4,7 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { Circuit, CircuitInfo, CircuitStats } from 'src/models';
+import type { Circuit, CircuitInfo, CircuitStats } from '@/models';
 
 /**
  * Update circuits list.

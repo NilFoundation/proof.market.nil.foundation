@@ -6,10 +6,10 @@
 import type { ReactElement } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import { dequal as deepEqual } from 'dequal';
-import { useLocalStorage } from 'src/hooks';
-import { siteMoneyTickerAbbreviation } from 'src/constants';
-import { selectLastOrderData, selectOrderBookData, useAppSelector } from 'src/redux';
-import type { LastOrderData, OrderBookData } from 'src/models';
+import { useLocalStorage } from '@/hooks';
+import { siteMoneyTickerAbbreviation } from '@/constants';
+import { selectLastOrderData, selectOrderBookData, useAppSelector } from '@/redux';
+import type { LastOrderData, OrderBookData } from '@/models';
 import { OrderBookTable } from './OrderBookTable';
 import { OrderBookSettingsContext } from './OrderBookSettingsContext';
 import { DashboardCard } from '../../common';

@@ -20,11 +20,11 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import debounce from 'lodash/debounce';
 import { useForm } from 'react-hook-form';
-import { Path } from 'src/routing';
-import { socialLinks } from 'src/constants';
-import { SocialLinks } from 'src/components';
-import type { RegisterData } from 'src/models';
-import { signUp, checkIsUsernameUnique } from 'src/api';
+import { Path } from '@/routing';
+import { socialLinks } from '@/constants';
+import { SocialLinks } from '@/components';
+import type { RegisterData } from '@/models';
+import { signUp, checkIsUsernameUnique } from '@/api';
 import { AuthCard } from '../AuthCard';
 import styles from './RegisterForm.module.scss';
 

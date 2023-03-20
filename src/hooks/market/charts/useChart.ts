@@ -7,7 +7,7 @@ import type { RefObject } from 'react';
 import { useEffect, useState } from 'react';
 import { createChart, ColorType } from 'lightweight-charts';
 import type { IChartApi, DeepPartial, ChartOptions } from 'lightweight-charts';
-import colors from 'src/styles/export.module.scss';
+import colors from '@/styles/export.module.scss';
 
 /**
  * Return type.

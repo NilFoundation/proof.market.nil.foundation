@@ -6,11 +6,11 @@
 import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { Label, Spinner } from '@nilfoundation/react-components';
-import { selectUserBalance, useAppSelector } from 'src/redux';
-import { useLocalStorage } from 'src/hooks';
-import { ClickableIcon } from 'src/components';
-import { longDash } from 'src/utils';
-import { siteMoneyTickerAbbreviation } from 'src/constants';
+import { selectUserBalance, useAppSelector } from '@/redux';
+import { useLocalStorage } from '@/hooks';
+import { ClickableIcon } from '@/components';
+import { longDash } from '@/utils';
+import { siteMoneyTickerAbbreviation } from '@/constants';
 import styles from './UserBalance.module.scss';
 
 /**

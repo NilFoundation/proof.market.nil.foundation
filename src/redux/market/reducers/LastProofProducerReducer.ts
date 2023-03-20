@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { LastProofProducer } from 'src/models';
+import type { LastProofProducer } from '@/models';
 import {
     UpdateIsErrorLastProofProducer,
     UpdateIsLoadingLastProofProducer,

@@ -12,13 +12,13 @@ import {
     selectSelectedPortfolioProposalsInfo,
     UpdateSelectedPortfolioProposalsInfoKey,
     useAppSelector,
-} from 'src/redux';
-import { ObjectAsPlainTextViewer } from 'src/components';
-import type { PortfolioProposalsInfo } from 'src/models';
-import { mapToHumanReadablePortfolioProposalsInfo } from 'src/models';
-import { Path } from 'src/routing';
-import { useSyncUrlAndSelectedItem } from 'src/hooks';
-import { RouterParam } from 'src/enums';
+} from '@/redux';
+import { ObjectAsPlainTextViewer } from '@/components';
+import type { PortfolioProposalsInfo } from '@/models';
+import { mapToHumanReadablePortfolioProposalsInfo } from '@/models';
+import { Path } from '@/routing';
+import { useSyncUrlAndSelectedItem } from '@/hooks';
+import { RouterParam } from '@/enums';
 import { PortfolioInfoList } from '../PortfolioInfoList';
 import { PortfolioContent } from '../PortfolioContent';
 

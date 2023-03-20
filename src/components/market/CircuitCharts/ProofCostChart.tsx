@@ -6,9 +6,9 @@
 import type { ReactElement } from 'react';
 import { useContext, useMemo } from 'react';
 import type { LineWidth } from 'lightweight-charts';
-import { useGetCircuitDashboardData } from 'src/hooks';
-import { siteMoneyTickerAbbreviation } from 'src/constants';
-import colors from 'src/styles/export.module.scss';
+import { useGetCircuitDashboardData } from '@/hooks';
+import { siteMoneyTickerAbbreviation } from '@/constants';
+import colors from '@/styles/export.module.scss';
 import { ChartTemplate } from '../ChartTemplate';
 import { ChartSettingsContext } from '../CircuitDashboard';
 

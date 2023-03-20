@@ -8,8 +8,8 @@ import { createRef, memo, useCallback } from 'react';
 import { ListGroup } from '@nilfoundation/react-components';
 import type { Column, TableInstance, TableState } from 'react-table';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { ReactTable } from 'src/components';
-import type { ManageOrdersData } from 'src/models';
+import { ReactTable } from '@/components';
+import type { ManageOrdersData } from '@/models';
 import { ActiveOrdersTableItem } from './ActiveOrdersTableItem';
 import styles from './ActiveOrdersTable.module.scss';
 

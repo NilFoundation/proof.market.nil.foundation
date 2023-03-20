@@ -11,8 +11,8 @@ import {
     selectCurrentCircuit,
     UpdateSelectedCircuitKey,
     useAppSelector,
-} from 'src/redux';
-import { RouterParam } from 'src/enums';
+} from '@/redux';
+import { RouterParam } from '@/enums';
 
 /**
  * Hook to manage selected circuit state and url statementName parameter sync.

@@ -5,9 +5,9 @@
 
 import { call, put, takeLatest, fork } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getLastProofProducerData } from 'src/api';
-import type { LastProofProducer } from 'src/models';
-import { getRuntimeConfigOrThrow } from 'src/utils';
+import { getLastProofProducerData } from '@/api';
+import type { LastProofProducer } from '@/models';
+import { getRuntimeConfigOrThrow } from '@/utils';
 import {
     UpdateLastProofProducer,
     UpdateIsLoadingLastProofProducer,

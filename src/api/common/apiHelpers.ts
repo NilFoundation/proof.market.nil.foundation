@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { getRuntimeConfigOrThrow } from 'src/utils';
+import { getRuntimeConfigOrThrow } from '@/utils';
 
 const db = getRuntimeConfigOrThrow().DBMS_DEFAULT_DATABASE;
 const apiVersion = getRuntimeConfigOrThrow().API_VERSION;

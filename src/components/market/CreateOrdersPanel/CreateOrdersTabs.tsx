@@ -6,7 +6,7 @@
 import type { ReactElement } from 'react';
 import { useContext } from 'react';
 import { Nav } from '@nilfoundation/react-components';
-import { TradeOrderType } from 'src/models';
+import { TradeOrderType } from '@/models';
 import { OrderManagementContext } from '../OrderManagementContextProvider';
 
 /**

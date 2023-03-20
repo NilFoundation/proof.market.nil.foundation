@@ -4,8 +4,8 @@
  */
 
 import type { ReactElement, ReactNode } from 'react';
-import { DateUnit } from 'src/enums';
-import { useLocalStorage } from 'src/hooks';
+import { DateUnit } from '@/enums';
+import { useLocalStorage } from '@/hooks';
 import { ChartSettingsContext } from './ChartSettingsContext';
 
 /**

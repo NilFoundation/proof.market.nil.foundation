@@ -6,7 +6,7 @@
 import type { ReactElement } from 'react';
 import { Nav } from '@nilfoundation/react-components';
 import { Link, useMatch } from 'react-router-dom';
-import type { Path } from 'src/routing';
+import type { Path } from '@/routing';
 
 /**
  * Props.

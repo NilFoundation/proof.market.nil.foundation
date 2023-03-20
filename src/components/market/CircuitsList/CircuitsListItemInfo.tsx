@@ -6,8 +6,8 @@
 import type { ReactElement } from 'react';
 import { memo } from 'react';
 import { Media, Spinner } from '@nilfoundation/react-components';
-import { useAppSelector } from 'src/redux';
-import { siteMoneyTickerAbbreviation } from 'src/constants';
+import { useAppSelector } from '@/redux';
+import { siteMoneyTickerAbbreviation } from '@/constants';
 import { PriceChangeIndicator } from '../PriceChangeIndicator';
 import styles from './CircuitsList.module.scss';
 

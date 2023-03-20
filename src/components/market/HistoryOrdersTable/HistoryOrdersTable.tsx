@@ -7,9 +7,9 @@ import type { ReactElement } from 'react';
 import { createRef, useMemo, memo } from 'react';
 import { ListGroup } from '@nilfoundation/react-components';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { Details } from 'src/components';
-import { groupManageOrdersDataByDate } from 'src/utils';
-import type { ManageOrdersData } from 'src/models';
+import { Details } from '@/components';
+import { groupManageOrdersDataByDate } from '@/utils';
+import type { ManageOrdersData } from '@/models';
 import { OrdersTableItem } from '../OrdersTableItem';
 import styles from './HistoryOrdersTable.module.scss';
 

@@ -4,8 +4,8 @@
  */
 
 import type { ReactElement } from 'react';
-import type { TradeOrderStatus } from 'src/models';
-import colors from 'src/styles/export.module.scss';
+import type { TradeOrderStatus } from '@/models';
+import colors from '@/styles/export.module.scss';
 import styles from './OrderStatusMarker.module.scss';
 
 /**

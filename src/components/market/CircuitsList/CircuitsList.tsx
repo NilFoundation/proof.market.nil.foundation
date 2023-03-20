@@ -6,8 +6,8 @@
 import type { ReactElement } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import { dequal as deepEqual } from 'dequal';
-import { selectCircuits, useAppSelector } from 'src/redux';
-import { useSelectedCircuitNameUrlSync } from 'src/hooks';
+import { selectCircuits, useAppSelector } from '@/redux';
+import { useSelectedCircuitNameUrlSync } from '@/hooks';
 import { CircuitsListTable } from './CircuitsListTable';
 import { DashboardCard } from '../../common';
 import styles from './CircuitsList.module.scss';

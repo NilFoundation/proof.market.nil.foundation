@@ -5,9 +5,9 @@
 
 import type { SagaIterator } from '@redux-saga/core';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { getUserBalance } from 'src/api';
-import type { UserBalance } from 'src/models';
-import { getRuntimeConfigOrThrow } from 'src/utils';
+import { getUserBalance } from '@/api';
+import type { UserBalance } from '@/models';
+import { getRuntimeConfigOrThrow } from '@/utils';
 import {
     UpdateUserBalance,
     UpdateUserBalanceIsLoading,

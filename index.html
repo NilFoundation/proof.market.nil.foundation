@@ -42,28 +42,28 @@
     />
     <meta
       property="og:image"
-      content="%PUBLIC_URL%/logo192.png"
+      content="/logo192.png"
     />
     <link
       rel="icon"
-      href="%PUBLIC_URL%/favicon.ico"
+      href="/favicon.ico"
       sizes="any"
     />
     <link
       rel="icon"
-      href="%PUBLIC_URL%/icon.svg"
+      href="/icon.svg"
       type="image/svg+xml"
     />
     <link
       rel="apple-touch-icon"
-      href="%PUBLIC_URL%/apple-touch-icon.png"
+      href="/apple-touch-icon.png"
     />
     <link
       rel="manifest"
-      href="%PUBLIC_URL%/manifest.json"
+      href="/manifest.json"
     />
     <title>=nil; Foundation - Proof Market</title>
-    <link rel="stylesheet" href="%PUBLIC_URL%/critical.css" />
+    <link rel="stylesheet" href="/critical.css" />
     <!-- Preconnect to required origins -->
     <link
       rel="preconnect"
@@ -93,13 +93,14 @@
     <% if (process.env.NODE_ENV === 'production') { %>
       <script
         defer
-        src="./runtimeConfig.js"
+        src="/runtimeConfig.js"
         >
       </script>
     <% } else { %>
       <script
         defer
-        src="./runtimeConfig.dev.js"
+        type="module"
+        src="/runtimeConfig.dev.js"
         >
       </script>
     <% } %>
@@ -117,5 +118,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script type="module" src="src/index.tsx"></script>
   </body>
 </html>

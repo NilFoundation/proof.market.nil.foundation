@@ -5,10 +5,10 @@
 
 import { call, put, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getPortfolioRequestsInfo } from 'src/api';
-import type { RootStateType } from 'src/redux/RootStateType';
-import { createUrlParamSelector } from 'src/redux/common';
-import { RouterParam } from 'src/enums';
+import { getPortfolioRequestsInfo } from '@/api';
+import type { RootStateType } from '@/redux/RootStateType';
+import { createUrlParamSelector } from '@/redux/common';
+import { RouterParam } from '@/enums';
 import { ProtectedCall, selectUserName } from '../../login';
 import {
     UpdateIsErrorPortfolioRequestsInfo,

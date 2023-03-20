@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Container, Row, Col } from '@nilfoundation/react-components';
-import { socialLinks } from 'src/constants';
+import { socialLinks } from '@/constants';
 import { SocialLinks } from '../SocialLinks';
 import { Copyright } from '../Copyright';
 import styles from './Footer.module.scss';

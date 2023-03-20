@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Dropdown } from '@nilfoundation/react-components';
-import { documentationUrl, navigationLinks } from 'src/constants';
+import { documentationUrl, navigationLinks } from '@/constants';
 import styles from './MobileMenu.module.scss';
 
 /**

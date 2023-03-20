@@ -5,7 +5,7 @@
 
 import type { Options } from 'ky';
 import ky from 'ky';
-import { getItemFromLocalStorage } from 'src/packages/LocalStorage';
+import { getItemFromLocalStorage } from '@/packages/LocalStorage';
 import { apiBaseUrl } from './apiHelpers';
 
 /**

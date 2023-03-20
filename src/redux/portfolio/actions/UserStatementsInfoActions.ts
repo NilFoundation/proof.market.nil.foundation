@@ -4,7 +4,7 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { UserStatementInfo } from 'src/models';
+import type { UserStatementInfo } from '@/models';
 
 /**
  * Update user statements info.

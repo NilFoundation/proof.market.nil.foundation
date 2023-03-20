@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import colors from 'src/styles/export.module.scss';
+import colors from '@/styles/export.module.scss';
 
 /**
  * Json viewer custom theme.

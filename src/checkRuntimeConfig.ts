@@ -28,7 +28,7 @@ export const checkRuntimeConfig = () => {
         }
     });
 
-    if (process.env.NODE_ENV !== 'production') {
+    if (!import.meta.env.PROD) {
         console.log('Required runtimeConfig values are set.');
     }
 };

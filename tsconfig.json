@@ -21,6 +21,9 @@
     "jsx": "react-jsx",
     "useUnknownInCatchVariables": false,
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+    }
   },
   "include": [
     "src"

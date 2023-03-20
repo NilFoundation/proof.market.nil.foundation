@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Outlet } from 'react-router-dom';
-import { AuthContainer } from 'src/components';
+import { AuthContainer } from '@/components';
 
 /**
  * Auth layout.

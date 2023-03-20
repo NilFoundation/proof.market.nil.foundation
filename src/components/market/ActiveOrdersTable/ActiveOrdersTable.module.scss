@@ -1,9 +1,9 @@
-@import "src/styles/constants.scss";
-@import "src/styles/mixins/tableColumns";
-@import "src/styles/mixins/responsive";
-@import "src/styles/mixins/styledList";
-@import "src/styles/mixins/hideScrollbar";
-@import "src/styles/mixins/overflowFade";
+@import "@/styles/constants.scss";
+@import "@/styles/mixins/tableColumns";
+@import "@/styles/mixins/responsive";
+@import "@/styles/mixins/styledList";
+@import "@/styles/mixins/hideScrollbar";
+@import "@/styles/mixins/overflowFade";
 
 .table {
   @include tableColumns(25%, 25%, 25%, 25%);

@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import type { UserStatementInfo } from 'src/models';
+import type { UserStatementInfo } from '@/models';
 import { createApiClient } from '../common';
 
 const httpFetcher = createApiClient('/statement');

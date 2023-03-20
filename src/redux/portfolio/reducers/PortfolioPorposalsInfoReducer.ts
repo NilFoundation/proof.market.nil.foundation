@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { PortfolioProposalsInfo } from 'src/models';
+import type { PortfolioProposalsInfo } from '@/models';
 import {
     UpdateIsErrorPortfolioProposalsInfo,
     UpdateIsLoadingPortfolioProposalsInfo,

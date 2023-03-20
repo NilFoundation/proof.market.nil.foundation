@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { Ask } from 'src/models';
+import type { Ask } from '@/models';
 import {
     UpdateChartsData,
     UpdateIsLoadingChartsData,

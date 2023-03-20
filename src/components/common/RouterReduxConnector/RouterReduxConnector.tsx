@@ -7,7 +7,7 @@ import type { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import useDeepCompareEffect from 'use-deep-compare-effect';
-import { SetLocation, SetParams } from 'src/redux';
+import { SetLocation, SetParams } from '@/redux';
 
 /**
  * Component to dispatch location and params changes into redux store.

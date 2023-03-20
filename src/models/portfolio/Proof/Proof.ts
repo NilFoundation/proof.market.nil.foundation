@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { formatDate } from 'src/utils';
+import { formatDate } from '@/utils';
 
 /**
  * Proof.

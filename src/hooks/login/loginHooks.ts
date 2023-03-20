@@ -7,10 +7,10 @@ import { useCallback, useMemo } from 'react';
 import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { removeItemFromLocalStorage, setItemIntoLocalStorage } from 'src/packages/LocalStorage';
-import { selectUserName, SetJwtRevalidateTimeout, UpdateUserName, useAppSelector } from 'src/redux';
-import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from 'src/utils';
-import { Path } from 'src/routing';
+import { removeItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
+import { selectUserName, SetJwtRevalidateTimeout, UpdateUserName, useAppSelector } from '@/redux';
+import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from '@/utils';
+import { Path } from '@/routing';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 

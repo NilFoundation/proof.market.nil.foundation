@@ -5,10 +5,10 @@
 
 import { call, put, select, takeLatest, fork, all } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getCircuits, getCircuitsInfo, getCircuitsStats } from 'src/api';
-import type { Circuit, CircuitInfo, CircuitStats } from 'src/models';
-import { getRuntimeConfigOrThrow } from 'src/utils';
-import { RouterParam } from 'src/enums';
+import { getCircuits, getCircuitsInfo, getCircuitsStats } from '@/api';
+import type { Circuit, CircuitInfo, CircuitStats } from '@/models';
+import { getRuntimeConfigOrThrow } from '@/utils';
+import { RouterParam } from '@/enums';
 import {
     UpdateCircuitsError,
     UpdateCircuitsInfoList,

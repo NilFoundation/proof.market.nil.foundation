@@ -16,9 +16,9 @@ import {
     Form,
     InputGroup,
 } from '@nilfoundation/react-components';
-import { useAuth } from 'src/hooks';
-import { siteMoneyTickerAbbreviation } from 'src/constants';
-import type { CreateTradeOrder } from 'src/models';
+import { useAuth } from '@/hooks';
+import { siteMoneyTickerAbbreviation } from '@/constants';
+import type { CreateTradeOrder } from '@/models';
 import { Details } from '../../common';
 import { OrderManagementContext } from '../OrderManagementContextProvider';
 import { BaseFormGroup } from './BaseFormGroup';

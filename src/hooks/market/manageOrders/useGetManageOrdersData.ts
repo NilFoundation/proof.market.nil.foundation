@@ -12,9 +12,9 @@ import {
     selectUserActiveAsks,
     selectUserCompletedAsks,
     selectUserCompletedBids,
-} from 'src/redux';
-import { TradeOrderType } from 'src/models';
-import type { Ask, Bid, ManageOrdersData } from 'src/models';
+} from '@/redux';
+import type { Ask, Bid, ManageOrdersData } from '@/models';
+import { TradeOrderType } from '@/models';
 
 /**
  * UseGetManageOrdersData hook return type.

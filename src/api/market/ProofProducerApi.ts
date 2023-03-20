@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import type { LastProofProducer } from 'src/models';
+import type { LastProofProducer } from '@/models';
 import { createApiClient } from '../common';
 
 const httpFetcher = createApiClient('/producer');

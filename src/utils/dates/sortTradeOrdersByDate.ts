@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import type { Ask, Bid } from 'src/models';
+import type { Ask, Bid } from '@/models';
 
 /**
  *

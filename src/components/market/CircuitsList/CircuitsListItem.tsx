@@ -7,10 +7,10 @@ import type { ReactElement } from 'react';
 import { ListGroup, Media } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentCircuitKey } from 'src/redux';
-import { Path } from 'src/routing';
-import type { CircuitsListData } from 'src/models';
-import { siteMoneyTickerAbbreviation } from 'src/constants';
+import { selectCurrentCircuitKey } from '@/redux';
+import { Path } from '@/routing';
+import type { CircuitsListData } from '@/models';
+import { siteMoneyTickerAbbreviation } from '@/constants';
 import { CircuitsListItemInfo } from './CircuitsListItemInfo';
 import styles from './CircuitsList.module.scss';
 

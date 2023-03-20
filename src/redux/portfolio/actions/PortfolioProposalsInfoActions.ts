@@ -4,7 +4,7 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { PortfolioProposalsInfo } from 'src/models';
+import type { PortfolioProposalsInfo } from '@/models';
 
 /**
  * Update portfolio proposals info.

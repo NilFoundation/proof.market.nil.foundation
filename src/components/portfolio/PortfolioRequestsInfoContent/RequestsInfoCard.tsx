@@ -6,10 +6,10 @@
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import { Col, Container, Row } from '@nilfoundation/react-components';
-import { ObjectAsPlainTextViewer } from 'src/components/common';
-import type { PortfolioRequestsInfo } from 'src/models';
-import { mapToHumanReadablePortfolioRequestsInfo } from 'src/models';
-import { selectCurrentStatementName, useAppSelector } from 'src/redux';
+import { ObjectAsPlainTextViewer } from '@/components/common';
+import type { PortfolioRequestsInfo } from '@/models';
+import { mapToHumanReadablePortfolioRequestsInfo } from '@/models';
+import { selectCurrentStatementName, useAppSelector } from '@/redux';
 import { ProofList } from '../ProofList';
 import styles from './PortfolioRequestsInfoContent.module.scss';
 

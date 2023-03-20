@@ -5,9 +5,9 @@
 
 import { call, cancel, delay, fork, put, select, take, takeLatest } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { renewJwt } from 'src/api';
-import { getItemFromLocalStorage, setItemIntoLocalStorage } from 'src/packages/LocalStorage';
-import { calculateRenewJwtTimeGap, getUserFromJwt } from 'src/utils';
+import { renewJwt } from '@/api';
+import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
+import { calculateRenewJwtTimeGap, getUserFromJwt } from '@/utils';
 import { SetJwtRevalidateTimeout, UpdateUserName } from '../actions';
 import { selectUserName } from '../selectors';
 

@@ -5,9 +5,9 @@
 
 import { createSelector } from '@reduxjs/toolkit';
 import sum from 'lodash/sum';
-import type { OrderBookPriceStep } from 'src/enums';
-import type { LastOrderData, OrderBookData } from 'src/models';
-import type { RootStateType } from 'src/redux';
+import type { OrderBookPriceStep } from '@/enums';
+import type { LastOrderData, OrderBookData } from '@/models';
+import type { RootStateType } from '@/redux';
 
 /**
  * Select orderBook data.

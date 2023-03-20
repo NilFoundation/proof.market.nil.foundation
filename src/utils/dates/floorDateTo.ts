@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { DateUnit } from 'src/enums';
+import { DateUnit } from '@/enums';
 
 /**
  * Round date string to provided time value. Always rounds down.

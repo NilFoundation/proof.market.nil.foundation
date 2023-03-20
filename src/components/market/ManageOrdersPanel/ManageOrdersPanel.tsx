@@ -6,9 +6,9 @@
 import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
-import { useAppSelector } from 'src/redux';
-import { useGetManageOrdersData } from 'src/hooks';
-import type { ManageOrdersData } from 'src/models';
+import { useAppSelector } from '@/redux';
+import { useGetManageOrdersData } from '@/hooks';
+import type { ManageOrdersData } from '@/models';
 import { DashboardCard } from '../../common';
 import { ProtectedContent } from '../../login';
 import { ManageOrdersTab } from './ManageOrdersTab';

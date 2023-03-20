@@ -7,7 +7,7 @@
 
 import { useCallback, useState } from 'react';
 import { dequal as deepEqual } from 'dequal';
-import { getItemFromLocalStorage, setItemIntoLocalStorage } from 'src/packages/LocalStorage';
+import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
 
 /**
  * Hook to use localStorage in a useState() hook way.

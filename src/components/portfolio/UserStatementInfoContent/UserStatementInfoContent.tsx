@@ -11,13 +11,13 @@ import {
     selectSelectedUserStatementInfo,
     UpdateSelectedUserStatementsInfoKey,
     useAppSelector,
-} from 'src/redux';
-import { ObjectAsPlainTextViewer } from 'src/components';
-import type { UserStatementInfo } from 'src/models';
-import { mapToHumanReadableUserStatementInfo } from 'src/models';
-import { Path } from 'src/routing';
-import { useSyncUrlAndSelectedItem } from 'src/hooks';
-import { RouterParam } from 'src/enums';
+} from '@/redux';
+import { ObjectAsPlainTextViewer } from '@/components';
+import type { UserStatementInfo } from '@/models';
+import { mapToHumanReadableUserStatementInfo } from '@/models';
+import { Path } from '@/routing';
+import { useSyncUrlAndSelectedItem } from '@/hooks';
+import { RouterParam } from '@/enums';
 import { PortfolioInfoList } from '../PortfolioInfoList';
 import { PortfolioContent } from '../PortfolioContent';
 

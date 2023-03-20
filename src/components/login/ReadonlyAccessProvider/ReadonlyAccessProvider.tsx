@@ -5,9 +5,9 @@
 
 import type { ReactElement, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
-import { login } from 'src/api';
-import { useAuth, useLogin } from 'src/hooks';
-import { getRuntimeConfigOrThrow } from 'src/utils';
+import { login } from '@/api';
+import { useAuth, useLogin } from '@/hooks';
+import { getRuntimeConfigOrThrow } from '@/utils';
 
 /**
  * Props.

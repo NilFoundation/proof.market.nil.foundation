@@ -1,6 +1,6 @@
-@import "src/styles/constants";
-@import "src/styles/mixins/hideScrollbar";
-@import "src/styles/mixins/overflowFade";
+@import "@/styles/constants";
+@import "@/styles/mixins/hideScrollbar";
+@import "@/styles/mixins/overflowFade";
 
 .container {
   height: calc(100vh - 274px);

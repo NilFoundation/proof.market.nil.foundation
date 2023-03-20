@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Container, Navbar, Nav } from '@nilfoundation/react-components';
-import { documentationUrl, navigationLinks } from 'src/constants';
+import { documentationUrl, navigationLinks } from '@/constants';
 import { MobileMenu } from '../MobileMenu';
 import { UserMenu } from '../../login';
 import { Breadcrumbs } from '../BreadCrumbs';

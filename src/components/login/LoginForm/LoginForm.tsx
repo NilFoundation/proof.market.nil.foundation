@@ -19,10 +19,10 @@ import {
 import { CSSTransition } from 'react-transition-group';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation } from 'react-router-dom';
-import { Path } from 'src/routing';
-import { login } from 'src/api';
-import { useLogin } from 'src/hooks';
-import type { LoginData } from 'src/models';
+import { Path } from '@/routing';
+import { login } from '@/api';
+import { useLogin } from '@/hooks';
+import type { LoginData } from '@/models';
 import { AuthCard } from '../AuthCard';
 import styles from './LoginForm.module.scss';
 
@@ -74,7 +74,7 @@ export const LoginForm = (): ReactElement => {
     return (
         <AuthCard>
             <Image
-                source={`${process.env.PUBLIC_URL}/logo512x384.png`}
+                source="/logo512x384.png"
                 alt="=nil; Foundation logo"
                 responsive
                 rounded

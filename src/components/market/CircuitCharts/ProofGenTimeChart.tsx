@@ -5,8 +5,8 @@
 
 import type { ReactElement } from 'react';
 import { useContext, useMemo } from 'react';
-import { useGetCircuitDashboardData } from 'src/hooks';
-import colors from 'src/styles/export.module.scss';
+import { useGetCircuitDashboardData } from '@/hooks';
+import colors from '@/styles/export.module.scss';
 import { ChartTemplate } from '../ChartTemplate';
 import { ChartSettingsContext } from '../CircuitDashboard';
 

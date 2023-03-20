@@ -5,10 +5,10 @@
 
 import { call, fork, put, takeLatest, select, all } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getBids, getAsks } from 'src/api';
-import { ProtectedCall, selectUserName } from 'src/redux/login';
-import { getRuntimeConfigOrThrow } from 'src/utils';
-import type { TradeOrder } from 'src/models';
+import { getBids, getAsks } from '@/api';
+import { ProtectedCall, selectUserName } from '@/redux/login';
+import { getRuntimeConfigOrThrow } from '@/utils';
+import type { TradeOrder } from '@/models';
 import {
     UpdateSelectedCircuitKey,
     UpdateUserAsksList,

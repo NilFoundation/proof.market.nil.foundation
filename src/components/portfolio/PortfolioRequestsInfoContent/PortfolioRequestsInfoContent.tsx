@@ -11,11 +11,11 @@ import {
     selectSelectedPortfolioRequestsInfo,
     UpdateSelectedPortfolioRequestsInfoKey,
     useAppSelector,
-} from 'src/redux';
-import type { PortfolioRequestsInfo } from 'src/models';
-import { Path } from 'src/routing';
-import { useSyncUrlAndSelectedItem } from 'src/hooks';
-import { RouterParam } from 'src/enums';
+} from '@/redux';
+import type { PortfolioRequestsInfo } from '@/models';
+import { Path } from '@/routing';
+import { useSyncUrlAndSelectedItem } from '@/hooks';
+import { RouterParam } from '@/enums';
 import { PortfolioInfoList } from '../PortfolioInfoList';
 import { PortfolioContent } from '../PortfolioContent';
 import { RequestsInfoCard } from './RequestsInfoCard';

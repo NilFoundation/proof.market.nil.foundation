@@ -5,10 +5,10 @@
 
 import type { ReactElement, ReactNode } from 'react';
 import { forwardRef } from 'react';
-import { TradeOrderType } from 'src/models';
-import type { ManageOrdersData } from 'src/models';
-import { capitalizeFirstChar, formatDate, renderDashOnEmptyValue } from 'src/utils';
-import { ClickableIcon } from 'src/components';
+import { TradeOrderType } from '@/models';
+import type { ManageOrdersData } from '@/models';
+import { capitalizeFirstChar, formatDate, renderDashOnEmptyValue } from '@/utils';
+import { ClickableIcon } from '@/components';
 import { OrderStatusMarker } from '../OrderStatusMarker';
 import styles from './OrdersTableItem.module.scss';
 

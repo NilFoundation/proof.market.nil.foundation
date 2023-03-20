@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { Path } from 'src/routing';
+import { Path } from '@/routing';
 
 /**
  * App navigation links.

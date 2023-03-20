@@ -7,8 +7,8 @@ import type { ReactElement, ReactNode } from 'react';
 import { useEffect } from 'react';
 import { useFilters, useSortBy, useTable } from 'react-table';
 import type { ColumnInstance, TableInstance, TableOptions } from 'react-table';
-import { notEmpty } from 'src/utils';
-import { useDebounce, useInitialTableState } from 'src/hooks';
+import { notEmpty } from '@/utils';
+import { useDebounce, useInitialTableState } from '@/hooks';
 import { ReactTableHeader } from './ReactTableHeader';
 import { Table, TBody, THead, TRow } from '../Table';
 

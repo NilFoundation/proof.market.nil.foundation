@@ -18,9 +18,9 @@ import type {
     UTCTimestamp,
     WhitespaceData,
 } from 'lightweight-charts';
-import { useChart, useRenderChartData } from 'src/hooks';
-import { formatUTCTimestamp } from 'src/utils';
-import { getDateFormatBasedOnDateUnit } from 'src/enums';
+import { useChart, useRenderChartData } from '@/hooks';
+import { formatUTCTimestamp } from '@/utils';
+import { getDateFormatBasedOnDateUnit } from '@/enums';
 import { ChartSettingsContext } from '../CircuitDashboard';
 import { ChartLegend } from '../ChartLegend';
 import './ChartTemplate.scss';

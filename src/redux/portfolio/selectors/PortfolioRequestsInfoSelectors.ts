@@ -4,7 +4,7 @@
  */
 
 import { createSelector } from '@reduxjs/toolkit';
-import type { RootStateType } from 'src/redux';
+import type { RootStateType } from '@/redux';
 
 /**
  * Select current selected portfolio requests info.

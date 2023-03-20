@@ -1,7 +1,7 @@
-@import "src/styles/constants.scss";
-@import "src/styles/mixins/styledList";
-@import "src/styles/mixins/hideScrollbar";
-@import "src/styles/mixins/overflowFade";
+@import "@/styles/constants.scss";
+@import "@/styles/mixins/styledList";
+@import "@/styles/mixins/hideScrollbar";
+@import "@/styles/mixins/overflowFade";
 
 .container {
   height: 400px;

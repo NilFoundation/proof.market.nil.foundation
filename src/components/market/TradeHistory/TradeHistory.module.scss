@@ -1,6 +1,6 @@
-@import "src/styles/mixins/tableColumns";
-@import "src/styles/mixins/hideScrollbar";
-@import "src/styles/mixins/overflowFade";
+@import "@/styles/mixins/tableColumns";
+@import "@/styles/mixins/hideScrollbar";
+@import "@/styles/mixins/overflowFade";
 
 .container {
   height: 407px;

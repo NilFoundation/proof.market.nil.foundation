@@ -1,6 +1,6 @@
-@import "/src/styles/mixins/responsive";
-@import "/src/styles/mixins/primaryLink";
-@import "src/styles/constants.scss";
+@import "@/styles/mixins/responsive";
+@import "@/styles/mixins/primaryLink";
+@import "@/styles/constants.scss";
 
 .breadcrumbs {
   padding: 0 !important;

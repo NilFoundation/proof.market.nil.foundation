@@ -4,9 +4,9 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { OrderBookPriceStep } from 'src/enums';
-import type { LastOrderData, OrderBookData } from 'src/models';
-import { getItemFromLocalStorage, setItemIntoLocalStorage } from 'src/packages/LocalStorage';
+import type { OrderBookPriceStep } from '@/enums';
+import type { LastOrderData, OrderBookData } from '@/models';
+import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
 import {
     UpdateOrderBookData,
     UpdateOrderBookDataError,

@@ -9,11 +9,11 @@ import { ListGroup } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import type { Row } from 'react-table';
 import { CSSTransition } from 'react-transition-group';
-import { TradeOrderType } from 'src/models';
-import { removeAsk, removeBid } from 'src/api';
-import { RemoveUserAsk, RemoveUserBid } from 'src/redux';
-import { useOnClickOutside } from 'src/hooks';
-import type { ManageOrdersData } from 'src/models';
+import { TradeOrderType } from '@/models';
+import { removeAsk, removeBid } from '@/api';
+import { RemoveUserAsk, RemoveUserBid } from '@/redux';
+import { useOnClickOutside } from '@/hooks';
+import type { ManageOrdersData } from '@/models';
 import { RemoveOrderConfirmationCard } from './RemoveOrderConfirmationCard';
 import { OrdersTableItem } from '../OrdersTableItem';
 

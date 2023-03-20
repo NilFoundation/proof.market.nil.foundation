@@ -10,7 +10,7 @@ import { getRuntimeConfigOrThrow } from './utils';
  * Ga initialize options.
  */
 const gaInitOptions = {
-    testMode: process.env.NODE_ENV !== 'production',
+    testMode: !import.meta.env.PROD,
 };
 
 /**

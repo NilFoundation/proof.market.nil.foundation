@@ -3,9 +3,6 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-// eslint-disable-next-line import/order
-import './polyfills';
-
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -38,5 +35,6 @@ render(
     document.getElementById('root'),
 );
 
-serviceWorkerRegistration.registerServiceWorker();
+// TODO - enable service-workier in vite build
+//serviceWorkerRegistration.registerServiceWorker();
 reportWebVitals();

@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { siteMoneyTickerAbbreviation } from 'src/constants';
+import { siteMoneyTickerAbbreviation } from '@/constants';
 import type { PortfolioOrdersInfo } from '../PortfolioOrdersInfo';
 
 /**

@@ -6,8 +6,8 @@
 import type { CSSProperties, KeyboardEventHandler, ReactElement } from 'react';
 import { useContext } from 'react';
 import type { Row } from 'react-table';
-import { TRow } from 'src/components';
-import type { OrderBookDataItem } from 'src/models';
+import { TRow } from '@/components';
+import type { OrderBookDataItem } from '@/models';
 import { OrderManagementContext } from '../OrderManagementContextProvider';
 import { OrderBookSettingsContext } from './OrderBookSettingsContext';
 import { OrderBookTableCell } from './OrderBookTableCell';

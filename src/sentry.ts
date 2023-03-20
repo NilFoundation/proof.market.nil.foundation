@@ -13,7 +13,7 @@ import { getRuntimeConfigOrThrow } from './utils';
  * @see {@link https://docs.sentry.io/platforms/javascript/guides/react/}
  */
 export const configureSentry = (): void => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (!import.meta.env.PROD) {
         return;
     }
 
@@ -30,7 +30,7 @@ export const configureSentry = (): void => {
         denyUrls: [
             // Chrome extensions
             /extensions\//i,
-            /^chrome:\/\//i,
+            /^chrome/i,
         ],
     });
 };

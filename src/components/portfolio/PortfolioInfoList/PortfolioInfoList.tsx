@@ -6,8 +6,8 @@
 import type { ReactElement } from 'react';
 import { useCallback, memo } from 'react';
 import { ListGroup, Spinner } from '@nilfoundation/react-components';
-import { DashboardCard } from 'src/components/common';
-import { Path } from 'src/routing';
+import { DashboardCard } from '@/components/common';
+import { Path } from '@/routing';
 import { PortfolioInfoListItem } from './PortfolioInfoListItem';
 import styles from './PortfolioInfoList.module.scss';
 

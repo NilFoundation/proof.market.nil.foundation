@@ -7,8 +7,8 @@ import type { ReactElement } from 'react';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { Spinner } from '@nilfoundation/react-components';
-import { selectCurrentCircuit, useAppSelector } from 'src/redux';
-import type { Circuit } from 'src/models';
+import { selectCurrentCircuit, useAppSelector } from '@/redux';
+import type { Circuit } from '@/models';
 import styles from './CircuitDetailedInfo.module.scss';
 
 /**

@@ -4,7 +4,7 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { Ask } from 'src/models';
+import type { Ask } from '@/models';
 
 /**
  * Data to build charts.
