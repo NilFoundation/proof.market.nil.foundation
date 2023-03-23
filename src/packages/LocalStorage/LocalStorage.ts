@@ -3,13 +3,15 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
+import type { LocalStorageKey } from './LocalStorageKey';
+
 /**
  * Get localStorage item.
  *
  * @param ItemKey - Key.
  * @returns Item value.
  */
-export const getItemFromLocalStorage = <T>(ItemKey: string): T | undefined => {
+export const getItemFromLocalStorage = <T>(ItemKey: LocalStorageKey): T | undefined => {
     try {
         const serialisedValue = localStorage.getItem(ItemKey);
         if (serialisedValue === null) {
@@ -27,7 +29,7 @@ export const getItemFromLocalStorage = <T>(ItemKey: string): T | undefined => {
  * @param ItemKey - Key.
  * @param ItemValue - Value.
  */
-export const setItemIntoLocalStorage = <T>(ItemKey: string, ItemValue: T): void => {
+export const setItemIntoLocalStorage = <T>(ItemKey: LocalStorageKey, ItemValue: T): void => {
     try {
         const serialisedValue = JSON.stringify(ItemValue);
         localStorage.setItem(ItemKey, serialisedValue);
@@ -41,7 +43,7 @@ export const setItemIntoLocalStorage = <T>(ItemKey: string, ItemValue: T): void 
  *
  * @param ItemKey - Key.
  */
-export const removeItemFromLocalStorage = (ItemKey: string): void => {
+export const removeItemFromLocalStorage = (ItemKey: LocalStorageKey): void => {
     try {
         localStorage.removeItem(ItemKey);
     } catch {

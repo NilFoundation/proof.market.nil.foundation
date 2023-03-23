@@ -6,7 +6,10 @@
 import { createApiClient } from '../common';
 import type { RegisterData } from '../../models';
 
-const httpFetcher = createApiClient('/user', false);
+const httpFetcher = createApiClient({
+    baseUrl: '/user',
+    injectToken: false,
+});
 
 /**
  * Register user.

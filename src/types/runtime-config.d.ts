@@ -15,6 +15,7 @@ const keys = [
     'REVALIDATE_DATA_INTERVAL',
     'SENTRY_DSN',
     'GA_TRACKING_ID',
+    'GOOGLE_AUTH_CLIENT_ID',
 ] as const;
 
 type RuntimConfigKeys = (typeof keys)[number];

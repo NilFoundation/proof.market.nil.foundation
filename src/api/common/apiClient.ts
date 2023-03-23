@@ -6,36 +6,65 @@
 import type { Options } from 'ky';
 import ky from 'ky';
 import { getItemFromLocalStorage } from '@/packages/LocalStorage';
+import { AuthType } from '@/enums';
 import { apiBaseUrl } from './apiHelpers';
+
+/**
+ * Create api client settings.
+ */
+type CreateApiClientSettings = {
+    baseUrl?: string;
+    injectToken?: boolean;
+    options?: Omit<Options, 'prefixUrl'>;
+    shouldUseApiBaseUrl?: boolean;
+};
+
+/**
+ * Create api client parameters. Could create api client with parameters or just prvide the baseUrl string.
+ */
+export type CreateApiClientParameters = CreateApiClientSettings | string;
 
 /**
  * Create api client.
  *
- * @param baseUrl Base api url.
- * @param injectToken Add Authorization header with token to all requests.
- * @param options Other options.
+ * @param {CreateApiClientParameters} params Create api client parameters.
  * @returns Api client.
  */
-export const createApiClient = (
-    baseUrl = '',
-    injectToken = true,
-    options?: Omit<Options, 'prefixUrl'>,
-) => {
+export const createApiClient = (params: CreateApiClientParameters) => {
+    let baseOptions = {
+        baseUrl: '',
+        injectToken: true,
+        options: {},
+        shouldUseApiBaseUrl: true,
+    };
+
+    if (typeof params === 'string') {
+        baseOptions.baseUrl = params;
+    } else {
+        baseOptions = Object.assign(baseOptions, params);
+    }
+
+    const { shouldUseApiBaseUrl, baseUrl, options, injectToken } = baseOptions;
+
     return ky.create({
-        prefixUrl: `${apiBaseUrl}${baseUrl}`,
+        prefixUrl: `${shouldUseApiBaseUrl ? apiBaseUrl : ''}${baseUrl}`,
         hooks: {
             beforeRequest: [
                 request => {
-                    injectToken && request.headers.set('Authorization', `Bearer ${getJwtToken()}`);
+                    if (!injectToken) {
+                        return request;
+                    }
+
+                    const authType = getItemFromLocalStorage('authType');
+                    const headerValue = `${
+                        authType === AuthType.credentials ? 'Bearer ' : ''
+                    }${getItemFromLocalStorage('userToken')}`;
+
+                    request.headers.set('Authorization', headerValue);
                 },
             ],
         },
         timeout: 20000,
         ...options,
     });
-};
-
-const getJwtToken = (): string | undefined => {
-    const tokenStorageKey = 'jwt';
-    return getItemFromLocalStorage<string>(tokenStorageKey);
 };

@@ -6,6 +6,7 @@
 import { useCallback } from 'react';
 import { dequal as deepEqual } from 'dequal';
 import type { TableState } from 'react-table';
+import type { LocalStorageKey } from '@/packages/LocalStorage';
 import { useLocalStorage } from '../useLocalStorage';
 
 /**
@@ -22,7 +23,7 @@ type PartalState<T extends Record<string, unknown>> = Partial<TableState<T>>;
  * InitialState is taken from localStorage and can be rewrited with setInitialState.
  */
 export const useInitialTableState = <T extends Record<string, unknown>>(
-    name: string,
+    name: LocalStorageKey,
     defaultState: PartalState<T> = {},
 ): [PartalState<T>, (newState: PartalState<T>) => void] => {
     const [initialState, setInitialState] = useLocalStorage(name, defaultState);

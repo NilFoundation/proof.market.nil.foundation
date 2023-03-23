@@ -12,4 +12,5 @@ window['RUNTIME_CONFIG'] = {
     GA_TRACKING_ID: '',
     PROOFMARKET_TOOLCHAIN_REPO: '',
     SENTRY_DSN: '',
+    GOOGLE_AUTH_CLIENT_ID: '',
 }

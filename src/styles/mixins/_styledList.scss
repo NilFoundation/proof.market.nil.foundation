@@ -9,7 +9,8 @@
     padding: 0 !important;
     height: 48px;
 
-    &:hover {
+    // TODO - refactor after migrating to Bootstrap@5
+    &:hover:not([aria-current="true"]) {
       background-color: $c-base-light;
     }
 

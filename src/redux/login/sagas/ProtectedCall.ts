@@ -6,7 +6,8 @@
 import { call, put } from 'redux-saga/effects';
 import type { StrictEffect } from 'redux-saga/effects';
 import { SetIsOnline } from '@/redux';
-import { UpdateUserName } from '../actions';
+import { clearAuthLocalStorageState } from '@/utils';
+import { UpdateAuthType, UpdateIsAuthorized, UpdateUserName } from '../actions';
 
 /**
  * Removes current user if api call response returns 401 error.
@@ -32,6 +33,7 @@ export function* ProtectedCall<T extends (...args: any[]) => any>(
         const result: unknown = yield call(fn, ...args);
 
         yield put(SetIsOnline(true));
+
         return result;
     } catch (e) {
         if (!e.response) {
@@ -42,6 +44,9 @@ export function* ProtectedCall<T extends (...args: any[]) => any>(
 
         if (e.response?.status === 401) {
             yield put(UpdateUserName(null));
+            yield put(UpdateIsAuthorized(false));
+            yield put(UpdateAuthType(undefined));
+            clearAuthLocalStorageState();
         }
 
         throw e;

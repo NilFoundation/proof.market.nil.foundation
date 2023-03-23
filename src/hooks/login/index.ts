@@ -3,4 +3,6 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-export * from './loginHooks';
+export * from './uselogin';
+export * from './useAuth';
+export * from './useLogout';

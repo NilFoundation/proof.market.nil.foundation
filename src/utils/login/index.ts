@@ -5,3 +5,4 @@
 
 export * from './jwtHelpers';
 export * from './calculateRevalidateJwtTimeout';
+export * from './clearAuthLocalStorageState';

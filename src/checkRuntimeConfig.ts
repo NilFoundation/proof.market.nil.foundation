@@ -14,6 +14,7 @@ const requiredEnvs: Array<keyof typeof window.RUNTIME_CONFIG> = [
     'READONLY_USER',
     'PROOFMARKET_TOOLCHAIN_REPO',
     'SITE_DEFAULT_TITLE',
+    'GOOGLE_AUTH_CLIENT_ID',
 ];
 
 /**

@@ -6,8 +6,14 @@
 import type { ReactElement } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import { dequal as deepEqual } from 'dequal';
-import { selectCircuits, useAppSelector } from '@/redux';
-import { useSelectedCircuitNameUrlSync } from '@/hooks';
+import {
+    selectCircuits,
+    selectCurrentCircuit,
+    UpdateSelectedCircuitKey,
+    useAppSelector,
+} from '@/redux';
+import { useSyncUrlAndSelectedItem } from '@/hooks';
+import { RouterParam } from '@/enums';
 import { CircuitsListTable } from './CircuitsListTable';
 import { DashboardCard } from '../../common';
 import styles from './CircuitsList.module.scss';
@@ -21,7 +27,12 @@ export const CircuitsList = (): ReactElement => {
     const circuitsList = useAppSelector(selectCircuits, deepEqual);
     const loadingCircuits = useAppSelector(s => s.circuitsState.isLoading);
 
-    useSelectedCircuitNameUrlSync();
+    useSyncUrlAndSelectedItem({
+        urlParamToSync: RouterParam.statementName,
+        actionToUpdateSelectedItem: UpdateSelectedCircuitKey,
+        itemSelector: selectCurrentCircuit,
+        allItemsSelector: selectCircuits,
+    });
 
     return (
         <DashboardCard>

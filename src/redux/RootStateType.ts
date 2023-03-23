@@ -4,7 +4,7 @@
  */
 
 import type { RouterReducerState } from './common';
-import type { UserReducerState } from './login';
+import type { AuthReducerState, UserReducerState } from './login';
 import type {
     CircuitsReducerState,
     OrderBookReducerState,
@@ -32,4 +32,5 @@ export interface RootStateType {
     userStatementInfoState: UserStatementsInfoReducerState;
     portfolioProposalsInfo: PortfolioPorposalsInfoReducerState;
     portfolioRequestsInfo: PortfolioRequestsInfoReducerState;
+    authState: AuthReducerState;
 }

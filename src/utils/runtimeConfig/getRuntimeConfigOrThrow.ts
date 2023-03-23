@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/require-description-complete-sentence */
 /**
  * @file Utility function.
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>

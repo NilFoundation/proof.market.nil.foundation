@@ -3,4 +3,4 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './getRuntimeConfig';
+export * from './getRuntimeConfigOrThrow';

@@ -4,3 +4,4 @@
  */
 
 export * from './UserReducer';
+export * from './AuthReducer';

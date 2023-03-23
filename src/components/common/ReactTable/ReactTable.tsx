@@ -45,7 +45,10 @@ export const ReactTable = <T extends Record<string, unknown>>({
     showTableHeader = true,
     ...restOptions
 }: ReactTableProps<T>): ReactElement => {
-    const [initialState, setInitialState] = useInitialTableState(name, defaultInitialState);
+    const [initialState, setInitialState] = useInitialTableState(
+        `${name}TableState`,
+        defaultInitialState,
+    );
 
     const tableInstance = useTable<T>(
         {

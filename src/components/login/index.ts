@@ -9,3 +9,4 @@ export * from './RegisterForm';
 export * from './ReadonlyAccessProvider';
 export * from './UserMenu';
 export * from './ProtectedContent';
+export * from './GoolgeAuthButton';

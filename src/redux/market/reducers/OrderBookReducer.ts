@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { OrderBookPriceStep } from '@/enums';
+import type { OrderBookPriceStepType } from '@/enums';
 import type { LastOrderData, OrderBookData } from '@/models';
 import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
 import {
@@ -22,11 +22,9 @@ export type OrderBookReducerState = {
     data: OrderBookData;
     isLoading: boolean;
     hasApiError: boolean;
-    priceStep: keyof typeof OrderBookPriceStep;
+    priceStep: OrderBookPriceStepType;
     lastOrderData?: LastOrderData;
 };
-
-const priceStepLocalStorageKey = 'orderBookPriceStep';
 
 /**
  * Initial state.
@@ -35,7 +33,7 @@ const initialState: OrderBookReducerState = {
     data: { asks: [], bids: [] },
     hasApiError: false,
     isLoading: false,
-    priceStep: getItemFromLocalStorage(priceStepLocalStorageKey) ?? '0.001',
+    priceStep: getItemFromLocalStorage('orderBookPriceStep') ?? '0.001',
     lastOrderData: undefined,
 };
 
@@ -56,7 +54,7 @@ export const OrderBookReducer = createReducer(initialState, builder =>
         .addCase(UpdateOrderBookPriceStep, (state, { payload }) => {
             state.priceStep = payload;
 
-            setItemIntoLocalStorage(priceStepLocalStorageKey, payload);
+            setItemIntoLocalStorage('orderBookPriceStep', payload);
         })
         .addCase(UpdateOrderBookLastOrderData, (state, { payload }) => {
             state.lastOrderData = payload;

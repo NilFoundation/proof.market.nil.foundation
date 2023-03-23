@@ -7,6 +7,7 @@
 
 import { useCallback, useState } from 'react';
 import { dequal as deepEqual } from 'dequal';
+import type { LocalStorageKey } from '@/packages/LocalStorage';
 import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
 
 /**
@@ -16,7 +17,10 @@ import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/Loc
  * @param initialValue Inital value. Used when localStorage is empty.
  * @returns Persisited state.
  */
-export const useLocalStorage = <T,>(key: string, initialValue: T): [T, (value: T) => void] => {
+export const useLocalStorage = <T,>(
+    key: LocalStorageKey,
+    initialValue: T,
+): [T, (value: T) => void] => {
     const [storedValue, setStoredValue] = useState<T>(
         () => getItemFromLocalStorage(key) ?? initialValue,
     );

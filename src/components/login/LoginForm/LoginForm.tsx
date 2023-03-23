@@ -4,7 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
-import { useRef, useState, useEffect } from 'react';
+import { useCallback, useRef, useState, useEffect } from 'react';
 import {
     Image,
     InputGroup,
@@ -19,11 +19,14 @@ import {
 import { CSSTransition } from 'react-transition-group';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation } from 'react-router-dom';
+import type { TokenResponse } from '@react-oauth/google';
 import { Path } from '@/routing';
 import { login } from '@/api';
 import { useLogin } from '@/hooks';
 import type { LoginData } from '@/models';
+import { AuthType } from '@/enums';
 import { AuthCard } from '../AuthCard';
+import { GoogleAuthButton } from '../GoolgeAuthButton';
 import styles from './LoginForm.module.scss';
 
 /**
@@ -59,7 +62,7 @@ export const LoginForm = (): ReactElement => {
         setErrorMessage('');
         try {
             const { jwt } = await login(data);
-            processLogin(jwt);
+            await processLogin(jwt, AuthType.credentials);
         } catch (e) {
             setErrorMessage('Login error');
         }
@@ -70,6 +73,14 @@ export const LoginForm = (): ReactElement => {
     }, []);
 
     const { ref, ...restRegister } = register('username', { required: true });
+
+    const processGoogleLogin = useCallback(
+        (r: TokenResponse) => {
+            processLogin(r, AuthType.google, () => setErrorMessage('Login error'));
+        },
+        [processLogin],
+    );
+    const onErrorGoogleLogin = useCallback(() => setErrorMessage('Login error'), []);
 
     return (
         <AuthCard>
@@ -134,16 +145,22 @@ export const LoginForm = (): ReactElement => {
                         </InputGroup.Buttons>
                     </InputGroup>
                 </Form.Group>
-                <Button
-                    block
-                    variant={Variant.success}
-                    size={Size.lg}
-                    onClick={onSubmitLogin}
-                    disabled={!isValid || isSubmitting}
-                >
-                    Login
-                    {isSubmitting && <Spinner />}
-                </Button>
+                <div className={styles.buttons}>
+                    <Button
+                        variant={Variant.success}
+                        size={Size.lg}
+                        onClick={onSubmitLogin}
+                        disabled={!isValid || isSubmitting}
+                    >
+                        Login
+                        {isSubmitting && <Spinner />}
+                    </Button>
+                    <GoogleAuthButton
+                        onSuccess={processGoogleLogin}
+                        onError={onErrorGoogleLogin}
+                        disabled={isSubmitting}
+                    />
+                </div>
                 <CSSTransition
                     classNames="fade"
                     timeout={300}

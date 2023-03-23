@@ -4,3 +4,4 @@
  */
 
 export * from './UserSelectors';
+export * from './AuthSelectors';

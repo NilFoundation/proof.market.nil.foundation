@@ -5,7 +5,7 @@
 
 import { combineReducers } from 'redux';
 import { RouterReducer } from './common';
-import { UserReducer } from './login';
+import { AuthReducer, UserReducer } from './login';
 import {
     CircuitsReducer,
     OrderBookReducer,
@@ -34,4 +34,5 @@ export const RootReducer = combineReducers<RootStateType>({
     userStatementInfoState: UserStatementsInfoReducer,
     portfolioProposalsInfo: PortfolioPorposalsInfoReducer,
     portfolioRequestsInfo: PortfolioRequestsInfoReducer,
+    authState: AuthReducer,
 });

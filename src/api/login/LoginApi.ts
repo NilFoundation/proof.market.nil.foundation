@@ -6,7 +6,7 @@
 import { createApiClient } from '../common';
 import type { LoginData, AuthData } from '../../models';
 
-const httpFetcher = createApiClient('/user', false);
+const httpFetcher = createApiClient('/user');
 
 /**
  * Login.

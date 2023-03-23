@@ -5,10 +5,17 @@
 
 import { call, cancel, delay, fork, put, select, take, takeLatest } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { renewJwt } from '@/api';
+import type { GoogleUserinfo } from '@/models';
+import { getGoogleProfileInfo, renewJwt } from '@/api';
 import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
-import { calculateRenewJwtTimeGap, getUserFromJwt } from '@/utils';
-import { SetJwtRevalidateTimeout, UpdateUserName } from '../actions';
+import { calculateRenewJwtTimeGap, clearAuthLocalStorageState, getUserFromJwt } from '@/utils';
+import { AuthType } from '@/enums';
+import {
+    SetJwtRevalidateTimeout,
+    UpdateGoogleUserInfo,
+    UpdateIsAuthorized,
+    UpdateUserName,
+} from '../actions';
 import { selectUserName } from '../selectors';
 
 /**
@@ -27,19 +34,44 @@ export function* AuthSaga(): SagaIterator<void> {
  * @yields
  */
 function* TryGetUserFromLocalStorageTokenSaga(): SagaIterator<void> {
-    const jwt = getItemFromLocalStorage<string>('jwt');
+    const token = getItemFromLocalStorage<string>('userToken');
+    const authType = getItemFromLocalStorage<AuthType>('authType');
 
-    if (!jwt) {
+    if (!token) {
         return;
     }
 
-    const user = getUserFromJwt(jwt);
+    yield put(UpdateIsAuthorized(true));
 
-    if (user) {
-        yield put(UpdateUserName(user));
+    switch (authType) {
+        case AuthType.google: {
+            try {
+                const response: GoogleUserinfo = yield call(getGoogleProfileInfo, token);
+                yield put(UpdateUserName(response.name));
+                yield put(UpdateGoogleUserInfo(response));
 
-        const timeout = calculateRenewJwtTimeGap(jwt);
-        yield put(SetJwtRevalidateTimeout(timeout));
+                // TODO - add google token revalidation
+
+                return;
+            } catch {
+                clearAuthLocalStorageState();
+            } finally {
+                break;
+            }
+        }
+        case AuthType.credentials: {
+            const user = getUserFromJwt(token);
+            if (user) {
+                yield put(UpdateUserName(user));
+
+                const timeout = calculateRenewJwtTimeGap(token);
+                yield put(SetJwtRevalidateTimeout(timeout));
+            }
+            break;
+        }
+        default: {
+            // Do nothing.
+        }
     }
 }
 
@@ -85,7 +117,7 @@ function* processRenewJwt(timeout: number): SagaIterator<void> {
         const timeout = calculateRenewJwtTimeGap(jwt);
 
         if (user === currentUser) {
-            setItemIntoLocalStorage('jwt', jwt);
+            setItemIntoLocalStorage('userToken', jwt);
 
             yield put(SetJwtRevalidateTimeout(timeout));
         }
