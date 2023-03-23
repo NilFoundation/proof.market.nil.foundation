@@ -14,7 +14,7 @@ import { store } from './redux';
 import { configureSentry } from './sentry';
 import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+//import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { checkRuntimeConfig } from './checkRuntimeConfig';
 import './index.scss';
 
