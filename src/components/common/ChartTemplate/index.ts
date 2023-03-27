@@ -4,3 +4,4 @@
  */
 
 export * from './ChartTemplate';
+export * from './ChartBaseProps';

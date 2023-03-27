@@ -4,7 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
-import { useContext, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import type {
     CandlestickData,
@@ -21,14 +21,14 @@ import type {
 import { useChart, useRenderChartData } from '@/hooks';
 import { formatUTCTimestamp } from '@/utils';
 import { getDateFormatBasedOnDateUnit } from '@/enums';
-import { ChartSettingsContext } from '../CircuitDashboard';
 import { ChartLegend } from '../ChartLegend';
-import './ChartTemplate.scss';
+import type { ChartBaseProps } from './ChartBaseProps';
+import styles from './ChartTemplate.module.scss';
 
 /**
  * Props.
  */
-type ChartTemplateProps<T extends 'Line' | 'Candlestick'> = {
+type ChartTemplateProps<T extends 'Line' | 'Candlestick'> = ChartBaseProps & {
     chartName: string;
     loadingData: boolean;
     seriesType: T;
@@ -54,9 +54,11 @@ export const ChartTemplate = <T extends 'Line' | 'Candlestick'>({
     seriesOptions,
     chartOptions,
     volumesData,
+    dataRange,
+    displayVolumes,
+    height,
 }: ChartTemplateProps<T>): ReactElement => {
     const ref = useRef<HTMLDivElement>(null);
-    const { dataRange, displayVolumes } = useContext(ChartSettingsContext);
     const options = useMemo(
         (): DeepPartial<ChartOptions> => ({
             ...chartOptions,
@@ -93,7 +95,8 @@ export const ChartTemplate = <T extends 'Line' | 'Candlestick'>({
     return (
         <div
             ref={ref}
-            className="circuitChart"
+            className={styles.chart}
+            style={{ height }}
         >
             <ChartLegend
                 currentData={currentChartData}

@@ -5,7 +5,7 @@
 
 import { createSelector } from '@reduxjs/toolkit';
 import sum from 'lodash/sum';
-import type { OrderBookPriceStep } from '@/enums';
+import type { OrderBookPriceStepType } from '@/enums';
 import type { LastOrderData, OrderBookData } from '@/models';
 import type { RootStateType } from '@/redux';
 
@@ -23,7 +23,7 @@ export const selectOrderBookData = (s: RootStateType): OrderBookData => s.orderB
  * @param s State.
  * @returns Orderbook price step.
  */
-export const selectOrderBookPriceStep = (s: RootStateType): keyof typeof OrderBookPriceStep =>
+export const selectOrderBookPriceStep = (s: RootStateType): OrderBookPriceStepType =>
     s.orderBookState.priceStep;
 
 /**

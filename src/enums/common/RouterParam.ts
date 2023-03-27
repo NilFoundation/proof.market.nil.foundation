@@ -11,4 +11,5 @@ export const enum RouterParam {
     portfolioUserStatementsInfoName = 'portfolioUserStatementsInfoName',
     portfolioProposalsInfoStatementName = 'portfolioProposalsInfoStatementName',
     portfolioRequestsInfoStatementName = 'portfolioRequestsInfoStatementName',
+    chartType = 'chartType',
 }

@@ -3,18 +3,19 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import type { ReactElement } from 'react';
-import { useContext } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { Icon, Nav } from '@nilfoundation/react-components';
-import { ChartSettingsContext } from './ChartSettingsContext';
 
 /**
  * Props.
  */
 type DashboardToolbarProps = {
+    children?: ReactNode;
     disabled: boolean;
     isFullscreen: boolean;
     setFullScreen: (x: boolean) => void;
+    displayVolumes: boolean;
+    setDisplayVolumes: (d: boolean) => void;
 };
 
 /**
@@ -27,11 +28,13 @@ export const DashboardToolbar = ({
     disabled,
     isFullscreen,
     setFullScreen,
+    displayVolumes,
+    setDisplayVolumes,
+    children,
 }: DashboardToolbarProps): ReactElement => {
-    const { displayVolumes, setDisplayVolumes } = useContext(ChartSettingsContext);
-
     return (
         <Nav>
+            {children}
             <Nav.Item
                 disabled={disabled}
                 active={displayVolumes}
@@ -40,6 +43,7 @@ export const DashboardToolbar = ({
                 <Icon
                     iconName="fa-solid fa-chart-simple"
                     srOnlyText="Toggles volumes display"
+                    title="Display volumes"
                 />
             </Nav.Item>
             <Nav.Item
@@ -50,6 +54,7 @@ export const DashboardToolbar = ({
                 <Icon
                     iconName={`fa-solid fa-${isFullscreen ? 'compress' : 'expand'}`}
                     srOnlyText="Toggles fullscreen view"
+                    title="Fullscreen view"
                 />
             </Nav.Item>
         </Nav>
