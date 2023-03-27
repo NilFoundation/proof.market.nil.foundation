@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import type { OrderBookPriceStep } from '@/enums';
+import type { OrderBookPriceStepType } from '@/enums';
 import { createApiClient } from '../common';
 import type { Circuit, OrderBookData } from '../../models';
 
@@ -11,7 +11,7 @@ import type { Circuit, OrderBookData } from '../../models';
  * Get orderbook data options.
  */
 export type OrderBookDataOptions = {
-    priceStep?: keyof typeof OrderBookPriceStep;
+    priceStep?: OrderBookPriceStepType;
     evalTimeStep?: number;
 };
 

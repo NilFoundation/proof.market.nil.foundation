@@ -4,29 +4,34 @@
  */
 
 import type { ReactElement } from 'react';
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useGetCircuitDashboardData } from '@/hooks';
 import colors from '@/styles/export.module.scss';
 import { ChartTemplate } from '../ChartTemplate';
-import { ChartSettingsContext } from '../CircuitDashboard';
+import type { ChartBaseProps } from '../ChartTemplate';
+
+/**
+ * Props.
+ */
+type ProofTimeGenChartProps = ChartBaseProps;
 
 /**
  * Proof cost chart.
  *
+ * @param {ProofTimeGenChartProps} props Props.
  * @returns React component.
  */
-export const ProofTimeGenChart = (): ReactElement => {
+export const ProofTimeGenChart = (props: ProofTimeGenChartProps): ReactElement => {
     const seriesOptions = useMemo(
         () => ({
             color: colors.infoColor,
         }),
         [],
     );
-    const { dataRange, displayVolumes } = useContext(ChartSettingsContext);
     const {
         chartData: { proofGenTimeData, volumesData },
         loadingData: isLoadingChartData,
-    } = useGetCircuitDashboardData(displayVolumes, dataRange);
+    } = useGetCircuitDashboardData(props.displayVolumes, props.dataRange);
 
     return (
         <ChartTemplate
@@ -36,6 +41,7 @@ export const ProofTimeGenChart = (): ReactElement => {
             seriesType="Line"
             seriesOptions={seriesOptions}
             volumesData={volumesData}
+            {...props}
         />
     );
 };

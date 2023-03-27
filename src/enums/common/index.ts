@@ -4,3 +4,4 @@
  */
 
 export * from './RouterParam';
+export * from './RouterSearchParam';

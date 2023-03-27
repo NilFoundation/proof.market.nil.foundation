@@ -4,20 +4,26 @@
  */
 
 import type { ReactElement } from 'react';
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { LineWidth } from 'lightweight-charts';
 import { useGetCircuitDashboardData } from '@/hooks';
 import { siteMoneyTickerAbbreviation } from '@/constants';
 import colors from '@/styles/export.module.scss';
 import { ChartTemplate } from '../ChartTemplate';
-import { ChartSettingsContext } from '../CircuitDashboard';
+import type { ChartBaseProps } from '../ChartTemplate';
+
+/**
+ * Props.
+ */
+type ProofCostChartProps = ChartBaseProps;
 
 /**
  * Proof cost chart.
  *
+ * @param {ProofCostChartProps} props Props.
  * @returns React component.
  */
-export const ProofCostChart = (): ReactElement => {
+export const ProofCostChart = (props: ProofCostChartProps): ReactElement => {
     const seriesOptions = useMemo(
         () => ({
             upColor: colors.successColor,
@@ -26,11 +32,10 @@ export const ProofCostChart = (): ReactElement => {
         }),
         [],
     );
-    const { dataRange, displayVolumes } = useContext(ChartSettingsContext);
     const {
         chartData: { candlestickChartData, volumesData },
         loadingData: isLoadingChartData,
-    } = useGetCircuitDashboardData(displayVolumes, dataRange);
+    } = useGetCircuitDashboardData(props.displayVolumes, props.dataRange);
 
     return (
         <ChartTemplate
@@ -40,6 +45,7 @@ export const ProofCostChart = (): ReactElement => {
             seriesType="Candlestick"
             seriesOptions={seriesOptions}
             volumesData={volumesData}
+            {...props}
         />
     );
 };
