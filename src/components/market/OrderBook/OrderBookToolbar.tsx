@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { useCallback, useContext } from 'react';
 import { Dropdown } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
+import type { OrderBookPriceStepType } from '@/enums';
 import { OrderBookPriceStep } from '@/enums';
 import { useAuth } from '@/hooks';
 import { selectOrderBookPriceStep, UpdateOrderBookPriceStep, useAppSelector } from '@/redux';
@@ -34,7 +35,7 @@ export const OrderBookToolbar = ({ disabled }: OrderBookToolbarProps): ReactElem
 
     const priceStep = useAppSelector(selectOrderBookPriceStep);
     const setPriceStep = useCallback(
-        (priceStep: keyof typeof OrderBookPriceStep) => {
+        (priceStep: OrderBookPriceStepType) => {
             dispatch(UpdateOrderBookPriceStep(priceStep));
         },
         [dispatch],
@@ -71,7 +72,7 @@ export const OrderBookToolbar = ({ disabled }: OrderBookToolbarProps): ReactElem
                         .map(x => (
                             <Dropdown.Item
                                 key={x}
-                                onSelect={() => setPriceStep(x as keyof typeof OrderBookPriceStep)}
+                                onSelect={() => setPriceStep(x as OrderBookPriceStepType)}
                                 active={x === priceStep}
                             >
                                 <span>{x}</span>

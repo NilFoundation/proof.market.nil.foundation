@@ -16,4 +16,5 @@ export enum Path {
     requests = 'requests',
     proposals = 'proposals',
     statements = 'statements',
+    charts = '/charts',
 }

@@ -4,16 +4,16 @@
  */
 
 import type { ReactElement } from 'react';
-import { useContext } from 'react';
 import { Nav } from '@nilfoundation/react-components';
 import { DateUnit } from '@/enums';
-import { ChartSettingsContext } from './ChartSettingsContext';
 
 /**
  * Props.
  */
 type DataRangeSelectProps = {
     disabled: boolean;
+    dataRange: DateUnit;
+    setDataRange: (r: DateUnit) => void;
 };
 
 /**
@@ -22,8 +22,11 @@ type DataRangeSelectProps = {
  * @param {DataRangeSelectProps} props Props.
  * @returns React component.
  */
-export const DataRangeSelect = ({ disabled }: DataRangeSelectProps): ReactElement => {
-    const { dataRange, setDataRange } = useContext(ChartSettingsContext);
+export const DataRangeSelect = ({
+    disabled,
+    dataRange,
+    setDataRange,
+}: DataRangeSelectProps): ReactElement => {
     return (
         <Nav>
             {Object.values(DateUnit).map(x => (

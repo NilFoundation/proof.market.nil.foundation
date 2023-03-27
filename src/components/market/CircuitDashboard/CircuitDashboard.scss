@@ -36,10 +36,6 @@
   padding: 25px 50px 100px;
   background-color: $c-base-darker;
 
-  .circuitChart {
-    height: calc(100% - 135px);
-  }
-
   @include responsive(sm) {
     padding: calc(10px + env(safe-area-inset-top)) 15px
       calc(75px + env(safe-area-inset-bottom));
