@@ -5,6 +5,7 @@ import path from 'path';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import legacy from '@vitejs/plugin-legacy';
 import eslint from 'vite-plugin-eslint';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
     resolve: {
@@ -24,6 +25,7 @@ export default defineConfig({
                 'core-js/stable'
             ],
         }),
+        viteCompression(),
     ],
     build: {
         outDir: 'build',
