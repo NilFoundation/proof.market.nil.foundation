@@ -13,4 +13,4 @@ window['RUNTIME_CONFIG'] = {
     PROOFMARKET_TOOLCHAIN_REPO: '',
     SENTRY_DSN: '',
     GOOGLE_AUTH_CLIENT_ID: '',
-}
+};

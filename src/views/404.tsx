@@ -10,11 +10,19 @@ import { Helmet } from 'react-helmet-async';
 import { Path } from '../routing';
 
 /**
+ * Props.
+ */
+type Page404Props = {
+    showGoBackButton?: boolean;
+};
+
+/**
  * 404 view.
  *
+ * @param {Page404Props} props Props.
  * @returns React component.
  */
-const Page404 = (): ReactElement => (
+const Page404 = ({ showGoBackButton = true }: Page404Props): ReactElement => (
     <Container
         as="main"
         fluid
@@ -28,16 +36,21 @@ const Page404 = (): ReactElement => (
                 xs={12}
                 className="text-center"
             >
-                This page does not exist.
                 <p aria-hidden={true} />
-                <Link to={Path.market}>
-                    <Button
-                        variant={Variant.primary}
-                        size={Size.lg}
-                    >
-                        Back to market
-                    </Button>
-                </Link>
+                This page does not exist.
+                {showGoBackButton && (
+                    <>
+                        <p aria-hidden={true} />
+                        <Link to={Path.market}>
+                            <Button
+                                variant={Variant.primary}
+                                size={Size.lg}
+                            >
+                                Back to market
+                            </Button>
+                        </Link>
+                    </>
+                )}
             </Col>
         </Row>
     </Container>

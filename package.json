@@ -1,5 +1,5 @@
 {
-  "name": "proof.market.nil.foundation",
+  "name": "proof.market",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -95,6 +95,6 @@
     "vite": "^4.2.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-html": "^3.2.0"
+    "vite-plugin-virtual-mpa": "^1.8.1"
   }
 }

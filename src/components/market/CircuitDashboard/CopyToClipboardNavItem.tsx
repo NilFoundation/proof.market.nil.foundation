@@ -45,7 +45,7 @@ export const CopyToClipboardNavItem = ({
             baseUrl += `:${window.location.port}`;
         }
 
-        const path = `${Path.charts}/${circuitName}/${chartType}`;
+        const path = `${Path.charts}/#/${circuitName}/${chartType}`;
 
         let urlSearchParams = `?${RouterSearchParam.chartDataRange}=${chartDataRange}`;
 
@@ -53,8 +53,7 @@ export const CopyToClipboardNavItem = ({
             urlSearchParams += `&${RouterSearchParam.chartDisplayVolumes}=true`;
         }
 
-        //TODO - remove /# when migrating from HashRouter
-        const src = baseUrl + '/#' + path + urlSearchParams;
+        const src = baseUrl + path + urlSearchParams;
 
         return `<iframe src="${src}" title="${chartType}"></iframe>`;
     }, [chartType, circuitName, chartDataRange, displayVolumes]);

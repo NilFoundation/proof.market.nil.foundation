@@ -12,7 +12,6 @@ import RouterReduxConnector from '@/components/common/RouterReduxConnector/Route
 import RequestsContent from '@/components/portfolio/PortfolioRequestsInfoContent/PortfolioRequestsInfoContent';
 import UserStatementInfoContent from '@/components/portfolio/UserStatementInfoContent/UserStatementInfoContent';
 import ProposalContent from '@/components/portfolio/PortfolioProposalsInfoContent/PortfolioProposalsInfoContent';
-import ChartsLayout from '@/layouts/ChartsLayout';
 import AuthLayout from '@/layouts/AuthLayout';
 import MainLayout from '@/layouts/MainLayout';
 import { Path } from './Paths';
@@ -26,7 +25,6 @@ const Page404 = lazy(() => import(/* webpackChunkName: "Page404" */ '../views/40
 const RegisterView = lazy(
     () => import(/* webpackChunkName: "RegisterView" */ '../views/RegisterView'),
 );
-const ChartsView = lazy(() => import(/* webpackChunkName: "ChartsView" */ '../views/ChartsView'));
 
 /**
  * App routes.
@@ -128,21 +126,6 @@ export const routesConfig: RouteObject[] = [
                     {
                         path: Path.any,
                         element: <Page404 />,
-                    },
-                ],
-            },
-            {
-                element: <ChartsLayout />,
-                children: [
-                    {
-                        path: Path.charts,
-                        element: <ChartsView />,
-                        children: [
-                            {
-                                path: `:${RouterParam.statementName}/:${RouterParam.chartType}`,
-                                element: <ChartsView />,
-                            },
-                        ],
                     },
                 ],
             },

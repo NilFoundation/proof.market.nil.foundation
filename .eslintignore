@@ -1,6 +1,6 @@
 build
 node_modules
 coverage
-*.config.js
-storybook-static
 scripts
+.github
+.husky
