@@ -6,7 +6,7 @@
 import type { RouterReducerState } from './common';
 import type { AuthReducerState, UserReducerState } from './login';
 import type {
-    CircuitsReducerState,
+    StatementsReducerState,
     OrderBookReducerState,
     ChartsReducerState,
     UserOrdersReducerState,
@@ -22,7 +22,7 @@ import type {
  * Root state type.
  */
 export interface RootStateType {
-    circuitsState: CircuitsReducerState;
+    statementsState: StatementsReducerState;
     userState: UserReducerState;
     routerState: RouterReducerState;
     orderBookState: OrderBookReducerState;

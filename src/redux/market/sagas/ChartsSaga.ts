@@ -5,17 +5,17 @@
 
 import { call, fork, put, takeLatest, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getAsks } from '@/api';
+import { getProposals } from '@/api';
 import { ProtectedCall } from '@/redux';
-import type { Ask } from '@/models';
+import type { Proposal } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import {
-    UpdateSelectedCircuitKey,
+    UpdateSelectedStatementKey,
     UpdateChartsData,
     UpdateIsErrorGettingChartsData,
     UpdateIsLoadingChartsData,
 } from '../actions';
-import { selectCurrentCircuitKey } from '../selectors';
+import { selectCurrentStatementKey } from '../selectors';
 import { RevalidateSaga } from '../../common';
 
 const revalidateDataDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
@@ -26,7 +26,7 @@ const revalidateDataDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INT
  * @yields
  */
 export function* ChartsSaga(): SagaIterator<void> {
-    yield takeLatest(UpdateSelectedCircuitKey, function* () {
+    yield takeLatest(UpdateSelectedStatementKey, function* () {
         yield put(UpdateChartsData([]));
         yield fork(GetChartsDataSaga);
     });
@@ -39,7 +39,7 @@ export function* ChartsSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetChartsDataSaga(): SagaIterator<void> {
-    const currentStatementKey: string | undefined = yield select(selectCurrentCircuitKey);
+    const currentStatementKey: string | undefined = yield select(selectCurrentStatementKey);
 
     if (currentStatementKey === undefined) {
         return;
@@ -54,16 +54,20 @@ function* GetChartsDataSaga(): SagaIterator<void> {
         yield put(UpdateIsErrorGettingChartsData(false));
         yield put(UpdateIsLoadingChartsData(true));
 
-        const completedAsks: Ask[] = yield call(ProtectedCall, getAsks, apiCallParameters);
+        const completedProposals: Proposal[] = yield call(
+            ProtectedCall,
+            getProposals,
+            apiCallParameters,
+        );
 
-        const currentKey = yield select(selectCurrentCircuitKey);
+        const currentKey = yield select(selectCurrentStatementKey);
 
         // TODO - remove after RevalidateSaga refactor
         // At the moment that fixes updating redux with outtadet api call bug
         const shouldUpdateChartsData =
-            completedAsks !== undefined && currentStatementKey === currentKey;
+            completedProposals !== undefined && currentStatementKey === currentKey;
         if (shouldUpdateChartsData) {
-            yield put(UpdateChartsData(completedAsks));
+            yield put(UpdateChartsData(completedProposals));
         }
     } catch (e) {
         yield put(UpdateIsErrorGettingChartsData(true));

@@ -16,7 +16,7 @@ import styles from './OrderBook.module.scss';
  * Props.
  */
 type OrderBookTableProps = {
-    type: 'bids' | 'asks';
+    type: 'requests' | 'proposals';
     data: OrderBookDataItem[];
     lastOrderData?: LastOrderData;
 };
@@ -50,7 +50,7 @@ export const OrderBookTable = memo(function OrderBookTable({
     const columns = useMemo(
         (): OrderBookTableColumn[] => [
             {
-                Header: type === 'asks' ? 'Ask' : 'Bid',
+                Header: type === 'proposals' ? 'Proposal' : 'Request',
                 accessor: 'ordersAmount',
                 disableSortBy: true,
             },
@@ -78,7 +78,11 @@ export const OrderBookTable = memo(function OrderBookTable({
             return (
                 <div className={styles.rowsContainer}>
                     {getDataWithVolumes(rows, maxVolume).map(row =>
-                        renderRow(row, prepareRow, type === 'asks' ? styles.ask : styles.bid),
+                        renderRow(
+                            row,
+                            prepareRow,
+                            type === 'proposals' ? styles.proposal : styles.request,
+                        ),
                     )}
                 </div>
             );
@@ -88,7 +92,7 @@ export const OrderBookTable = memo(function OrderBookTable({
 
     return (
         <ReactTable
-            name={type === 'asks' ? 'asksTable' : 'bidsTable'}
+            name={type === 'proposals' ? 'proposalsTable' : 'requestsTable'}
             className={styles.orderBookTable}
             renderRows={renderRows}
             data={data}

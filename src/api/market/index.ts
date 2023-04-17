@@ -4,7 +4,7 @@
  */
 
 export * from './StatementApi';
-export * from './BidsApi';
-export * from './AsksApi';
+export * from './RequestsApi';
+export * from './ProposalsApi';
 export * from './ProofProducerApi';
 export * from './OrderBookApi';

@@ -4,21 +4,21 @@
  */
 
 import { useCallback, useState, useRef } from 'react';
-import { getAsks } from '@/api';
-import type { Ask } from '@/models';
+import { getProposals } from '@/api';
+import type { Proposal } from '@/models';
 
 /**
  * Hook parameters type.
  */
 type UseInfiniteLoadItemsParams = {
-    selectedCircuitKey: string;
+    selectedStatementKey: string;
 };
 
 /**
  * Hook return type.
  */
 type UseInfiniteLoadItemsReturnType = {
-    items: Ask[];
+    items: Proposal[];
     loading: boolean;
     error: boolean;
     loadMoreItems: (startIndex: number, stopIndex: number) => Promise<void>;
@@ -32,12 +32,12 @@ type UseInfiniteLoadItemsReturnType = {
  * @returns .
  */
 export const useInfiniteLoadTrades = ({
-    selectedCircuitKey,
+    selectedStatementKey,
 }: UseInfiniteLoadItemsParams): UseInfiniteLoadItemsReturnType => {
     const requestCache = useRef<Record<string, boolean>>({});
     const [loadedItemsState, setLoadedItemsState] = useState<{
         hasNextPage: boolean;
-        items: Ask[];
+        items: Proposal[];
     }>({
         hasNextPage: true,
         items: [],
@@ -69,12 +69,12 @@ export const useInfiniteLoadTrades = ({
                 setLoading(true);
                 setError(false);
 
-                const getTradesApiFilter: Partial<Ask> = {
-                    statement_key: selectedCircuitKey,
+                const getTradesApiFilter: Partial<Proposal> = {
+                    statement_key: selectedStatementKey,
                     status: 'completed',
                 };
 
-                const loadedItems = await getAsks(getTradesApiFilter, stopIndex, startIndex);
+                const loadedItems = await getProposals(getTradesApiFilter, stopIndex, startIndex);
 
                 setLoading(false);
                 setLoadedItemsState({
@@ -86,7 +86,7 @@ export const useInfiniteLoadTrades = ({
                 setLoading(false);
             }
         },
-        [setError, setLoading, loadedItemsState, selectedCircuitKey],
+        [setError, setLoading, loadedItemsState, selectedStatementKey],
     );
 
     return {

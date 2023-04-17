@@ -9,7 +9,7 @@ import { Spinner } from '@nilfoundation/react-components';
 import type { ListChildComponentProps } from 'react-window';
 import { Table, TRow, TCell, THead, THeader, TBody, VirtualList } from '@/components';
 import { formatDate, renderDashOnEmptyValue } from '@/utils';
-import type { Ask } from '@/models';
+import type { Proposal } from '@/models';
 import { useInfiniteLoadTrades } from '@/hooks';
 import styles from './TradeHistory.module.scss';
 
@@ -17,7 +17,7 @@ import styles from './TradeHistory.module.scss';
  * Props.
  */
 type TradeHistoryTableProps = {
-    selectedCircuitKey: string;
+    selectedStatementKey: string;
 };
 
 /**
@@ -42,16 +42,16 @@ const tradeHistoryTableHeadConfig: Array<Record<'Header', string>> = [
  * @returns React component.
  */
 export const TradeHistoryTable = memo(function TradeHistoryTable({
-    selectedCircuitKey,
+    selectedStatementKey,
 }: TradeHistoryTableProps): ReactElement {
     const { items, loadMoreItems, loading, error, hasMore } = useInfiniteLoadTrades({
-        selectedCircuitKey,
+        selectedStatementKey,
     });
 
     const isItemLoaded = (index: number) => !hasMore || !!items.at(index);
     const itemCount = hasMore ? items.length + 1 : items.length;
 
-    const Element = ({ index, style }: ListChildComponentProps<Ask>) => {
+    const Element = ({ index, style }: ListChildComponentProps<Proposal>) => {
         if (!isItemLoaded(index)) {
             return (
                 <TRow style={style}>
@@ -114,7 +114,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
  * @param currentItem CurrentItem.
  * @returns ClassName.
  */
-const getRowClass = (prevItem: Ask, currentItem: Ask): string => {
+const getRowClass = (prevItem: Proposal, currentItem: Proposal): string => {
     if (prevItem.cost > currentItem.cost) {
         return 'lossTextColor';
     }

@@ -4,13 +4,13 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { Ask, Bid } from '@/models';
+import type { Proposal, Request } from '@/models';
 import {
-    UpdateUserAsksList,
-    UpdateUserBidsList,
-    RemoveUserAsk,
-    RemoveUserBid,
-    AddUserBid,
+    UpdateUserProposalsList,
+    UpdateUserRequestsList,
+    RemoveUserProposal,
+    RemoveUserRequest,
+    AddUserRequest,
     UpdateGettingUserOrdersError,
     UpdateIsLoadingUserOrders,
 } from '../actions';
@@ -19,8 +19,8 @@ import {
  * State.
  */
 export type UserOrdersReducerState = {
-    asks: Ask[];
-    bids: Bid[];
+    proposals: Proposal[];
+    requests: Request[];
     isLoading: boolean;
     isError: boolean;
 };
@@ -29,8 +29,8 @@ export type UserOrdersReducerState = {
  * Initial state.
  */
 const initialState: UserOrdersReducerState = {
-    asks: [],
-    bids: [],
+    proposals: [],
+    requests: [],
     isLoading: false,
     isError: false,
 };
@@ -40,11 +40,11 @@ const initialState: UserOrdersReducerState = {
  */
 export const UserOrdersReducer = createReducer(initialState, builder =>
     builder
-        .addCase(UpdateUserAsksList, (state, { payload }) => {
-            state.asks = payload;
+        .addCase(UpdateUserProposalsList, (state, { payload }) => {
+            state.proposals = payload;
         })
-        .addCase(UpdateUserBidsList, (state, { payload }) => {
-            state.bids = payload;
+        .addCase(UpdateUserRequestsList, (state, { payload }) => {
+            state.requests = payload;
         })
         .addCase(UpdateGettingUserOrdersError, (state, { payload }) => {
             state.isError = payload;
@@ -52,15 +52,15 @@ export const UserOrdersReducer = createReducer(initialState, builder =>
         .addCase(UpdateIsLoadingUserOrders, (state, { payload }) => {
             state.isLoading = payload;
         })
-        .addCase(AddUserBid, (state, { payload }) => {
-            state.bids.push(payload);
+        .addCase(AddUserRequest, (state, { payload }) => {
+            state.requests.push(payload);
         })
-        .addCase(RemoveUserAsk, (state, { payload }) => ({
+        .addCase(RemoveUserProposal, (state, { payload }) => ({
             ...state,
-            asks: state.asks.filter(x => x._key !== payload),
+            proposals: state.proposals.filter(x => x._key !== payload),
         }))
-        .addCase(RemoveUserBid, (state, { payload }) => ({
+        .addCase(RemoveUserRequest, (state, { payload }) => ({
             ...state,
-            asks: state.bids.filter(x => x._key !== payload),
+            proposals: state.requests.filter(x => x._key !== payload),
         })),
 );

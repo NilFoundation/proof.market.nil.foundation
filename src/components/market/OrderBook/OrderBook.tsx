@@ -73,19 +73,19 @@ const OrderBookViewFactory = ({
     isError: boolean;
     lastOrderData?: LastOrderData;
 }) => {
-    const { asks, bids } = data;
+    const { proposals, requests } = data;
 
     switch (true) {
-        case isLoading && !asks.length && !bids.length:
+        case isLoading && !proposals.length && !requests.length:
             return <Spinner grow />;
         case isError:
             return <h5>Error while loading data.</h5>;
-        case !!asks.length || !!bids.length:
+        case !!proposals.length || !!requests.length:
             return (
                 <>
                     <OrderBookTable
-                        type="bids"
-                        data={bids}
+                        type="requests"
+                        data={requests}
                     />
                     <div className={styles.lastDeal}>
                         {lastOrderData && (
@@ -102,8 +102,8 @@ const OrderBookViewFactory = ({
                         )}
                     </div>
                     <OrderBookTable
-                        type="asks"
-                        data={asks}
+                        type="proposals"
+                        data={proposals}
                     />
                 </>
             );

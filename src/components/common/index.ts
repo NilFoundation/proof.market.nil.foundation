@@ -25,4 +25,4 @@ export * from './ProgressBar';
 export * from './RouterLink';
 export * from './ChartTemplate';
 export * from './ChartLegend';
-export * from './CircuitCharts';
+export * from './StatementCharts';

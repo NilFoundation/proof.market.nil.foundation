@@ -10,8 +10,8 @@ import { useDispatch } from 'react-redux';
 import type { Row } from 'react-table';
 import { CSSTransition } from 'react-transition-group';
 import { TradeOrderType } from '@/models';
-import { removeAsk, removeBid } from '@/api';
-import { RemoveUserAsk, RemoveUserBid } from '@/redux';
+import { removeProposal, removeRequest } from '@/api';
+import { RemoveUserProposal, RemoveUserRequest } from '@/redux';
 import { useOnClickOutside } from '@/hooks';
 import type { ManageOrdersData } from '@/models';
 import { RemoveOrderConfirmationCard } from './RemoveOrderConfirmationCard';
@@ -49,8 +49,8 @@ export const ActiveOrdersTableItem = forwardRef<HTMLDivElement, ActiveOrdersTabl
             setError('');
 
             try {
-                const fetcher = type === TradeOrderType.buy ? removeBid : removeAsk;
-                const action = type === TradeOrderType.buy ? RemoveUserBid : RemoveUserAsk;
+                const fetcher = type === TradeOrderType.buy ? removeRequest : removeProposal;
+                const action = type === TradeOrderType.buy ? RemoveUserRequest : RemoveUserProposal;
 
                 await fetcher(orderId);
                 dispatch(action(orderId));

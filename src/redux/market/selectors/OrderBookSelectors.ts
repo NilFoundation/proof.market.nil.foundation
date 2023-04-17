@@ -29,8 +29,13 @@ export const selectOrderBookPriceStep = (s: RootStateType): OrderBookPriceStepTy
 /**
  * Returns orderBook max volume.
  */
-export const selectOrderBookMaxVolume = createSelector(selectOrderBookData, ({ asks, bids }) =>
-    Math.max(sum(asks.map(x => x.ordersAmount)) ?? 0, sum(bids.map(x => x.ordersAmount)) ?? 0),
+export const selectOrderBookMaxVolume = createSelector(
+    selectOrderBookData,
+    ({ proposals, requests }) =>
+        Math.max(
+            sum(proposals.map(x => x.ordersAmount)) ?? 0,
+            sum(requests.map(x => x.ordersAmount)) ?? 0,
+        ),
 );
 
 /**

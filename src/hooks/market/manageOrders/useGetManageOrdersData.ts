@@ -8,12 +8,12 @@ import { useSelector } from 'react-redux';
 import { dequal as deepEqual } from 'dequal';
 import {
     useAppSelector,
-    selectUserActiveBids,
-    selectUserActiveAsks,
-    selectUserCompletedAsks,
-    selectUserCompletedBids,
+    selectUserActiveRequests,
+    selectUserActiveProposals,
+    selectUserCompletedProposals,
+    selectUserCompletedRequests,
 } from '@/redux';
-import type { Ask, Bid, ManageOrdersData } from '@/models';
+import type { Proposal, Request, ManageOrdersData } from '@/models';
 import { TradeOrderType } from '@/models';
 
 /**
@@ -33,25 +33,33 @@ export type UseGetManageOrdersDataReturnType = {
  */
 export const useGetManageOrdersData = (): UseGetManageOrdersDataReturnType => {
     const loadingData = useAppSelector(s => s.userOrdersState.isLoading);
-    const activeBids = useSelector(selectUserActiveBids, deepEqual);
-    const completedBids = useSelector(selectUserCompletedBids, deepEqual);
-    const activeAsks = useSelector(selectUserActiveAsks, deepEqual);
-    const completedAsks = useSelector(selectUserCompletedAsks, deepEqual);
+    const activeRequests = useSelector(selectUserActiveRequests, deepEqual);
+    const completedRequests = useSelector(selectUserCompletedRequests, deepEqual);
+    const activeProposals = useSelector(selectUserActiveProposals, deepEqual);
+    const completedProposals = useSelector(selectUserCompletedProposals, deepEqual);
     const isError = useAppSelector(s => s.userOrdersState.isError);
 
     const activeOrdersData = useMemo(() => {
-        const mappedAsks = activeAsks.map(x => mapToManageOrdersData(x, TradeOrderType.sell));
-        const mappedBids = activeBids.map(x => mapToManageOrdersData(x, TradeOrderType.buy));
+        const mappedProposals = activeProposals.map(x =>
+            mapToManageOrdersData(x, TradeOrderType.sell),
+        );
+        const mappedRequests = activeRequests.map(x =>
+            mapToManageOrdersData(x, TradeOrderType.buy),
+        );
 
-        return [...mappedAsks, ...mappedBids];
-    }, [activeAsks, activeBids]);
+        return [...mappedProposals, ...mappedRequests];
+    }, [activeProposals, activeRequests]);
 
     const historyOrdersData = useMemo(() => {
-        const mappedAsks = completedAsks.map(x => mapToManageOrdersData(x, TradeOrderType.sell));
-        const mappedBids = completedBids.map(x => mapToManageOrdersData(x, TradeOrderType.buy));
+        const mappedProposals = completedProposals.map(x =>
+            mapToManageOrdersData(x, TradeOrderType.sell),
+        );
+        const mappedRequests = completedRequests.map(x =>
+            mapToManageOrdersData(x, TradeOrderType.buy),
+        );
 
-        return [...mappedAsks, ...mappedBids];
-    }, [completedAsks, completedBids]);
+        return [...mappedProposals, ...mappedRequests];
+    }, [completedProposals, completedRequests]);
 
     return { loadingData, isError, activeOrdersData, historyOrdersData };
 };
@@ -59,11 +67,11 @@ export const useGetManageOrdersData = (): UseGetManageOrdersDataReturnType => {
 /**
  * Maps trade orders list to manage orders table data list.
  *
- * @param {Ask | Bid} order - Current order.
+ * @param {Proposal | Request} order - Current order.
  * @param type Type.
  * @returns Manage orders table data list.
  */
-const mapToManageOrdersData = <T extends Ask | Bid>(
+const mapToManageOrdersData = <T extends Proposal | Request>(
     { createdOn, matched_time, cost, eval_time, _key, status }: T,
     type: TradeOrderType,
 ): ManageOrdersData => ({

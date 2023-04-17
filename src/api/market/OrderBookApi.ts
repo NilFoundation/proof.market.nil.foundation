@@ -5,7 +5,7 @@
 
 import type { OrderBookPriceStepType } from '@/enums';
 import { createApiClient } from '../common';
-import type { Circuit, OrderBookData } from '../../models';
+import type { Statement, OrderBookData } from '../../models';
 
 /**
  * Get orderbook data options.
@@ -25,7 +25,7 @@ const httpFetcher = createApiClient('/book');
  * @returns Orderbook data.
  */
 export const getOrderBookData = (
-    statementKey: Circuit['_key'],
+    statementKey: Statement['_key'],
     options?: OrderBookDataOptions,
 ): Promise<OrderBookData> =>
     httpFetcher.get(`${statementKey}${options ? getUrlFromOptions(options) : ''}`).json();

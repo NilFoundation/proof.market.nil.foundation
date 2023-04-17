@@ -12,7 +12,7 @@ export type LocalStorageKey =
     | 'userToken'
     | 'orderBookPriceStep'
     | 'userBalanceHidden'
-    | 'circuitDashboardDataRange'
+    | 'statementDashboardDataRange'
     | 'displayUserOrdersInOrderbook'
-    | 'circuitDashboardDisplayVolumes'
+    | 'statementDashboardDisplayVolumes'
     | `${string}TableState`;

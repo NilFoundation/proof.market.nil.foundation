@@ -86,13 +86,13 @@
   }
 }
 
-.ask {
+.proposal {
   div[role="cell"]:first-child {
     color: $c-danger;
   }
 }
 
-.bid {
+.request {
   div[role="cell"]:first-child {
     color: $c-success;
   }

@@ -4,12 +4,12 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { Ask } from '@/models';
+import type { Proposal } from '@/models';
 
 /**
  * Data to build charts.
  */
-export const UpdateChartsData = createAction<Ask[]>('@charts/UPDATE_COMPLETED_ORDERS');
+export const UpdateChartsData = createAction<Proposal[]>('@charts/UPDATE_COMPLETED_ORDERS');
 
 /**
  * Update loading data state.

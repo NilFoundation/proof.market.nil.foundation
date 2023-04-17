@@ -11,7 +11,7 @@ import { ChartType, DateUnit, RouterParam, RouterSearchParam } from '@/enums';
 import type { ChartBaseProps } from '@/components';
 import { ProofTimeGenChart, ProofCostChart } from '@/components';
 import { useSyncUrlAndSelectedItem, useWindowHeight } from '@/hooks';
-import { selectCircuits, selectCurrentCircuit, UpdateSelectedCircuitKey } from '@/redux';
+import { selectStatements, selectCurrentStatement, UpdateSelectedStatementKey } from '@/redux';
 
 /**
  * Charts view.
@@ -36,9 +36,9 @@ const ChartsView = (): ReactElement => {
 
     useSyncUrlAndSelectedItem({
         urlParamToSync: RouterParam.statementName,
-        actionToUpdateSelectedItem: UpdateSelectedCircuitKey,
-        itemSelector: selectCurrentCircuit,
-        allItemsSelector: selectCircuits,
+        actionToUpdateSelectedItem: UpdateSelectedStatementKey,
+        itemSelector: selectCurrentStatement,
+        allItemsSelector: selectStatements,
     });
 
     return (

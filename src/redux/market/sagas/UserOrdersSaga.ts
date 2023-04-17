@@ -5,21 +5,21 @@
 
 import { call, fork, put, takeLatest, select, all } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { getBids, getAsks } from '@/api';
+import { getRequests, getProposals } from '@/api';
 import { ProtectedCall, selectUserName } from '@/redux/login';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import type { TradeOrder } from '@/models';
 import {
-    UpdateSelectedCircuitKey,
-    UpdateUserAsksList,
-    UpdateUserBidsList,
+    UpdateSelectedStatementKey,
+    UpdateUserProposalsList,
+    UpdateUserRequestsList,
     UpdateGettingUserOrdersError,
     UpdateIsLoadingUserOrders,
 } from '../actions';
-import { selectCurrentCircuitKey } from '../selectors';
+import { selectCurrentStatementKey } from '../selectors';
 import { RevalidateSaga } from '../../common';
 
-const revalidateAsksDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
+const revalidateProposalsDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
 
 /**
  * User orders saga.
@@ -27,12 +27,12 @@ const revalidateAsksDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INT
  * @yields
  */
 export function* UserOrdersSaga(): SagaIterator<void> {
-    yield takeLatest(UpdateSelectedCircuitKey, function* () {
-        yield put(UpdateUserAsksList([]));
-        yield put(UpdateUserBidsList([]));
+    yield takeLatest(UpdateSelectedStatementKey, function* () {
+        yield put(UpdateUserProposalsList([]));
+        yield put(UpdateUserRequestsList([]));
         yield fork(GetUserOrdersSaga);
     });
-    yield fork(RevalidateSaga, GetUserOrdersSaga, revalidateAsksDelay);
+    yield fork(RevalidateSaga, GetUserOrdersSaga, revalidateProposalsDelay);
 }
 
 /**
@@ -41,7 +41,7 @@ export function* UserOrdersSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetUserOrdersSaga(): SagaIterator<void> {
-    const selectedStatementKey: string | undefined = yield select(selectCurrentCircuitKey);
+    const selectedStatementKey: string | undefined = yield select(selectCurrentStatementKey);
     const currentUser = yield select(selectUserName);
 
     if (selectedStatementKey === undefined || !currentUser) {
@@ -57,17 +57,17 @@ function* GetUserOrdersSaga(): SagaIterator<void> {
         yield put(UpdateGettingUserOrdersError(false));
         yield put(UpdateIsLoadingUserOrders(true));
 
-        const [userAsks, userBids] = yield all([
-            call(ProtectedCall, getAsks, apiCallOptions),
-            call(ProtectedCall, getBids, apiCallOptions),
+        const [userProposals, userRequests] = yield all([
+            call(ProtectedCall, getProposals, apiCallOptions),
+            call(ProtectedCall, getRequests, apiCallOptions),
         ]);
 
-        if (userAsks !== undefined) {
-            yield put(UpdateUserAsksList(userAsks));
+        if (userProposals !== undefined) {
+            yield put(UpdateUserProposalsList(userProposals));
         }
 
-        if (userBids !== undefined) {
-            yield put(UpdateUserBidsList(userAsks));
+        if (userRequests !== undefined) {
+            yield put(UpdateUserRequestsList(userProposals));
         }
     } catch (e) {
         yield put(UpdateGettingUserOrdersError(true));

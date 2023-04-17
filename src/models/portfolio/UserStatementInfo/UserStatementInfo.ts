@@ -18,7 +18,7 @@ export type UserStatementInfo = {
      */
     name: string;
     /**
-     * Overall bids amount.
+     * Overall requests amount.
      */
     amount: string;
     /**
@@ -41,8 +41,8 @@ export type UserStatementInfo = {
  */
 export const mapToHumanReadableUserStatementInfo = (statementInfo: UserStatementInfo) => ({
     ['Name']: statementInfo.name,
-    ['Overall bids amount']: statementInfo.amount,
-    ['Total sum of all bids costs']: `${statementInfo.fees} ${siteMoneyTickerAbbreviation}`,
+    ['Overall requests amount']: statementInfo.amount,
+    ['Total sum of all requests costs']: `${statementInfo.fees} ${siteMoneyTickerAbbreviation}`,
     ['Average generation time']: `${statementInfo.avg_generation_time?.toFixed(2)} min`,
     ['Average cost']: `${statementInfo.avg_cost?.toFixed(2)} ${siteMoneyTickerAbbreviation}`,
 });

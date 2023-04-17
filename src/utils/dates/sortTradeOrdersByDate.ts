@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import type { Ask, Bid } from '@/models';
+import type { Proposal, Request } from '@/models';
 
 /**
  *
@@ -11,5 +11,5 @@ import type { Ask, Bid } from '@/models';
  * @param second Second order.
  * @returns Comparsion result.
  */
-export const sortTradeOrdersByDate = <T extends Bid | Ask>(first: T, second: T): number =>
+export const sortTradeOrdersByDate = <T extends Request | Proposal>(first: T, second: T): number =>
     Date.parse(first.createdOn) - Date.parse(second.createdOn);

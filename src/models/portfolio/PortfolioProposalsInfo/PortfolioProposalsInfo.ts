@@ -23,8 +23,10 @@ export const mapToHumanReadablePortfolioProposalsInfo = ({
     fees,
 }: PortfolioProposalsInfo) => ({
     ['Name']: name,
-    ['Overall asks amount']: amount,
-    ['Total sum of all asks costs']: fees ? `${fees} ${siteMoneyTickerAbbreviation}` : undefined,
+    ['Overall proposals amount']: amount,
+    ['Total sum of all proposals costs']: fees
+        ? `${fees} ${siteMoneyTickerAbbreviation}`
+        : undefined,
     ['Average generation time']: avg_generation_time
         ? `${avg_generation_time?.toFixed(2)} min`
         : undefined,

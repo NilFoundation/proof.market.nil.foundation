@@ -11,7 +11,7 @@ import { socialLinks as links } from '@/constants';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import { DashboardCard, SocialLinks } from '../../common';
 import { ProtectedContent } from '../../login';
-import { CreateBidForm } from '../CreateBidForm';
+import { CreateRequestForm } from '../CreateRequestForm';
 import { CreateOrdersTabs } from './CreateOrdersTabs';
 import './CreateOrdersPanel.scss';
 
@@ -24,7 +24,7 @@ const socialLinks = links.filter(({ icon }) => ['discord', 'telegram'].includes(
  */
 export const CreateOrdersPanel = (): ReactElement => {
     const [tab, setTab] = useState<TradeOrderType>(TradeOrderType.buy);
-    const selectedCircuitKey = useAppSelector(s => s.circuitsState.selectedKey);
+    const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
 
     return (
         <DashboardCard>
@@ -35,7 +35,7 @@ export const CreateOrdersPanel = (): ReactElement => {
                         currentTab={tab}
                         onSetTab={setTab}
                     />
-                    {tabFactory(tab, selectedCircuitKey)}
+                    {tabFactory(tab, selectedStatementKey)}
                 </ProtectedContent>
             </div>
         </DashboardCard>
@@ -46,17 +46,17 @@ export const CreateOrdersPanel = (): ReactElement => {
  * Renders tab content conditionally.
  *
  * @param tab Selected tab.
- * @param selectedCircuitKey Selected circuit key.
+ * @param selectedStatementKey Selected statement key.
  * @returns React Element.
  */
-const tabFactory = (tab: TradeOrderType, selectedCircuitKey?: string) => {
-    if (selectedCircuitKey === undefined) {
-        return <h5>Please, select circuit to create orders.</h5>;
+const tabFactory = (tab: TradeOrderType, selectedStatementKey?: string) => {
+    if (selectedStatementKey === undefined) {
+        return <h5>Please, select statement to create orders.</h5>;
     }
 
     switch (tab) {
         case TradeOrderType.buy:
-            return <CreateBidForm />;
+            return <CreateRequestForm />;
         case TradeOrderType.sell:
             return (
                 <div className="text-center">

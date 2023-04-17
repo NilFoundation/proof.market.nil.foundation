@@ -17,7 +17,7 @@ import {
     UpdateUserName,
 } from '../actions';
 import { ProtectedCall } from './ProtectedCall';
-import { AddUserBid, RemoveUserAsk, RemoveUserBid } from '../../market';
+import { AddUserRequest, RemoveUserProposal, RemoveUserRequest } from '../../market';
 import { selectAuthType, selectGoogleUserInfo, selectUserName } from '../selectors';
 
 /**
@@ -27,7 +27,13 @@ import { selectAuthType, selectGoogleUserInfo, selectUserName } from '../selecto
  */
 export function* UserSaga(): SagaIterator<void> {
     yield takeLatest(
-        [UpdateUserName, AddUserBid, RemoveUserAsk, RemoveUserBid, UpdateGoogleUserInfo],
+        [
+            UpdateUserName,
+            AddUserRequest,
+            RemoveUserProposal,
+            RemoveUserRequest,
+            UpdateGoogleUserInfo,
+        ],
         GetUserBalance,
     );
 }

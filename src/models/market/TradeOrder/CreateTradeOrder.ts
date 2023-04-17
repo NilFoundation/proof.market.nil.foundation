@@ -8,7 +8,7 @@
  */
 export interface CreateTradeOrder {
     /**
-     * Id of related circuit.
+     * Id of related statement.
      */
     statement_key: string;
     /**

@@ -4,5 +4,5 @@
  */
 
 export * from './useChart';
-export * from './useGetCircuitDashboardData';
+export * from './useGetStatementDashboardData';
 export * from './useRenderChartData';

@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
 import { RouterReducer } from './common';
 import { AuthReducer, UserReducer } from './login';
 import {
-    CircuitsReducer,
+    StatementsReducer,
     OrderBookReducer,
     ChartsReducer,
     UserOrdersReducer,
@@ -24,7 +24,7 @@ import type { RootStateType } from './RootStateType';
  * Root reducer.
  */
 export const RootReducer = combineReducers<RootStateType>({
-    circuitsState: CircuitsReducer,
+    statementsState: StatementsReducer,
     userState: UserReducer,
     routerState: RouterReducer,
     orderBookState: OrderBookReducer,

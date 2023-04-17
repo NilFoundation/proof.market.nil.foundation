@@ -24,7 +24,7 @@ import styles from './ManageOrdersPanel.module.scss';
  */
 export const ManageOrdersPanel = (): ReactElement => {
     const [tab, setTab] = useState<ManageOrdersTab>(ManageOrdersTab.active);
-    const selectedCircuitKey = useAppSelector(s => s.circuitsState.selectedKey);
+    const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
     const { isError, loadingData, activeOrdersData, historyOrdersData } = useGetManageOrdersData();
 
     return (
@@ -39,7 +39,7 @@ export const ManageOrdersPanel = (): ReactElement => {
                         currentTab={tab}
                         onSetTab={setTab}
                     />
-                    {selectedCircuitKey !== undefined ? (
+                    {selectedStatementKey !== undefined ? (
                         viewFactory(
                             tab,
                             isError,
@@ -47,7 +47,7 @@ export const ManageOrdersPanel = (): ReactElement => {
                             tab === ManageOrdersTab.active ? activeOrdersData : historyOrdersData,
                         )
                     ) : (
-                        <h5>Please, select circuit to display orders.</h5>
+                        <h5>Please, select statement to display orders.</h5>
                     )}
                 </ProtectedContent>
             </div>

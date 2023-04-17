@@ -4,17 +4,19 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { Ask, Bid } from '@/models';
+import type { Proposal, Request } from '@/models';
 
 /**
- * Update user asks list.
+ * Update user proposals list.
  */
-export const UpdateUserAsksList = createAction<Ask[]>('@userOrders/UPDATE_USER_ASKS');
+export const UpdateUserProposalsList = createAction<Proposal[]>(
+    '@userOrders/UPDATE_USER_PROPOSALS',
+);
 
 /**
- * Update user bids list.
+ * Update user requests list.
  */
-export const UpdateUserBidsList = createAction<Bid[]>('@userOrders/UPDATE_USER_BIDS');
+export const UpdateUserRequestsList = createAction<Request[]>('@userOrders/UPDATE_USER_REQUESTS');
 
 /**
  * Update loading state.
@@ -27,16 +29,16 @@ export const UpdateIsLoadingUserOrders = createAction<boolean>('@userOrders/UPDA
 export const UpdateGettingUserOrdersError = createAction<boolean>('@userOrders/UPDATE_IS_ERROR');
 
 /**
- * Remove user ask.
+ * Remove user proposal.
  */
-export const RemoveUserAsk = createAction<Ask['_key']>('@userOrders/REMOVE_ASK');
+export const RemoveUserProposal = createAction<Proposal['_key']>('@userOrders/REMOVE_PROPOSAL');
 
 /**
- * Remove user bid.
+ * Remove user request.
  */
-export const RemoveUserBid = createAction<Bid['_key']>('@userOrders/REMOVE_BID');
+export const RemoveUserRequest = createAction<Request['_key']>('@userOrders/REMOVE_REQUEST');
 
 /**
- * Add user bid.
+ * Add user request.
  */
-export const AddUserBid = createAction<Bid>('@userOrders/ADD_BID');
+export const AddUserRequest = createAction<Request>('@userOrders/ADD_REQUEST');

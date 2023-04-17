@@ -4,49 +4,49 @@
  */
 
 import { createSelector } from '@reduxjs/toolkit';
-import type { Ask } from '@/models';
+import type { Proposal } from '@/models';
 import type { RootStateType } from '@/redux';
 
 /**
- * Select all user asks.
+ * Select all user proposals.
  *
  * @param s State.
- * @returns All asks.
+ * @returns All proposals.
  */
-export const selectUserAsks = (s: RootStateType): Ask[] => s.userOrdersState.asks;
+export const selectUserProposals = (s: RootStateType): Proposal[] => s.userOrdersState.proposals;
 
 /**
- * Select all user bids.
+ * Select all user requests.
  *
  * @param s State.
- * @returns All bids.
+ * @returns All requests.
  */
-export const selectUserBids = (s: RootStateType): Ask[] => s.userOrdersState.bids;
+export const selectUserRequests = (s: RootStateType): Proposal[] => s.userOrdersState.requests;
 
 /**
- * Select asks with 'created' or 'processing' status.
+ * Select proposals with 'created' or 'processing' status.
  */
-export const selectUserActiveAsks = createSelector(selectUserAsks, asks =>
-    asks.filter(x => x.status === 'created' || x.status === 'processing'),
+export const selectUserActiveProposals = createSelector(selectUserProposals, proposals =>
+    proposals.filter(x => x.status === 'created' || x.status === 'processing'),
 );
 
 /**
- * Select asks with 'created' or 'processing' status.
+ * Select proposals with 'created' or 'processing' status.
  */
-export const selectUserActiveBids = createSelector(selectUserBids, bids =>
-    bids.filter(x => x.status === 'created' || x.status === 'processing'),
+export const selectUserActiveRequests = createSelector(selectUserRequests, requests =>
+    requests.filter(x => x.status === 'created' || x.status === 'processing'),
 );
 
 /**
- * Select asks with 'compelted' status.
+ * Select proposals with 'compelted' status.
  */
-export const selectUserCompletedAsks = createSelector(selectUserAsks, asks =>
-    asks.filter(x => x.status === 'completed'),
+export const selectUserCompletedProposals = createSelector(selectUserProposals, proposals =>
+    proposals.filter(x => x.status === 'completed'),
 );
 
 /**
- * Select bids with 'compelted' status.
+ * Select requests with 'compelted' status.
  */
-export const selectUserCompletedBids = createSelector(selectUserBids, bids =>
-    bids.filter(x => x.status === 'completed'),
+export const selectUserCompletedRequests = createSelector(selectUserRequests, requests =>
+    requests.filter(x => x.status === 'completed'),
 );

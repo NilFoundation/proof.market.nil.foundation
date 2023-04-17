@@ -9,7 +9,7 @@ import { createApiClient } from '../common';
 const httpFetcher = createApiClient('/producer');
 
 /**
- * Get last proof producer data for all circuits.
+ * Get last proof producer data for all statements.
  *
  * @returns .
  */

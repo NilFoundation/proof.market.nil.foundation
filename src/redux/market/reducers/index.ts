@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-export * from './CircuitsReducer';
+export * from './StatementsReducer';
 export * from './OrderBookReducer';
 export * from './ChartsReducer';
 export * from './UserOrdersReducer';

@@ -6,7 +6,7 @@
 import { all, fork } from 'redux-saga/effects';
 import type { AllEffect, ForkEffect } from 'redux-saga/effects';
 import {
-    CircuitsSaga,
+    StatementsSaga,
     OrderBookSaga,
     ChartsSaga,
     UserOrdersSaga,
@@ -25,7 +25,7 @@ export default function* RootSaga(): Iterator<AllEffect<ForkEffect>> {
     yield all([
         fork(AuthSaga),
         fork(UserSaga),
-        fork(CircuitsSaga),
+        fork(StatementsSaga),
         fork(ChartsSaga),
         fork(UserOrdersSaga),
         fork(OrderBookSaga),

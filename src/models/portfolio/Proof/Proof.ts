@@ -14,13 +14,13 @@ export type Proof = {
      */
     _key: string;
     /**
-     * Key of bid.
+     * Key of request.
      */
-    bid_key: string;
+    request_key: string;
     /**
-     * Key of ask.
+     * Key of proposal.
      */
-    ask_key: string;
+    proposal_key: string;
     /**
      * Proof owner.
      */
@@ -63,6 +63,6 @@ export const mapToHumanReadableProof = (proof: Proof) => ({
     ['Created at']: formatDate(proof.createdOn, 'DD.MM HH:mm:ss'),
     ['Last update at']: formatDate(proof.updatedOn, 'DD.MM HH:mm:ss'),
     ['Generation time']: `${proof.generation_time?.toFixed(2)} min`,
-    ['Ask key']: proof.ask_key,
-    ['Bid key']: proof.bid_key,
+    ['Proposal key']: proof.proposal_key,
+    ['Request key']: proof.request_key,
 });

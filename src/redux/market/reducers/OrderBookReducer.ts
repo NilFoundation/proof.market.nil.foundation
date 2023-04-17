@@ -30,7 +30,7 @@ export type OrderBookReducerState = {
  * Initial state.
  */
 const initialState: OrderBookReducerState = {
-    data: { asks: [], bids: [] },
+    data: { proposals: [], requests: [] },
     hasApiError: false,
     isLoading: false,
     priceStep: getItemFromLocalStorage('orderBookPriceStep') ?? '0.001',

@@ -7,14 +7,14 @@ import type { ReactElement } from 'react';
 import { Container, Row, Col } from '@nilfoundation/react-components';
 import { Helmet } from 'react-helmet-async';
 import {
-    CircuitsList,
+    StatementsList,
     OrderManagementContextProvider,
-    CircuitDashboard,
+    StatementDashboard,
     OrderBook,
     CreateOrdersPanel,
     TradeHistory,
     ManageOrdersPanel,
-    CircuitInfoPanel,
+    StatementInfoPanel,
     LastProofProducer,
 } from '../components';
 
@@ -37,7 +37,7 @@ const MarketView = (): ReactElement => (
                 xs={12}
                 md={3}
             >
-                <CircuitsList />
+                <StatementsList />
                 <TradeHistory />
                 <LastProofProducer />
             </Col>
@@ -46,8 +46,8 @@ const MarketView = (): ReactElement => (
                     xs={12}
                     md={6}
                 >
-                    <CircuitInfoPanel />
-                    <CircuitDashboard />
+                    <StatementInfoPanel />
+                    <StatementDashboard />
                     <OrderBook />
                 </Col>
                 <Col

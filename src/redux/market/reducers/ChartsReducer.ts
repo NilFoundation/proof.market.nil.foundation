@@ -4,7 +4,7 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { Ask } from '@/models';
+import type { Proposal } from '@/models';
 import {
     UpdateChartsData,
     UpdateIsLoadingChartsData,
@@ -15,7 +15,7 @@ import {
  * State.
  */
 export type ChartsReducerState = {
-    data: Ask[];
+    data: Proposal[];
     isLoading: boolean;
     hasError: boolean;
 };
