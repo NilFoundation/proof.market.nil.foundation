@@ -81,7 +81,7 @@ export const StatementsListTable = memo(function StatementsListTable({
 
     const tableData: StatementsListData[] = useMemo(() => {
         return statementsList
-            .filter(x => !x.isPrivate && selectedTags.some(y => y === x.tag))
+            .filter(x => selectedTags.some(y => y === x.tag))
             .map(x => {
                 const info = statementsInfo && statementsInfo.find(y => y._key === x._key);
 

@@ -20,7 +20,9 @@ export const selectCurrentStatementKey = (s: RootStateType): string | undefined 
 /**
  * Sorted and filtered statements selector.
  */
-export const selectStatements = createSelector(selectStatementsList, statements => statements);
+export const selectStatements = createSelector(selectStatementsList, statements =>
+    statements.filter(x => !x.isPrivate),
+);
 
 /**
  * Selected statement selector.
@@ -38,3 +40,10 @@ export const selectCurrentStatementName = createSelector(
     selectCurrentStatement,
     selectedStatement => selectedStatement?.name,
 );
+
+/**
+ * Selected statements tags.
+ */
+export const selectAllStatementsTags = createSelector(selectStatements, statements => [
+    ...new Set(statements.map(x => x.tag)),
+]);
