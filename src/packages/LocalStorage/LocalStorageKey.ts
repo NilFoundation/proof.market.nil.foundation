@@ -16,4 +16,4 @@ export type LocalStorageKey =
     | 'displayUserOrdersInOrderbook'
     | 'statementDashboardDisplayVolumes'
     | `${string}TableState`
-    | 'statementsTags';
+    | 'selectedStatementsTags';

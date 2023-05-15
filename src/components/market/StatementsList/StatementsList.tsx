@@ -28,7 +28,7 @@ import styles from './StatementsList.module.scss';
 export const StatementsList = (): ReactElement => {
     const statementsList = useAppSelector(selectStatements, deepEqual);
     const loadingStatements = useAppSelector(s => s.statementsState.isLoading);
-    const [tags, setTags] = useLocalStorage<string[]>('statementsTags', []);
+    const [tags, setTags] = useLocalStorage<string[]>('selectedStatementsTags', []);
 
     const addStatementsTag = useCallback(
         (tag: string) => {
