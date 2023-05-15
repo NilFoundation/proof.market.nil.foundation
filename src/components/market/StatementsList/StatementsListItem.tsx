@@ -4,7 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
-import { ListGroup, Media } from '@nilfoundation/react-components';
+import { Label, ListGroup, Media } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentStatementKey } from '@/redux';
@@ -19,6 +19,9 @@ import styles from './StatementsList.module.scss';
  */
 type CurcuitsListItemProps = {
     data: StatementsListData;
+    onAddItemTag: (tag: string) => void;
+    onRemoveItemTag: (tag: string) => void;
+    isTagSelected: boolean;
 };
 
 /**
@@ -28,10 +31,17 @@ type CurcuitsListItemProps = {
  * @returns React component.
  */
 export const CurcuitsListItem = ({
-    data: { _key, cost, change, name },
+    data: { _key, cost, change, name, tag },
+    onAddItemTag,
+    onRemoveItemTag,
+    isTagSelected,
 }: CurcuitsListItemProps): ReactElement => {
     const selectedKey = useSelector(selectCurrentStatementKey);
     const isSelected = _key === selectedKey;
+
+    const handler = isTagSelected
+        ? (t: string) => onAddItemTag(t)
+        : (t: string) => onRemoveItemTag(t);
 
     return (
         <ListGroup.Item active={isSelected}>
@@ -39,6 +49,18 @@ export const CurcuitsListItem = ({
                 <Media className={isSelected ? styles.selected : ''}>
                     <Media.Body className={styles.itemBody}>
                         {`${name.toUpperCase()}/${siteMoneyTickerAbbreviation}`}
+                        {tag && (
+                            <div
+                                className={styles.itemTag}
+                                onClick={() => handler(tag)}
+                                onKeyDown={() => handler(tag)}
+                                tabIndex={0}
+                                role="button"
+                                aria-label={`Click to select ${tag} tag`}
+                            >
+                                <Label>{tag}</Label>
+                            </div>
+                        )}
                     </Media.Body>
                     <StatementsListItemInfo
                         cost={cost}

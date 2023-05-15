@@ -11,4 +11,5 @@ export type StatementsListData = {
     name: string;
     cost?: number | null;
     change?: number | null;
+    tag?: string;
 };

@@ -20,6 +20,9 @@ import styles from './StatementsList.module.scss';
  */
 type StatementsListTableProps = {
     statementsList: Statement[];
+    selectedTags: string[];
+    addStatmentsTag: (tag: string) => void;
+    removeStatementsTag: (tag: string) => void;
 };
 
 /**
@@ -43,6 +46,10 @@ const columns: StatementsListTableColumn[] = [
         accessor: '_key',
         disableFilters: true,
     },
+    {
+        accessor: 'tag',
+        disableFilters: true,
+    },
 ];
 
 /**
@@ -55,7 +62,7 @@ const defaultTableState: Partial<TableState<StatementsListData>> = {
             desc: false,
         },
     ],
-    hiddenColumns: ['change', 'cost', 'id'],
+    hiddenColumns: ['change', 'cost', 'id', 'tag'],
 };
 
 /**
@@ -66,12 +73,15 @@ const defaultTableState: Partial<TableState<StatementsListData>> = {
  */
 export const StatementsListTable = memo(function StatementsListTable({
     statementsList,
+    addStatmentsTag,
+    selectedTags,
+    removeStatementsTag,
 }: StatementsListTableProps): ReactElement {
     const statementsInfo = useAppSelector(s => s.statementsState.statementsInfo, deepEqual);
 
     const tableData: StatementsListData[] = useMemo(() => {
         return statementsList
-            .filter(x => !x.isPrivate)
+            .filter(x => !x.isPrivate && selectedTags.some(y => y === x.tag))
             .map(x => {
                 const info = statementsInfo && statementsInfo.find(y => y._key === x._key);
 
@@ -80,9 +90,10 @@ export const StatementsListTable = memo(function StatementsListTable({
                     name: x.name,
                     cost: info?.current,
                     change: info?.daily_change,
+                    tag: info?.tag,
                 };
             });
-    }, [statementsList, statementsInfo]);
+    }, [statementsList, statementsInfo, selectedTags]);
 
     const renderRows = useCallback(
         ({ rows, prepareRow, visibleColumns }: TableInstance<StatementsListData>) => (
@@ -98,6 +109,9 @@ export const StatementsListTable = memo(function StatementsListTable({
                                 <CurcuitsListItem
                                     key={row.id}
                                     data={row.values as StatementsListData}
+                                    onAddItemTag={addStatmentsTag}
+                                    onRemoveItemTag={removeStatementsTag}
+                                    isTagSelected={selectedTags.includes(row.values.tag)}
                                 />
                             );
                         })
@@ -105,7 +119,7 @@ export const StatementsListTable = memo(function StatementsListTable({
                 </ListGroup>
             </>
         ),
-        [],
+        [addStatmentsTag, selectedTags, removeStatementsTag],
     );
 
     return (

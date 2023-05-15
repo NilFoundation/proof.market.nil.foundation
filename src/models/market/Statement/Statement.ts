@@ -43,4 +43,8 @@ export type Statement = {
      * Repository url.
      */
     url?: string;
+    /**
+     * Statement tag.
+     */
+    tag?: string;
 };

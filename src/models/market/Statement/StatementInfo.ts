@@ -39,4 +39,8 @@ export type StatementInfo = {
      * 24h hight.
      */
     max: number | null;
+    /**
+     * Statement tag.
+     */
+    tag?: string;
 };
