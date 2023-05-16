@@ -90,7 +90,7 @@ export const StatementsListTable = memo(function StatementsListTable({
                     name: x.name,
                     cost: info?.current,
                     change: info?.daily_change,
-                    tag: info?.tag,
+                    tag: x.tag,
                 };
             });
     }, [statementsList, statementsInfo, selectedTags]);
