@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { Label, ListGroup, Media } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 import { selectCurrentStatementKey } from '@/redux';
 import { Path } from '@/routing';
 import type { StatementsListData } from '@/models';
@@ -19,8 +20,6 @@ import styles from './StatementsList.module.scss';
  */
 type CurcuitsListItemProps = {
     data: StatementsListData;
-    onAddItemTag: (tag: string) => void;
-    onRemoveItemTag: (tag: string) => void;
     isTagSelected: boolean;
 };
 
@@ -32,16 +31,10 @@ type CurcuitsListItemProps = {
  */
 export const CurcuitsListItem = ({
     data: { _key, cost, change, name, tag },
-    onAddItemTag,
-    onRemoveItemTag,
     isTagSelected,
 }: CurcuitsListItemProps): ReactElement => {
     const selectedKey = useSelector(selectCurrentStatementKey);
     const isSelected = _key === selectedKey;
-
-    const handler = isTagSelected
-        ? (t: string) => onAddItemTag(t)
-        : (t: string) => onRemoveItemTag(t);
 
     return (
         <ListGroup.Item active={isSelected}>
@@ -50,15 +43,13 @@ export const CurcuitsListItem = ({
                     <Media.Body className={styles.itemBody}>
                         {`${name.toUpperCase()}/${siteMoneyTickerAbbreviation}`}
                         {tag && (
-                            <div
-                                className={styles.itemTag}
-                                onClick={() => handler(tag)}
-                                onKeyDown={() => handler(tag)}
-                                tabIndex={0}
-                                role="button"
-                                aria-label={`Click to select ${tag} tag`}
-                            >
-                                <Label>{tag}</Label>
+                            <div>
+                                <Label
+                                    rounded
+                                    className={clsx(isTagSelected && styles.lightTag, styles.tag)}
+                                >
+                                    {tag}
+                                </Label>
                             </div>
                         )}
                     </Media.Body>

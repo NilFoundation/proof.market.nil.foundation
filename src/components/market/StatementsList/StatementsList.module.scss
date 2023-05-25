@@ -34,6 +34,7 @@ div.selected {
 .itemBody {
   vertical-align: middle !important;
   height: calc(48px - 1rem);
+  font-size: 1.25rem !important;
 }
 
 .itemTag {
@@ -49,7 +50,6 @@ div.selected {
   white-space: nowrap;
 }
 
-.tagsContainer {
-  display: flex;
-  flex-grow: 1;
+.tag {
+  font-size: 1rem;
 }

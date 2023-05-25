@@ -11,6 +11,7 @@ import { HashRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import App from './App';
+import { BaseuiProvider } from './BaseuiProvider';
 import { store } from './redux';
 import { configureSentry } from './sentry';
 import { reportWebVitals } from './reportWebVitals';
@@ -30,7 +31,9 @@ render(
             <HelmetProvider>
                 <Provider store={store}>
                     <HashRouter>
-                        <App />
+                        <BaseuiProvider>
+                            <App />
+                        </BaseuiProvider>
                     </HashRouter>
                 </Provider>
             </HelmetProvider>

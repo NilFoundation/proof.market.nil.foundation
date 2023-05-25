@@ -44,6 +44,7 @@ export const selectCurrentStatementName = createSelector(
 /**
  * Selected statements tags.
  */
-export const selectAllStatementsTags = createSelector(selectStatements, statements => [
-    ...new Set(statements.map(x => x.tag)),
-]);
+export const selectAllStatementsTags = createSelector(
+    selectStatements,
+    statements => [...new Set(statements.map(x => x.tag).filter(x => x !== undefined))] as string[],
+);

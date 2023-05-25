@@ -8,9 +8,12 @@ import { memo, useCallback, useMemo } from 'react';
 import { ListGroup } from '@nilfoundation/react-components';
 import { dequal as deepEqual } from 'dequal';
 import type { TableInstance, TableState } from 'react-table';
-import { useAppSelector } from '@/redux';
+import type { Option } from 'baseui/select';
+import { Select } from 'baseui/select';
+import { selectAllStatementsTags, useAppSelector } from '@/redux';
 import { ReactTable } from '@/components';
 import type { Statement, StatementsListData, StatementsListTableColumn } from '@/models';
+import { useLocalStorage } from '@/hooks';
 import { CurcuitsListItem } from './StatementsListItem';
 import { StatementsListTextFilter } from './StatementsListTextFilter';
 import styles from './StatementsList.module.scss';
@@ -20,9 +23,6 @@ import styles from './StatementsList.module.scss';
  */
 type StatementsListTableProps = {
     statementsList: Statement[];
-    selectedTags: string[];
-    addStatmentsTag: (tag: string) => void;
-    removeStatementsTag: (tag: string) => void;
 };
 
 /**
@@ -73,15 +73,18 @@ const defaultTableState: Partial<TableState<StatementsListData>> = {
  */
 export const StatementsListTable = memo(function StatementsListTable({
     statementsList,
-    addStatmentsTag,
-    selectedTags,
-    removeStatementsTag,
 }: StatementsListTableProps): ReactElement {
     const statementsInfo = useAppSelector(s => s.statementsState.statementsInfo, deepEqual);
+    const avialiableTags = useAppSelector(selectAllStatementsTags);
+    const selectOptions: Option[] = useMemo(() => {
+        return avialiableTags.map(x => ({ label: x, id: x }));
+    }, [avialiableTags]);
+
+    const [tags, setTags] = useLocalStorage<Option[]>('selectedStatementsTags', []);
 
     const tableData: StatementsListData[] = useMemo(() => {
         return statementsList
-            .filter(x => selectedTags.some(y => y === x.tag))
+            .filter(x => (tags.length > 0 ? tags.some(y => y.id === x.tag) : true))
             .map(x => {
                 const info = statementsInfo && statementsInfo.find(y => y._key === x._key);
 
@@ -93,12 +96,19 @@ export const StatementsListTable = memo(function StatementsListTable({
                     tag: x.tag,
                 };
             });
-    }, [statementsList, statementsInfo, selectedTags]);
+    }, [statementsList, statementsInfo, tags]);
 
     const renderRows = useCallback(
         ({ rows, prepareRow, visibleColumns }: TableInstance<StatementsListData>) => (
             <>
                 {visibleColumns.find(x => x.canFilter)?.render('Filter')}
+                <Select
+                    options={selectOptions}
+                    value={tags}
+                    multi
+                    onChange={params => setTags(params.value as Option[])}
+                    placeholder="Select statements tags"
+                />
                 <ListGroup className={styles.listGroup}>
                     {rows.length === 0 ? (
                         <span className="text-muted">No statements found</span>
@@ -109,9 +119,7 @@ export const StatementsListTable = memo(function StatementsListTable({
                                 <CurcuitsListItem
                                     key={row.id}
                                     data={row.values as StatementsListData}
-                                    onAddItemTag={addStatmentsTag}
-                                    onRemoveItemTag={removeStatementsTag}
-                                    isTagSelected={selectedTags.includes(row.values.tag)}
+                                    isTagSelected={tags.includes(row.values.tag)}
                                 />
                             );
                         })
@@ -119,7 +127,7 @@ export const StatementsListTable = memo(function StatementsListTable({
                 </ListGroup>
             </>
         ),
-        [addStatmentsTag, selectedTags, removeStatementsTag],
+        [tags, setTags, selectOptions],
     );
 
     return (

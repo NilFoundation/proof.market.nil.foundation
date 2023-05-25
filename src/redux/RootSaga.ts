@@ -30,7 +30,7 @@ export default function* RootSaga(): Iterator<AllEffect<ForkEffect>> {
         fork(UserOrdersSaga),
         fork(OrderBookSaga),
         fork(LastProofProducerSaga),
-        fork(PortfolioSaga),
+        //fork(PortfolioSaga),
         fork(DataRevalidationSaga),
         fork(HadnleNetworkStateSaga),
     ]);
