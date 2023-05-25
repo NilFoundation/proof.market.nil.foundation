@@ -37,15 +37,6 @@ div.selected {
   font-size: 1.25rem !important;
 }
 
-.itemTag {
-  opacity: 0.7;
-  transition: opacity 0.3s ease-out;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
 .cost {
   white-space: nowrap;
 }

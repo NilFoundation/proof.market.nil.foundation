@@ -7,7 +7,6 @@ import type { ReactElement } from 'react';
 import { Label, ListGroup, Media } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import clsx from 'clsx';
 import { selectCurrentStatementKey } from '@/redux';
 import { Path } from '@/routing';
 import type { StatementsListData } from '@/models';
@@ -20,7 +19,6 @@ import styles from './StatementsList.module.scss';
  */
 type CurcuitsListItemProps = {
     data: StatementsListData;
-    isTagSelected: boolean;
 };
 
 /**
@@ -31,7 +29,6 @@ type CurcuitsListItemProps = {
  */
 export const CurcuitsListItem = ({
     data: { _key, cost, change, name, tag },
-    isTagSelected,
 }: CurcuitsListItemProps): ReactElement => {
     const selectedKey = useSelector(selectCurrentStatementKey);
     const isSelected = _key === selectedKey;
@@ -46,7 +43,7 @@ export const CurcuitsListItem = ({
                             <div>
                                 <Label
                                     rounded
-                                    className={clsx(isTagSelected && styles.lightTag, styles.tag)}
+                                    className={styles.tag}
                                 >
                                     {tag}
                                 </Label>

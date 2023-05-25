@@ -41,9 +41,7 @@ export const StatementsList = (): ReactElement => {
                 {loadingStatements && !statementsList.length ? (
                     <Spinner grow />
                 ) : (
-                    <>
-                        <StatementsListTable statementsList={statementsList} />
-                    </>
+                    <StatementsListTable statementsList={statementsList} />
                 )}
             </div>
         </DashboardCard>

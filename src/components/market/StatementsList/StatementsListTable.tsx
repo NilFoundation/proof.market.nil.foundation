@@ -119,7 +119,6 @@ export const StatementsListTable = memo(function StatementsListTable({
                                 <CurcuitsListItem
                                     key={row.id}
                                     data={row.values as StatementsListData}
-                                    isTagSelected={tags.includes(row.values.tag)}
                                 />
                             );
                         })
