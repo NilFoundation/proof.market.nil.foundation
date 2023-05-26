@@ -20,8 +20,12 @@ export const login = (loginData: LoginData): Promise<AuthData> =>
 /**
  * Renew jtw token.
  *
- * @param username Username.
+ * @param {{username: string}} username Username.
  * @returns .
  */
-export const renewJwt = (username: string): Promise<AuthData | Record<string, never>> =>
+export const renewJwt = ({
+    username,
+}: {
+    username: string;
+}): Promise<AuthData | Record<string, never>> =>
     httpFetcher.post('renew', { json: username }).json();

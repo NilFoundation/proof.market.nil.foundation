@@ -106,7 +106,9 @@ function* processRenewJwt(timeout: number): SagaIterator<void> {
     try {
         const currentUser = yield select(selectUserName);
 
-        const result: Awaited<ReturnType<typeof renewJwt>> = yield call(renewJwt, currentUser);
+        const result: Awaited<ReturnType<typeof renewJwt>> = yield call(renewJwt, {
+            username: currentUser,
+        });
         const { jwt } = result;
 
         if (!jwt) {
@@ -122,6 +124,7 @@ function* processRenewJwt(timeout: number): SagaIterator<void> {
             yield put(SetJwtRevalidateTimeout(timeout));
         }
     } catch (e) {
-        // Do nothing
+        clearAuthLocalStorageState();
+        yield put(UpdateUserName(null));
     }
 }
