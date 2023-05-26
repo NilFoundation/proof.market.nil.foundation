@@ -10,8 +10,10 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Client as Styletron } from 'styletron-engine-atomic';
+import { Provider as StyletronProvider } from 'styletron-react';
+import { BaseProvider } from 'baseui';
 import App from './App';
-import { BaseuiProvider } from './BaseuiProvider';
 import { store } from './redux';
 import { configureSentry } from './sentry';
 import { reportWebVitals } from './reportWebVitals';
@@ -19,11 +21,14 @@ import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { checkRuntimeConfig } from './checkRuntimeConfig';
 import { getRuntimeConfigOrThrow } from './utils';
+import { theme } from './baseuiTheme';
 import './index.scss';
 
 checkRuntimeConfig();
 configureSentry();
 configureGA();
+
+const engine = new Styletron();
 
 render(
     <React.StrictMode>
@@ -31,9 +36,11 @@ render(
             <HelmetProvider>
                 <Provider store={store}>
                     <HashRouter>
-                        <BaseuiProvider>
-                            <App />
-                        </BaseuiProvider>
+                        <StyletronProvider value={engine}>
+                            <BaseProvider theme={theme}>
+                                <App />
+                            </BaseProvider>
+                        </StyletronProvider>
                     </HashRouter>
                 </Provider>
             </HelmetProvider>
