@@ -53,3 +53,8 @@ export const UpdateStatementsStats = createAction<StatementStats[]>('@statements
 export const UpdateIsLoadingStatementsStats = createAction<boolean>(
     '@statements/UPDATE_IS_LOADING_STATEMENTS_STATS',
 );
+
+/**
+ * Update selected statements tags.
+ */
+export const UpdateSelectedStatementTags = createAction<string[]>('@statements/updateSelectedTags');

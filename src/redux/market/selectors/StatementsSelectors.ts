@@ -48,3 +48,10 @@ export const selectAllStatementsTags = createSelector(
     selectStatements,
     statements => [...new Set(statements.map(x => x.tag).filter(x => x !== undefined))] as string[],
 );
+
+export const selectStatementsFilteredByTags = createSelector(
+    selectStatements,
+    (s: RootStateType) => s.statementsState.selectedStatementTags,
+    (statements, tags) =>
+        statements.filter(x => (tags.length > 0 ? tags.some(tag => tag === x.tag) : statements)),
+);

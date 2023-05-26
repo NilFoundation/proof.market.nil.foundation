@@ -7,10 +7,10 @@ import type { ReactElement } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import { dequal as deepEqual } from 'dequal';
 import {
-    selectStatements,
     selectCurrentStatement,
     UpdateSelectedStatementKey,
     useAppSelector,
+    selectStatementsFilteredByTags,
 } from '@/redux';
 import { useSyncUrlAndSelectedItem } from '@/hooks';
 import { RouterParam } from '@/enums';
@@ -24,14 +24,14 @@ import styles from './StatementsList.module.scss';
  * @returns React component.
  */
 export const StatementsList = (): ReactElement => {
-    const statementsList = useAppSelector(selectStatements, deepEqual);
+    const statementsList = useAppSelector(selectStatementsFilteredByTags, deepEqual);
     const loadingStatements = useAppSelector(s => s.statementsState.isLoading);
 
     useSyncUrlAndSelectedItem({
         urlParamToSync: RouterParam.statementName,
         actionToUpdateSelectedItem: UpdateSelectedStatementKey,
         itemSelector: selectCurrentStatement,
-        allItemsSelector: selectStatements,
+        allItemsSelector: selectStatementsFilteredByTags,
     });
 
     return (

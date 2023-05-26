@@ -5,6 +5,7 @@
 
 import { createReducer } from '@reduxjs/toolkit';
 import type { Statement, StatementInfo, StatementStats } from '@/models';
+import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
 import {
     UpdateStatementsList,
     UpdateSelectedStatementKey,
@@ -14,6 +15,7 @@ import {
     UpdateIsLoadingStatementsInfo,
     UpdateStatementsStats,
     UpdateIsLoadingStatementsStats,
+    UpdateSelectedStatementTags,
 } from '../actions';
 
 /**
@@ -28,6 +30,7 @@ export type StatementsReducerState = {
     isLoadingStatementsInfo: boolean;
     statementsStats: StatementStats[];
     isLoadingStatementsStats: boolean;
+    selectedStatementTags: string[];
 };
 
 /**
@@ -42,6 +45,7 @@ const initialState: StatementsReducerState = {
     isLoadingStatementsInfo: false,
     statementsStats: [],
     isLoadingStatementsStats: false,
+    selectedStatementTags: getItemFromLocalStorage('selectedStatementsTags') ?? [],
 };
 
 /**
@@ -81,5 +85,10 @@ export const StatementsReducer = createReducer(initialState, builder =>
         .addCase(UpdateIsLoadingStatementsStats, (state, { payload }) => ({
             ...state,
             isLoadingStatementsStats: payload,
-        })),
+        }))
+        .addCase(UpdateSelectedStatementTags, (state, { payload }) => {
+            state.selectedStatementTags = payload;
+
+            setItemIntoLocalStorage('selectedStatementsTags', payload);
+        }),
 );
