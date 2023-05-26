@@ -51,7 +51,7 @@ const columns: StatementsListTableColumn[] = [
     },
     {
         accessor: 'tag',
-        Filter: StatementsListTextFilter,
+        disableFilters: true,
     },
 ];
 
@@ -88,8 +88,6 @@ export const StatementsListTable = memo(function StatementsListTable({
     const selectValues: Option[] = useMemo(() => {
         return selectedTags.map(x => ({ label: x, id: x }));
     }, [selectedTags]);
-
-    //const [tags, setTags] = useLocalStorage<Option[]>('selectedStatementsTags', []);
 
     const tableData: StatementsListData[] = useMemo(() => {
         return statementsList.map(x => {
