@@ -16,6 +16,7 @@ const keys = [
     'SENTRY_DSN',
     'GA_TRACKING_ID',
     'GOOGLE_AUTH_CLIENT_ID',
+    'CIRCUIT_DEVELOPER_GUIDE_URL',
 ] as const;
 
 type RuntimConfigKeys = (typeof keys)[number];

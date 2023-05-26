@@ -14,9 +14,12 @@ import { selectAllStatementsTags, useAppSelector } from '@/redux';
 import { ReactTable } from '@/components';
 import type { Statement, StatementsListData, StatementsListTableColumn } from '@/models';
 import { useLocalStorage } from '@/hooks';
+import { getRuntimeConfigOrThrow } from '@/utils';
 import { CurcuitsListItem } from './StatementsListItem';
 import { StatementsListTextFilter } from './StatementsListTextFilter';
 import styles from './StatementsList.module.scss';
+
+const { CIRCUIT_DEVELOPER_GUIDE_URL } = getRuntimeConfigOrThrow();
 
 /**
  * Props.
@@ -48,7 +51,7 @@ const columns: StatementsListTableColumn[] = [
     },
     {
         accessor: 'tag',
-        disableFilters: true,
+        Filter: StatementsListTextFilter,
     },
 ];
 
@@ -111,7 +114,19 @@ export const StatementsListTable = memo(function StatementsListTable({
                 />
                 <ListGroup className={styles.listGroup}>
                     {rows.length === 0 ? (
-                        <span className="text-muted">No statements found</span>
+                        <>
+                            <div className="text-muted">No statements found</div>
+                            <div className="text-muted">
+                                Create your own statement using{' '}
+                                <a
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    href={CIRCUIT_DEVELOPER_GUIDE_URL}
+                                >
+                                    this guide
+                                </a>
+                            </div>
+                        </>
                     ) : (
                         rows.map(row => {
                             prepareRow(row);
