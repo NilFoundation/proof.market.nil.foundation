@@ -76,7 +76,3 @@ export const useSyncUrlAndSelectedItem = <T extends { _key: string; name: string
         nameFromUrlParam,
     ]);
 };
-
-// user opens emty page
-// user opens page with url parameters
-// user opens page with parameters and filters
