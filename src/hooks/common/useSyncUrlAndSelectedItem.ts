@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { dequal as deepEqual } from 'dequal';
 import type { EqualityFn, NoInfer } from 'react-redux';
@@ -43,17 +43,40 @@ export const useSyncUrlAndSelectedItem = <T extends { _key: string; name: string
     const allItems = useAppSelector(allItemsSelector, deepEqual);
     const nameFromUrlParam = useParams()[urlParamToSync];
 
-    useEffect(() => {
-        if (selectedItem?.name === nameFromUrlParam) {
-            return;
-        }
+    const navigateToItem = useCallback(
+        (item?: T) => {
+            item !== undefined && navigate(`${item.name}`, { relative: 'route' });
+        },
+        [navigate],
+    );
 
+    useEffect(() => {
         if (nameFromUrlParam !== undefined) {
             const itemToSelect = allItems.find(x => x.name === nameFromUrlParam);
-            itemToSelect && dispatch(actionToUpdateSelectedItem(itemToSelect._key));
+
+            if (itemToSelect) {
+                dispatch(actionToUpdateSelectedItem(itemToSelect._key));
+            } else {
+                const firstAvialiableStatement = allItems.at(0);
+                firstAvialiableStatement &&
+                    dispatch(actionToUpdateSelectedItem(firstAvialiableStatement._key));
+                navigateToItem(firstAvialiableStatement);
+            }
+
             return;
         }
 
-        selectedItem?._key !== undefined && navigate(`${selectedItem.name}`, { relative: 'path' });
-    }, [dispatch, selectedItem, allItems, navigate, actionToUpdateSelectedItem, nameFromUrlParam]);
+        navigateToItem(selectedItem);
+    }, [
+        dispatch,
+        selectedItem,
+        allItems,
+        navigateToItem,
+        actionToUpdateSelectedItem,
+        nameFromUrlParam,
+    ]);
 };
+
+// user opens emty page
+// user opens page with url parameters
+// user opens page with parameters and filters

@@ -112,7 +112,6 @@ export const StatementsListTable = memo(function StatementsListTable({
                     value={selectValues}
                     multi
                     onChange={params => {
-                        console.log(params);
                         dispatch(
                             UpdateSelectedStatementTags(params.value.map(x => x.id as string)),
                         );
