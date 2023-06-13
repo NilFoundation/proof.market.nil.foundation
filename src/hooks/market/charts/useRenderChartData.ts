@@ -150,7 +150,7 @@ const volumeSeriesDefaultOptions: DeepPartial<HistogramStyleOptions & SeriesOpti
     priceFormat: {
         type: 'volume',
     },
-    priceScaleId: '',
+    priceScaleId: 'left',
 };
 
 /**

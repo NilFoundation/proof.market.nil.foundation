@@ -77,6 +77,12 @@ export const ChartTemplate = <T extends 'Line' | 'Candlestick'>({
                     bottom: displayVolumes ? 0.3 : 0.2,
                 },
             },
+            leftPriceScale: {
+                visible: displayVolumes,
+            },
+            crosshair: {
+                mode: 0,
+            },
         }),
         [chartOptions, dataRange, displayVolumes],
     );
