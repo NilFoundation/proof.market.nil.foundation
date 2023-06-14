@@ -20,9 +20,15 @@ import type {
     WhitespaceData,
     HistogramData,
     HistogramStyleOptions,
+    ISeriesApi,
 } from 'lightweight-charts';
 import { DateUnit } from '@/enums';
 import colors from '@/styles/export.module.scss';
+
+/**
+ * Series type.
+ */
+type SeriesType = 'Line' | 'Candlestick';
 
 /**
  * Return type.
@@ -31,13 +37,13 @@ type UseRenderChartDataReturnType = {
     /**
      * Current chart data (when user hovers chart).
      */
-    currentChartData?: LineData | BarData;
+    currentChartData?: LineData | BarData | WhitespaceData;
 };
 
 /**
  * Hook parameters.
  */
-type UseRenderChartDataProps<T extends 'Line' | 'Candlestick'> = {
+type UseRenderChartDataProps<T extends SeriesType> = {
     seriesType: T;
     seriesData: T extends 'Line' ? LineData[] : CandlestickData[];
     chart?: IChartApi;
@@ -55,7 +61,7 @@ type UseRenderChartDataProps<T extends 'Line' | 'Candlestick'> = {
  * @param {UseRenderChartDataProps} parameters Parameters.
  * @returns Current price.
  */
-export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
+export const useRenderChartData = <T extends SeriesType>({
     seriesType,
     seriesData,
     chart,
@@ -64,7 +70,7 @@ export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
     markers,
     volumes,
 }: UseRenderChartDataProps<T>): UseRenderChartDataReturnType => {
-    const [currentChartData, setCurrentChartData] = useState<LineData | BarData>();
+    const [currentChartData, setCurrentChartData] = useState<LineData | BarData | WhitespaceData>();
 
     useEffect(() => {
         if (!chart) {
@@ -95,9 +101,14 @@ export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
         });
         volumes && volumeSeries.setData(volumes);
 
+        const setLastBarChartData = () => {
+            const bar = getLastBar(series);
+            bar && setCurrentChartData(bar);
+        };
+
         const crosshairMoveHandler: MouseEventHandler = param => {
-            if (!param.time) {
-                setCurrentChartData(undefined);
+            if (!param?.time) {
+                setLastBarChartData();
                 return;
             }
 
@@ -106,6 +117,7 @@ export const useRenderChartData = <T extends 'Line' | 'Candlestick'>({
         };
 
         chart.subscribeCrosshairMove(crosshairMoveHandler);
+        setLastBarChartData();
 
         return () => {
             chart.removeSeries(series);
@@ -180,4 +192,14 @@ const getDataRange = (rightEdge: number, visibleRange: DateUnit): Range<number> 
         from: rightEdge - distance,
         to: rightEdge,
     };
+};
+
+/**
+ * Get last series data.
+ *
+ * @param series Series.
+ * @returns Last series bar.
+ */
+const getLastBar = <T extends SeriesType>(series: ISeriesApi<T>) => {
+    return series.dataByIndex(-1) ?? undefined;
 };

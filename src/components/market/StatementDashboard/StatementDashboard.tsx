@@ -76,7 +76,7 @@ export const StatementDashboard = (): ReactElement => {
                         chartType={chartType}
                         dataRange={dataRange}
                         displayVolumes={displayVolumes}
-                        height={fullScreen ? windowHeight - 235 : 406}
+                        height={fullScreen ? windowHeight - 283 : 454}
                     />
                 </FullScreenView>
             </div>

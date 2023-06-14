@@ -1,13 +1,21 @@
 @import "../../../styles/constants.scss";
 
+$height: 3rem;
+
 .chartLegend {
   position: absolute;
-  width: 250px;
-  top: 12px;
-  left: 12px;
+  width: 100%;
+  top: -$height;
+  left: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  height: $height;
+  padding: 0 6px;
   z-index: 2;
 }
 
 .chartName {
-  margin-bottom: 4px;
+  margin: 0 !important;
 }

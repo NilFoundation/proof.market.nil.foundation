@@ -4,16 +4,21 @@
  */
 
 import type { ReactElement } from 'react';
-import type { BarData, LineData } from 'lightweight-charts';
-import { isLineData } from '@/utils';
+import type { BarData, LineData, WhitespaceData } from 'lightweight-charts';
+import { formatUTCTimestamp } from '@/utils';
 import styles from './ChartLegend.module.scss';
+
+/**
+ * Legend data.
+ */
+type LegendData = LineData | BarData | WhitespaceData;
 
 /**
  * Props.
  */
 type ChartLegendProps = {
     name: string;
-    currentData?: LineData | BarData;
+    currentData?: LegendData;
 };
 
 /**
@@ -29,23 +34,59 @@ export const ChartLegend = ({ name, currentData }: ChartLegendProps): ReactEleme
 
     return (
         <div className={styles.chartLegend}>
-            <h5 className={styles.chartName}>{name.toUpperCase()}</h5>
-            {isLineData(currentData) ? (
-                <div className="text-muted">{currentData?.value?.toFixed(2)}</div>
-            ) : (
-                (Object.keys(currentData) as Array<keyof BarData>).map(x =>
-                    x !== 'time' && x !== 'color' ? (
-                        <div
-                            className="text-muted"
-                            key={x}
-                        >
-                            {`${x}: ${currentData[x].toFixed(2)}`}
-                        </div>
-                    ) : (
-                        <></>
-                    ),
-                )
+            <strong className={styles.chartName}>{name.toUpperCase()}</strong>
+            {currentData.time && (
+                <span>{formatUTCTimestamp(currentData.time as number, 'DD.MM HH:mm')}</span>
             )}
+            <LegendViewFactory data={currentData} />
         </div>
     );
+};
+
+/**
+ * Conditionally renders legend data.
+ *
+ * @param {{data: LegendData}} props Props.
+ * @returns React element.
+ */
+const LegendViewFactory = ({ data }: { data: LegendData }) => {
+    switch (true) {
+        case isLineData(data):
+            return <div className="text-muted">{(data as LineData)?.value?.toFixed(2)}</div>;
+        case isBarData(data):
+            return (
+                <>
+                    {(Object.keys(data) as Array<keyof BarData>).map(
+                        x =>
+                            x !== 'time' &&
+                            x !== 'color' && (
+                                <div
+                                    className="text-muted"
+                                    key={x}
+                                >
+                                    {`${x}: ${(data as BarData)[x].toFixed(2)}`}
+                                </div>
+                            ),
+                    )}
+                </>
+            );
+        default:
+            return <></>;
+    }
+};
+
+/**
+ * @param data Chart data.
+ * @returns True if value is {@link BarData}.
+ */
+const isBarData = (data: unknown): data is BarData => {
+    return (data as BarData)?.open !== undefined;
+};
+
+/**
+ * @param data Chart data.
+ * @returns True if value is {@link LineData}.
+ */
+const isLineData = (data: unknown): data is LineData => {
+    return (data as LineData)?.value !== undefined;
 };

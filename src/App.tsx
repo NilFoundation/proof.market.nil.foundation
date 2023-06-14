@@ -15,7 +15,7 @@ import { getRuntimeConfigOrThrow } from './utils';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
 const renderLoader = () => (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: '200px' }}>
         <Spinner grow />
     </div>
 );

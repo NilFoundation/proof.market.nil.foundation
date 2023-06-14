@@ -70,6 +70,7 @@ export const ChartTemplate = <T extends 'Line' | 'Candlestick'>({
                 tickMarkFormatter: (t: UTCTimestamp) =>
                     formatUTCTimestamp(t, getDateFormatBasedOnDateUnit(dataRange)),
                 fixRightEdge: true,
+                fixLeftEdge: true,
             },
             rightPriceScale: {
                 scaleMargins: {
@@ -108,7 +109,11 @@ export const ChartTemplate = <T extends 'Line' | 'Candlestick'>({
                 currentData={currentChartData}
                 name={chartName}
             />
-            {loadingData && seriesData.length === 0 && <Spinner grow />}
+            {loadingData && seriesData.length === 0 && (
+                <div className={styles.spinner}>
+                    <Spinner />
+                </div>
+            )}
         </div>
     );
 };
