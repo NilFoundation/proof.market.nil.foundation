@@ -1,12 +1,12 @@
 /**
- * @file App.
+ * @file Layout.
  * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
  */
 
 import type { ReactElement } from 'react';
-import { Layout, Spinner } from '@nilfoundation/react-components';
+import { Layout } from '@nilfoundation/react-components';
 import { Outlet } from 'react-router-dom';
-import { Header, Footer, ReadonlyAccessProvider } from '../components';
+import { Header, Footer, ReadonlyAccessProvider, FullScreenLoader } from '../components';
 
 /**
  * Main app layout.
@@ -20,7 +20,7 @@ const MainLayout = (): ReactElement => {
             footer={<Footer />}
             stickyHeader
         >
-            <ReadonlyAccessProvider fallback={<Spinner grow />}>
+            <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
                 <Outlet />
             </ReadonlyAccessProvider>
         </Layout>

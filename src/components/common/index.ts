@@ -26,3 +26,4 @@ export * from './RouterLink';
 export * from './ChartTemplate';
 export * from './ChartLegend';
 export * from './StatementCharts';
+export * from './FullScreenLoader';

@@ -5,20 +5,15 @@
 
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
-import { NotificationProvider, Spinner } from '@nilfoundation/react-components';
+import { NotificationProvider } from '@nilfoundation/react-components';
 import { ErrorBoundary, withProfiler } from '@sentry/react';
 import { Helmet } from 'react-helmet-async';
-import { GALocationTracker, PageVisibilityDetector } from './components';
+import { FullScreenLoader, GALocationTracker, PageVisibilityDetector } from './components';
 import { Router } from './routing';
 import ErrorView from './views/ErrorView';
 import { getRuntimeConfigOrThrow } from './utils';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
-const renderLoader = () => (
-    <div style={{ height: '200px' }}>
-        <Spinner grow />
-    </div>
-);
 
 /**
  * @returns App.
@@ -31,7 +26,7 @@ function App(): ReactElement {
                     titleTemplate={`${baseDocumentTitle} | %s`}
                     defaultTitle={baseDocumentTitle}
                 />
-                <Suspense fallback={renderLoader()}>
+                <Suspense fallback={<FullScreenLoader />}>
                     <Router />
                 </Suspense>
             </NotificationProvider>
