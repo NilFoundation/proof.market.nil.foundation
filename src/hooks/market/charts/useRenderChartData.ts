@@ -22,6 +22,7 @@ import type {
     HistogramStyleOptions,
     ISeriesApi,
 } from 'lightweight-charts';
+import { MismatchDirection } from 'lightweight-charts';
 import { DateUnit } from '@/enums';
 import colors from '@/styles/export.module.scss';
 
@@ -201,5 +202,5 @@ const getDataRange = (rightEdge: number, visibleRange: DateUnit): Range<number> 
  * @returns Last series bar.
  */
 const getLastBar = <T extends SeriesType>(series: ISeriesApi<T>) => {
-    return series.dataByIndex(-1) ?? undefined;
+    return series.dataByIndex(Infinity, MismatchDirection.NearestLeft) ?? undefined;
 };
