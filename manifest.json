@@ -4,13 +4,19 @@
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "32x32 24x24 16x16",
+      "sizes": "32x32",
       "type": "image/x-icon"
     },
     {
       "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "logo192_maskable.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
     },
     {
       "src": "logo512.png",
@@ -21,5 +27,22 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#222222",
-  "background_color": "#222222"
+  "background_color": "#222222",
+  "shortcuts": [
+    {
+      "name": "Open Portfolio",
+      "short_name": "Portfolio",
+      "description": "View portfolio page",
+      "url": "/portfolio?utm_source=homescreen",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Open login page",
+      "short_name": "Login",
+      "description": "View login page",
+      "url": "/login?utm_source=homescreen",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
 }

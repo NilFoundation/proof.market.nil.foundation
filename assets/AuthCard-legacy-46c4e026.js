@@ -1,0 +1,1 @@
+System.register(["./index-legacy-ce80b539.js"],(function(e,t){"use strict";var r,s,c;return{setters:[e=>{r=e.p,s=e.be,c=e.bf}],execute:function(){e("A",(({children:e})=>r(s,{className:c.authCard,children:e})))}}}));
