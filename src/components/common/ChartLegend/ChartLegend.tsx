@@ -80,7 +80,7 @@ const LegendViewFactory = ({ data }: { data: LegendData }) => {
  * @returns True if value is {@link BarData}.
  */
 const isBarData = (data: LegendData): data is BarData => {
-    return (data as BarData)?.open !== undefined;
+    return !!('open' in data);
 };
 
 /**
@@ -88,5 +88,5 @@ const isBarData = (data: LegendData): data is BarData => {
  * @returns True if value is {@link LineData}.
  */
 const isLineData = (data: LegendData): data is LineData => {
-    return (data as LineData)?.value !== undefined;
+    return !!('value' in data);
 };
