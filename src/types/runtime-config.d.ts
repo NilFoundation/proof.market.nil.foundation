@@ -17,6 +17,7 @@ const keys = [
     'GA_TRACKING_ID',
     'GOOGLE_AUTH_CLIENT_ID',
     'CIRCUIT_DEVELOPER_GUIDE_URL',
+    'API_RESPONSE_WAIT_TIMEOUT',
 ] as const;
 
 type RuntimConfigKeys = (typeof keys)[number];

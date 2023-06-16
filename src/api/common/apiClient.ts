@@ -7,6 +7,7 @@ import type { Options } from 'ky';
 import ky from 'ky';
 import { getItemFromLocalStorage } from '@/packages/LocalStorage';
 import { AuthType } from '@/enums';
+import { getRuntimeConfigOrThrow } from '@/utils';
 import { apiBaseUrl } from './apiHelpers';
 
 /**
@@ -23,6 +24,8 @@ type CreateApiClientSettings = {
  * Create api client parameters. Could create api client with parameters or just prvide the baseUrl string.
  */
 export type CreateApiClientParameters = CreateApiClientSettings | string;
+
+const defaultTimeout = 20000;
 
 /**
  * Create api client.
@@ -45,6 +48,7 @@ export const createApiClient = (params: CreateApiClientParameters) => {
     }
 
     const { shouldUseApiBaseUrl, baseUrl, options, injectToken } = baseOptions;
+    const { API_RESPONSE_WAIT_TIMEOUT } = getRuntimeConfigOrThrow();
 
     return ky.create({
         prefixUrl: `${shouldUseApiBaseUrl ? apiBaseUrl : ''}${baseUrl}`,
@@ -64,7 +68,7 @@ export const createApiClient = (params: CreateApiClientParameters) => {
                 },
             ],
         },
-        timeout: 20000,
+        timeout: Number(API_RESPONSE_WAIT_TIMEOUT) ?? defaultTimeout,
         ...options,
     });
 };
