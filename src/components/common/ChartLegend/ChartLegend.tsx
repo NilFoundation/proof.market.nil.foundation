@@ -79,7 +79,7 @@ const LegendViewFactory = ({ data }: { data: LegendData }) => {
  * @param data Chart data.
  * @returns True if value is {@link BarData}.
  */
-const isBarData = (data: unknown): data is BarData => {
+const isBarData = (data: LegendData): data is BarData => {
     return (data as BarData)?.open !== undefined;
 };
 
@@ -87,6 +87,6 @@ const isBarData = (data: unknown): data is BarData => {
  * @param data Chart data.
  * @returns True if value is {@link LineData}.
  */
-const isLineData = (data: unknown): data is LineData => {
+const isLineData = (data: LegendData): data is LineData => {
     return (data as LineData)?.value !== undefined;
 };
