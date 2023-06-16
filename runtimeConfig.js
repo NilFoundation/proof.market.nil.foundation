@@ -10,5 +10,6 @@ window['RUNTIME_CONFIG'] = {
   PROOFMARKET_TOOLCHAIN_REPO: 'https://github.com/NilFoundation/proof-market-toolchain',
   SENTRY_DSN: 'https://25060f5edf144018919e2fe4e3b4bb37@o4504243377995776.ingest.sentry.io/4504243621134336',
   GOOGLE_AUTH_CLIENT_ID: '529940120835-gdn93l907dddjdjqemesim4f0dt2lhop.apps.googleusercontent.com',
+  CIRCUIT_DEVELOPER_GUIDE_URL: 'https://docs.nil.foundation/proof-market/market/user-guides/circuit-developer',
 }
 
