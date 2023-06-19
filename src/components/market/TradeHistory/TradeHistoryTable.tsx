@@ -96,7 +96,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
                     itemCount={itemCount}
                     // eslint-disable-next-line @typescript-eslint/no-empty-function
                     loadMoreItems={loading ? () => {} : loadMoreItems}
-                    height={376}
+                    height={446}
                     itemSize={28}
                     className={styles.virtualList}
                 >

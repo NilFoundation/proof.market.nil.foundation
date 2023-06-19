@@ -7,10 +7,10 @@
 
 .historyOrdersTable {
   @include tableColumns(24%, 16%, 20%, 40%);
-  height: 488px;
+  height: 528px;
 
   @include responsive(sm) {
-    height: 430px;
+    height: 407px;
   }
 }
 
@@ -24,9 +24,9 @@
   overflow: auto;
   @include overflowFade(8px, true);
 
-  height: 480px;
+  height: 520px;
 
   @include responsive(sm) {
-    height: 406px;
+    height: 446px;
   }
 }
