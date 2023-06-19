@@ -1,1 +1,0 @@
-System.register(["./index-legacy-7269a1b0.js"],(function(e,t){"use strict";var r,s,c;return{setters:[e=>{r=e.p,s=e.bf,c=e.bg}],execute:function(){e("A",(({children:e})=>r(s,{className:c.authCard,children:e})))}}}));
