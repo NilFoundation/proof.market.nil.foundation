@@ -38,7 +38,7 @@ jobs:
       working-directory: public
       run: |
         config="
-        window['RUNTIME_CONFIG'] = {
+        {
           BASE_API_URL: '${{ secrets.BASE_API_URL }}',
           DBMS_DEFAULT_DATABASE: '${{ secrets.DBMS_DEFAULT_DATABASE }}',
           API_VERSION: '${{ secrets.API_VERSION }}',
@@ -53,8 +53,8 @@ jobs:
           API_RESPONSE_WAIT_TIMEOUT: '${{ secrets.API_RESPONSE_WAIT_TIMEOUT }}',
         }
         "
-        echo "$config" > runtimeConfig.js
-        echo runtimeConfig.js
+        echo "$config" > runtime-config.json
+        echo runtime-config.json
 
     - name: Lint
       run: npm run lint:ts
