@@ -92,19 +92,22 @@
     </script>
     <script
       type="text/javascript"
-      defer
-    >
+      src="/tomlParser.js">
+    </script>
+    <script type="text/javascript">
       async function loadConfig() {
         var configPath;
 
         // ejs syntax
         if (<%= process.env.NODE_ENV === 'production' %>) {
-          configPath = './runtime-config.json';
+          configPath = './runtime-config.toml';
         } else {
-          configPath = './runtime-config.dev.json';
+          configPath = './runtime-config.dev.toml';
         }
-        var rawConfig = await fetch(configPath);
-        var config = await rawConfig.json();
+
+        var result = await fetch(configPath);
+        var rawConfig = await result.text();
+        config = tomlParser.parse(rawConfig);
         window['RUNTIME_CONFIG'] = config;
       }
 

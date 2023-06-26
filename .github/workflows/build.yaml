@@ -37,24 +37,22 @@ jobs:
     - name: Setup runtime config
       working-directory: public
       run: |
-        config="
-        {
-          BASE_API_URL: '${{ secrets.BASE_API_URL }}',
-          DBMS_DEFAULT_DATABASE: '${{ secrets.DBMS_DEFAULT_DATABASE }}',
-          API_VERSION: '${{ secrets.API_VERSION }}',
-          REVALIDATE_DATA_INTERVAL: '${{ secrets.REVALIDATE_DATA_INTERVAL }}',
-          READONLY_USER: '${{ secrets.READONLY_USER }}',
-          SITE_DEFAULT_TITLE: '${{ secrets.SITE_DEFAULT_TITLE }}',
-          GA_TRACKING_ID: '${{ secrets.GA_TRACKING_ID }}',
-          PROOFMARKET_TOOLCHAIN_REPO: '${{ secrets.PROOFMARKET_TOOLCHAIN_REPO }}',
-          SENTRY_DSN: '${{ secrets.SENTRY_DSN }}',
-          GOOGLE_AUTH_CLIENT_ID: '${{ secrets.GOOGLE_AUTH_CLIENT_ID }}',
-          CIRCUIT_DEVELOPER_GUIDE_URL: '${{ secrets.CIRCUIT_DEVELOPER_GUIDE_URL }}',
-          API_RESPONSE_WAIT_TIMEOUT: '${{ secrets.API_RESPONSE_WAIT_TIMEOUT }}',
-        }
-        "
-        echo "$config" > runtime-config.json
-        echo runtime-config.json
+        config='
+          BASE_API_URL = "${{ secrets.BASE_API_URL }}"
+          DBMS_DEFAULT_DATABASE = "${{ secrets.DBMS_DEFAULT_DATABASE }}"
+          API_VERSION = "${{ secrets.API_VERSION }}"
+          REVALIDATE_DATA_INTERVAL = "${{ secrets.REVALIDATE_DATA_INTERVAL }}"
+          READONLY_USER = "${{ secrets.READONLY_USER }}"
+          SITE_DEFAULT_TITLE = "${{ secrets.SITE_DEFAULT_TITLE }}"
+          GA_TRACKING_ID = "${{ secrets.GA_TRACKING_ID }}"
+          PROOFMARKET_TOOLCHAIN_REPO = "${{ secrets.PROOFMARKET_TOOLCHAIN_REPO }}"
+          SENTRY_DSN = "${{ secrets.SENTRY_DSN }}"
+          GOOGLE_AUTH_CLIENT_ID = "${{ secrets.GOOGLE_AUTH_CLIENT_ID }}"
+          CIRCUIT_DEVELOPER_GUIDE_URL = "${{ secrets.CIRCUIT_DEVELOPER_GUIDE_URL }}"
+          API_RESPONSE_WAIT_TIMEOUT = "${{ secrets.API_RESPONSE_WAIT_TIMEOUT }}"
+        '
+        echo "$config" > runtime-config.toml
+        echo runtime-config.toml
 
     - name: Lint
       run: npm run lint:ts
