@@ -19,8 +19,7 @@ import { configureSentry } from './sentry';
 import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import { checkRuntimeConfig } from './checkRuntimeConfig';
-import { getRuntimeConfigOrThrow } from './utils';
+import { getRuntimeConfigOrThrow, checkRuntimeConfig } from './utils';
 import { theme } from './baseuiTheme';
 import './index.scss';
 

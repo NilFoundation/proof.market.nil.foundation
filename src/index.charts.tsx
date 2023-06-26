@@ -10,7 +10,7 @@ import type { RouteObject } from 'react-router-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { store } from './redux';
-import { checkRuntimeConfig } from './checkRuntimeConfig';
+import { checkRuntimeConfig } from './utils';
 import { RouterParam } from './enums';
 import ChartsView from './views/ChartsView';
 import ChartsLayout from './layouts/ChartsLayout';

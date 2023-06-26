@@ -4,3 +4,4 @@
  */
 
 export * from './getRuntimeConfigOrThrow';
+export * from './checkRuntimeConfig';

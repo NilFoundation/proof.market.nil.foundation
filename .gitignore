@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # runtime configuration in development mode
-runtimeConfig.dev.js
+runtime-config.dev.json

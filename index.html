@@ -90,20 +90,26 @@
       src="https://kit.fontawesome.com/9264f6e460.js"
       crossorigin="anonymous">
     </script>
-    <% if (process.env.NODE_ENV === 'production') { %>
-      <script
-        defer
-        src="/runtimeConfig.js"
-        >
-      </script>
-    <% } else { %>
-      <script
-        defer
-        type="module"
-        src="/runtimeConfig.dev.js"
-        >
-      </script>
-    <% } %>
+    <script
+      type="text/javascript"
+      defer
+    >
+      async function loadConfig() {
+        var configPath;
+
+        // ejs syntax
+        if (<%= process.env.NODE_ENV === 'production' %>) {
+          configPath = './runtime-config.json';
+        } else {
+          configPath = './runtime-config.dev.json';
+        }
+        var rawConfig = await fetch(configPath);
+        var config = await rawConfig.json();
+        window['RUNTIME_CONFIG'] = config;
+      }
+
+      loadConfig();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

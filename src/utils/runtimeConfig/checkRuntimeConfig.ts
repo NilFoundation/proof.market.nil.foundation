@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { getRuntimeConfigOrThrow } from './utils';
+import { getRuntimeConfigOrThrow } from '..';
 
 const runtimeConfig = getRuntimeConfigOrThrow();
 
