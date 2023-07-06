@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SetJwtRevalidateTimeout, UpdateIsAuthorized, UpdateUserName } from '@/redux';
 import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from '@/utils';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import { setItemIntoLocalStorage } from '@/packages/LocalStorage';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;

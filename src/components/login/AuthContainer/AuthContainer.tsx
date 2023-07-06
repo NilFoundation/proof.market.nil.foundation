@@ -7,7 +7,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { Icon, useBreakpoints } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { Copyright, FullScreenView } from '@/components';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import styles from './AuthContainer.module.scss';
 
 /**

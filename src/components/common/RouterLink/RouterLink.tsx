@@ -3,16 +3,16 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { Nav } from '@nilfoundation/react-components';
 import { Link, useMatch } from 'react-router-dom';
-import type { Path } from '@/routing';
+import type { Path } from '@/features/routing';
 
 /**
  * Props.
  */
 type RouterLinkProps = {
-    title: string;
+    title: ReactNode;
     to: Path | string;
 };
 
@@ -30,7 +30,7 @@ export const RouterLink = ({ title, to }: RouterLinkProps): ReactElement => {
 
     return (
         <Nav.Item
-            key={title}
+            key={to}
             active={!!match}
             renderLink={({ active: _, ...props }) => (
                 <Link

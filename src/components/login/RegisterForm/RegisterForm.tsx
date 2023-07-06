@@ -20,7 +20,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import debounce from 'lodash/debounce';
 import { useForm } from 'react-hook-form';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import { socialLinks } from '@/constants';
 import { SocialLinks } from '@/components';
 import type { RegisterData } from '@/models';

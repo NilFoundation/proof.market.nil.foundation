@@ -1,0 +1,16 @@
+@import "@/styles/constants.scss";
+
+.menu {
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid $c-base-light;
+  background-color: $c-base-darker;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.item {
+  font-size: 2.5rem;
+}

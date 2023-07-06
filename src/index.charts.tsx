@@ -14,7 +14,7 @@ import { checkRuntimeConfig } from './utils';
 import { RouterParam } from './enums';
 import ChartsView from './views/ChartsView';
 import ChartsLayout from './layouts/ChartsLayout';
-import { Path } from './routing';
+import { Path } from './features/routing';
 import ErrorView from './views/ErrorView';
 import Page404 from './views/404';
 import './index.scss';

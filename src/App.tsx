@@ -9,9 +9,11 @@ import { NotificationProvider } from '@nilfoundation/react-components';
 import { ErrorBoundary, withProfiler } from '@sentry/react';
 import { Helmet } from 'react-helmet-async';
 import { FullScreenLoader, GALocationTracker, PageVisibilityDetector } from './components';
-import { Router } from './routing';
+import { Router, routesConfig as baseRoutesConfig } from './features/routing';
 import ErrorView from './views/ErrorView';
 import { getRuntimeConfigOrThrow } from './utils';
+import { useWindowDimensions } from './features/shared';
+import { mobileRoutesConfig } from './features/mobile';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
 
@@ -19,6 +21,9 @@ const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
  * @returns App.
  */
 function App(): ReactElement {
+    const { width } = useWindowDimensions();
+    const routesConfig = width < 600 ? mobileRoutesConfig : baseRoutesConfig;
+
     return (
         <ErrorBoundary fallback={<ErrorView />}>
             <NotificationProvider>
@@ -27,7 +32,7 @@ function App(): ReactElement {
                     defaultTitle={baseDocumentTitle}
                 />
                 <Suspense fallback={<FullScreenLoader />}>
-                    <Router />
+                    <Router config={routesConfig} />
                 </Suspense>
             </NotificationProvider>
             <GALocationTracker />

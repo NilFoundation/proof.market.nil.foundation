@@ -13,7 +13,7 @@ import {
     useAppSelector,
 } from '@/redux';
 import type { PortfolioRequestsInfo } from '@/models';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import { useSyncUrlAndSelectedItem } from '@/hooks';
 import { RouterParam } from '@/enums';
 import { PortfolioInfoList } from '../PortfolioInfoList';

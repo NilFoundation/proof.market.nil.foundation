@@ -13,23 +13,27 @@ import RequestsContent from '@/components/portfolio/PortfolioRequestsInfoContent
 import UserStatementInfoContent from '@/components/portfolio/UserStatementInfoContent/UserStatementInfoContent';
 import ProposalContent from '@/components/portfolio/PortfolioProposalsInfoContent/PortfolioProposalsInfoContent';
 import AuthLayout from '@/layouts/AuthLayout';
-import MainLayout from '@/layouts/MainLayout';
-import { Path } from './Paths';
+import { Path } from '@/features/routing';
+import MobileLayout from '../components/mobileLayout/MobileLayout';
 
-const MarketView = lazy(() => import(/* webpackChunkName: "MarketView" */ '../views/MarketView'));
-const LoginView = lazy(() => import(/* webpackChunkName: "LoginView" */ '../views/LoginView'));
-const PortfolioView = lazy(
-    () => import(/* webpackChunkName: "PortfolioView" */ '../views/PortfolioView'),
+const MarketView = lazy(
+    () => import(/* webpackChunkName: "MarketView" */ '../../../views/MarketView'),
 );
-const Page404 = lazy(() => import(/* webpackChunkName: "Page404" */ '../views/404'));
+const LoginView = lazy(
+    () => import(/* webpackChunkName: "LoginView" */ '../../../views/LoginView'),
+);
+const PortfolioView = lazy(
+    () => import(/* webpackChunkName: "PortfolioView" */ '../../../views/PortfolioView'),
+);
+const Page404 = lazy(() => import(/* webpackChunkName: "Page404" */ '../../../views/404'));
 const RegisterView = lazy(
-    () => import(/* webpackChunkName: "RegisterView" */ '../views/RegisterView'),
+    () => import(/* webpackChunkName: "RegisterView" */ '../../../views/RegisterView'),
 );
 
 /**
  * App routes.
  */
-export const routesConfig: RouteObject[] = [
+export const mobileRoutesConfig: RouteObject[] = [
     {
         element: <RouterReduxConnector />,
         children: [
@@ -56,7 +60,7 @@ export const routesConfig: RouteObject[] = [
                 ],
             },
             {
-                element: <MainLayout />,
+                element: <MobileLayout />,
                 children: [
                     {
                         element: <ProtectedRoute readonlyAccess />,
