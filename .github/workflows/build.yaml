@@ -31,7 +31,6 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm config set "//npm.pkg.github.com/:_authToken" ${{ secrets.AUTH_TOKEN }}
         npm ci
 
     - name: Setup runtime config
