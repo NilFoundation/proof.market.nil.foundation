@@ -4,7 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
-import { Spinner } from '@nilfoundation/react-components';
+import { SPINNER_SIZE, Spinner } from '@nilfoundation/ui-kit';
 import { dequal as deepEqual } from 'dequal';
 import {
     selectCurrentStatement,
@@ -39,7 +39,7 @@ export const StatementsList = (): ReactElement => {
             <h4>Statement list</h4>
             <div className={styles.container}>
                 {loadingStatements && !statementsList.length ? (
-                    <Spinner grow />
+                    <Spinner size={SPINNER_SIZE.large} />
                 ) : (
                     <StatementsListTable statementsList={statementsList} />
                 )}

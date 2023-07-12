@@ -32,7 +32,7 @@ configureSentry();
 configureGA();
 
 const engine = new Styletron();
-const theme = createTheme(engine);
+const theme = createTheme(engine, { enableDefaultFonts: false });
 
 render(
     <React.StrictMode>
