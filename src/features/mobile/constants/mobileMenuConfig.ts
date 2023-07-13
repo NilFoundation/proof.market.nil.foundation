@@ -30,17 +30,7 @@ export const mobileMenuConfig: MobileMenuElement[] = [
     },
     {
         icon: 'fa-solid fa-money-check-dollar',
-        title: 'Orderbook',
-        path: `${Path.market}/${MobilePath.orderBook}`,
-    },
-    {
-        icon: 'fa-solid fa-circle-check',
-        title: 'Manage orders',
-        path: `${Path.market}/${MobilePath.manageOrders}`,
-    },
-    {
-        icon: 'fa-solid fa-circle-plus',
-        title: 'Create orders',
-        path: `${Path.market}/${MobilePath.createOrders}`,
+        title: 'Last proof producer',
+        path: `${Path.market}/${MobilePath.lastProofProducer}`,
     },
 ];

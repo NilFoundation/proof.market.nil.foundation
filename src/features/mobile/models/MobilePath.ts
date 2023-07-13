@@ -10,7 +10,5 @@ export const enum MobilePath {
     statementsList = 'statements-list',
     charts = 'charts',
     trades = 'trades',
-    orderBook = 'orderbook',
-    createOrders = 'createOrders',
-    manageOrders = 'manageOrders',
+    lastProofProducer = 'last-proof-producer',
 }

@@ -94,7 +94,7 @@ export const routesConfig: RouteObject[] = [
                                         ),
                                     },
                                     {
-                                        path: `${Path.requests}`,
+                                        path: Path.requests,
                                         element: <RequestsContent />,
                                         children: [
                                             {
@@ -104,7 +104,7 @@ export const routesConfig: RouteObject[] = [
                                         ],
                                     },
                                     {
-                                        path: `${Path.proposals}`,
+                                        path: Path.proposals,
                                         element: <ProposalContent />,
                                         children: [
                                             {
