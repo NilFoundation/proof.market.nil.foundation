@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 // TODO - replace HashRouter with BrowserRouter after migrating from gh pages
 import { HashRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Client as Styletron } from 'styletron-engine-atomic';
 import { Provider as StyletronProvider } from 'styletron-react';
 import { BaseProvider } from 'baseui';
@@ -19,7 +18,7 @@ import { configureSentry } from './sentry';
 import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import { getRuntimeConfigOrThrow, checkRuntimeConfig } from './utils';
+import { checkRuntimeConfig } from './utils';
 import { theme } from './baseuiTheme';
 import './index.scss';
 
@@ -31,19 +30,17 @@ const engine = new Styletron();
 
 render(
     <React.StrictMode>
-        <GoogleOAuthProvider clientId={getRuntimeConfigOrThrow().GOOGLE_AUTH_CLIENT_ID!}>
-            <HelmetProvider>
-                <Provider store={store}>
-                    <HashRouter>
-                        <StyletronProvider value={engine}>
-                            <BaseProvider theme={theme}>
-                                <App />
-                            </BaseProvider>
-                        </StyletronProvider>
-                    </HashRouter>
-                </Provider>
-            </HelmetProvider>
-        </GoogleOAuthProvider>
+        <HelmetProvider>
+            <Provider store={store}>
+                <HashRouter>
+                    <StyletronProvider value={engine}>
+                        <BaseProvider theme={theme}>
+                            <App />
+                        </BaseProvider>
+                    </StyletronProvider>
+                </HashRouter>
+            </Provider>
+        </HelmetProvider>
     </React.StrictMode>,
     document.getElementById('root'),
 );

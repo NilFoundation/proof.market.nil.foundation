@@ -6,7 +6,6 @@
 import type { Options } from 'ky';
 import ky from 'ky';
 import { getItemFromLocalStorage } from '@/packages/LocalStorage';
-import { AuthType } from '@/enums';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import { apiBaseUrl } from './apiHelpers';
 
@@ -59,12 +58,10 @@ export const createApiClient = (params: CreateApiClientParameters) => {
                         return request;
                     }
 
-                    const authType = getItemFromLocalStorage('authType');
-                    const headerValue = `${
-                        authType === AuthType.credentials ? 'Bearer ' : ''
-                    }${getItemFromLocalStorage('userToken')}`;
-
-                    request.headers.set('Authorization', headerValue);
+                    request.headers.set(
+                        'Authorization',
+                        `Bearer ${getItemFromLocalStorage('userToken')}`,
+                    );
                 },
             ],
         },

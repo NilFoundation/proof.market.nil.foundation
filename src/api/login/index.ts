@@ -6,4 +6,3 @@
 export * from './LoginApi';
 export * from './UserApi';
 export * from './RegisterApi';
-export * from './googleLoginApi';

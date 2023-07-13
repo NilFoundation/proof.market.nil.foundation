@@ -34,13 +34,13 @@ export const ProtectedContent = ({
     overlayTitle,
     overlayButtonText = 'Sign in',
 }: ProtectedComponentProps): ReactElement => {
-    const { isAuthenticated, isReadonly } = useAuth();
+    const { isAuthorized, isReadonly } = useAuth();
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
     return (
         <>
-            {(!isAuthenticated || isReadonly) && (
+            {(!isAuthorized || isReadonly) && (
                 <Overlay>
                     <div className={styles.container}>
                         {overlayTitle && <h4 className="text-center">{overlayTitle}</h4>}

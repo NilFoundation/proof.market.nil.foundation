@@ -6,4 +6,3 @@
 export * from './LoginData';
 export * from './RegisterData';
 export * from './AuthData';
-export * from './GoogleUserInfo';

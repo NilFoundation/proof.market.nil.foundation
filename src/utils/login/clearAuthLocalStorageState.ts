@@ -10,5 +10,4 @@ import { removeItemFromLocalStorage } from '@/packages/LocalStorage';
  */
 export const clearAuthLocalStorageState = () => {
     removeItemFromLocalStorage('userToken');
-    removeItemFromLocalStorage('authType');
 };

@@ -26,12 +26,12 @@ const ProtectedRoute = ({
     readonlyAccess = false,
     redirectPath = Path.login,
 }: ProtectedRouteProps): ReactElement => {
-    const { isAuthenticated, isReadonly } = useAuth();
+    const { isAuthorized, isReadonly } = useAuth();
     const { pathname } = useLocation();
 
     return (
         <>
-            {isAuthenticated && (readonlyAccess ? true : !isReadonly) ? (
+            {isAuthorized && (readonlyAccess ? true : !isReadonly) ? (
                 <Outlet />
             ) : (
                 <Navigate

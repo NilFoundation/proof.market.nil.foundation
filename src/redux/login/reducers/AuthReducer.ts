@@ -4,15 +4,12 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { AuthType } from '@/enums';
-import { getItemFromLocalStorage } from '@/packages/LocalStorage';
-import { UpdateAuthType, UpdateIsAuthorized } from '../actions';
+import { UpdateIsAuthorized } from '../actions';
 
 /**
  * State.
  */
 export type AuthReducerState = {
-    type?: AuthType;
     isAuthorized: boolean;
 };
 
@@ -20,7 +17,6 @@ export type AuthReducerState = {
  * Initial state.
  */
 const initialState: AuthReducerState = {
-    type: getItemFromLocalStorage('authType'),
     isAuthorized: false,
 };
 
@@ -28,11 +24,7 @@ const initialState: AuthReducerState = {
  * Reducer of auth state.
  */
 export const AuthReducer = createReducer(initialState, builder =>
-    builder
-        .addCase(UpdateAuthType, (state, { payload }) => {
-            state.type = payload;
-        })
-        .addCase(UpdateIsAuthorized, (state, { payload }) => {
-            state.isAuthorized = payload;
-        }),
+    builder.addCase(UpdateIsAuthorized, (state, { payload }) => {
+        state.isAuthorized = payload;
+    }),
 );

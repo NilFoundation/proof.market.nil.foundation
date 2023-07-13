@@ -31,7 +31,7 @@ export const ReadonlyAccessProvider = ({
 }: ReadonlyAccessProviderProps): ReactElement => {
     const [error, setError] = useState(false);
     const processLogin = useLogin();
-    const { isAuthenticated } = useAuth();
+    const { isAuthorized } = useAuth();
 
     useEffect(() => {
         const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
@@ -49,12 +49,12 @@ export const ReadonlyAccessProvider = ({
             }
         };
 
-        !isAuthenticated && loginWithReadonly(readonlyUser!);
-    }, [processLogin, isAuthenticated]);
+        !isAuthorized && loginWithReadonly(readonlyUser!);
+    }, [processLogin, isAuthorized]);
 
     if (error) {
         return <>{errorView}</>;
     }
 
-    return <>{isAuthenticated ? children : fallback ?? null}</>;
+    return <>{isAuthorized ? children : fallback ?? null}</>;
 };

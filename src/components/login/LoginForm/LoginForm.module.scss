@@ -21,13 +21,3 @@
     transition: background-color 5000s ease-in-out 0s;
   }
 }
-
-.buttons {
-  display: flex;
-  gap: 1rem;
-
-  > button {
-    width: 50%;
-    display: block;
-  }
-}

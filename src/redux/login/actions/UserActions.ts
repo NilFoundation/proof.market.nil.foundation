@@ -4,7 +4,7 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { GoogleUserinfo, UserBalance } from '@/models';
+import type { UserBalance } from '@/models';
 
 /**
  * Update current user name.
@@ -32,10 +32,3 @@ export const UpdateUserBalanceIsLoadingError = createAction<boolean>(
  * Set jwt token revalidation timeout.
  */
 export const SetJwtRevalidateTimeout = createAction<number>('@user/SET_REVALIDATE_JWT_TIMEOUT');
-
-/*
- * Update google user info.
- */
-export const UpdateGoogleUserInfo = createAction<GoogleUserinfo | undefined>(
-    '@user/UPDATE_GOOGLE_USER_INFO',
-);

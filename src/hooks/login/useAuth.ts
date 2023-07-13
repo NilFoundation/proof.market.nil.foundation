@@ -4,9 +4,8 @@
  */
 
 import { useMemo } from 'react';
-import { selectAuthType, selectIsAuthenticated, selectUserName, useAppSelector } from '@/redux';
+import { selectIsAuthorized, selectUserName, useAppSelector } from '@/redux';
 import { getRuntimeConfigOrThrow } from '@/utils';
-import type { AuthType } from '@/enums';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 
@@ -15,23 +14,16 @@ const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
  *
  * @returns Auth state.
  */
-export const useAuth = (): {
-    user: string | null;
-    isAuthenticated: boolean;
-    isReadonly: boolean;
-    authType?: AuthType;
-} => {
+export const useAuth = () => {
     const user = useAppSelector(selectUserName);
-    const isAuthenticated = useAppSelector(selectIsAuthenticated);
-    const authType = useAppSelector(selectAuthType);
+    const isAuthorized = useAppSelector(selectIsAuthorized);
     const isReadonly = useMemo(() => {
         return user === readonlyUser;
     }, [user]);
 
     return {
         user,
-        isAuthenticated,
+        isAuthorized,
         isReadonly,
-        authType,
     };
 };

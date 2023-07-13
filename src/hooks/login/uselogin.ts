@@ -7,18 +7,9 @@ import { useCallback } from 'react';
 import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import type { TokenResponse } from '@react-oauth/google';
-import {
-    SetJwtRevalidateTimeout,
-    UpdateAuthType,
-    UpdateGoogleUserInfo,
-    UpdateIsAuthorized,
-    UpdateUserName,
-} from '@/redux';
+import { SetJwtRevalidateTimeout, UpdateIsAuthorized, UpdateUserName } from '@/redux';
 import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from '@/utils';
 import { Path } from '@/routing';
-import { AuthType } from '@/enums';
-import { getGoogleProfileInfo } from '@/api';
 import { setItemIntoLocalStorage } from '@/packages/LocalStorage';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
@@ -32,25 +23,6 @@ const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 export const useLogin = (redirectPath = Path.market) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const processGoogleLogin = useCallback(
-        async ({ access_token }: TokenResponse, errorCb?: () => void) => {
-            try {
-                const response = await getGoogleProfileInfo(access_token);
-
-                dispatch(UpdateGoogleUserInfo(response));
-
-                setItemIntoLocalStorage('userToken', access_token);
-
-                // TODO - add google token revalidation
-
-                return response.name;
-            } catch {
-                errorCb && errorCb();
-            }
-        },
-        [dispatch],
-    );
 
     const processCredentialsLogin = useCallback(
         async (jwt: string) => {
@@ -67,39 +39,33 @@ export const useLogin = (redirectPath = Path.market) => {
     );
 
     const processLogin = useCallback(
-        async (
-            data: string | TokenResponse,
-            authType: AuthType = AuthType.credentials,
-            errorCb?: () => void,
-        ) => {
-            const user =
-                authType === AuthType.credentials
-                    ? await processCredentialsLogin(data as string)
-                    : await processGoogleLogin(data as TokenResponse, errorCb);
+        async (data: string, errorCb?: () => void) => {
+            try {
+                const user = await processCredentialsLogin(data);
 
-            if (!user) {
-                return;
+                if (!user) {
+                    return;
+                }
+
+                navigate(redirectPath, { replace: true });
+
+                dispatch(UpdateUserName(user));
+                dispatch(UpdateIsAuthorized(true));
+
+                if (user === readonlyUser) {
+                    return;
+                }
+
+                notificationActions?.create({
+                    title: 'Login success',
+                    message: `Successfully login as ${user}`,
+                    variant: Variant.success,
+                });
+            } catch {
+                errorCb && errorCb();
             }
-
-            setItemIntoLocalStorage('authType', authType);
-
-            navigate(redirectPath, { replace: true });
-
-            dispatch(UpdateAuthType(authType));
-            dispatch(UpdateUserName(user));
-            dispatch(UpdateIsAuthorized(true));
-
-            if (user === readonlyUser) {
-                return;
-            }
-
-            notificationActions?.create({
-                title: 'Login success',
-                message: `Successfully login as ${user}`,
-                variant: Variant.success,
-            });
         },
-        [processCredentialsLogin, processGoogleLogin, navigate, redirectPath, dispatch],
+        [processCredentialsLogin, navigate, redirectPath, dispatch],
     );
 
     return processLogin;

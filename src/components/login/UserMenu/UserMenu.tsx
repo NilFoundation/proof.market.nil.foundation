@@ -11,12 +11,9 @@ import { useAuth, useLogout } from '@/hooks';
 import { Path } from '@/routing';
 import styles from './UserMenu.module.scss';
 
-const UserBalance = loadable(
-    () => import(/* webpackChunkName: "UserBalance" */ '../UserBalance/UserBalance'),
-    {
-        fallback: <Spinner grow />,
-    },
-);
+const UserBalance = loadable(() => import('../UserBalance/UserBalance'), {
+    fallback: <Spinner grow />,
+});
 
 /**
  * User menu.

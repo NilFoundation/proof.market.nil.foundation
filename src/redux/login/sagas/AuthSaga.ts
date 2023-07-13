@@ -4,14 +4,11 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { call, fork, put } from 'redux-saga/effects';
+import { fork, put } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import type { GoogleUserinfo } from '@/models';
-import { getGoogleProfileInfo } from '@/api';
 import { getItemFromLocalStorage } from '@/packages/LocalStorage';
-import { clearAuthLocalStorageState, getUserFromJwt } from '@/utils';
-import { AuthType } from '@/enums';
-import { UpdateGoogleUserInfo, UpdateIsAuthorized, UpdateUserName } from '../actions';
+import { getUserFromJwt } from '@/utils';
+import { UpdateIsAuthorized, UpdateUserName } from '../actions';
 
 /**
  * Auth main saga.
@@ -30,44 +27,20 @@ export function* AuthSaga(): SagaIterator<void> {
  */
 function* TryGetUserFromLocalStorageTokenSaga(): SagaIterator<void> {
     const token = getItemFromLocalStorage<string>('userToken');
-    const authType = getItemFromLocalStorage<AuthType>('authType');
+    console.log(token);
 
     if (!token) {
         return;
     }
 
-    switch (authType) {
-        case AuthType.google: {
-            yield put(UpdateIsAuthorized(true));
+    const user = getUserFromJwt(token);
+    console.log(user);
+    if (user) {
+        yield put(UpdateUserName(user));
+        yield put(UpdateIsAuthorized(true));
 
-            try {
-                const response: GoogleUserinfo = yield call(getGoogleProfileInfo, token);
-                yield put(UpdateUserName(response.name));
-                yield put(UpdateGoogleUserInfo(response));
-
-                // TODO - add google token revalidation
-
-                return;
-            } catch {
-                clearAuthLocalStorageState();
-            } finally {
-                break;
-            }
-        }
-        case AuthType.credentials: {
-            const user = getUserFromJwt(token);
-            if (user) {
-                yield put(UpdateUserName(user));
-                //yield put(UpdateIsAuthorized(true));
-
-                //const timeout = calculateRenewJwtTimeGap(token);
-                //yield put(SetJwtRevalidateTimeout(timeout));
-            }
-            break;
-        }
-        default: {
-            // Do nothing.
-        }
+        //const timeout = calculateRenewJwtTimeGap(token);
+        //yield put(SetJwtRevalidateTimeout(timeout));
     }
 }
 

@@ -4,9 +4,8 @@
  */
 
 import { createReducer } from '@reduxjs/toolkit';
-import type { GoogleUserinfo, UserBalance } from '@/models';
+import type { UserBalance } from '@/models';
 import {
-    UpdateGoogleUserInfo,
     UpdateUserBalance,
     UpdateUserBalanceIsLoading,
     UpdateUserBalanceIsLoadingError,
@@ -21,7 +20,6 @@ export type UserReducerState = {
     balance?: UserBalance;
     balanceIsLoading: boolean;
     loadingBalanceError: boolean;
-    googleUserInfo: GoogleUserinfo | undefined;
 };
 
 /**
@@ -32,7 +30,6 @@ const initialState: UserReducerState = {
     balance: undefined,
     balanceIsLoading: false,
     loadingBalanceError: false,
-    googleUserInfo: undefined,
 };
 
 /**
@@ -51,8 +48,5 @@ export const UserReducer = createReducer(initialState, builder =>
         })
         .addCase(UpdateUserBalanceIsLoadingError, (state, { payload }) => {
             state.loadingBalanceError = payload;
-        })
-        .addCase(UpdateGoogleUserInfo, (state, { payload }) => {
-            state.googleUserInfo = payload;
         }),
 );

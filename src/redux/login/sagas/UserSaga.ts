@@ -8,9 +8,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getUserBalance } from '@/api';
 import type { UserBalance } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
-import { AuthType } from '@/enums';
 import {
-    UpdateGoogleUserInfo,
     UpdateUserBalance,
     UpdateUserBalanceIsLoading,
     UpdateUserBalanceIsLoadingError,
@@ -18,7 +16,7 @@ import {
 } from '../actions';
 import { ProtectedCall } from './ProtectedCall';
 import { AddUserRequest, RemoveUserProposal, RemoveUserRequest } from '../../market';
-import { selectAuthType, selectGoogleUserInfo, selectUserName } from '../selectors';
+import { selectUserName } from '../selectors';
 
 /**
  * User main saga.
@@ -27,13 +25,7 @@ import { selectAuthType, selectGoogleUserInfo, selectUserName } from '../selecto
  */
 export function* UserSaga(): SagaIterator<void> {
     yield takeLatest(
-        [
-            UpdateUserName,
-            AddUserRequest,
-            RemoveUserProposal,
-            RemoveUserRequest,
-            UpdateGoogleUserInfo,
-        ],
+        [UpdateUserName, AddUserRequest, RemoveUserProposal, RemoveUserRequest],
         GetUserBalance,
     );
 }
@@ -45,10 +37,6 @@ export function* UserSaga(): SagaIterator<void> {
  */
 function* GetUserBalance(): SagaIterator<void> {
     const user = yield select(selectUserName);
-    const googleUserInfo: ReturnType<typeof selectGoogleUserInfo> = yield select(
-        selectGoogleUserInfo,
-    );
-    const authType = yield select(selectAuthType);
     const isReadonly = user === getRuntimeConfigOrThrow().READONLY_USER;
 
     if (isReadonly || !user) {
@@ -59,9 +47,7 @@ function* GetUserBalance(): SagaIterator<void> {
         yield put(UpdateUserBalanceIsLoading(true));
         yield put(UpdateUserBalanceIsLoadingError(false));
 
-        const userId = authType === AuthType.credentials ? user : googleUserInfo?.id;
-
-        const balance: UserBalance | undefined = yield call(ProtectedCall, getUserBalance, userId);
+        const balance: UserBalance | undefined = yield call(ProtectedCall, getUserBalance, user);
         yield put(UpdateUserBalance(balance));
     } catch {
         yield put(UpdateUserBalanceIsLoadingError(true));

@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import type { GoogleUserinfo, UserBalance } from '@/models';
+import type { UserBalance } from '@/models';
 import type { RootStateType } from '@/redux';
 
 /**
@@ -21,12 +21,3 @@ export const selectUserName = (s: RootStateType): string | null => s.userState.n
  * @returns User balance.
  */
 export const selectUserBalance = (s: RootStateType): UserBalance | undefined => s.userState.balance;
-
-/**
- * Select google user info.
- *
- * @param s State.
- * @returns Google user info.
- */
-export const selectGoogleUserInfo = (s: RootStateType): GoogleUserinfo | undefined =>
-    s.userState.googleUserInfo;
