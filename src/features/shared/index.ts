@@ -4,3 +4,4 @@
  */
 
 export { useWindowDimensions } from './hooks/useWindowDimensions';
+export { useBreakpoint } from './hooks/useBreakpoint';

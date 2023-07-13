@@ -5,14 +5,14 @@
 
 import type { ReactElement } from 'react';
 import { Container, Navbar, Nav } from '@nilfoundation/react-components';
+import clsx from 'clsx';
 import { documentationUrl, navigationLinks } from '@/constants';
-import { useWindowDimensions } from '@/features/shared';
+import { useBreakpoint } from '@/features/shared';
 import { MobileMenu } from '../MobileMenu';
 import { UserMenu } from '../../login';
 import { Breadcrumbs } from '../BreadCrumbs';
 import { RouterLink } from '../RouterLink';
 import styles from './Header.module.scss';
-import clsx from 'clsx';
 
 /**
  * Header.
@@ -20,8 +20,8 @@ import clsx from 'clsx';
  * @returns React component.
  */
 export const Header = (): ReactElement => {
-    const { width } = useWindowDimensions();
-    const isMobile = width < 600;
+    const bp = useBreakpoint();
+    const isMobile = bp === 'sm';
 
     return (
         <Navbar className={styles.navbar}>

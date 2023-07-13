@@ -62,12 +62,33 @@ export const mobileRoutesConfig: RouteObject[] = [
                                     },
                                     {
                                         path: MobilePath.charts,
+                                        element: <StatementsList />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.statementName}`,
+                                                element: <StatementsList />,
+                                            },
+                                        ],
                                     },
                                     {
                                         path: MobilePath.lastProofProducer,
+                                        element: <StatementsList />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.statementName}`,
+                                                element: <StatementsList />,
+                                            },
+                                        ],
                                     },
                                     {
                                         path: MobilePath.trades,
+                                        element: <StatementsList />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.statementName}`,
+                                                element: <StatementsList />,
+                                            },
+                                        ],
                                     },
                                 ],
                             },
