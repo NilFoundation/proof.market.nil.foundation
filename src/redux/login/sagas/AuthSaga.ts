@@ -1,7 +1,7 @@
 /**
  * @file Redux saga.
  * @todo Add token renewal after implementing on backend.
- * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
+ * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
 import { call, fork, put } from 'redux-saga/effects';

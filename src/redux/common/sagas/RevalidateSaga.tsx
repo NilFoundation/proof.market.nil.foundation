@@ -1,6 +1,6 @@
 /**
  * @file Redux saga.
- * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
+ * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
 import { delay, call, take, fork, cancel } from 'redux-saga/effects';

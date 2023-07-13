@@ -1,7 +1,7 @@
 /* eslint-disable jsdoc/require-jsdoc */
 /**
  * @file Typings.
- * @copyright Yury Korotovskikh 2022 <u.korotovskiy@nil.foundation>
+ * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
 import type { MouseEventHandler } from 'react';
