@@ -7,7 +7,6 @@ import type { ReactElement } from 'react';
 import { Container, Navbar, Nav } from '@nilfoundation/react-components';
 import { documentationUrl, navigationLinks } from '@/constants';
 import { useBreakpoint } from '@/features/shared';
-import { MobileMenu } from '../MobileMenu';
 import { UserMenu } from '../../login';
 import { Breadcrumbs } from '../BreadCrumbs';
 import { RouterLink } from '../RouterLink';
@@ -46,7 +45,6 @@ export const Header = (): ReactElement => {
                             <Nav.Item href={documentationUrl}>Docs</Nav.Item>
                         </Nav>
                         <UserMenu />
-                        <MobileMenu />
                     </>
                 )}
             </Container>

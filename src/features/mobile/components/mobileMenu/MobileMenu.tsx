@@ -4,33 +4,33 @@
  */
 
 import type { ReactElement } from 'react';
-import { Icon, Nav } from '@nilfoundation/react-components';
-import { RouterLink } from '@/components';
+import { Nav } from '@nilfoundation/react-components';
 import { mobileMenuConfig } from '../../constants/mobileMenuConfig';
 import styles from './MobileMenu.module.scss';
+
+type MobileMenuProps = {
+    onSetMenuItem: (item: string) => void;
+};
 
 /**
  * Mobile menu.
  *
+ * @param {MobileMenuProps} props - Component props.
  * @returns React element.
  */
-export const MobileMenu = (): ReactElement => {
+export const MobileMenu = ({ onSetMenuItem }: MobileMenuProps): ReactElement => {
     return (
         <Nav
             className={styles.menu}
             justified
         >
-            {mobileMenuConfig.map(({ title, icon, path }) => (
-                <RouterLink
-                    key={title}
-                    to={path}
-                    title={
-                        <Icon
-                            className={styles.item}
-                            iconName={icon}
-                        />
-                    }
-                />
+            {mobileMenuConfig.map(({ key }) => (
+                <Nav.Item
+                    key={key}
+                    onClick={() => onSetMenuItem(key)}
+                >
+                    {key}
+                </Nav.Item>
             ))}
         </Nav>
     );

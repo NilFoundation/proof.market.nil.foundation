@@ -3,34 +3,26 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { Path } from '@/features/routing';
-import { MobilePath } from '../models/MobilePath';
-
 type MobileMenuElement = {
     icon: string;
-    title: string;
-    path: string;
+    key: string;
 };
 
 export const mobileMenuConfig: MobileMenuElement[] = [
     {
         icon: 'fa-solid fa-list',
-        title: 'Statements',
-        path: `${Path.market}/${MobilePath.statementsList}`,
+        key: 'Statements',
     },
     {
         icon: 'fa-solid fa-chart-simple',
-        title: 'Charts',
-        path: `${Path.market}/${MobilePath.charts}`,
+        key: 'Charts',
     },
     {
         icon: 'fa-solid fa-list-check',
-        title: 'Trades',
-        path: `${Path.market}/${MobilePath.trades}`,
+        key: 'Trades',
     },
     {
         icon: 'fa-solid fa-money-check-dollar',
-        title: 'Last proof producer',
-        path: `${Path.market}/${MobilePath.lastProofProducer}`,
+        key: 'Last proof producer',
     },
 ];
