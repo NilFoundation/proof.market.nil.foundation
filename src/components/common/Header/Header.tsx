@@ -6,11 +6,13 @@
 import type { ReactElement } from 'react';
 import { Container, Navbar, Nav } from '@nilfoundation/react-components';
 import { documentationUrl, navigationLinks } from '@/constants';
+import { useWindowDimensions } from '@/features/shared';
 import { MobileMenu } from '../MobileMenu';
 import { UserMenu } from '../../login';
 import { Breadcrumbs } from '../BreadCrumbs';
 import { RouterLink } from '../RouterLink';
 import styles from './Header.module.scss';
+import clsx from 'clsx';
 
 /**
  * Header.
@@ -18,6 +20,9 @@ import styles from './Header.module.scss';
  * @returns React component.
  */
 export const Header = (): ReactElement => {
+    const { width } = useWindowDimensions();
+    const isMobile = width < 600;
+
     return (
         <Navbar className={styles.navbar}>
             <Container
@@ -25,7 +30,7 @@ export const Header = (): ReactElement => {
                 fluid
             >
                 <Breadcrumbs />
-                <Nav className={styles.nav}>
+                <Nav className={clsx(styles.nav, styles.desktopOnly)}>
                     {navigationLinks.map(({ title, path }) => (
                         <RouterLink
                             key={path}
@@ -35,8 +40,16 @@ export const Header = (): ReactElement => {
                     ))}
                     <Nav.Item href={documentationUrl}>Docs</Nav.Item>
                 </Nav>
-                <UserMenu />
-                <MobileMenu />
+                {isMobile ? (
+                    <Nav className={styles.nav}>
+                        <Nav.Item href={documentationUrl}>Docs</Nav.Item>
+                    </Nav>
+                ) : (
+                    <>
+                        <UserMenu />
+                        <MobileMenu />
+                    </>
+                )}
             </Container>
         </Navbar>
     );

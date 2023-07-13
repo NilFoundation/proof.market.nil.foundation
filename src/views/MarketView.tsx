@@ -6,8 +6,8 @@
 import type { ReactElement } from 'react';
 import { Container, Row, Col } from '@nilfoundation/react-components';
 import { Helmet } from 'react-helmet-async';
+import { StatementsList } from '@/features/statementsList';
 import {
-    StatementsList,
     OrderManagementContextProvider,
     StatementDashboard,
     OrderBook,

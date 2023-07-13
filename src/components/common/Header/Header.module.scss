@@ -20,7 +20,9 @@
     padding-top: 14px;
     padding-bottom: 14px;
   }
+}
 
+.desktopOnly {
   @include responsive(sm) {
     display: none;
   }

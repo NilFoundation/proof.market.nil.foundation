@@ -9,6 +9,8 @@ import type { RouteObject } from 'react-router-dom';
 import ProtectedRoute from '@/components/login/ProtectedRoute/ProtectedRoute';
 import RouterReduxConnector from '@/components/common/RouterReduxConnector/RouterReduxConnector';
 import { Path } from '@/features/routing';
+import { StatementsList } from '@/features/statementsList';
+import { RouterParam } from '@/enums';
 import MobileLayout from '../components/mobileLayout/MobileLayout';
 import { MobilePath } from '../models/MobilePath';
 
@@ -43,13 +45,20 @@ export const mobileRoutesConfig: RouteObject[] = [
                                         index: true,
                                         element: (
                                             <Navigate
-                                                to={MobilePath.charts}
+                                                to={MobilePath.statementsList}
                                                 replace
                                             />
                                         ),
                                     },
                                     {
                                         path: MobilePath.statementsList,
+                                        element: <StatementsList />,
+                                        children: [
+                                            {
+                                                path: `:${RouterParam.statementName}`,
+                                                element: <StatementsList />,
+                                            },
+                                        ],
                                     },
                                     {
                                         path: MobilePath.charts,
