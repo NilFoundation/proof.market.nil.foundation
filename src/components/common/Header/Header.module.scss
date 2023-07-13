@@ -1,4 +1,3 @@
-@import "@/styles/mixins/responsive";
 @import "@/styles/constants.scss";
 
 .container {
@@ -19,12 +18,6 @@
     color: $c-secondary !important;
     padding-top: 14px;
     padding-bottom: 14px;
-  }
-}
-
-.desktopOnly {
-  @include responsive(sm) {
-    display: none;
   }
 }
 

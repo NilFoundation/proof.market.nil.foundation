@@ -7,3 +7,4 @@ import MobileLayout from './components/mobileLayout/MobileLayout';
 
 export { MobileLayout };
 export { mobileRoutesConfig } from './constants/mobileRoutesConfig';
+export { useRedirectOnBreakpointChange } from './hooks/useRedirectOnBreakpointChange';

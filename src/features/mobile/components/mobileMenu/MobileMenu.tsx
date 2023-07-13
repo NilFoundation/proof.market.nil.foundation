@@ -16,7 +16,10 @@ import styles from './MobileMenu.module.scss';
  */
 export const MobileMenu = (): ReactElement => {
     return (
-        <Nav className={styles.menu}>
+        <Nav
+            className={styles.menu}
+            justified
+        >
             {mobileMenuConfig.map(({ title, icon, path }) => (
                 <RouterLink
                     key={title}

@@ -9,9 +9,9 @@ import { useWindowDimensions } from './useWindowDimensions';
 type Breakpoint = 'sm' | 'md' | 'lg';
 
 /**
- * Hook to get window dimensions.
+ * Hook to get current breakpoint based on screen width.
  *
- * @returns Window dimwnsions.
+ * @returns Matched breakpoint.
  */
 export const useBreakpoint = () => {
     const [breakpoint, setBreakpoint] = useState<Breakpoint>();
@@ -20,10 +20,12 @@ export const useBreakpoint = () => {
     useEffect(() => {
         if (width < 768) {
             setBreakpoint('sm');
+            return;
         }
 
         if (width >= 1400) {
             setBreakpoint('lg');
+            return;
         }
 
         setBreakpoint('md');

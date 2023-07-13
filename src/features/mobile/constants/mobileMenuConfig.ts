@@ -15,7 +15,7 @@ type MobileMenuElement = {
 export const mobileMenuConfig: MobileMenuElement[] = [
     {
         icon: 'fa-solid fa-list',
-        title: 'Statements list',
+        title: 'Statements',
         path: `${Path.market}/${MobilePath.statementsList}`,
     },
     {
