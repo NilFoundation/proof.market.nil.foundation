@@ -1,5 +1,5 @@
 /**
- * @file React routing.
+ * @file React component.
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 

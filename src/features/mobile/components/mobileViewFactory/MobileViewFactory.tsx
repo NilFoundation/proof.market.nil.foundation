@@ -4,11 +4,10 @@
  */
 
 import type { ReactElement } from 'react';
-import { Layout } from '@nilfoundation/react-components';
-import { Outlet, useOutletContext } from 'react-router-dom';
-import { ReadonlyAccessProvider, FullScreenLoader, Header } from '../../../../components';
-import { MobileMenu } from '../mobileMenu/MobileMenu';
+import { useOutletContext } from 'react-router-dom';
 import { StatementsList } from '@/features/statementsList';
+import type { MobileOutletContext } from '../../models/MobileOutletContext';
+import { MobileMenuItem } from '../../enums/MobileMenuItem';
 
 /**
  * Mobile content factory.
@@ -16,10 +15,10 @@ import { StatementsList } from '@/features/statementsList';
  * @returns React element.
  */
 const MobileViewFactory = (): ReactElement => {
-    const selectedMenuItem = useOutletContext();
+    const { selectedMenuOption } = useOutletContext<MobileOutletContext>();
 
-    switch (selectedMenuItem) {
-        case 'Statements':
+    switch (selectedMenuOption) {
+        case MobileMenuItem.statements:
             return <StatementsList />;
         default:
             return <></>;

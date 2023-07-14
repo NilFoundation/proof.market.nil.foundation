@@ -9,6 +9,8 @@ import { Layout } from '@nilfoundation/react-components';
 import { Outlet } from 'react-router-dom';
 import { ReadonlyAccessProvider, FullScreenLoader, Header } from '../../../../components';
 import { MobileMenu } from '../mobileMenu/MobileMenu';
+import type { MobileOutletContext } from '../../models/MobileOutletContext';
+import { MobileMenuItem } from '../../enums/MobileMenuItem';
 
 /**
  * Mobile app layout.
@@ -16,15 +18,22 @@ import { MobileMenu } from '../mobileMenu/MobileMenu';
  * @returns React element.
  */
 const MobileLayout = (): ReactElement => {
-    const [selectedMenuOption, setSeleectedMenuOption] = useState<string>();
+    const [selectedMenuOption, setSeleectedMenuOption] = useState<MobileMenuItem>(
+        MobileMenuItem.statements,
+    );
 
     return (
         <Layout
             header={<Header />}
-            footer={<MobileMenu onSetMenuItem={setSeleectedMenuOption} />}
+            footer={
+                <MobileMenu
+                    selectedMenuOption={selectedMenuOption}
+                    onSetMenuOption={setSeleectedMenuOption}
+                />
+            }
         >
             <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
-                <Outlet context={selectedMenuOption} />
+                <Outlet context={{ selectedMenuOption } satisfies MobileOutletContext} />
             </ReadonlyAccessProvider>
         </Layout>
     );

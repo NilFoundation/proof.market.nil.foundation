@@ -32,10 +32,10 @@ export const mobileRoutesConfig: RouteObject[] = [
                 ),
             },
             {
-                element: <MobileLayout />,
+                element: <ProtectedRoute readonlyAccess />,
                 children: [
                     {
-                        element: <ProtectedRoute readonlyAccess />,
+                        element: <MobileLayout />,
                         children: [
                             {
                                 path: Path.market,

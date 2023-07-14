@@ -3,26 +3,26 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
+import { MobileMenuItem } from '../enums/MobileMenuItem';
+
 type MobileMenuElement = {
-    icon: string;
-    key: string;
+    key: MobileMenuItem;
 };
 
+/**
+ * Mobile menu configuration.
+ */
 export const mobileMenuConfig: MobileMenuElement[] = [
     {
-        icon: 'fa-solid fa-list',
-        key: 'Statements',
+        key: MobileMenuItem.statements,
     },
     {
-        icon: 'fa-solid fa-chart-simple',
-        key: 'Charts',
+        key: MobileMenuItem.charts,
     },
     {
-        icon: 'fa-solid fa-list-check',
-        key: 'Trades',
+        key: MobileMenuItem.trades,
     },
     {
-        icon: 'fa-solid fa-money-check-dollar',
-        key: 'Last proof producer',
+        key: MobileMenuItem.lastProofProducer,
     },
 ];

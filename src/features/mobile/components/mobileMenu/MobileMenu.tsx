@@ -1,15 +1,17 @@
 /**
- * @file Layout.
+ * @file React component.
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
 import type { ReactElement } from 'react';
 import { Nav } from '@nilfoundation/react-components';
 import { mobileMenuConfig } from '../../constants/mobileMenuConfig';
+import type { MobileMenuItem } from '../../enums/MobileMenuItem';
 import styles from './MobileMenu.module.scss';
 
 type MobileMenuProps = {
-    onSetMenuItem: (item: string) => void;
+    selectedMenuOption?: MobileMenuItem;
+    onSetMenuOption: (item: MobileMenuItem) => void;
 };
 
 /**
@@ -18,7 +20,10 @@ type MobileMenuProps = {
  * @param {MobileMenuProps} props - Component props.
  * @returns React element.
  */
-export const MobileMenu = ({ onSetMenuItem }: MobileMenuProps): ReactElement => {
+export const MobileMenu = ({
+    selectedMenuOption,
+    onSetMenuOption,
+}: MobileMenuProps): ReactElement => {
     return (
         <Nav
             className={styles.menu}
@@ -27,7 +32,8 @@ export const MobileMenu = ({ onSetMenuItem }: MobileMenuProps): ReactElement => 
             {mobileMenuConfig.map(({ key }) => (
                 <Nav.Item
                     key={key}
-                    onClick={() => onSetMenuItem(key)}
+                    active={selectedMenuOption === key}
+                    onClick={() => onSetMenuOption(key)}
                 >
                     {key}
                 </Nav.Item>
