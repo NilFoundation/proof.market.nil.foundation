@@ -1,0 +1,12 @@
+@import "@/styles/constants.scss";
+
+.content {
+  background-color: $c-base-darker;
+  flex-grow: 1;
+}
+
+.layout {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+}

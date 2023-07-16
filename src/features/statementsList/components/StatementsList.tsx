@@ -35,7 +35,7 @@ const StatementsList = (): ReactElement => {
     });
 
     return (
-        <DashboardCard>
+        <DashboardCard className={styles.wrapper}>
             <h4>Statement list</h4>
             <div className={styles.container}>
                 {loadingStatements && !statementsList.length ? (

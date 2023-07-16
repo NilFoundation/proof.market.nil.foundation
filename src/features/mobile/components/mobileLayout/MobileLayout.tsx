@@ -5,12 +5,12 @@
 
 import type { ReactElement } from 'react';
 import { useState } from 'react';
-import { Layout } from '@nilfoundation/react-components';
 import { Outlet } from 'react-router-dom';
 import { ReadonlyAccessProvider, FullScreenLoader, Header } from '../../../../components';
 import { MobileMenu } from '../mobileMenu/MobileMenu';
-import type { MobileOutletContext } from '../../models/MobileOutletContext';
 import { MobileMenuItem } from '../../enums/MobileMenuItem';
+import { MobileMenuContext } from './MobileMenuContext';
+import styles from './MobileLayout.module.scss';
 
 /**
  * Mobile app layout.
@@ -23,19 +23,20 @@ const MobileLayout = (): ReactElement => {
     );
 
     return (
-        <Layout
-            header={<Header />}
-            footer={
-                <MobileMenu
-                    selectedMenuOption={selectedMenuOption}
-                    onSetMenuOption={setSeleectedMenuOption}
-                />
-            }
-        >
-            <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
-                <Outlet context={{ selectedMenuOption } satisfies MobileOutletContext} />
-            </ReadonlyAccessProvider>
-        </Layout>
+        <div className={styles.layout}>
+            <Header />
+            <div className={styles.content}>
+                <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
+                    <MobileMenuContext.Provider value={{ selectedMenuOption }}>
+                        <Outlet />
+                    </MobileMenuContext.Provider>
+                </ReadonlyAccessProvider>
+            </div>
+            <MobileMenu
+                selectedMenuOption={selectedMenuOption}
+                onSetMenuOption={setSeleectedMenuOption}
+            />
+        </div>
     );
 };
 

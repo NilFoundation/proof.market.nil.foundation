@@ -5,6 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Container, Navbar, Nav } from '@nilfoundation/react-components';
+import clsx from 'clsx';
 import { documentationUrl, navigationLinks } from '@/constants';
 import { useBreakpoint } from '@/features/shared';
 import { UserMenu } from '../../login';
@@ -13,16 +14,24 @@ import { RouterLink } from '../RouterLink';
 import styles from './Header.module.scss';
 
 /**
+ * Props.
+ */
+type HeaderProps = {
+    className?: string;
+};
+
+/**
  * Header.
  *
+ * @param {HeaderProps} props Props.
  * @returns React component.
  */
-export const Header = (): ReactElement => {
+export const Header = ({ className }: HeaderProps): ReactElement => {
     const bp = useBreakpoint();
     const isMobile = bp === 'sm';
 
     return (
-        <Navbar className={styles.navbar}>
+        <Navbar className={clsx(styles.navbar, className)}>
             <Container
                 className={styles.container}
                 fluid
