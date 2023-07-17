@@ -61,6 +61,6 @@ export const UserOrdersReducer = createReducer(initialState, builder =>
         }))
         .addCase(RemoveUserRequest, (state, { payload }) => ({
             ...state,
-            proposals: state.requests.filter(x => x._key !== payload),
+            requests: state.requests.filter(x => x._key !== payload),
         })),
 );

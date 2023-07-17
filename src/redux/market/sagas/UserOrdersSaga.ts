@@ -67,7 +67,7 @@ function* GetUserOrdersSaga(): SagaIterator<void> {
         }
 
         if (userRequests !== undefined) {
-            yield put(UpdateUserRequestsList(userProposals));
+            yield put(UpdateUserRequestsList(userRequests));
         }
     } catch (e) {
         yield put(UpdateGettingUserOrdersError(true));
