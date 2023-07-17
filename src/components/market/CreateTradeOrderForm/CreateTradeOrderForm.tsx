@@ -151,6 +151,21 @@ export const CreateTradeOrderForm = ({
                 </Details>
                 {children}
             </div>
+            <div className={styles.errorMsg}>
+                <CSSTransition
+                    classNames="fade"
+                    timeout={300}
+                    in={!!errorMessage}
+                    nodeRef={nodeRef}
+                >
+                    <span
+                        ref={nodeRef}
+                        className="errorMessage"
+                    >
+                        {errorMessage}
+                    </span>
+                </CSSTransition>
+            </div>
             <Button
                 variant={Variant.success}
                 onClick={onSubmit}
@@ -161,19 +176,6 @@ export const CreateTradeOrderForm = ({
                 Submit
                 {isSubmitting && <Spinner />}
             </Button>
-            <CSSTransition
-                classNames="fade"
-                timeout={300}
-                in={!!errorMessage}
-                nodeRef={nodeRef}
-            >
-                <div
-                    ref={nodeRef}
-                    className="errorMessage"
-                >
-                    {errorMessage}
-                </div>
-            </CSSTransition>
         </Form>
     );
 };

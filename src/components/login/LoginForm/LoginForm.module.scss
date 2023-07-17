@@ -21,3 +21,9 @@
     transition: background-color 5000s ease-in-out 0s;
   }
 }
+
+.errorMsg {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}

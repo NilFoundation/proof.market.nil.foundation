@@ -27,6 +27,7 @@ import type { RegisterData } from '@/models';
 import { signUp, checkIsUsernameUnique } from '@/api';
 import { AuthCard } from '../AuthCard';
 import styles from './RegisterForm.module.scss';
+import { getApiErrorMessage } from '@/utils';
 
 const usernameRequiredMinLength = 3;
 const usernameAndPwdMaxLength = 30;
@@ -52,6 +53,7 @@ export const RegisterForm = (): ReactElement => {
 
     const inputAnimationRef = useRef(null);
     const buttonAnimationRef = useRef(null);
+    const errorMsgAnimationRef = useRef(null);
     const userNameInputRef = useRef<HTMLInputElement | null>(null);
     const navigate = useNavigate();
     const {
@@ -74,8 +76,15 @@ export const RegisterForm = (): ReactElement => {
 
             navigate(Path.login, { state });
         } catch (e) {
-            const errorMessage = e?.response?.data?.errorMessage ?? 'Register error';
-            setErrorMessage(errorMessage);
+            const internalErrorMsg = await getApiErrorMessage(e);
+
+            let visibleErrorMsg = 'Register error';
+
+            if (internalErrorMsg) {
+                visibleErrorMsg += `: ${internalErrorMsg}`;
+            }
+
+            setErrorMessage(visibleErrorMsg);
         }
     });
 
@@ -206,7 +215,22 @@ export const RegisterForm = (): ReactElement => {
                             </Button>
                         </div>
                     </CSSTransition>
-                    {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+                    <div className={styles.errorMsg}>
+                        <CSSTransition
+                            in={!!errorMessage}
+                            timeout={300}
+                            nodeRef={errorMsgAnimationRef}
+                            unmountOnExit
+                            classNames="fade"
+                        >
+                            <span
+                                ref={errorMsgAnimationRef}
+                                className="errorMessage"
+                            >
+                                {errorMessage}
+                            </span>
+                        </CSSTransition>
+                    </div>
                 </div>
                 <div className={styles.bottomBlock}>
                     <div className={styles.social}>

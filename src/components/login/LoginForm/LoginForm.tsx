@@ -25,6 +25,7 @@ import { useLogin } from '@/hooks';
 import type { LoginData } from '@/models';
 import { AuthCard } from '../AuthCard';
 import styles from './LoginForm.module.scss';
+import { getApiErrorMessage } from '@/utils';
 
 /**
  * Password input type.
@@ -61,7 +62,15 @@ export const LoginForm = (): ReactElement => {
             const { jwt } = await login(data);
             await processLogin(jwt);
         } catch (e) {
-            setErrorMessage('Login error');
+            const internalErrorMsg = await getApiErrorMessage(e);
+
+            let visibleErrorMsg = 'Login error';
+
+            if (internalErrorMsg) {
+                visibleErrorMsg += `: ${internalErrorMsg}`;
+            }
+
+            setErrorMessage(visibleErrorMsg);
         }
     });
 
@@ -146,20 +155,22 @@ export const LoginForm = (): ReactElement => {
                         {isSubmitting && <Spinner />}
                     </Button>
                 </div>
-                <CSSTransition
-                    classNames="fade"
-                    timeout={300}
-                    in={!!errorMessage}
-                    unmountOnExit
-                    nodeRef={nodeRef}
-                >
-                    <div
-                        ref={nodeRef}
-                        className="errorMessage"
+                <div className={styles.errorMsg}>
+                    <CSSTransition
+                        in={!!errorMessage}
+                        timeout={300}
+                        nodeRef={nodeRef}
+                        unmountOnExit
+                        classNames="fade"
                     >
-                        {errorMessage}
-                    </div>
-                </CSSTransition>
+                        <span
+                            ref={nodeRef}
+                            className="errorMessage"
+                        >
+                            {errorMessage}
+                        </span>
+                    </CSSTransition>
+                </div>
                 <h5 className="text-muted text-center">{"Don't have an account? "}</h5>
                 <Link
                     to={Path.register}

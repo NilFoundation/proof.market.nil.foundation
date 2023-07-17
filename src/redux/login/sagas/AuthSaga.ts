@@ -27,14 +27,13 @@ export function* AuthSaga(): SagaIterator<void> {
  */
 function* TryGetUserFromLocalStorageTokenSaga(): SagaIterator<void> {
     const token = getItemFromLocalStorage<string>('userToken');
-    console.log(token);
 
     if (!token) {
         return;
     }
 
     const user = getUserFromJwt(token);
-    console.log(user);
+
     if (user) {
         yield put(UpdateUserName(user));
         yield put(UpdateIsAuthorized(true));

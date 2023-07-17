@@ -14,12 +14,12 @@
     flex-direction: column;
 
     .formContent {
-      height: 460px;
+      height: 440px;
       overflow: auto;
       @include hideScrollbar;
 
       @include responsive(sm) {
-        height: 428px;
+        height: 408px;
       }
     }
 

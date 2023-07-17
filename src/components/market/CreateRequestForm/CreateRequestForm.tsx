@@ -14,6 +14,7 @@ import type { CreateRequest } from '@/models';
 import { OrderManagementContext } from '../OrderManagementContextProvider';
 import { CreateTradeOrderForm } from '../CreateTradeOrderForm';
 import { PublicInput } from './PublicInput';
+import { getApiErrorMessage } from '@/utils';
 
 /**
  * Create request form.
@@ -48,7 +49,15 @@ export const CreateRequestForm = (): ReactElement => {
             });
             form.reset();
         } catch (e) {
-            setErrorMessage('Create order error');
+            const internalErrorMsg = await getApiErrorMessage(e);
+
+            let visibleErrorMsg = 'Create order error';
+
+            if (internalErrorMsg) {
+                visibleErrorMsg += `: ${internalErrorMsg}`;
+            }
+
+            setErrorMessage(visibleErrorMsg);
         } finally {
             setProcessing(false);
         }

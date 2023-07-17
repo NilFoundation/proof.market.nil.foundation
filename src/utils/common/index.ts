@@ -8,3 +8,4 @@ export * from './renderDashOnEmptyValue';
 export * from './longDashSymbol';
 export * from './capitalizeFirstChar';
 export * from './ValueOf';
+export * from './getApiErrorMessage';
