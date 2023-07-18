@@ -25,11 +25,11 @@ export interface TradeOrder extends CreateTradeOrder {
     /**
      * Time of trade order creation.
      */
-    createdOn: string;
+    createdOn: number;
     /**
      * Matched time.
      */
-    matched_time?: string;
+    matched_time?: number;
     /**
      * Real generation time.
      */

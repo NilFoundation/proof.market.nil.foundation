@@ -90,10 +90,18 @@ export const useInfiniteLoadTrades = ({
     );
 
     return {
-        items: loadedItemsState.items,
+        items: loadedItemsState.items.sort(sortTradesByUpdatedOnTime),
         loading,
         error,
         loadMoreItems,
         hasMore: loadedItemsState.hasNextPage,
     };
 };
+
+function sortTradesByUpdatedOnTime(a: Proposal, b: Proposal) {
+    if (!a.updatedOn || !b.updatedOn) {
+        return 0;
+    }
+
+    return b.updatedOn - a.updatedOn;
+}

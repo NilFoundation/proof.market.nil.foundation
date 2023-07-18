@@ -21,5 +21,5 @@ export interface Request extends TradeOrder {
     /**
      * Time, when request was accepted, either - null.
      */
-    updatedOn: string | null;
+    updatedOn: number | null;
 }

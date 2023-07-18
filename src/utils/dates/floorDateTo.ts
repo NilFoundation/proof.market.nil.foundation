@@ -8,12 +8,12 @@ import { DateUnit } from '@/enums';
 /**
  * Round date string to provided time value. Always rounds down.
  *
- * @param dateString Date string.
+ * @param dateTimestamp Date.
  * @param floorTo Round date to.
  * @returns Date.
  */
-export const floorDateTo = (dateString: string, floorTo: DateUnit): Date => {
-    const date = new Date(dateString);
+export const floorDateTo = (dateTimestamp: number, floorTo: DateUnit): Date => {
+    const date = new Date(dateTimestamp);
 
     switch (floorTo) {
         case DateUnit.minute:

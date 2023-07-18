@@ -61,7 +61,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
         }
 
         const currentItem = items.at(index)!;
-        const { cost, generation_time, matched_time } = currentItem;
+        const { cost, generation_time, updatedOn } = currentItem;
         const nextItem = items.at(index + 1);
 
         const className = nextItem ? getRowClass(nextItem, currentItem) : '';
@@ -72,7 +72,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
                 className={className}
                 role="row"
             >
-                <TCell>{formatDate(matched_time!, 'DD.MM HH:mm')}</TCell>
+                <TCell>{formatDate(updatedOn!, 'DD.MM HH:mm')}</TCell>
                 <TCell>{cost.toFixed(4)}</TCell>
                 <TCell>{renderDashOnEmptyValue(generation_time)}</TCell>
             </TRow>

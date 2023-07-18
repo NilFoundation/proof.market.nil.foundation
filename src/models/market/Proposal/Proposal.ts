@@ -12,5 +12,5 @@ export interface Proposal extends TradeOrder {
     /**
      * Time, when proposal was accepted, either - null.
      */
-    updatedOn: string | null;
+    updatedOn: number | null;
 }
