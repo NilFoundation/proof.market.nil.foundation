@@ -95,7 +95,7 @@
       src="/tomlParser.js">
     </script>
     <script type="text/javascript">
-      async function loadConfig() {
+      function loadConfig() {
         var configPath;
 
         // ejs syntax
@@ -105,10 +105,19 @@
           configPath = './runtime-config.dev.toml';
         }
 
-        var result = await fetch(configPath);
-        var rawConfig = await result.text();
-        config = tomlParser.parse(rawConfig);
-        window['RUNTIME_CONFIG'] = config;
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", configPath, false);
+
+        rawFile.onreadystatechange = function () {
+          if(rawFile.readyState === 4)  {
+            if(rawFile.status === 200 || rawFile.status == 0) {
+              var rawConfig = rawFile.responseText;
+              config = tomlParser.parse(rawConfig);
+              window['RUNTIME_CONFIG'] = config;
+            }
+          }
+        }
+        rawFile.send(null);
       }
 
       loadConfig();
