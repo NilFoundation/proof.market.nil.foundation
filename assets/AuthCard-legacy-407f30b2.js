@@ -1,1 +1,0 @@
-System.register(["./index-legacy-5edbbf2d.js"],(function(e,t){"use strict";var r,c,s;return{setters:[e=>{r=e.p,c=e.bc,s=e.bd}],execute:function(){e("A",(({children:e})=>r(c,{className:s.authCard,children:e})))}}}));

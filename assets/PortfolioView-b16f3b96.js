@@ -1,0 +1,1 @@
+import{v as a,Z as o,p as i,W as s,$ as t,a0 as r,b3 as e,a2 as l}from"./index-7371ffba.js";const n=()=>a(o,{as:"main",fluid:!0,"data-sb":"portfolioView",children:[i(s,{children:i("title",{children:"Portfolio"})}),a(t,{children:[i(r,{xs:12,children:i(e,{})}),i(r,{xs:12,children:i(l,{})})]})]});export{n as default};
