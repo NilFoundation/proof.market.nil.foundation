@@ -14,7 +14,7 @@ import type {
     UTCTimestamp,
     WhitespaceData,
 } from 'lightweight-charts';
-import { useAppSelector, selectChartData } from '@/redux';
+import { useAppSelector, selectSortedChartData } from '@/redux';
 import { getUTCTimestamp } from '@/utils';
 import { DateUnit } from '@/enums';
 import colors from '@/styles/export.module.scss';
@@ -44,7 +44,7 @@ export const useGetStatementDashboardData = (
     dataRange = DateUnit.day,
 ): UseGetStatementDashboardDataReturnType => {
     const loadingData = useAppSelector(s => s.statementsState.isLoading || s.chartsState.isLoading);
-    const proposals = useSelector(selectChartData, deepEqual);
+    const proposals = useSelector(selectSortedChartData, deepEqual);
     const grouppedOrders = useMemo(() => {
         return reduceOrdersByDate(proposals, dataRange);
     }, [proposals, dataRange]);

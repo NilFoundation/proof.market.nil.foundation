@@ -90,7 +90,7 @@ export const useInfiniteLoadTrades = ({
     );
 
     return {
-        items: loadedItemsState.items.sort(sortTradesByUpdatedOnTime),
+        items: loadedItemsState.items.sort(sortTradesByUpdatedOnTimeDesc),
         loading,
         error,
         loadMoreItems,
@@ -98,7 +98,7 @@ export const useInfiniteLoadTrades = ({
     };
 };
 
-function sortTradesByUpdatedOnTime(a: Proposal, b: Proposal) {
+function sortTradesByUpdatedOnTimeDesc(a: Proposal, b: Proposal) {
     if (!a.updatedOn || !b.updatedOn) {
         return 0;
     }
