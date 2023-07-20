@@ -6,9 +6,9 @@
 import { call, fork, put, takeLatest, select } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
 import type { OrderBookDataOptions } from '@/api';
-import { getProposals, getOrderBookData } from '@/api';
+import { getOrderBookData } from '@/api';
 import { ProtectedCall } from '@/redux';
-import type { Proposal, LastOrderData, OrderBookData, TradeOrder } from '@/models';
+import type { Proposal, LastOrderData, OrderBookData } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import {
     UpdateSelectedStatementKey,
@@ -17,8 +17,13 @@ import {
     UpdateOrderBookDataError,
     UpdateOrderBookPriceStep,
     UpdateOrderBookLastOrderData,
+    UpdateChartsData,
 } from '../actions';
-import { selectCurrentStatementKey, selectOrderBookPriceStep } from '../selectors';
+import {
+    selectCurrentStatementKey,
+    selectOrderBookPriceStep,
+    selectSortedChartData,
+} from '../selectors';
 import { RevalidateSaga } from '../../common';
 
 const revalidateDataDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
@@ -38,7 +43,7 @@ export function* OrderBookSaga(): SagaIterator<void> {
     });
 
     yield fork(RevalidateSaga, GetOrderBookDataSaga, revalidateDataDelay);
-    yield fork(RevalidateSaga, GetLastOrderDataSaga, revalidateDataDelay);
+    yield takeLatest(UpdateChartsData, GetLastOrderDataSaga);
 }
 
 /**
@@ -91,17 +96,11 @@ function* GetLastOrderDataSaga(): SagaIterator<void> {
     }
 
     try {
-        const apiCallParameters: Partial<TradeOrder> = {
-            statement_key: currentStatementKey,
-            status: 'completed',
-        };
-
-        const lastTwoCompletedProposals: Proposal[] = yield call(
-            ProtectedCall,
-            getProposals,
-            apiCallParameters,
-            2,
-        );
+        /**
+         * @todo After moving to websocets it's better not to use chart data in orderbook, and move it to higher level.
+         */
+        const completedPoposals = yield select(selectSortedChartData);
+        const lastTwoCompletedProposals = completedPoposals.slice(-2);
 
         if (lastTwoCompletedProposals === undefined || lastTwoCompletedProposals.length === 0) {
             yield put(UpdateOrderBookLastOrderData(undefined));
@@ -123,8 +122,8 @@ function* GetLastOrderDataSaga(): SagaIterator<void> {
  * @returns Last order data.
  */
 const getLastOrderData = (lastTwoCompletedProposals: Proposal[]): LastOrderData => {
-    const latestCost = lastTwoCompletedProposals.at(0)?.cost;
-    const prevCost = lastTwoCompletedProposals.at(1)?.cost;
+    const latestCost = lastTwoCompletedProposals.at(1)?.cost;
+    const prevCost = lastTwoCompletedProposals.at(0)?.cost;
 
     const getType = () => (latestCost! > prevCost! ? 'grow' : 'loss');
     const type = latestCost && prevCost ? getType() : undefined;
