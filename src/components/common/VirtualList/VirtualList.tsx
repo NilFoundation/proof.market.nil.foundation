@@ -4,6 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
+import { forwardRef } from 'react';
 import type { FixedSizeListProps } from 'react-window';
 import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
@@ -22,18 +23,16 @@ type VirtualListProps = {
  * @param {VirtualListProps} props Props.
  * @returns React component.
  */
-export const VirtualList = ({
-    isItemLoaded,
-    children,
-    loadMoreItems,
-    itemCount,
-    ...rest
-}: VirtualListProps): ReactElement => {
+export const VirtualList = forwardRef<InfiniteLoader, VirtualListProps>(function VirtualList(
+    { isItemLoaded, children, loadMoreItems, itemCount, ...rest },
+    ref,
+): ReactElement {
     return (
         <InfiniteLoader
             loadMoreItems={loadMoreItems}
             itemCount={itemCount}
             isItemLoaded={isItemLoaded}
+            ref={ref}
         >
             {({ onItemsRendered, ref }) => (
                 <List
@@ -48,4 +47,4 @@ export const VirtualList = ({
             )}
         </InfiniteLoader>
     );
-};
+});

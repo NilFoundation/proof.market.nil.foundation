@@ -3,6 +3,5 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './charts';
-export * from './manageOrders';
-export * from './trades';
+export * from './useInfiniteLoadTrades';
+export * from './useRevalidateTradesData';
