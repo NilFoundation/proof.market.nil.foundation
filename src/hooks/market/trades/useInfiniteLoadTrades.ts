@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState, useRef, useMemo } from 'react';
 import { getProposals } from '@/api';
 import type { Proposal } from '@/models';
 
@@ -44,6 +44,11 @@ export const useInfiniteLoadTrades = ({
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+
+    const items = useMemo(
+        () => loadedItemsState.items.sort(sortTradesByUpdatedOnTimeDesc),
+        [loadedItemsState.items],
+    );
 
     const loadMoreItems = useCallback(
         async (startIndex: number, stopIndex: number) => {
@@ -90,7 +95,7 @@ export const useInfiniteLoadTrades = ({
     );
 
     return {
-        items: loadedItemsState.items.sort(sortTradesByUpdatedOnTimeDesc),
+        items,
         loading,
         error,
         loadMoreItems,
@@ -105,3 +110,5 @@ function sortTradesByUpdatedOnTimeDesc(a: Proposal, b: Proposal) {
 
     return b.updatedOn - a.updatedOn;
 }
+
+// detect how to revalidate here

@@ -5,6 +5,10 @@
 
 import { useEffect, useRef } from 'react';
 import type InfiniteLoader from 'react-window-infinite-loader';
+import { useInterval } from '@/hooks';
+import { getRuntimeConfigOrThrow } from '@/utils';
+
+const { REVALIDATE_DATA_INTERVAL } = getRuntimeConfigOrThrow();
 
 /**
  * Revalidate infinite loader data.
@@ -19,12 +23,12 @@ export const useRevalidateTradesData = () => {
         hasMountedRef.current = true;
     }, []);
 
-    setInterval(() => {
+    useInterval(() => {
         if (listRef.current && hasMountedRef.current) {
             console.log('here');
-            listRef.current.resetloadMoreItemsCache();
+            listRef.current.resetloadMoreItemsCache(true);
         }
-    }, 5000);
+    }, Number(REVALIDATE_DATA_INTERVAL));
 
     return listRef;
 };

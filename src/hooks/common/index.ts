@@ -9,3 +9,4 @@ export * from './table';
 export * from './useSyncUrlAndSelectedItem';
 export * from './useWindowHeight';
 export * from './useOnClickOutside';
+export * from './useInterval';
