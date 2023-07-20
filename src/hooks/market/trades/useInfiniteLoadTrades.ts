@@ -110,5 +110,3 @@ function sortTradesByUpdatedOnTimeDesc(a: Proposal, b: Proposal) {
 
     return b.updatedOn - a.updatedOn;
 }
-
-// detect how to revalidate here
