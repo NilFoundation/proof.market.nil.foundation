@@ -4,4 +4,3 @@
  */
 
 export * from './useInfiniteLoadTrades';
-export * from './useRevalidateTradesData';

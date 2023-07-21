@@ -10,7 +10,7 @@ import type { ListChildComponentProps } from 'react-window';
 import { Table, TRow, TCell, THead, THeader, TBody, VirtualList } from '@/components';
 import { formatDate, renderDashOnEmptyValue } from '@/utils';
 import type { Proposal } from '@/models';
-import { useInfiniteLoadTrades, useRevalidateTradesData } from '@/hooks';
+import { useInfiniteLoadTrades } from '@/hooks';
 import styles from './TradeHistory.module.scss';
 
 /**
@@ -44,8 +44,7 @@ const tradeHistoryTableHeadConfig: Array<Record<'Header', string>> = [
 export const TradeHistoryTable = memo(function TradeHistoryTable({
     selectedStatementKey,
 }: TradeHistoryTableProps): ReactElement {
-    const listRef = useRevalidateTradesData();
-    const { items, loadMoreItems, loading, error, hasMore } = useInfiniteLoadTrades({
+    const { items, loadMoreItems, loading, error, hasMore, listRef } = useInfiniteLoadTrades({
         selectedStatementKey,
     });
 
