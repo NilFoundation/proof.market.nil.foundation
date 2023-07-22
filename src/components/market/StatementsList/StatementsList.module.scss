@@ -24,8 +24,7 @@ div.selected {
 .listGroup {
   @include styledList;
   @include hideScrollbar;
-  height: 460px;
-  flex-grow: 1;
+  height: 406px;
   overflow: auto;
   padding-top: 8px;
   @include overflowFade(8px, true);
