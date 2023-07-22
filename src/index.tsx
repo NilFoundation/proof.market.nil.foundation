@@ -19,12 +19,7 @@ import { configureSentry } from './sentry';
 import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-<<<<<<< HEAD
 import { checkRuntimeConfig } from './utils';
-import { theme } from './baseuiTheme';
-=======
-import { getRuntimeConfigOrThrow, checkRuntimeConfig } from './utils';
->>>>>>> a4ac104 (add new ui kit theme #121)
 import './index.scss';
 
 checkRuntimeConfig();
