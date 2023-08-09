@@ -14,16 +14,20 @@ import UserStatementInfoContent from '@/components/portfolio/UserStatementInfoCo
 import ProposalContent from '@/components/portfolio/PortfolioProposalsInfoContent/PortfolioProposalsInfoContent';
 import AuthLayout from '@/layouts/AuthLayout';
 import MainLayout from '@/layouts/MainLayout';
-import { Path } from './Paths';
+import { Path } from '../models/Paths';
 
-const MarketView = lazy(() => import(/* webpackChunkName: "MarketView" */ '../views/MarketView'));
-const LoginView = lazy(() => import(/* webpackChunkName: "LoginView" */ '../views/LoginView'));
-const PortfolioView = lazy(
-    () => import(/* webpackChunkName: "PortfolioView" */ '../views/PortfolioView'),
+const MarketView = lazy(
+    () => import(/* webpackChunkName: "MarketView" */ '../../../views/MarketView'),
 );
-const Page404 = lazy(() => import(/* webpackChunkName: "Page404" */ '../views/404'));
+const LoginView = lazy(
+    () => import(/* webpackChunkName: "LoginView" */ '../../../views/LoginView'),
+);
+const PortfolioView = lazy(
+    () => import(/* webpackChunkName: "PortfolioView" */ '../../../views/PortfolioView'),
+);
+const Page404 = lazy(() => import(/* webpackChunkName: "Page404" */ '../../../views/404'));
 const RegisterView = lazy(
-    () => import(/* webpackChunkName: "RegisterView" */ '../views/RegisterView'),
+    () => import(/* webpackChunkName: "RegisterView" */ '../../../views/RegisterView'),
 );
 
 /**
@@ -90,7 +94,7 @@ export const routesConfig: RouteObject[] = [
                                         ),
                                     },
                                     {
-                                        path: `${Path.requests}`,
+                                        path: Path.requests,
                                         element: <RequestsContent />,
                                         children: [
                                             {
@@ -100,7 +104,7 @@ export const routesConfig: RouteObject[] = [
                                         ],
                                     },
                                     {
-                                        path: `${Path.proposals}`,
+                                        path: Path.proposals,
                                         element: <ProposalContent />,
                                         children: [
                                             {

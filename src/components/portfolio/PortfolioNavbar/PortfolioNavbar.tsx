@@ -5,7 +5,7 @@
 
 import { Nav } from '@nilfoundation/react-components';
 import { DashboardCard, RouterLink } from '@/components';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import styles from './PortfolioNavbar.module.scss';
 
 /**

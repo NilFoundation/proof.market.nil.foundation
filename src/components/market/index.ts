@@ -3,7 +3,6 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './StatementsList';
 export * from './StatementDetailedInfo';
 export * from './StatementDashboard';
 export * from './OrderBook';

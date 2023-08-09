@@ -16,7 +16,7 @@ import {
 import { ObjectAsPlainTextViewer } from '@/components';
 import type { PortfolioProposalsInfo } from '@/models';
 import { mapToHumanReadablePortfolioProposalsInfo } from '@/models';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import { useSyncUrlAndSelectedItem } from '@/hooks';
 import { RouterParam } from '@/enums';
 import { PortfolioInfoList } from '../PortfolioInfoList';

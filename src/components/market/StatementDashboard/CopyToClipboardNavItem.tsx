@@ -10,7 +10,7 @@ import loadable from '@loadable/component';
 import { useParams } from 'react-router-dom';
 import type { DateUnit, ChartType } from '@/enums';
 import { RouterSearchParam, RouterParam } from '@/enums';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 
 const CopyToClipboard = loadable.lib(() => import('react-copy-to-clipboard'));
 

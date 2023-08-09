@@ -14,16 +14,16 @@ import {
 } from '@/redux';
 import { useSyncUrlAndSelectedItem } from '@/hooks';
 import { RouterParam } from '@/enums';
+import { DashboardCard } from '@/components';
 import { StatementsListTable } from './StatementsListTable';
-import { DashboardCard } from '../../common';
 import styles from './StatementsList.module.scss';
 
 /**
- * Currencies list.
+ * Statements list.
  *
  * @returns React component.
  */
-export const StatementsList = (): ReactElement => {
+const StatementsList = (): ReactElement => {
     const statementsList = useAppSelector(selectStatementsFilteredByTags, deepEqual);
     const loadingStatements = useAppSelector(s => s.statementsState.isLoading);
 
@@ -35,7 +35,7 @@ export const StatementsList = (): ReactElement => {
     });
 
     return (
-        <DashboardCard>
+        <DashboardCard className={styles.wrapper}>
             <h4>Statement list</h4>
             <div className={styles.container}>
                 {loadingStatements && !statementsList.length ? (
@@ -47,3 +47,5 @@ export const StatementsList = (): ReactElement => {
         </DashboardCard>
     );
 };
+
+export default StatementsList;

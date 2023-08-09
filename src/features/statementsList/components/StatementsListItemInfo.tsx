@@ -8,7 +8,7 @@ import { memo } from 'react';
 import { Media, Spinner } from '@nilfoundation/react-components';
 import { useAppSelector } from '@/redux';
 import { siteMoneyTickerAbbreviation } from '@/constants';
-import { PriceChangeIndicator } from '../PriceChangeIndicator';
+import { PriceChangeIndicator } from '@/components/market/PriceChangeIndicator';
 import styles from './StatementsList.module.scss';
 
 /**

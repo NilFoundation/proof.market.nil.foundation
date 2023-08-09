@@ -11,10 +11,10 @@ import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { AddUserRequest, useAppSelector } from '@/redux';
 import { createRequest } from '@/api/market/RequestsApi';
 import type { CreateRequest } from '@/models';
+import { getApiErrorMessage } from '@/utils';
 import { OrderManagementContext } from '../OrderManagementContextProvider';
 import { CreateTradeOrderForm } from '../CreateTradeOrderForm';
 import { PublicInput } from './PublicInput';
-import { getApiErrorMessage } from '@/utils';
 
 /**
  * Create request form.

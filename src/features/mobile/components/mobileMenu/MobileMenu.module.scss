@@ -1,0 +1,22 @@
+@import "@/styles/constants.scss";
+@import "src/styles/mixins/overflowFade";
+@import "src/styles/mixins/hideScrollbar";
+
+.menu {
+  border-top: 1px solid $c-base-light;
+  background-color: $c-base-darker;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 1.5rem 18px 1rem;
+  margin-top: auto;
+  height: 48px;
+  flex-grow: 2;
+
+  @include hideScrollbar;
+  overflow: auto;
+
+  > li {
+    height: 48px;
+  }
+}

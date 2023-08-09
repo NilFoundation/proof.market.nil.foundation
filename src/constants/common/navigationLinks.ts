@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 
 /**
  * App navigation links.

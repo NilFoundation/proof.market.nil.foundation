@@ -19,7 +19,7 @@ import {
 import { CSSTransition } from 'react-transition-group';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation } from 'react-router-dom';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import { login } from '@/api';
 import { useLogin } from '@/hooks';
 import type { LoginData } from '@/models';

@@ -7,7 +7,7 @@ import type { ReactElement } from 'react';
 import { Container, Row, Col, Button, Variant, Size } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Path } from '../routing';
+import { Path } from '../features/routing';
 
 /**
  * Props.

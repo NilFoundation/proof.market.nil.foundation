@@ -15,7 +15,7 @@ import {
 import { ObjectAsPlainTextViewer } from '@/components';
 import type { UserStatementInfo } from '@/models';
 import { mapToHumanReadableUserStatementInfo } from '@/models';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import { useSyncUrlAndSelectedItem } from '@/hooks';
 import { RouterParam } from '@/enums';
 import { PortfolioInfoList } from '../PortfolioInfoList';

@@ -8,7 +8,7 @@ import { Label, ListGroup, Media } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentStatementKey } from '@/redux';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import type { StatementsListData } from '@/models';
 import { siteMoneyTickerAbbreviation } from '@/constants';
 import { StatementsListItemInfo } from './StatementsListItemInfo';

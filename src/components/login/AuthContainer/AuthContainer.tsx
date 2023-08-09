@@ -4,10 +4,11 @@
  */
 
 import type { ReactElement, ReactNode } from 'react';
-import { Icon, useBreakpoints } from '@nilfoundation/react-components';
+import { Icon } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
 import { Copyright, FullScreenView } from '@/components';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
+import { useBreakpoint } from '@/features/shared';
 import styles from './AuthContainer.module.scss';
 
 /**
@@ -24,7 +25,7 @@ type AuthContainerProps = {
  * @returns React component.
  */
 export const AuthContainer = ({ children }: AuthContainerProps): ReactElement => {
-    const { md, lg } = useBreakpoints();
+    const bp = useBreakpoint();
 
     return (
         <FullScreenView
@@ -32,8 +33,8 @@ export const AuthContainer = ({ children }: AuthContainerProps): ReactElement =>
             className={styles.loginContainer}
         >
             {children}
-            {md ||
-                (lg && (
+            {bp === 'md' ||
+                (bp === 'lg' && (
                     <Link
                         className={styles.back}
                         to={Path.market}

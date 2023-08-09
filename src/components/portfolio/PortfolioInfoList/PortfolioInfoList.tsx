@@ -7,7 +7,7 @@ import type { ReactElement } from 'react';
 import { useCallback, memo } from 'react';
 import { ListGroup, Spinner } from '@nilfoundation/react-components';
 import { DashboardCard } from '@/components/common';
-import { Path } from '@/routing';
+import { Path } from '@/features/routing';
 import { PortfolioInfoListItem } from './PortfolioInfoListItem';
 import styles from './PortfolioInfoList.module.scss';
 

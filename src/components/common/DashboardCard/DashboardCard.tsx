@@ -5,6 +5,7 @@
 
 import type { ReactElement, ReactNode } from 'react';
 import { Jumbotron } from '@nilfoundation/react-components';
+import clsx from 'clsx';
 import styles from './DashboardCard.module.scss';
 
 /**
@@ -22,7 +23,7 @@ type DashboardCardProps = {
  * @returns React component.
  */
 export const DashboardCard = ({ children, className }: DashboardCardProps): ReactElement => {
-    return (
-        <Jumbotron className={`${styles.dashboardCard} ${className ?? ''}`}>{children}</Jumbotron>
-    );
+    const cn = clsx(styles.dashboardCard, className);
+
+    return <Jumbotron className={cn}>{children}</Jumbotron>;
 };
