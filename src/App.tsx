@@ -5,7 +5,6 @@
 
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
-import { NotificationProvider } from '@nilfoundation/react-components';
 import { ErrorBoundary, withProfiler } from '@sentry/react';
 import { Helmet } from 'react-helmet-async';
 import { FullScreenLoader, GALocationTracker, PageVisibilityDetector } from './components';
@@ -25,15 +24,13 @@ function App(): ReactElement {
 
     return (
         <ErrorBoundary fallback={<ErrorView />}>
-            <NotificationProvider>
-                <Helmet
-                    titleTemplate={`${baseDocumentTitle} | %s`}
-                    defaultTitle={baseDocumentTitle}
-                />
-                <Suspense fallback={<FullScreenLoader />}>
-                    {bp === 'sm' ? <MobileRouter /> : <Router config={desktopRoutesConfig} />}
-                </Suspense>
-            </NotificationProvider>
+            <Helmet
+                titleTemplate={`${baseDocumentTitle} | %s`}
+                defaultTitle={baseDocumentTitle}
+            />
+            <Suspense fallback={<FullScreenLoader />}>
+                {bp === 'sm' ? <MobileRouter /> : <Router config={desktopRoutesConfig} />}
+            </Suspense>
             <GALocationTracker />
             <PageVisibilityDetector />
         </ErrorBoundary>

@@ -20,14 +20,14 @@ import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { checkRuntimeConfig } from './utils';
-import './index.scss';
+import './style';
 
 checkRuntimeConfig();
 configureSentry();
 configureGA();
 
 const engine = new Styletron();
-const theme = createTheme(engine, { enableDefaultFonts: false });
+const { theme } = createTheme(engine, { enableDefaultFonts: false });
 
 render(
     <React.StrictMode>

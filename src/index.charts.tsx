@@ -17,7 +17,7 @@ import ChartsLayout from './layouts/ChartsLayout';
 import { Path } from './features/routing';
 import ErrorView from './views/ErrorView';
 import Page404 from './views/404';
-import './index.scss';
+import './style';
 
 checkRuntimeConfig();
 
