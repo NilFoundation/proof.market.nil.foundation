@@ -6,7 +6,8 @@
 import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ReadonlyAccessProvider, FullScreenLoader, Header } from '../../../../components';
+import { Navbar } from '@/features/shared';
+import { ReadonlyAccessProvider, FullScreenLoader } from '../../../../components';
 import { MobileMenu } from '../mobileMenu/MobileMenu';
 import { MobileMenuItem } from '../../enums/MobileMenuItem';
 import { MobileMenuContext } from './MobileMenuContext';
@@ -24,7 +25,7 @@ const MobileLayout = (): ReactElement => {
 
     return (
         <div className={styles.layout}>
-            <Header />
+            <Navbar />
             <div className={styles.content}>
                 <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
                     <MobileMenuContext.Provider value={{ selectedMenuOption }}>

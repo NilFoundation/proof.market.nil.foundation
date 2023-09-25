@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Brand, NavigationBar } from '@nilfoundation/ui-kit';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/features/auth';
 import { navbarConfig } from './navbarConfig';
 
 /**

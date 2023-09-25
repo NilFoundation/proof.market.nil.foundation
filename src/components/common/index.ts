@@ -4,8 +4,6 @@
  */
 
 export * from './Footer';
-export * from './Header';
-export * from './BreadCrumbs';
 export * from './Details';
 export * from './DashboardCard';
 export * from './ReactTable';

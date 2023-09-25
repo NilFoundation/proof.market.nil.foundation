@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@loadable/component": "^5.15.3",
+    "@nilfoundation/react-components": "^0.8.3",
     "@nilfoundation/ui-kit": "^2.0.5",
     "@reduxjs/toolkit": "^1.8.5",
     "@sentry/react": "^7.21.1",

@@ -7,7 +7,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Size, Variant } from '@nilfoundation/react-components';
 import { Path } from '@/features/routing';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/features/auth';
 import { Overlay } from '@/components/common';
 import styles from './ProtectedContent.module.scss';
 

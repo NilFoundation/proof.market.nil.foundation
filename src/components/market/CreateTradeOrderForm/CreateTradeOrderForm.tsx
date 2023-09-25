@@ -16,7 +16,7 @@ import {
     Form,
     InputGroup,
 } from '@nilfoundation/react-components';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/features/auth';
 import { siteMoneyTickerAbbreviation } from '@/constants';
 import type { CreateTradeOrder } from '@/models';
 import { Details } from '../../common';
