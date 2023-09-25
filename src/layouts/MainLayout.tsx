@@ -6,8 +6,8 @@
 import type { ReactElement } from 'react';
 import { Layout } from '@nilfoundation/react-components';
 import { Outlet } from 'react-router-dom';
-import { Footer, ReadonlyAccessProvider, FullScreenLoader } from '../components';
-import { Navbar } from '@/features/shared';
+import { Footer, Navbar } from '@/features/shared';
+import { ReadonlyAccessProvider, FullScreenLoader } from '../components';
 
 /**
  * Main app layout.

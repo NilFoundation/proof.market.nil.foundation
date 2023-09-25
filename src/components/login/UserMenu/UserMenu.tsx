@@ -7,7 +7,7 @@ import type { ReactElement } from 'react';
 import loadable from '@loadable/component';
 import { Button, Dropdown, Icon, Menu, Spinner } from '@nilfoundation/react-components';
 import { useNavigate } from 'react-router-dom';
-import { useAuth, useLogout } from '@/hooks';
+import { useAuth, useLogout } from '@/features/auth';
 import { Path } from '@/features/routing';
 import styles from './UserMenu.module.scss';
 

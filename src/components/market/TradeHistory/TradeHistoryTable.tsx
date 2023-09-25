@@ -7,10 +7,11 @@ import type { ReactElement } from 'react';
 import { memo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import type { ListChildComponentProps } from 'react-window';
-import { Table, TRow, TCell, THead, THeader, TBody, VirtualList } from '@/components';
+import { Table, TRow, TCell, THead, THeader, TBody } from '@/components';
 import { formatDate, renderDashOnEmptyValue } from '@/utils';
 import type { Proposal } from '@/models';
 import { useInfiniteLoadTrades } from '@/hooks';
+import { VirtualList } from '@/features/shared';
 import styles from './TradeHistory.module.scss';
 
 /**

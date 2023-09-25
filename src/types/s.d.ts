@@ -1,6 +1,6 @@
 /**
- * @file Index.
+ * @file Typings.
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './VirtualList';
+declare module 'inline-style-expand-shorthand';

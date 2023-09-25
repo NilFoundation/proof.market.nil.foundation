@@ -7,9 +7,9 @@ import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import type { ListChildComponentProps } from 'react-window';
-import { VirtualList } from '@/components/common';
 import type { PortfolioRequestsInfo, Proof } from '@/models';
 import { useInfiniteLoadProofs, useWindowHeight } from '@/hooks';
+import { VirtualList } from '@/features/shared';
 import { ProofListItem } from './ProofListItem';
 import styles from './ProofList.module.scss';
 
