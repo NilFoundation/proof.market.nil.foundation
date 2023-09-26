@@ -6,3 +6,5 @@
 export { useAuth } from './hooks/useAuth';
 export { useLogout } from './hooks/useLogout';
 export { useLogin } from './hooks/useLogin';
+
+export * from './components/ProtectedContent/ProtectedContent';
