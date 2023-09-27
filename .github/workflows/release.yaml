@@ -1,4 +1,7 @@
 name: Release
+# This workflow is triggered when a tag in master branch is created.
+# It creates a release with current version.
+
 on:
   push:
     tags:
@@ -13,3 +16,4 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           generateReleaseNotes: true
+          token: ${{ secrets.PUSH_TOKEN }}
