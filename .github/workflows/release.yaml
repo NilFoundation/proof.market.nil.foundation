@@ -1,19 +1,31 @@
-name: Release
-# This workflow is triggered when a tag in master branch is created.
-# It creates a release with current version.
+name: Version
+# This workflow is triggered on push to master branch and can be triggered manually.
+# It pushes new package version to external storage.
 
 on:
+  workflow_dispatch:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - master
+    paths:
+      - "src/**"
+
 jobs:
-  release:
+  build:
+    name: Version
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: ncipollo/release-action@v1
-        with:
-          generateReleaseNotes: true
-          token: ${{ secrets.PUSH_TOKEN }}
+    - name: Checkout
+      uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: Update version
+      run: |
+        npm version ${{ inputs.release_type || 'patch' }}
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PUSH_TOKEN }}
+        branch: master
+        tags: true
