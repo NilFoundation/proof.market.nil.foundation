@@ -7,6 +7,6 @@
  * Trade order type.
  */
 export enum TradeOrderType {
-    buy = 'BUY',
-    sell = 'SELL',
+  buy = 'BUY',
+  sell = 'SELL',
 }

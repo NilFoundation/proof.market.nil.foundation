@@ -22,34 +22,34 @@ import styles from './OrderBook.module.scss';
  * @returns React component.
  */
 export const OrderBook = (): ReactElement => {
-    const [displayUserOrders, setDisplayUserOrders] = useLocalStorage<boolean>(
-        'displayUserOrdersInOrderbook',
-        true,
-    );
+  const [displayUserOrders, setDisplayUserOrders] = useLocalStorage<boolean>(
+    'displayUserOrdersInOrderbook',
+    true,
+  );
 
-    const data = useAppSelector(selectOrderBookData, deepEqual);
-    const lastOrderData = useAppSelector(selectLastOrderData, deepEqual);
-    const isLoading = useAppSelector(s => s.orderBookState.isLoading);
-    const gettingDataError = useAppSelector(s => s.orderBookState.hasApiError);
+  const data = useAppSelector(selectOrderBookData, deepEqual);
+  const lastOrderData = useAppSelector(selectLastOrderData, deepEqual);
+  const isLoading = useAppSelector(s => s.orderBookState.isLoading);
+  const gettingDataError = useAppSelector(s => s.orderBookState.hasApiError);
 
-    return (
-        <DashboardCard>
-            <OrderBookSettingsContext.Provider value={{ displayUserOrders, setDisplayUserOrders }}>
-                <div className={styles.header}>
-                    <h4>Order book</h4>
-                    <OrderBookToolbar disabled={isLoading} />
-                </div>
-                <div className={styles.orderBook}>
-                    {OrderBookViewFactory({
-                        data,
-                        isLoading,
-                        isError: gettingDataError,
-                        lastOrderData,
-                    })}
-                </div>
-            </OrderBookSettingsContext.Provider>
-        </DashboardCard>
-    );
+  return (
+    <DashboardCard>
+      <OrderBookSettingsContext.Provider value={{ displayUserOrders, setDisplayUserOrders }}>
+        <div className={styles.header}>
+          <h4>Order book</h4>
+          <OrderBookToolbar disabled={isLoading} />
+        </div>
+        <div className={styles.orderBook}>
+          {OrderBookViewFactory({
+            data,
+            isLoading,
+            isError: gettingDataError,
+            lastOrderData,
+          })}
+        </div>
+      </OrderBookSettingsContext.Provider>
+    </DashboardCard>
+  );
 };
 
 /**
@@ -63,51 +63,49 @@ export const OrderBook = (): ReactElement => {
  * @returns React element.
  */
 const OrderBookViewFactory = ({
-    data,
-    isLoading,
-    isError,
-    lastOrderData,
+  data,
+  isLoading,
+  isError,
+  lastOrderData,
 }: {
-    data: OrderBookData;
-    isLoading: boolean;
-    isError: boolean;
-    lastOrderData?: LastOrderData;
+  data: OrderBookData;
+  isLoading: boolean;
+  isError: boolean;
+  lastOrderData?: LastOrderData;
 }) => {
-    const { proposals, requests } = data;
+  const { proposals, requests } = data;
 
-    switch (true) {
-        case isLoading && !proposals.length && !requests.length:
-            return <Spinner grow />;
-        case isError:
-            return <h5>Error while loading data.</h5>;
-        case !!proposals.length || !!requests.length:
-            return (
-                <>
-                    <OrderBookTable
-                        type="requests"
-                        data={requests}
-                    />
-                    <div className={styles.lastDeal}>
-                        {lastOrderData && (
-                            <>
-                                <div className={styles.lastDealTitle}>Last deal:</div>
-                                {lastOrderData.cost && (
-                                    <div className={`${lastOrderData.type}TextColor`}>
-                                        {`${lastOrderData.cost.toFixed(
-                                            4,
-                                        )} ${siteMoneyTickerAbbreviation}`}
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </div>
-                    <OrderBookTable
-                        type="proposals"
-                        data={proposals}
-                    />
-                </>
-            );
-        default:
-            return <h5>No orders.</h5>;
-    }
+  switch (true) {
+    case isLoading && !proposals.length && !requests.length:
+      return <Spinner grow />;
+    case isError:
+      return <h5>Error while loading data.</h5>;
+    case !!proposals.length || !!requests.length:
+      return (
+        <>
+          <OrderBookTable
+            type="requests"
+            data={requests}
+          />
+          <div className={styles.lastDeal}>
+            {lastOrderData && (
+              <>
+                <div className={styles.lastDealTitle}>Last deal:</div>
+                {lastOrderData.cost && (
+                  <div className={`${lastOrderData.type}TextColor`}>
+                    {`${lastOrderData.cost.toFixed(4)} ${siteMoneyTickerAbbreviation}`}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+          <OrderBookTable
+            type="proposals"
+            data={proposals}
+          />
+        </>
+      );
+    default:
+      return <h5>No orders.</h5>;
+  }
 };

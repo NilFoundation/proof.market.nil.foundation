@@ -15,12 +15,12 @@ import { SetPageIsVisible } from '@/redux';
  * @returns .
  */
 export const PageVisibilityDetector = (): ReactElement => {
-    const isVisible = usePageVisibility();
-    const dispatch = useDispatch();
+  const isVisible = usePageVisibility();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(SetPageIsVisible(isVisible));
-    }, [isVisible, dispatch]);
+  useEffect(() => {
+    dispatch(SetPageIsVisible(isVisible));
+  }, [isVisible, dispatch]);
 
-    return <></>;
+  return <></>;
 };

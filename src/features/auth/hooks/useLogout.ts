@@ -14,13 +14,13 @@ import { clearAuthLocalStorageState } from '@/utils';
  * @returns Logout callback.
  */
 export const useLogout = (): (() => void) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const processLogout = useCallback(() => {
-        dispatch(UpdateUserName(null));
-        dispatch(UpdateIsAuthorized(false));
-        clearAuthLocalStorageState();
-    }, [dispatch]);
+  const processLogout = useCallback(() => {
+    dispatch(UpdateUserName(null));
+    dispatch(UpdateIsAuthorized(false));
+    clearAuthLocalStorageState();
+  }, [dispatch]);
 
-    return processLogout;
+  return processLogout;
 };

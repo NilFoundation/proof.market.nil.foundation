@@ -13,12 +13,12 @@ import { LoginForm } from '../components';
  * @returns React component.
  */
 const LoginView = (): ReactElement => (
-    <>
-        <Helmet>
-            <title>Login</title>
-        </Helmet>
-        <LoginForm />
-    </>
+  <>
+    <Helmet>
+      <title>Login</title>
+    </Helmet>
+    <LoginForm />
+  </>
 );
 
 export default LoginView;

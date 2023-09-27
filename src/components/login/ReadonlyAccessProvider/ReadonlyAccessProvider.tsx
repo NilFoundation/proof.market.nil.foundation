@@ -13,9 +13,9 @@ import { getRuntimeConfigOrThrow } from '@/utils';
  * Props.
  */
 type ReadonlyAccessProviderProps = {
-    children?: ReactNode;
-    fallback?: ReactNode;
-    errorView?: ReactNode;
+  children?: ReactNode;
+  fallback?: ReactNode;
+  errorView?: ReactNode;
 };
 
 /**
@@ -25,36 +25,36 @@ type ReadonlyAccessProviderProps = {
  * @returns React component.
  */
 export const ReadonlyAccessProvider = ({
-    children,
-    fallback,
-    errorView,
+  children,
+  fallback,
+  errorView,
 }: ReadonlyAccessProviderProps): ReactElement => {
-    const [error, setError] = useState(false);
-    const processLogin = useLogin();
-    const { isAuthorized } = useAuth();
+  const [error, setError] = useState(false);
+  const processLogin = useLogin();
+  const { isAuthorized } = useAuth();
 
-    useEffect(() => {
-        const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
+  useEffect(() => {
+    const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 
-        const loginWithReadonly = async (user: string) => {
-            try {
-                const { jwt } = await login({
-                    username: user,
-                    password: '',
-                });
+    const loginWithReadonly = async (user: string) => {
+      try {
+        const { jwt } = await login({
+          username: user,
+          password: '',
+        });
 
-                await processLogin(jwt);
-            } catch (e) {
-                setError(true);
-            }
-        };
+        await processLogin(jwt);
+      } catch (e) {
+        setError(true);
+      }
+    };
 
-        !isAuthorized && loginWithReadonly(readonlyUser!);
-    }, [processLogin, isAuthorized]);
+    !isAuthorized && loginWithReadonly(readonlyUser!);
+  }, [processLogin, isAuthorized]);
 
-    if (error) {
-        return <>{errorView}</>;
-    }
+  if (error) {
+    return <>{errorView}</>;
+  }
 
-    return <>{isAuthorized ? children : fallback ?? null}</>;
+  return <>{isAuthorized ? children : fallback ?? null}</>;
 };

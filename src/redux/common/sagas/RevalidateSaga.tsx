@@ -19,34 +19,34 @@ import { StartDataRevalidation, StopDataRevalidation } from '../actions';
  * @yields
  */
 export function* RevalidateSaga<T extends (...args: unknown[]) => unknown>(
-    fnToRevalidate: T,
-    revalidateInterval: number,
-    ...args: Parameters<T>
+  fnToRevalidate: T,
+  revalidateInterval: number,
+  ...args: Parameters<T>
 ): SagaIterator {
-    while (true) {
-        const { payload, type } = yield take([UpdateUserName, StartDataRevalidation]);
+  while (true) {
+    const { payload, type } = yield take([UpdateUserName, StartDataRevalidation]);
 
-        if (type === StartDataRevalidation.type || payload) {
-            yield call(Revalidate, fnToRevalidate, revalidateInterval, ...args);
-        }
+    if (type === StartDataRevalidation.type || payload) {
+      yield call(Revalidate, fnToRevalidate, revalidateInterval, ...args);
     }
+  }
 }
 
 function* Revalidate<T extends (...args: unknown[]) => unknown>(
-    fnToRevalidate: T,
-    revalidateInterval: number,
-    ...args: Parameters<T>
+  fnToRevalidate: T,
+  revalidateInterval: number,
+  ...args: Parameters<T>
 ): SagaIterator {
-    const task = yield fork(function* () {
-        while (true) {
-            yield call(fnToRevalidate, ...args);
-            yield delay(revalidateInterval);
-        }
-    });
-
-    const { payload, type } = yield take([UpdateUserName, StopDataRevalidation]);
-
-    if (type === StopDataRevalidation.type || !payload) {
-        yield cancel(task);
+  const task = yield fork(function* () {
+    while (true) {
+      yield call(fnToRevalidate, ...args);
+      yield delay(revalidateInterval);
     }
+  });
+
+  const { payload, type } = yield take([UpdateUserName, StopDataRevalidation]);
+
+  if (type === StopDataRevalidation.type || !payload) {
+    yield cancel(task);
+  }
 }

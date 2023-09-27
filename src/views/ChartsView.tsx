@@ -19,56 +19,56 @@ import { selectStatements, selectCurrentStatement, UpdateSelectedStatementKey } 
  * @returns React component.
  */
 const ChartsView = (): ReactElement => {
-    const params = useParams();
-    const [searchParams] = useSearchParams();
-    const chartType = params[RouterParam.chartType];
-    const dateRange = searchParams.get(RouterSearchParam.chartDataRange);
-    const displayVolumes = searchParams.get(RouterSearchParam.chartDisplayVolumes);
-    const windowHeight = useWindowHeight();
+  const params = useParams();
+  const [searchParams] = useSearchParams();
+  const chartType = params[RouterParam.chartType];
+  const dateRange = searchParams.get(RouterSearchParam.chartDataRange);
+  const displayVolumes = searchParams.get(RouterSearchParam.chartDisplayVolumes);
+  const windowHeight = useWindowHeight();
 
-    const computedDateRange: DateUnit = useMemo(
-        () =>
-            Object.values(DateUnit).some(x => x === dateRange)
-                ? (dateRange as DateUnit)
-                : DateUnit.minute,
-        [dateRange],
-    );
+  const computedDateRange: DateUnit = useMemo(
+    () =>
+      Object.values(DateUnit).some(x => x === dateRange)
+        ? (dateRange as DateUnit)
+        : DateUnit.minute,
+    [dateRange],
+  );
 
-    useSyncUrlAndSelectedItem({
-        urlParamToSync: RouterParam.statementName,
-        actionToUpdateSelectedItem: UpdateSelectedStatementKey,
-        itemSelector: selectCurrentStatement,
-        allItemsSelector: selectStatements,
-    });
+  useSyncUrlAndSelectedItem({
+    urlParamToSync: RouterParam.statementName,
+    actionToUpdateSelectedItem: UpdateSelectedStatementKey,
+    itemSelector: selectCurrentStatement,
+    allItemsSelector: selectStatements,
+  });
 
-    return (
-        <Container
-            as="main"
-            fluid
-        >
-            <Row noGutters>
-                <Col xs={12}>
-                    <ChartsViewFactory
-                        chartType={chartType}
-                        displayVolumes={!!displayVolumes}
-                        dataRange={computedDateRange}
-                        height={windowHeight - 24}
-                    />
-                </Col>
-            </Row>
-        </Container>
-    );
+  return (
+    <Container
+      as="main"
+      fluid
+    >
+      <Row noGutters>
+        <Col xs={12}>
+          <ChartsViewFactory
+            chartType={chartType}
+            displayVolumes={!!displayVolumes}
+            dataRange={computedDateRange}
+            height={windowHeight - 24}
+          />
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default ChartsView;
 
 const ChartsViewFactory = ({ chartType, ...rest }: { chartType?: string } & ChartBaseProps) => {
-    switch (chartType) {
-        case ChartType.proofCostChart:
-            return <ProofCostChart {...rest} />;
-        case ChartType.proofGetTimeChart:
-            return <ProofTimeGenChart {...rest} />;
-        default:
-            return <></>;
-    }
+  switch (chartType) {
+    case ChartType.proofCostChart:
+      return <ProofCostChart {...rest} />;
+    case ChartType.proofGetTimeChart:
+      return <ProofTimeGenChart {...rest} />;
+    default:
+      return <></>;
+  }
 };

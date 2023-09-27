@@ -7,16 +7,16 @@
  * User balance.
  */
 export interface UserBalance {
-    /**
-     * User balance.
-     */
-    balance?: number;
-    /**
-     * Order status.
-     */
-    blocked?: number;
-    /**
-     * Id of accepted Order.
-     */
-    user: string;
+  /**
+   * User balance.
+   */
+  balance?: number;
+  /**
+   * Order status.
+   */
+  blocked?: number;
+  /**
+   * Id of accepted Order.
+   */
+  user: string;
 }

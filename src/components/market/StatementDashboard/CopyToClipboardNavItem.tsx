@@ -18,10 +18,10 @@ const CopyToClipboard = loadable.lib(() => import('react-copy-to-clipboard'));
  * Props.
  */
 type CopyToClipboardNavItemProps = {
-    disabled: boolean;
-    chartType: ChartType;
-    chartDataRange: DateUnit;
-    displayVolumes: boolean;
+  disabled: boolean;
+  chartType: ChartType;
+  chartDataRange: DateUnit;
+  displayVolumes: boolean;
 };
 
 /**
@@ -31,57 +31,57 @@ type CopyToClipboardNavItemProps = {
  * @returns React component.
  */
 export const CopyToClipboardNavItem = ({
-    disabled,
-    chartType,
-    chartDataRange,
-    displayVolumes,
+  disabled,
+  chartType,
+  chartDataRange,
+  displayVolumes,
 }: CopyToClipboardNavItemProps): ReactElement => {
-    const statementName = useParams()[RouterParam.statementName];
+  const statementName = useParams()[RouterParam.statementName];
 
-    const shareChartText = useMemo(() => {
-        let baseUrl = `${window.location.protocol}//${window.location.hostname}`;
+  const shareChartText = useMemo(() => {
+    let baseUrl = `${window.location.protocol}//${window.location.hostname}`;
 
-        if (import.meta.env.DEV) {
-            baseUrl += `:${window.location.port}`;
-        }
+    if (import.meta.env.DEV) {
+      baseUrl += `:${window.location.port}`;
+    }
 
-        const path = `${Path.charts}/#/${statementName}/${chartType}`;
+    const path = `${Path.charts}/#/${statementName}/${chartType}`;
 
-        let urlSearchParams = `?${RouterSearchParam.chartDataRange}=${chartDataRange}`;
+    let urlSearchParams = `?${RouterSearchParam.chartDataRange}=${chartDataRange}`;
 
-        if (displayVolumes) {
-            urlSearchParams += `&${RouterSearchParam.chartDisplayVolumes}=true`;
-        }
+    if (displayVolumes) {
+      urlSearchParams += `&${RouterSearchParam.chartDisplayVolumes}=true`;
+    }
 
-        const src = baseUrl + path + urlSearchParams;
+    const src = baseUrl + path + urlSearchParams;
 
-        return `<iframe src="${src}" title="${chartType}"></iframe>`;
-    }, [chartType, statementName, chartDataRange, displayVolumes]);
+    return `<iframe src="${src}" title="${chartType}"></iframe>`;
+  }, [chartType, statementName, chartDataRange, displayVolumes]);
 
-    return (
-        <CopyToClipboard fallback={<></>}>
-            {({ default: Lib }) => {
-                return (
-                    <Lib.CopyToClipboard
-                        text={shareChartText}
-                        onCopy={() =>
-                            notificationActions?.create({
-                                title: 'Copied to clipboard',
-                                variant: Variant.success,
-                                lifeTime: 1080,
-                            })
-                        }
-                    >
-                        <Nav.Item disabled={disabled}>
-                            <Icon
-                                iconName="fa-solid fa-code"
-                                srOnlyText="Copy share chart html"
-                                title="Share"
-                            />
-                        </Nav.Item>
-                    </Lib.CopyToClipboard>
-                );
-            }}
-        </CopyToClipboard>
-    );
+  return (
+    <CopyToClipboard fallback={<></>}>
+      {({ default: Lib }) => {
+        return (
+          <Lib.CopyToClipboard
+            text={shareChartText}
+            onCopy={() =>
+              notificationActions?.create({
+                title: 'Copied to clipboard',
+                variant: Variant.success,
+                lifeTime: 1080,
+              })
+            }
+          >
+            <Nav.Item disabled={disabled}>
+              <Icon
+                iconName="fa-solid fa-code"
+                srOnlyText="Copy share chart html"
+                title="Share"
+              />
+            </Nav.Item>
+          </Lib.CopyToClipboard>
+        );
+      }}
+    </CopyToClipboard>
+  );
 };

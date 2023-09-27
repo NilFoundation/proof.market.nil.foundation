@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
 
 function getWindowDimensions() {
-    const { innerHeight: height, innerWidth: width } = window;
-    return { height, width };
+  const { innerHeight: height, innerWidth: width } = window;
+  return { height, width };
 }
 
 /**
@@ -17,16 +17,16 @@ function getWindowDimensions() {
  * @returns Window dimwnsions.
  */
 export const useWindowDimensions = () => {
-    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
-    useEffect(() => {
-        const handleResize = debounce(() => {
-            setWindowDimensions(getWindowDimensions());
-        }, 100);
+  useEffect(() => {
+    const handleResize = debounce(() => {
+      setWindowDimensions(getWindowDimensions());
+    }, 100);
 
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-    return windowDimensions;
+  return windowDimensions;
 };

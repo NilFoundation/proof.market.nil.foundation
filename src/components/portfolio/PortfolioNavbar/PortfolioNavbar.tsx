@@ -14,35 +14,35 @@ import styles from './PortfolioNavbar.module.scss';
  * @returns React component.
  */
 export const PortfolioNavbar = () => {
-    return (
-        <DashboardCard className={styles.container}>
-            <Nav>
-                {navConfig.map(({ text, link }) => (
-                    <RouterLink
-                        key={text}
-                        title={text}
-                        to={link}
-                    />
-                ))}
-            </Nav>
-        </DashboardCard>
-    );
+  return (
+    <DashboardCard className={styles.container}>
+      <Nav>
+        {navConfig.map(({ text, link }) => (
+          <RouterLink
+            key={text}
+            title={text}
+            to={link}
+          />
+        ))}
+      </Nav>
+    </DashboardCard>
+  );
 };
 
 /**
  * Navbar links configuration.
  */
 const navConfig = [
-    {
-        text: 'Requests',
-        link: `${Path.portfolio}/${Path.requests}`,
-    },
-    {
-        text: 'Proposals',
-        link: `${Path.portfolio}/${Path.proposals}`,
-    },
-    {
-        text: 'Statements',
-        link: `${Path.portfolio}/${Path.statements}`,
-    },
+  {
+    text: 'Requests',
+    link: `${Path.portfolio}/${Path.requests}`,
+  },
+  {
+    text: 'Proposals',
+    link: `${Path.portfolio}/${Path.proposals}`,
+  },
+  {
+    text: 'Statements',
+    link: `${Path.portfolio}/${Path.statements}`,
+  },
 ];

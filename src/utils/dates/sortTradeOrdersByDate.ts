@@ -12,4 +12,4 @@ import type { Proposal, Request } from '@/models';
  * @returns Comparsion result.
  */
 export const sortTradeOrdersByDate = <T extends Request | Proposal>(first: T, second: T): number =>
-    Date.parse(first.createdOn.toString()) - Date.parse(second.createdOn.toString());
+  Date.parse(first.createdOn.toString()) - Date.parse(second.createdOn.toString());

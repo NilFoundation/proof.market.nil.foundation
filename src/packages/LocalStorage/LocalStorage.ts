@@ -12,15 +12,15 @@ import type { LocalStorageKey } from './LocalStorageKey';
  * @returns Item value.
  */
 export const getItemFromLocalStorage = <T>(ItemKey: LocalStorageKey): T | undefined => {
-    try {
-        const serialisedValue = localStorage.getItem(ItemKey);
-        if (serialisedValue === null) {
-            return undefined;
-        }
-        return JSON.parse(serialisedValue);
-    } catch {
-        return undefined;
+  try {
+    const serialisedValue = localStorage.getItem(ItemKey);
+    if (serialisedValue === null) {
+      return undefined;
     }
+    return JSON.parse(serialisedValue);
+  } catch {
+    return undefined;
+  }
 };
 
 /**
@@ -30,12 +30,12 @@ export const getItemFromLocalStorage = <T>(ItemKey: LocalStorageKey): T | undefi
  * @param ItemValue - Value.
  */
 export const setItemIntoLocalStorage = <T>(ItemKey: LocalStorageKey, ItemValue: T): void => {
-    try {
-        const serialisedValue = JSON.stringify(ItemValue);
-        localStorage.setItem(ItemKey, serialisedValue);
-    } catch {
-        // Do nothing
-    }
+  try {
+    const serialisedValue = JSON.stringify(ItemValue);
+    localStorage.setItem(ItemKey, serialisedValue);
+  } catch {
+    // Do nothing
+  }
 };
 
 /**
@@ -44,9 +44,9 @@ export const setItemIntoLocalStorage = <T>(ItemKey: LocalStorageKey, ItemValue: 
  * @param ItemKey - Key.
  */
 export const removeItemFromLocalStorage = (ItemKey: LocalStorageKey): void => {
-    try {
-        localStorage.removeItem(ItemKey);
-    } catch {
-        // Do nothing
-    }
+  try {
+    localStorage.removeItem(ItemKey);
+  } catch {
+    // Do nothing
+  }
 };

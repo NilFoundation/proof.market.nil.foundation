@@ -18,7 +18,7 @@ import styles from './OrderBook.module.scss';
  * Props.
  */
 type OrderBookToolbarProps = {
-    disabled: boolean;
+  disabled: boolean;
 };
 
 /**
@@ -28,58 +28,58 @@ type OrderBookToolbarProps = {
  * @returns React component.
  */
 export const OrderBookToolbar = ({ disabled }: OrderBookToolbarProps): ReactElement => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { displayUserOrders, setDisplayUserOrders } = useContext(OrderBookSettingsContext);
-    const { isReadonly } = useAuth();
+  const { displayUserOrders, setDisplayUserOrders } = useContext(OrderBookSettingsContext);
+  const { isReadonly } = useAuth();
 
-    const priceStep = useAppSelector(selectOrderBookPriceStep);
-    const setPriceStep = useCallback(
-        (priceStep: OrderBookPriceStepType) => {
-            dispatch(UpdateOrderBookPriceStep(priceStep));
-        },
-        [dispatch],
-    );
+  const priceStep = useAppSelector(selectOrderBookPriceStep);
+  const setPriceStep = useCallback(
+    (priceStep: OrderBookPriceStepType) => {
+      dispatch(UpdateOrderBookPriceStep(priceStep));
+    },
+    [dispatch],
+  );
 
-    return (
-        <>
-            <div className={styles.checkboxContainer}>
-                <input
-                    id="toggleDisplayUserOrders"
-                    type="checkbox"
-                    className={styles.checkbox}
-                    checked={displayUserOrders}
-                    onChange={() => setDisplayUserOrders(!displayUserOrders)}
-                    disabled={isReadonly}
-                />
-                <label
-                    className={styles.label}
-                    htmlFor="toggleDisplayUserOrders"
-                >
-                    Show my orders
-                </label>
-            </div>
-            <Dropdown>
-                <Dropdown.Button
-                    className={styles.changePriceStepButton}
-                    disabled={disabled}
-                >
-                    {priceStep}
-                </Dropdown.Button>
-                <Dropdown.Menu align="right">
-                    {Object.keys(OrderBookPriceStep)
-                        .sort()
-                        .map(x => (
-                            <Dropdown.Item
-                                key={x}
-                                onSelect={() => setPriceStep(x as OrderBookPriceStepType)}
-                                active={x === priceStep}
-                            >
-                                <span>{x}</span>
-                            </Dropdown.Item>
-                        ))}
-                </Dropdown.Menu>
-            </Dropdown>
-        </>
-    );
+  return (
+    <>
+      <div className={styles.checkboxContainer}>
+        <input
+          id="toggleDisplayUserOrders"
+          type="checkbox"
+          className={styles.checkbox}
+          checked={displayUserOrders}
+          onChange={() => setDisplayUserOrders(!displayUserOrders)}
+          disabled={isReadonly}
+        />
+        <label
+          className={styles.label}
+          htmlFor="toggleDisplayUserOrders"
+        >
+          Show my orders
+        </label>
+      </div>
+      <Dropdown>
+        <Dropdown.Button
+          className={styles.changePriceStepButton}
+          disabled={disabled}
+        >
+          {priceStep}
+        </Dropdown.Button>
+        <Dropdown.Menu align="right">
+          {Object.keys(OrderBookPriceStep)
+            .sort()
+            .map(x => (
+              <Dropdown.Item
+                key={x}
+                onSelect={() => setPriceStep(x as OrderBookPriceStepType)}
+                active={x === priceStep}
+              >
+                <span>{x}</span>
+              </Dropdown.Item>
+            ))}
+        </Dropdown.Menu>
+      </Dropdown>
+    </>
+  );
 };

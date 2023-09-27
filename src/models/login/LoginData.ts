@@ -7,12 +7,12 @@
  * Login data.
  */
 export type LoginData = {
-    /**
-     * User name.
-     */
-    username: string;
-    /**
-     * Password.
-     */
-    password: string;
+  /**
+   * User name.
+   */
+  username: string;
+  /**
+   * Password.
+   */
+  password: string;
 };

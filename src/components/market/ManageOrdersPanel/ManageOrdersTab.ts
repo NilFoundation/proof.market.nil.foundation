@@ -7,6 +7,6 @@
  * Tab.
  */
 export enum ManageOrdersTab {
-    active = 'ACTIVE',
-    history = 'HISTORY',
+  active = 'ACTIVE',
+  history = 'HISTORY',
 }

@@ -18,29 +18,29 @@ import styles from './StatementsList.module.scss';
  * @returns Search by text filter component.
  */
 export const StatementsListTextFilter = ({
-    column: { setFilter },
+  column: { setFilter },
 }: FilterProps<StatementsListData>): ReactElement => {
-    const [filterValue, setFilterValue] = useState('');
-    const debouncedSearch = useRef(
-        debounce(value => {
-            setFilter(value || undefined);
-        }, 300),
-    ).current;
+  const [filterValue, setFilterValue] = useState('');
+  const debouncedSearch = useRef(
+    debounce(value => {
+      setFilter(value || undefined);
+    }, 300),
+  ).current;
 
-    return (
-        <InputGroup className={styles.inputGroup}>
-            <InputGroup.Addon>
-                <Icon iconName="fa-solid fa-search" />
-            </InputGroup.Addon>
-            <Input
-                placeholder="Search statements"
-                type="text"
-                value={filterValue}
-                onChange={e => {
-                    setFilterValue(e.target.value);
-                    debouncedSearch(e.target.value);
-                }}
-            />
-        </InputGroup>
-    );
+  return (
+    <InputGroup className={styles.inputGroup}>
+      <InputGroup.Addon>
+        <Icon iconName="fa-solid fa-search" />
+      </InputGroup.Addon>
+      <Input
+        placeholder="Search statements"
+        type="text"
+        value={filterValue}
+        onChange={e => {
+          setFilterValue(e.target.value);
+          debouncedSearch(e.target.value);
+        }}
+      />
+    </InputGroup>
+  );
 };

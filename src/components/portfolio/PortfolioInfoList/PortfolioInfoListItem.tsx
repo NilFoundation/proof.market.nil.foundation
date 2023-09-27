@@ -12,8 +12,8 @@ import styles from './PortfolioInfoList.module.scss';
  * Props.
  */
 type PortfolioInfoListItemProps = {
-    name: string;
-    path: string;
+  name: string;
+  path: string;
 };
 
 /**
@@ -23,18 +23,18 @@ type PortfolioInfoListItemProps = {
  * @returns React component.
  */
 export const PortfolioInfoListItem = ({ name, path }: PortfolioInfoListItemProps): ReactElement => {
-    const isSelected = useMatch({
-        path: path,
-        end: false,
-    });
+  const isSelected = useMatch({
+    path: path,
+    end: false,
+  });
 
-    return (
-        <ListGroup.Item active={!!isSelected}>
-            <Link to={path}>
-                <Media className={isSelected ? styles.selected : ''}>
-                    <Media.Body className={styles.itemBody}>{name.toUpperCase()}</Media.Body>
-                </Media>
-            </Link>
-        </ListGroup.Item>
-    );
+  return (
+    <ListGroup.Item active={!!isSelected}>
+      <Link to={path}>
+        <Media className={isSelected ? styles.selected : ''}>
+          <Media.Body className={styles.itemBody}>{name.toUpperCase()}</Media.Body>
+        </Media>
+      </Link>
+    </ListGroup.Item>
+  );
 };

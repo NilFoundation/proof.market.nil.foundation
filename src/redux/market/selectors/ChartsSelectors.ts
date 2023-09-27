@@ -22,13 +22,13 @@ const selectChartData = (s: RootStateType): Proposal[] => s.chartsState.data;
  * @returns Chart data.
  */
 export const selectSortedChartData = createSelector(selectChartData, data =>
-    [...data].sort(sortProposalsByUpdatedOnAsc),
+  [...data].sort(sortProposalsByUpdatedOnAsc),
 );
 
 function sortProposalsByUpdatedOnAsc(a: Proposal, b: Proposal) {
-    if (!a.updatedOn || !b.updatedOn) {
-        return 0;
-    }
+  if (!a.updatedOn || !b.updatedOn) {
+    return 0;
+  }
 
-    return a.updatedOn - b.updatedOn;
+  return a.updatedOn - b.updatedOn;
 }

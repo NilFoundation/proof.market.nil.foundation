@@ -13,9 +13,9 @@ import styles from './FullScreenView.module.scss';
  * Props.
  */
 type FullScreenViewProps = {
-    showFullScreen: boolean;
-    children: ReactNode;
-    className?: string;
+  showFullScreen: boolean;
+  children: ReactNode;
+  className?: string;
 };
 
 /**
@@ -25,31 +25,31 @@ type FullScreenViewProps = {
  * @returns React component.
  */
 export const FullScreenView = ({
-    showFullScreen,
-    children,
-    className,
+  showFullScreen,
+  children,
+  className,
 }: FullScreenViewProps): JSX.Element => {
-    const nodeRef = useRef<HTMLDivElement>(null);
+  const nodeRef = useRef<HTMLDivElement>(null);
 
-    return (
-        <>
-            {!showFullScreen && children}
-            <Portal>
-                <CSSTransition
-                    classNames="alert"
-                    timeout={300}
-                    in={showFullScreen}
-                    nodeRef={nodeRef}
-                    unmountOnExit
-                >
-                    <div
-                        className={`${styles.fullScreenView} ${className ?? ''}`}
-                        ref={nodeRef}
-                    >
-                        {children}
-                    </div>
-                </CSSTransition>
-            </Portal>
-        </>
-    );
+  return (
+    <>
+      {!showFullScreen && children}
+      <Portal>
+        <CSSTransition
+          classNames="alert"
+          timeout={300}
+          in={showFullScreen}
+          nodeRef={nodeRef}
+          unmountOnExit
+        >
+          <div
+            className={`${styles.fullScreenView} ${className ?? ''}`}
+            ref={nodeRef}
+          >
+            {children}
+          </div>
+        </CSSTransition>
+      </Portal>
+    </>
+  );
 };

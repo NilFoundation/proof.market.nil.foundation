@@ -11,18 +11,18 @@ import { ProtectedCall } from '@/redux';
 import type { Proposal, LastOrderData, OrderBookData } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import {
-    UpdateSelectedStatementKey,
-    UpdateOrderBookData,
-    UpdateOrderBookDataIsLoading,
-    UpdateOrderBookDataError,
-    UpdateOrderBookPriceStep,
-    UpdateOrderBookLastOrderData,
-    UpdateChartsData,
+  UpdateSelectedStatementKey,
+  UpdateOrderBookData,
+  UpdateOrderBookDataIsLoading,
+  UpdateOrderBookDataError,
+  UpdateOrderBookPriceStep,
+  UpdateOrderBookLastOrderData,
+  UpdateChartsData,
 } from '../actions';
 import {
-    selectCurrentStatementKey,
-    selectOrderBookPriceStep,
-    selectSortedChartData,
+  selectCurrentStatementKey,
+  selectOrderBookPriceStep,
+  selectSortedChartData,
 } from '../selectors';
 import { RevalidateSaga } from '../../common';
 
@@ -34,16 +34,16 @@ const revalidateDataDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INT
  * @yields
  */
 export function* OrderBookSaga(): SagaIterator<void> {
-    yield takeLatest([UpdateSelectedStatementKey, UpdateOrderBookPriceStep], function* () {
-        yield put(UpdateOrderBookData({ proposals: [], requests: [] }));
-        yield put(UpdateOrderBookLastOrderData(undefined));
+  yield takeLatest([UpdateSelectedStatementKey, UpdateOrderBookPriceStep], function* () {
+    yield put(UpdateOrderBookData({ proposals: [], requests: [] }));
+    yield put(UpdateOrderBookLastOrderData(undefined));
 
-        yield fork(GetOrderBookDataSaga);
-        yield fork(GetLastOrderDataSaga);
-    });
+    yield fork(GetOrderBookDataSaga);
+    yield fork(GetLastOrderDataSaga);
+  });
 
-    yield fork(RevalidateSaga, GetOrderBookDataSaga, revalidateDataDelay);
-    yield takeLatest(UpdateChartsData, GetLastOrderDataSaga);
+  yield fork(RevalidateSaga, GetOrderBookDataSaga, revalidateDataDelay);
+  yield takeLatest(UpdateChartsData, GetLastOrderDataSaga);
 }
 
 /**
@@ -52,35 +52,35 @@ export function* OrderBookSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetOrderBookDataSaga(): SagaIterator<void> {
-    const currentStatementKey: string | undefined = yield select(selectCurrentStatementKey);
-    const currentPriceStep = yield select(selectOrderBookPriceStep);
-    const apiCallOptions: OrderBookDataOptions = {
-        priceStep: currentPriceStep,
-    };
+  const currentStatementKey: string | undefined = yield select(selectCurrentStatementKey);
+  const currentPriceStep = yield select(selectOrderBookPriceStep);
+  const apiCallOptions: OrderBookDataOptions = {
+    priceStep: currentPriceStep,
+  };
 
-    if (currentStatementKey === undefined) {
-        return;
+  if (currentStatementKey === undefined) {
+    return;
+  }
+
+  try {
+    yield put(UpdateOrderBookDataError(false));
+    yield put(UpdateOrderBookDataIsLoading(true));
+
+    const apiCallResult: OrderBookData = yield call(
+      ProtectedCall,
+      getOrderBookData,
+      currentStatementKey,
+      apiCallOptions,
+    );
+
+    if (apiCallResult !== undefined) {
+      yield put(UpdateOrderBookData(apiCallResult));
     }
-
-    try {
-        yield put(UpdateOrderBookDataError(false));
-        yield put(UpdateOrderBookDataIsLoading(true));
-
-        const apiCallResult: OrderBookData = yield call(
-            ProtectedCall,
-            getOrderBookData,
-            currentStatementKey,
-            apiCallOptions,
-        );
-
-        if (apiCallResult !== undefined) {
-            yield put(UpdateOrderBookData(apiCallResult));
-        }
-    } catch (e) {
-        yield put(UpdateOrderBookDataError(true));
-    } finally {
-        yield put(UpdateOrderBookDataIsLoading(false));
-    }
+  } catch (e) {
+    yield put(UpdateOrderBookDataError(true));
+  } finally {
+    yield put(UpdateOrderBookDataIsLoading(false));
+  }
 }
 
 /**
@@ -89,30 +89,30 @@ function* GetOrderBookDataSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetLastOrderDataSaga(): SagaIterator<void> {
-    const currentStatementKey: string | undefined = yield select(selectCurrentStatementKey);
+  const currentStatementKey: string | undefined = yield select(selectCurrentStatementKey);
 
-    if (currentStatementKey === undefined) {
-        return;
+  if (currentStatementKey === undefined) {
+    return;
+  }
+
+  try {
+    /**
+     * @todo After moving to websocets it's better not to use chart data in orderbook, and move it to higher level.
+     */
+    const completedPoposals = yield select(selectSortedChartData);
+    const lastTwoCompletedProposals = completedPoposals.slice(-2);
+
+    if (lastTwoCompletedProposals === undefined || lastTwoCompletedProposals.length === 0) {
+      yield put(UpdateOrderBookLastOrderData(undefined));
+
+      return;
     }
 
-    try {
-        /**
-         * @todo After moving to websocets it's better not to use chart data in orderbook, and move it to higher level.
-         */
-        const completedPoposals = yield select(selectSortedChartData);
-        const lastTwoCompletedProposals = completedPoposals.slice(-2);
-
-        if (lastTwoCompletedProposals === undefined || lastTwoCompletedProposals.length === 0) {
-            yield put(UpdateOrderBookLastOrderData(undefined));
-
-            return;
-        }
-
-        const lastOrderData = getLastOrderData(lastTwoCompletedProposals);
-        yield put(UpdateOrderBookLastOrderData(lastOrderData));
-    } catch (e) {
-        yield put(UpdateOrderBookLastOrderData(undefined));
-    }
+    const lastOrderData = getLastOrderData(lastTwoCompletedProposals);
+    yield put(UpdateOrderBookLastOrderData(lastOrderData));
+  } catch (e) {
+    yield put(UpdateOrderBookLastOrderData(undefined));
+  }
 }
 
 /**
@@ -122,15 +122,15 @@ function* GetLastOrderDataSaga(): SagaIterator<void> {
  * @returns Last order data.
  */
 const getLastOrderData = (lastTwoCompletedProposals: Proposal[]): LastOrderData => {
-    const latestCost = lastTwoCompletedProposals.at(1)?.cost;
-    const prevCost = lastTwoCompletedProposals.at(0)?.cost;
+  const latestCost = lastTwoCompletedProposals.at(1)?.cost;
+  const prevCost = lastTwoCompletedProposals.at(0)?.cost;
 
-    const getType = () => (latestCost! > prevCost! ? 'grow' : 'loss');
-    const type = latestCost && prevCost ? getType() : undefined;
+  const getType = () => (latestCost! > prevCost! ? 'grow' : 'loss');
+  const type = latestCost && prevCost ? getType() : undefined;
 
-    return {
-        cost: latestCost,
-        eval_time: lastTwoCompletedProposals.at(0)?.eval_time,
-        type,
-    };
+  return {
+    cost: latestCost,
+    eval_time: lastTwoCompletedProposals.at(0)?.eval_time,
+    type,
+  };
 };

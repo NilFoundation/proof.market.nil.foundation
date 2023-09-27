@@ -11,9 +11,9 @@ import { DateUnit } from '@/enums';
  * Props.
  */
 type DataRangeSelectProps = {
-    disabled: boolean;
-    dataRange: DateUnit;
-    setDataRange: (r: DateUnit) => void;
+  disabled: boolean;
+  dataRange: DateUnit;
+  setDataRange: (r: DateUnit) => void;
 };
 
 /**
@@ -23,22 +23,22 @@ type DataRangeSelectProps = {
  * @returns React component.
  */
 export const DataRangeSelect = ({
-    disabled,
-    dataRange,
-    setDataRange,
+  disabled,
+  dataRange,
+  setDataRange,
 }: DataRangeSelectProps): ReactElement => {
-    return (
-        <Nav>
-            {Object.values(DateUnit).map(x => (
-                <Nav.Item
-                    key={x}
-                    active={dataRange === x}
-                    onClick={() => setDataRange(x)}
-                    disabled={disabled}
-                >
-                    {x}
-                </Nav.Item>
-            ))}
-        </Nav>
-    );
+  return (
+    <Nav>
+      {Object.values(DateUnit).map(x => (
+        <Nav.Item
+          key={x}
+          active={dataRange === x}
+          onClick={() => setDataRange(x)}
+          disabled={disabled}
+        >
+          {x}
+        </Nav.Item>
+      ))}
+    </Nav>
+  );
 };

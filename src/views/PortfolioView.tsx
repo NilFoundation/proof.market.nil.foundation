@@ -15,25 +15,25 @@ import { PortfolioNavbar } from '../components';
  * @returns React component.
  */
 const PortfolioView = (): ReactElement => {
-    return (
-        <Container
-            as="main"
-            fluid
-            data-sb="portfolioView"
-        >
-            <Helmet>
-                <title>Portfolio</title>
-            </Helmet>
-            <Row>
-                <Col xs={12}>
-                    <PortfolioNavbar />
-                </Col>
-                <Col xs={12}>
-                    <Outlet />
-                </Col>
-            </Row>
-        </Container>
-    );
+  return (
+    <Container
+      as="main"
+      fluid
+      data-sb="portfolioView"
+    >
+      <Helmet>
+        <title>Portfolio</title>
+      </Helmet>
+      <Row>
+        <Col xs={12}>
+          <PortfolioNavbar />
+        </Col>
+        <Col xs={12}>
+          <Outlet />
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default PortfolioView;

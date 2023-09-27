@@ -24,28 +24,28 @@ type ProofCostChartProps = ChartBaseProps;
  * @returns React component.
  */
 export const ProofCostChart = (props: ProofCostChartProps): ReactElement => {
-    const seriesOptions = useMemo(
-        () => ({
-            upColor: colors.successColor,
-            downColor: colors.dangerColor,
-            priceLineWidth: 2 as LineWidth,
-        }),
-        [],
-    );
-    const {
-        chartData: { candlestickChartData, volumesData },
-        loadingData: isLoadingChartData,
-    } = useGetStatementDashboardData(props.displayVolumes, props.dataRange);
+  const seriesOptions = useMemo(
+    () => ({
+      upColor: colors.successColor,
+      downColor: colors.dangerColor,
+      priceLineWidth: 2 as LineWidth,
+    }),
+    [],
+  );
+  const {
+    chartData: { candlestickChartData, volumesData },
+    loadingData: isLoadingChartData,
+  } = useGetStatementDashboardData(props.displayVolumes, props.dataRange);
 
-    return (
-        <ChartTemplate
-            loadingData={isLoadingChartData}
-            chartName={`Proof cost, ${siteMoneyTickerAbbreviation}`}
-            seriesData={candlestickChartData}
-            seriesType="Candlestick"
-            seriesOptions={seriesOptions}
-            volumesData={volumesData}
-            {...props}
-        />
-    );
+  return (
+    <ChartTemplate
+      loadingData={isLoadingChartData}
+      chartName={`Proof cost, ${siteMoneyTickerAbbreviation}`}
+      seriesData={candlestickChartData}
+      seriesType="Candlestick"
+      seriesOptions={seriesOptions}
+      volumesData={volumesData}
+      {...props}
+    />
+  );
 };

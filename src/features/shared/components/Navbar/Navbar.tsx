@@ -16,24 +16,24 @@ import { navbarConfig } from './navbarConfig';
  * @returns React component.
  */
 export const Navbar = (): ReactElement => {
-    const { user, isAuthorized, isReadonly } = useAuth();
-    const processLogout = useLogout();
-    const navigate = useNavigate();
-    const { pathname } = useLocation();
+  const { user, isAuthorized, isReadonly } = useAuth();
+  const processLogout = useLogout();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-    return (
-        <NavigationBar
-            items={navbarConfig}
-            username={user ?? undefined}
-            isAuth={isAuthorized && !isReadonly}
-            brand={<Brand />}
-            onLogin={() => navigate(Path.login, { replace: true, state: { from: pathname } })}
-            authDropdownContainer={
-                <AuthDropdownContainer
-                    username={user ?? undefined}
-                    onLogout={processLogout}
-                />
-            }
+  return (
+    <NavigationBar
+      items={navbarConfig}
+      username={user ?? undefined}
+      isAuth={isAuthorized && !isReadonly}
+      brand={<Brand />}
+      onLogin={() => navigate(Path.login, { replace: true, state: { from: pathname } })}
+      authDropdownContainer={
+        <AuthDropdownContainer
+          username={user ?? undefined}
+          onLogout={processLogout}
         />
-    );
+      }
+    />
+  );
 };

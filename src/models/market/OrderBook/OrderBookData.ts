@@ -9,6 +9,6 @@ import type { OrderBookDataItem } from './OrderBookDataItem';
  * Order book data.
  */
 export type OrderBookData = {
-    proposals: OrderBookDataItem[];
-    requests: OrderBookDataItem[];
+  proposals: OrderBookDataItem[];
+  requests: OrderBookDataItem[];
 };

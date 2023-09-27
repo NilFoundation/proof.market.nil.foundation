@@ -37,10 +37,7 @@
       }
     ],
     "react/display-name": 1,
-    "react/jsx-first-prop-new-line": [
-      "warn",
-      "multiline"
-    ],
+    "react/jsx-first-prop-new-line": ["warn", "multiline"],
     "jsx-a11y/anchor-is-valid": 0,
     "jsdoc/require-param-type": 0,
     "jsdoc/require-returns-type": 0,
@@ -51,11 +48,7 @@
       "warn",
       {
         "publicOnly": true,
-        "contexts": [
-          "TSInterfaceDeclaration",
-          "TSTypeAliasDeclaration",
-          "TSEnumDeclaration"
-        ],
+        "contexts": ["TSInterfaceDeclaration", "TSTypeAliasDeclaration", "TSEnumDeclaration"],
         "require": {
           "FunctionExpression": true,
           "ClassDeclaration": true,
@@ -71,19 +64,7 @@
     "import/order": [
       "warn",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          [
-            "sibling",
-            "parent",
-            "index"
-          ],
-          [
-            "object"
-          ]
-        ],
+        "groups": ["builtin", "external", "internal", ["sibling", "parent", "index"], ["object"]],
         "pathGroups": [
           {
             "pattern": "react",
@@ -96,9 +77,7 @@
             "position": "after"
           }
         ],
-        "pathGroupsExcludedImportTypes": [
-          "react"
-        ],
+        "pathGroupsExcludedImportTypes": ["react"],
         "newlines-between": "never",
         "warnOnUnassignedImports": true
       }
@@ -106,10 +85,7 @@
   },
   "settings": {
     "import/parsers": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx"
-      ]
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
       "typescript": {

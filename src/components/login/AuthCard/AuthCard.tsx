@@ -11,7 +11,7 @@ import styles from './AuthCard.module.scss';
  * Props.
  */
 type AuthCardProps = {
-    children: ReactNode;
+  children: ReactNode;
 };
 
 /**
@@ -21,5 +21,5 @@ type AuthCardProps = {
  * @returns React component.
  */
 export const AuthCard = ({ children }: AuthCardProps): ReactElement => {
-    return <Jumbotron className={styles.authCard}>{children}</Jumbotron>;
+  return <Jumbotron className={styles.authCard}>{children}</Jumbotron>;
 };

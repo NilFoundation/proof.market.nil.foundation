@@ -12,8 +12,8 @@ import styles from './DashboardCard.module.scss';
  * Props.
  */
 type DashboardCardProps = {
-    children: ReactNode;
-    className?: string;
+  children: ReactNode;
+  className?: string;
 };
 
 /**
@@ -23,7 +23,7 @@ type DashboardCardProps = {
  * @returns React component.
  */
 export const DashboardCard = ({ children, className }: DashboardCardProps): ReactElement => {
-    const cn = clsx(styles.dashboardCard, className);
+  const cn = clsx(styles.dashboardCard, className);
 
-    return <Jumbotron className={cn}>{children}</Jumbotron>;
+  return <Jumbotron className={cn}>{children}</Jumbotron>;
 };

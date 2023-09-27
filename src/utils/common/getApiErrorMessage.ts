@@ -11,18 +11,18 @@
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getApiErrorMessage = async (e: any) => {
-    try {
-        const response = e.response;
+  try {
+    const response = e.response;
 
-        if (!response) {
-            return undefined;
-        }
-
-        const errJson = await e.response.json();
-        const errorMessage = errJson?.errorMessage;
-
-        return typeof errorMessage === 'string' ? errorMessage : undefined;
-    } catch {
-        return undefined;
+    if (!response) {
+      return undefined;
     }
+
+    const errJson = await e.response.json();
+    const errorMessage = errJson?.errorMessage;
+
+    return typeof errorMessage === 'string' ? errorMessage : undefined;
+  } catch {
+    return undefined;
+  }
 };

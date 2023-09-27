@@ -14,8 +14,8 @@ import type { OrderBookDataItem } from '@/models';
  * Props.
  */
 type OrderBookTableCellProps = {
-    cell: Cell<OrderBookDataItem>;
-    userOrdersAmount?: number;
+  cell: Cell<OrderBookDataItem>;
+  userOrdersAmount?: number;
 };
 
 /**
@@ -25,19 +25,19 @@ type OrderBookTableCellProps = {
  * @returns React component.
  */
 export const OrderBookTableCell = ({
-    cell,
-    userOrdersAmount,
+  cell,
+  userOrdersAmount,
 }: OrderBookTableCellProps): ReactElement => {
-    const { column, value, getCellProps } = cell;
+  const { column, value, getCellProps } = cell;
 
-    return (
-        <TCell {...getCellProps()}>
-            <span>{column.id === 'ordersAmount' ? value : renderDashOnEmptyValue(value)}</span>
-            {!!userOrdersAmount && (
-                <Label>
-                    <span>{userOrdersAmount}</span>
-                </Label>
-            )}
-        </TCell>
-    );
+  return (
+    <TCell {...getCellProps()}>
+      <span>{column.id === 'ordersAmount' ? value : renderDashOnEmptyValue(value)}</span>
+      {!!userOrdersAmount && (
+        <Label>
+          <span>{userOrdersAmount}</span>
+        </Label>
+      )}
+    </TCell>
+  );
 };

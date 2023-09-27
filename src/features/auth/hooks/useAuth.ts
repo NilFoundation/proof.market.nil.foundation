@@ -15,15 +15,15 @@ const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
  * @returns Auth state.
  */
 export const useAuth = () => {
-    const user = useAppSelector(selectUserName);
-    const isAuthorized = useAppSelector(selectIsAuthorized);
-    const isReadonly = useMemo(() => {
-        return user === readonlyUser;
-    }, [user]);
+  const user = useAppSelector(selectUserName);
+  const isAuthorized = useAppSelector(selectIsAuthorized);
+  const isReadonly = useMemo(() => {
+    return user === readonlyUser;
+  }, [user]);
 
-    return {
-        user,
-        isAuthorized,
-        isReadonly,
-    };
+  return {
+    user,
+    isAuthorized,
+    isReadonly,
+  };
 };

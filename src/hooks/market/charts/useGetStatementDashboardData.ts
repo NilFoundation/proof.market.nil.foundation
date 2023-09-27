@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux';
 import { dequal as deepEqual } from 'dequal';
 import sum from 'lodash/sum';
 import type {
-    CandlestickData,
-    HistogramData,
-    LineData,
-    UTCTimestamp,
-    WhitespaceData,
+  CandlestickData,
+  HistogramData,
+  LineData,
+  UTCTimestamp,
+  WhitespaceData,
 } from 'lightweight-charts';
 import { useAppSelector, selectSortedChartData } from '@/redux';
 import { getUTCTimestamp } from '@/utils';
@@ -24,12 +24,12 @@ import type { Proposal, Request } from '@/models';
  * Hook return type.
  */
 type UseGetStatementDashboardDataReturnType = {
-    chartData: {
-        candlestickChartData: CandlestickData[];
-        proofGenTimeData: LineData[];
-        volumesData?: Array<WhitespaceData | HistogramData>;
-    };
-    loadingData: boolean;
+  chartData: {
+    candlestickChartData: CandlestickData[];
+    proofGenTimeData: LineData[];
+    volumesData?: Array<WhitespaceData | HistogramData>;
+  };
+  loadingData: boolean;
 };
 
 /**
@@ -40,25 +40,25 @@ type UseGetStatementDashboardDataReturnType = {
  * @returns Data to draw statement chart.
  */
 export const useGetStatementDashboardData = (
-    withVolumes = false,
-    dataRange = DateUnit.day,
+  withVolumes = false,
+  dataRange = DateUnit.day,
 ): UseGetStatementDashboardDataReturnType => {
-    const loadingData = useAppSelector(s => s.statementsState.isLoading || s.chartsState.isLoading);
-    const proposals = useSelector(selectSortedChartData, deepEqual);
-    const grouppedOrders = useMemo(() => {
-        return reduceOrdersByDate(proposals, dataRange);
-    }, [proposals, dataRange]);
+  const loadingData = useAppSelector(s => s.statementsState.isLoading || s.chartsState.isLoading);
+  const proposals = useSelector(selectSortedChartData, deepEqual);
+  const grouppedOrders = useMemo(() => {
+    return reduceOrdersByDate(proposals, dataRange);
+  }, [proposals, dataRange]);
 
-    const chartData = useMemo(
-        () => ({
-            candlestickChartData: getCandlestickData(grouppedOrders),
-            proofGenTimeData: getProofGenTimeData(grouppedOrders),
-            volumesData: withVolumes ? getVolumesData(grouppedOrders) : undefined,
-        }),
-        [grouppedOrders, withVolumes],
-    );
+  const chartData = useMemo(
+    () => ({
+      candlestickChartData: getCandlestickData(grouppedOrders),
+      proofGenTimeData: getProofGenTimeData(grouppedOrders),
+      volumesData: withVolumes ? getVolumesData(grouppedOrders) : undefined,
+    }),
+    [grouppedOrders, withVolumes],
+  );
 
-    return { chartData, loadingData };
+  return { chartData, loadingData };
 };
 
 /**
@@ -69,15 +69,15 @@ export const useGetStatementDashboardData = (
  * @returns Orders, grouped by date.
  */
 const reduceOrdersByDate = <T extends Request | Proposal>(proposals: T[], dataRange: DateUnit) => {
-    return proposals.reduce((previousValue: Record<string, T[]>, currentValue: T) => {
-        const date = getUTCTimestamp(currentValue.updatedOn!, dataRange);
+  return proposals.reduce((previousValue: Record<string, T[]>, currentValue: T) => {
+    const date = getUTCTimestamp(currentValue.updatedOn!, dataRange);
 
-        if (!previousValue[date]) previousValue[date] = [];
+    if (!previousValue[date]) previousValue[date] = [];
 
-        previousValue[date].push(currentValue);
+    previousValue[date].push(currentValue);
 
-        return previousValue;
-    }, {});
+    return previousValue;
+  }, {});
 };
 
 /**
@@ -87,27 +87,26 @@ const reduceOrdersByDate = <T extends Request | Proposal>(proposals: T[], dataRa
  * @returns Array of candleStick data.
  */
 const getCandlestickData = <T extends Request | Proposal>(
-    ordersGrouppedByDate: Record<string, T[]>,
+  ordersGrouppedByDate: Record<string, T[]>,
 ): CandlestickData[] => {
-    const keys = Object.keys(ordersGrouppedByDate);
+  const keys = Object.keys(ordersGrouppedByDate);
 
-    return keys.map((x, index) => {
-        const ordersCosts = ordersGrouppedByDate[x].map(x => x.cost);
+  return keys.map((x, index) => {
+    const ordersCosts = ordersGrouppedByDate[x].map(x => x.cost);
 
-        const high = Math.max(...ordersCosts);
-        const low = Math.min(...ordersCosts);
-        const open =
-            index === 0 ? ordersCosts[0] : ordersGrouppedByDate[keys[index - 1]].at(-1)!.cost;
-        const close = ordersCosts[ordersCosts.length - 1];
+    const high = Math.max(...ordersCosts);
+    const low = Math.min(...ordersCosts);
+    const open = index === 0 ? ordersCosts[0] : ordersGrouppedByDate[keys[index - 1]].at(-1)!.cost;
+    const close = ordersCosts[ordersCosts.length - 1];
 
-        return {
-            time: Number(x) as UTCTimestamp,
-            high,
-            low,
-            open,
-            close,
-        };
-    });
+    return {
+      time: Number(x) as UTCTimestamp,
+      high,
+      low,
+      open,
+      close,
+    };
+  });
 };
 
 /**
@@ -117,14 +116,14 @@ const getCandlestickData = <T extends Request | Proposal>(
  * @returns Array of line data.
  */
 const getProofGenTimeData = <T extends Request | Proposal>(
-    ordersGrouppedByDate: Record<string, T[]>,
+  ordersGrouppedByDate: Record<string, T[]>,
 ): LineData[] => {
-    return Object.keys(ordersGrouppedByDate).map(x => {
-        const ordersEvalTime = ordersGrouppedByDate[x].map(x => x.generation_time);
-        const averageEvalTime = sum(ordersEvalTime) / ordersEvalTime.length;
+  return Object.keys(ordersGrouppedByDate).map(x => {
+    const ordersEvalTime = ordersGrouppedByDate[x].map(x => x.generation_time);
+    const averageEvalTime = sum(ordersEvalTime) / ordersEvalTime.length;
 
-        return { time: Number(x) as UTCTimestamp, value: averageEvalTime };
-    });
+    return { time: Number(x) as UTCTimestamp, value: averageEvalTime };
+  });
 };
 
 /**
@@ -134,20 +133,20 @@ const getProofGenTimeData = <T extends Request | Proposal>(
  * @returns Volume data.
  */
 const getVolumesData = <T extends Request | Proposal>(
-    ordersGrouppedByDate: Record<string, T[]>,
+  ordersGrouppedByDate: Record<string, T[]>,
 ): Array<WhitespaceData | HistogramData> => {
-    const keys = Object.keys(ordersGrouppedByDate);
+  const keys = Object.keys(ordersGrouppedByDate);
 
-    return keys.map((x, index) => {
-        const costs = ordersGrouppedByDate[x].map(x => x.cost);
+  return keys.map((x, index) => {
+    const costs = ordersGrouppedByDate[x].map(x => x.cost);
 
-        const open = index === 0 ? costs[0] : ordersGrouppedByDate[keys[index - 1]].at(-1)!.cost;
-        const close = costs[costs.length - 1];
+    const open = index === 0 ? costs[0] : ordersGrouppedByDate[keys[index - 1]].at(-1)!.cost;
+    const close = costs[costs.length - 1];
 
-        return {
-            time: Number(x) as UTCTimestamp,
-            value: ordersGrouppedByDate[x].length,
-            color: open < close ? colors.transparentSuccessColor : colors.transparentDangerColor,
-        };
-    });
+    return {
+      time: Number(x) as UTCTimestamp,
+      value: ordersGrouppedByDate[x].length,
+      color: open < close ? colors.transparentSuccessColor : colors.transparentDangerColor,
+    };
+  });
 };

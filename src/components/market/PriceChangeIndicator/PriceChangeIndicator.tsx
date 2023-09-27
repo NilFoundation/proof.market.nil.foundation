@@ -12,10 +12,10 @@ import styles from './PriceChangeIndicator.module.scss';
  * Props.
  */
 type PriceChangeIndicatorProps = {
-    change: number;
-    className?: string;
-    toFixed?: number;
-    plainColor?: boolean;
+  change: number;
+  className?: string;
+  toFixed?: number;
+  plainColor?: boolean;
 };
 
 /**
@@ -25,23 +25,23 @@ type PriceChangeIndicatorProps = {
  * @returns React component.
  */
 export const PriceChangeIndicator = ({
-    change,
-    className,
-    toFixed = 4,
-    plainColor,
+  change,
+  className,
+  toFixed = 4,
+  plainColor,
 }: PriceChangeIndicatorProps): ReactElement => {
-    const isGrow = !!change && change > 0;
-    const iconName = `fa-solid fa-arrow-${isGrow ? 'up' : 'down'}`;
-    const computedClassName = clsx(
-        styles.priceChangeIndicator,
-        plainColor ? '' : isGrow ? 'growTextColor' : 'lossTextColor',
-        className,
-    );
+  const isGrow = !!change && change > 0;
+  const iconName = `fa-solid fa-arrow-${isGrow ? 'up' : 'down'}`;
+  const computedClassName = clsx(
+    styles.priceChangeIndicator,
+    plainColor ? '' : isGrow ? 'growTextColor' : 'lossTextColor',
+    className,
+  );
 
-    return (
-        <div className={computedClassName}>
-            <Icon iconName={iconName} />
-            {`${Math.abs(change).toFixed(toFixed)}%`}
-        </div>
-    );
+  return (
+    <div className={computedClassName}>
+      <Icon iconName={iconName} />
+      {`${Math.abs(change).toFixed(toFixed)}%`}
+    </div>
+  );
 };

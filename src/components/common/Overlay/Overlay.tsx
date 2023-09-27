@@ -10,8 +10,8 @@ import styles from './Overlay.module.scss';
  * Props.
  */
 type OverlayProps = {
-    className?: string;
-    children: ReactNode;
+  className?: string;
+  children: ReactNode;
 };
 
 /**
@@ -21,5 +21,5 @@ type OverlayProps = {
  * @returns React component.
  */
 export const Overlay = ({ className, children }: OverlayProps): ReactElement => (
-    <div className={`${className ?? ''} ${styles.overlay}`}>{children}</div>
+  <div className={`${className ?? ''} ${styles.overlay}`}>{children}</div>
 );

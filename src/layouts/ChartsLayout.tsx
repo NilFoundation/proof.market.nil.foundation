@@ -13,11 +13,11 @@ import { Outlet } from 'react-router-dom';
  * @returns React element.
  */
 const ChartsLayout = (): ReactElement => {
-    return (
-        <Layout>
-            <Outlet />
-        </Layout>
-    );
+  return (
+    <Layout>
+      <Outlet />
+    </Layout>
+  );
 };
 
 export default ChartsLayout;

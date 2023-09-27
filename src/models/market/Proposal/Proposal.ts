@@ -9,8 +9,8 @@ import type { TradeOrder } from '../TradeOrder';
  * Proposal.
  */
 export interface Proposal extends TradeOrder {
-    /**
-     * Time, when proposal was accepted, either - null.
-     */
-    updatedOn: number | null;
+  /**
+   * Time, when proposal was accepted, either - null.
+   */
+  updatedOn: number | null;
 }

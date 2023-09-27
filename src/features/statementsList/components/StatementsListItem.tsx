@@ -18,7 +18,7 @@ import styles from './StatementsList.module.scss';
  * Props.
  */
 type CurcuitsListItemProps = {
-    data: StatementsListData;
+  data: StatementsListData;
 };
 
 /**
@@ -28,35 +28,35 @@ type CurcuitsListItemProps = {
  * @returns React component.
  */
 export const CurcuitsListItem = ({
-    data: { _key, cost, change, name, tag },
+  data: { _key, cost, change, name, tag },
 }: CurcuitsListItemProps): ReactElement => {
-    const selectedKey = useSelector(selectCurrentStatementKey);
-    const isSelected = _key === selectedKey;
+  const selectedKey = useSelector(selectCurrentStatementKey);
+  const isSelected = _key === selectedKey;
 
-    return (
-        <ListGroup.Item active={isSelected}>
-            <Link to={`${Path.market}/${name}`}>
-                <Media className={isSelected ? styles.selected : ''}>
-                    <Media.Body className={styles.itemBody}>
-                        {`${name.toUpperCase()}/${siteMoneyTickerAbbreviation}`}
-                        {tag && (
-                            <div>
-                                <Label
-                                    rounded
-                                    className={styles.tag}
-                                >
-                                    {tag}
-                                </Label>
-                            </div>
-                        )}
-                    </Media.Body>
-                    <StatementsListItemInfo
-                        cost={cost}
-                        change={change}
-                        isSelected={isSelected}
-                    />
-                </Media>
-            </Link>
-        </ListGroup.Item>
-    );
+  return (
+    <ListGroup.Item active={isSelected}>
+      <Link to={`${Path.market}/${name}`}>
+        <Media className={isSelected ? styles.selected : ''}>
+          <Media.Body className={styles.itemBody}>
+            {`${name.toUpperCase()}/${siteMoneyTickerAbbreviation}`}
+            {tag && (
+              <div>
+                <Label
+                  rounded
+                  className={styles.tag}
+                >
+                  {tag}
+                </Label>
+              </div>
+            )}
+          </Media.Body>
+          <StatementsListItemInfo
+            cost={cost}
+            change={change}
+            isSelected={isSelected}
+          />
+        </Media>
+      </Link>
+    </ListGroup.Item>
+  );
 };

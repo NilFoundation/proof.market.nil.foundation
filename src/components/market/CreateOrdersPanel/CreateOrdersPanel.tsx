@@ -23,23 +23,23 @@ const socialLinks = links.filter(({ icon }) => ['discord', 'telegram'].includes(
  * @returns React component.
  */
 export const CreateOrdersPanel = (): ReactElement => {
-    const [tab, setTab] = useState<TradeOrderType>(TradeOrderType.buy);
-    const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
+  const [tab, setTab] = useState<TradeOrderType>(TradeOrderType.buy);
+  const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
 
-    return (
-        <DashboardCard>
-            <h4>Create orders</h4>
-            <div className="cerateOrdersPanel">
-                <ProtectedContent overlayTitle="Authorization is required to create orders">
-                    <CreateOrdersTabs
-                        currentTab={tab}
-                        onSetTab={setTab}
-                    />
-                    {tabFactory(tab, selectedStatementKey)}
-                </ProtectedContent>
-            </div>
-        </DashboardCard>
-    );
+  return (
+    <DashboardCard>
+      <h4>Create orders</h4>
+      <div className="cerateOrdersPanel">
+        <ProtectedContent overlayTitle="Authorization is required to create orders">
+          <CreateOrdersTabs
+            currentTab={tab}
+            onSetTab={setTab}
+          />
+          {tabFactory(tab, selectedStatementKey)}
+        </ProtectedContent>
+      </div>
+    </DashboardCard>
+  );
 };
 
 /**
@@ -50,32 +50,32 @@ export const CreateOrdersPanel = (): ReactElement => {
  * @returns React Element.
  */
 const tabFactory = (tab: TradeOrderType, selectedStatementKey?: string) => {
-    if (selectedStatementKey === undefined) {
-        return <h5>Please, select statement to create orders.</h5>;
-    }
+  if (selectedStatementKey === undefined) {
+    return <h5>Please, select statement to create orders.</h5>;
+  }
 
-    switch (tab) {
-        case TradeOrderType.buy:
-            return <CreateRequestForm />;
-        case TradeOrderType.sell:
-            return (
-                <div className="text-center">
-                    If you wish to generate proofs, please see instructions on our{' '}
-                    <a
-                        target="_blank"
-                        rel="noreferrer"
-                        href={getRuntimeConfigOrThrow().PROOFMARKET_TOOLCHAIN_REPO}
-                    >
-                        <strong>toolchain repository</strong>
-                    </a>
-                    <p></p>
-                    <div>
-                        or join us on Discord or Telegram:
-                        <SocialLinks socialLinks={socialLinks} />
-                    </div>
-                </div>
-            );
-        default:
-            return <></>;
-    }
+  switch (tab) {
+    case TradeOrderType.buy:
+      return <CreateRequestForm />;
+    case TradeOrderType.sell:
+      return (
+        <div className="text-center">
+          If you wish to generate proofs, please see instructions on our{' '}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={getRuntimeConfigOrThrow().PROOFMARKET_TOOLCHAIN_REPO}
+          >
+            <strong>toolchain repository</strong>
+          </a>
+          <p></p>
+          <div>
+            or join us on Discord or Telegram:
+            <SocialLinks socialLinks={socialLinks} />
+          </div>
+        </div>
+      );
+    default:
+      return <></>;
+  }
 };

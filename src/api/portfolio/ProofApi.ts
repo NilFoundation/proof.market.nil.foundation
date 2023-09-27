@@ -18,13 +18,13 @@ const httpFetcher = createApiClient('/proof');
  * @returns Proofs.
  */
 export const getProofs = (
-    parameters: Partial<Proof>,
-    limit?: number,
-    startFrom?: number,
+  parameters: Partial<Proof>,
+  limit?: number,
+  startFrom?: number,
 ): Promise<Proof[]> =>
-    httpFetcher
-        .get(getApiUrlByParameters<Partial<Proof>>(parameters, limit, startFrom, 'owner'))
-        .json();
+  httpFetcher
+    .get(getApiUrlByParameters<Partial<Proof>>(parameters, limit, startFrom, 'owner'))
+    .json();
 
 /**
  * Get proof by key.
@@ -34,16 +34,16 @@ export const getProofs = (
  * @returns Proofs.
  */
 export const getProofById = (
-    proofKey: Proof['_key'],
-    downloadProgressHandler?: (progress: DownloadProgress) => void,
+  proofKey: Proof['_key'],
+  downloadProgressHandler?: (progress: DownloadProgress) => void,
 ): Promise<Proof> =>
-    httpFetcher
-        .get(
-            proofKey,
-            downloadProgressHandler
-                ? {
-                      onDownloadProgress: progress => downloadProgressHandler(progress),
-                  }
-                : undefined,
-        )
-        .json();
+  httpFetcher
+    .get(
+      proofKey,
+      downloadProgressHandler
+        ? {
+            onDownloadProgress: progress => downloadProgressHandler(progress),
+          }
+        : undefined,
+    )
+    .json();

@@ -22,55 +22,55 @@ import { PublicInput } from './PublicInput';
  * @returns React component.
  */
 export const CreateRequestForm = (): ReactElement => {
-    const { setProcessing } = useContext(OrderManagementContext);
-    const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
-    const dispatch = useDispatch();
-    const [errorMessage, setErrorMessage] = useState('');
-    const form = useForm<CreateRequest>({
-        mode: 'onChange',
-        defaultValues: {
-            statement_key: selectedStatementKey,
-        },
-    });
+  const { setProcessing } = useContext(OrderManagementContext);
+  const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
+  const dispatch = useDispatch();
+  const [errorMessage, setErrorMessage] = useState('');
+  const form = useForm<CreateRequest>({
+    mode: 'onChange',
+    defaultValues: {
+      statement_key: selectedStatementKey,
+    },
+  });
 
-    const onSubmitRequest = form.handleSubmit(async (data: CreateRequest): Promise<void> => {
-        setErrorMessage('');
-        setProcessing(true);
-        try {
-            const createdRequest = await createRequest(data);
-            dispatch(AddUserRequest(createdRequest));
+  const onSubmitRequest = form.handleSubmit(async (data: CreateRequest): Promise<void> => {
+    setErrorMessage('');
+    setProcessing(true);
+    try {
+      const createdRequest = await createRequest(data);
+      dispatch(AddUserRequest(createdRequest));
 
-            const { cost, eval_time } = data;
+      const { cost, eval_time } = data;
 
-            notificationActions?.create({
-                title: 'Order successfully created',
-                message: `Cost: ${cost}${eval_time ? `, eval_time: ${eval_time}` : ''}`,
-                variant: Variant.success,
-            });
-            form.reset();
-        } catch (e) {
-            const internalErrorMsg = await getApiErrorMessage(e);
+      notificationActions?.create({
+        title: 'Order successfully created',
+        message: `Cost: ${cost}${eval_time ? `, eval_time: ${eval_time}` : ''}`,
+        variant: Variant.success,
+      });
+      form.reset();
+    } catch (e) {
+      const internalErrorMsg = await getApiErrorMessage(e);
 
-            let visibleErrorMsg = 'Create order error';
+      let visibleErrorMsg = 'Create order error';
 
-            if (internalErrorMsg) {
-                visibleErrorMsg += `: ${internalErrorMsg}`;
-            }
+      if (internalErrorMsg) {
+        visibleErrorMsg += `: ${internalErrorMsg}`;
+      }
 
-            setErrorMessage(visibleErrorMsg);
-        } finally {
-            setProcessing(false);
-        }
-    });
+      setErrorMessage(visibleErrorMsg);
+    } finally {
+      setProcessing(false);
+    }
+  });
 
-    return (
-        <FormProvider {...form}>
-            <CreateTradeOrderForm
-                onSubmit={onSubmitRequest}
-                errorMessage={errorMessage}
-            >
-                <PublicInput />
-            </CreateTradeOrderForm>
-        </FormProvider>
-    );
+  return (
+    <FormProvider {...form}>
+      <CreateTradeOrderForm
+        onSubmit={onSubmitRequest}
+        errorMessage={errorMessage}
+      >
+        <PublicInput />
+      </CreateTradeOrderForm>
+    </FormProvider>
+  );
 };

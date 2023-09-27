@@ -10,11 +10,11 @@ import styles from './ProgressBar.module.scss';
  * Props.
  */
 export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
-    percent?: number;
-    /**
-     * @default true
-     */
-    showPercent?: boolean;
+  percent?: number;
+  /**
+   * @default true
+   */
+  showPercent?: boolean;
 }
 
 /**
@@ -24,28 +24,28 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
  * @returns React component.
  */
 export const ProgressBar = ({
-    className,
-    showPercent = true,
-    percent,
+  className,
+  showPercent = true,
+  percent,
 }: ProgressBarProps): ReactElement => {
-    const percentDisplay = `${percent}%`;
+  const percentDisplay = `${percent}%`;
 
-    return (
-        <div className={`${styles.progress} ${className ?? ''} progress`}>
-            <div
-                className="progress-bar"
-                role="progressbar"
-                aria-valuenow={percent}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                style={{ width: percentDisplay, minWidth: '2em' }}
-            >
-                {showPercent ? (
-                    percentDisplay
-                ) : (
-                    <span className="sr-only">{`${percentDisplay} completed`}</span>
-                )}
-            </div>
-        </div>
-    );
+  return (
+    <div className={`${styles.progress} ${className ?? ''} progress`}>
+      <div
+        className="progress-bar"
+        role="progressbar"
+        aria-valuenow={percent}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        style={{ width: percentDisplay, minWidth: '2em' }}
+      >
+        {showPercent ? (
+          percentDisplay
+        ) : (
+          <span className="sr-only">{`${percentDisplay} completed`}</span>
+        )}
+      </div>
+    </div>
+  );
 };

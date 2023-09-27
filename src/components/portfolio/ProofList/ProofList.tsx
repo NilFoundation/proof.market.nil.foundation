@@ -17,7 +17,7 @@ import styles from './ProofList.module.scss';
  * Props.
  */
 type ProofListProps = {
-    selectedRequestsInfoKey: PortfolioRequestsInfo['_key'];
+  selectedRequestsInfoKey: PortfolioRequestsInfo['_key'];
 };
 
 /**
@@ -27,54 +27,54 @@ type ProofListProps = {
  * @returns React component.
  */
 export const ProofList = ({ selectedRequestsInfoKey }: ProofListProps): ReactElement => {
-    const windowHeight = useWindowHeight();
-    const listHeight = useMemo(() => windowHeight - 274, [windowHeight]);
-    const { items, loadMoreItems, loading, hasMore, error } = useInfiniteLoadProofs({
-        selectedRequestsInfoKey,
-    });
+  const windowHeight = useWindowHeight();
+  const listHeight = useMemo(() => windowHeight - 274, [windowHeight]);
+  const { items, loadMoreItems, loading, hasMore, error } = useInfiniteLoadProofs({
+    selectedRequestsInfoKey,
+  });
 
-    const isItemLoaded = (index: number) => !hasMore || !!items.at(index);
-    const itemCount = hasMore ? items.length + 1 : items.length;
+  const isItemLoaded = (index: number) => !hasMore || !!items.at(index);
+  const itemCount = hasMore ? items.length + 1 : items.length;
 
-    const Element = ({ index, style }: ListChildComponentProps<Proof>) => {
-        const styleWithMargin = {
-            ...style,
-            top: `${parseFloat(style.top as string) + 12 * (index + 1)}px`,
-        };
-
-        if (!isItemLoaded(index)) {
-            return (
-                <div style={styleWithMargin}>
-                    <Spinner grow />
-                </div>
-            );
-        }
-
-        const currentItem = items.at(index)!;
-
-        return (
-            <ProofListItem
-                proof={currentItem}
-                style={styleWithMargin}
-            />
-        );
+  const Element = ({ index, style }: ListChildComponentProps<Proof>) => {
+    const styleWithMargin = {
+      ...style,
+      top: `${parseFloat(style.top as string) + 12 * (index + 1)}px`,
     };
 
-    return (
-        <div className={styles.container}>
-            {!loading && error && items.length === 0 && <h5>Error while getting proofs data.</h5>}
-            {!loading && !error && items.length === 0 && <h5>No proofs found.</h5>}
-            <VirtualList
-                isItemLoaded={isItemLoaded}
-                itemCount={itemCount}
-                // eslint-disable-next-line @typescript-eslint/no-empty-function
-                loadMoreItems={loading ? () => {} : loadMoreItems}
-                height={listHeight}
-                itemSize={164}
-                className={styles.virtualList}
-            >
-                {Element}
-            </VirtualList>
+    if (!isItemLoaded(index)) {
+      return (
+        <div style={styleWithMargin}>
+          <Spinner grow />
         </div>
+      );
+    }
+
+    const currentItem = items.at(index)!;
+
+    return (
+      <ProofListItem
+        proof={currentItem}
+        style={styleWithMargin}
+      />
     );
+  };
+
+  return (
+    <div className={styles.container}>
+      {!loading && error && items.length === 0 && <h5>Error while getting proofs data.</h5>}
+      {!loading && !error && items.length === 0 && <h5>No proofs found.</h5>}
+      <VirtualList
+        isItemLoaded={isItemLoaded}
+        itemCount={itemCount}
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        loadMoreItems={loading ? () => {} : loadMoreItems}
+        height={listHeight}
+        itemSize={164}
+        className={styles.virtualList}
+      >
+        {Element}
+      </VirtualList>
+    </div>
+  );
 };

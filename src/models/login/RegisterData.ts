@@ -7,16 +7,16 @@
  * Register new user data.
  */
 export type RegisterData = {
-    /**
-     * User name.
-     */
-    user: string;
-    /**
-     * Password.
-     */
-    passwd: string;
-    /**
-     * Email.
-     */
-    email?: string;
+  /**
+   * User name.
+   */
+  user: string;
+  /**
+   * Password.
+   */
+  passwd: string;
+  /**
+   * Email.
+   */
+  email?: string;
 };

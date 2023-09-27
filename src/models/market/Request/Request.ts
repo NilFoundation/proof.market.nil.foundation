@@ -10,16 +10,16 @@ import type { TradeOrder } from '../TradeOrder';
  * Request.
  */
 export interface Request extends TradeOrder {
-    /**
-     * Public input.
-     */
-    public_input: Record<string, string>;
-    /**
-     * Proof (when generated, either - null).
-     */
-    proof: Proof['_key'] | null;
-    /**
-     * Time, when request was accepted, either - null.
-     */
-    updatedOn: number | null;
+  /**
+   * Public input.
+   */
+  public_input: Record<string, string>;
+  /**
+   * Proof (when generated, either - null).
+   */
+  proof: Proof['_key'] | null;
+  /**
+   * Time, when request was accepted, either - null.
+   */
+  updatedOn: number | null;
 }

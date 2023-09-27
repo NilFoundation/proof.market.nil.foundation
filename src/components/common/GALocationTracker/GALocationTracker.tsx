@@ -14,12 +14,12 @@ import { useLocation } from 'react-router-dom';
  * @returns React component.
  */
 export const GALocationTracker = (): ReactElement => {
-    const { pathname } = useLocation();
-    const mainPath = pathname.split('/').slice(0, 2).join('');
+  const { pathname } = useLocation();
+  const mainPath = pathname.split('/').slice(0, 2).join('');
 
-    useEffect(() => {
-        mainPath && ReactGa.send({ hitType: 'pageview', page: mainPath });
-    }, [mainPath]);
+  useEffect(() => {
+    mainPath && ReactGa.send({ hitType: 'pageview', page: mainPath });
+  }, [mainPath]);
 
-    return <></>;
+  return <></>;
 };

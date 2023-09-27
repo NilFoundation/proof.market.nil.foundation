@@ -11,7 +11,7 @@ import styles from './ClickableIcon.module.scss';
  * Props.
  */
 type ClicableIconProps = {
-    iconName: string;
+  iconName: string;
 } & ButtonProps<HTMLButtonElement>;
 
 /**
@@ -21,12 +21,12 @@ type ClicableIconProps = {
  * @returns React component.
  */
 export const ClickableIcon = ({ iconName, className, ...rest }: ClicableIconProps): JSX.Element => {
-    return (
-        <Button
-            className={`${styles.button} ${className ?? ''}`}
-            {...rest}
-        >
-            <Icon iconName={iconName} />
-        </Button>
-    );
+  return (
+    <Button
+      className={`${styles.button} ${className ?? ''}`}
+      {...rest}
+    >
+      <Icon iconName={iconName} />
+    </Button>
+  );
 };

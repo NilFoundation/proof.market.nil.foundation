@@ -16,21 +16,17 @@ export type PortfolioRequestsInfo = PortfolioOrdersInfo;
  * @returns Human readable portfolio requests info.
  */
 export const mapToHumanReadablePortfolioRequestsInfo = ({
-    name,
-    amount,
-    avg_cost,
-    avg_generation_time,
-    fees,
+  name,
+  amount,
+  avg_cost,
+  avg_generation_time,
+  fees,
 }: PortfolioRequestsInfo) => ({
-    ['Name']: name,
-    ['Overall requests amount']: amount,
-    ['Total sum of all requests costs']: fees
-        ? `${fees} ${siteMoneyTickerAbbreviation}`
-        : undefined,
-    ['Average generation time']: avg_generation_time
-        ? `${avg_generation_time?.toFixed(2)} min`
-        : undefined,
-    ['Average cost']: avg_cost
-        ? `${avg_cost?.toFixed(2)} ${siteMoneyTickerAbbreviation}`
-        : undefined,
+  ['Name']: name,
+  ['Overall requests amount']: amount,
+  ['Total sum of all requests costs']: fees ? `${fees} ${siteMoneyTickerAbbreviation}` : undefined,
+  ['Average generation time']: avg_generation_time
+    ? `${avg_generation_time?.toFixed(2)} min`
+    : undefined,
+  ['Average cost']: avg_cost ? `${avg_cost?.toFixed(2)} ${siteMoneyTickerAbbreviation}` : undefined,
 });

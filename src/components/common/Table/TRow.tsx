@@ -17,12 +17,12 @@ type TRowProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElemen
  * @returns React component.
  */
 export const TRow = ({ children, ...rest }: TRowProps): ReactElement => {
-    return (
-        <div
-            role="row"
-            {...rest}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      role="row"
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 };

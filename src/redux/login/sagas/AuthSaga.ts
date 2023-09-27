@@ -16,8 +16,8 @@ import { UpdateIsAuthorized, UpdateUserName } from '../actions';
  * @yields
  */
 export function* AuthSaga(): SagaIterator<void> {
-    yield fork(TryGetUserFromLocalStorageTokenSaga);
-    //yield takeLatest(SetJwtRevalidateTimeout, RenewJwtSaga);
+  yield fork(TryGetUserFromLocalStorageTokenSaga);
+  //yield takeLatest(SetJwtRevalidateTimeout, RenewJwtSaga);
 }
 
 /**
@@ -26,21 +26,21 @@ export function* AuthSaga(): SagaIterator<void> {
  * @yields
  */
 function* TryGetUserFromLocalStorageTokenSaga(): SagaIterator<void> {
-    const token = getItemFromLocalStorage<string>('userToken');
+  const token = getItemFromLocalStorage<string>('userToken');
 
-    if (!token) {
-        return;
-    }
+  if (!token) {
+    return;
+  }
 
-    const user = getUserFromJwt(token);
+  const user = getUserFromJwt(token);
 
-    if (user) {
-        yield put(UpdateUserName(user));
-        yield put(UpdateIsAuthorized(true));
+  if (user) {
+    yield put(UpdateUserName(user));
+    yield put(UpdateIsAuthorized(true));
 
-        //const timeout = calculateRenewJwtTimeGap(token);
-        //yield put(SetJwtRevalidateTimeout(timeout));
-    }
+    //const timeout = calculateRenewJwtTimeGap(token);
+    //yield put(SetJwtRevalidateTimeout(timeout));
+  }
 }
 
 // /**

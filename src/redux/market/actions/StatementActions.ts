@@ -15,7 +15,7 @@ export const UpdateStatementsList = createAction<Statement[]>('@statements/UPDAT
  * Update selected statement key.
  */
 export const UpdateSelectedStatementKey = createAction<string>(
-    '@statements/UPDATE_SELECTED_STATEMENT_KEY',
+  '@statements/UPDATE_SELECTED_STATEMENT_KEY',
 );
 
 /**
@@ -32,14 +32,14 @@ export const UpdateStatementsError = createAction<boolean>('@statements/UPDATE_E
  * Update statement info list.
  */
 export const UpdateStatementsInfoList = createAction<StatementInfo[]>(
-    '@statements/UPDATE_STATEMENTS_INFO',
+  '@statements/UPDATE_STATEMENTS_INFO',
 );
 
 /**
  * Update statement info loading state.
  */
 export const UpdateIsLoadingStatementsInfo = createAction<boolean>(
-    '@statements/UPDATE_IS_LOADING_STATEMENTS_INFO',
+  '@statements/UPDATE_IS_LOADING_STATEMENTS_INFO',
 );
 
 /**
@@ -51,7 +51,7 @@ export const UpdateStatementsStats = createAction<StatementStats[]>('@statements
  * Update statement stats loading state.
  */
 export const UpdateIsLoadingStatementsStats = createAction<boolean>(
-    '@statements/UPDATE_IS_LOADING_STATEMENTS_STATS',
+  '@statements/UPDATE_IS_LOADING_STATEMENTS_STATS',
 );
 
 /**

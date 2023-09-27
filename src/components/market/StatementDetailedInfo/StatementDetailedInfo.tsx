@@ -17,54 +17,54 @@ import styles from './StatementDetailedInfo.module.scss';
  * @returns React component.
  */
 const StatementDetailedInfoComponent = (): ReactElement => {
-    const currentSelectedStatement = useSelector(selectCurrentStatement);
-    const loadingStatements = useAppSelector(s => s.statementsState.isLoading);
+  const currentSelectedStatement = useSelector(selectCurrentStatement);
+  const loadingStatements = useAppSelector(s => s.statementsState.isLoading);
 
-    return (
-        <div className={styles.container}>
-            <StatementInfoViewFactory
-                loading={loadingStatements}
-                data={currentSelectedStatement}
-            />
-        </div>
-    );
+  return (
+    <div className={styles.container}>
+      <StatementInfoViewFactory
+        loading={loadingStatements}
+        data={currentSelectedStatement}
+      />
+    </div>
+  );
 };
 
 export const StatementDetailedInfo = memo(StatementDetailedInfoComponent);
 
 const StatementInfoViewFactory = ({
-    loading,
-    data,
+  loading,
+  data,
 }: {
-    loading: boolean;
-    data?: Statement;
+  loading: boolean;
+  data?: Statement;
 }): ReactElement => {
-    switch (true) {
-        case loading && !data:
-            return <Spinner grow />;
-        case data !== undefined:
-            return (
-                <>
-                    <div className={styles.text}>
-                        <span className="text-muted">Description:</span>
-                        {data!.description}
-                    </div>
-                    {data?.url && (
-                        <div className={styles.text}>
-                            <span className="text-muted">Url:</span>
-                            <a
-                                href={data.url}
-                                rel="noreferrer"
-                                target="_blank"
-                            >
-                                {data.url}
-                            </a>
-                        </div>
-                    )}
-                </>
-            );
-        case data === undefined:
-        default:
-            return <h4>No statement info was provided.</h4>;
-    }
+  switch (true) {
+    case loading && !data:
+      return <Spinner grow />;
+    case data !== undefined:
+      return (
+        <>
+          <div className={styles.text}>
+            <span className="text-muted">Description:</span>
+            {data!.description}
+          </div>
+          {data?.url && (
+            <div className={styles.text}>
+              <span className="text-muted">Url:</span>
+              <a
+                href={data.url}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {data.url}
+              </a>
+            </div>
+          )}
+        </>
+      );
+    case data === undefined:
+    default:
+      return <h4>No statement info was provided.</h4>;
+  }
 };

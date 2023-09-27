@@ -13,24 +13,24 @@ import { getRuntimeConfigOrThrow } from './utils';
  * @see {@link https://docs.sentry.io/platforms/javascript/guides/react/}
  */
 export const configureSentry = (): void => {
-    if (!import.meta.env.PROD) {
-        return;
-    }
+  if (!import.meta.env.PROD) {
+    return;
+  }
 
-    const dsn = getRuntimeConfigOrThrow().SENTRY_DSN;
+  const dsn = getRuntimeConfigOrThrow().SENTRY_DSN;
 
-    if (!dsn) {
-        return;
-    }
+  if (!dsn) {
+    return;
+  }
 
-    Sentry.init({
-        dsn,
-        integrations: [new BrowserTracing()],
-        tracesSampleRate: 0.2,
-        denyUrls: [
-            // Chrome extensions
-            /extensions\//i,
-            /^chrome/i,
-        ],
-    });
+  Sentry.init({
+    dsn,
+    integrations: [new BrowserTracing()],
+    tracesSampleRate: 0.2,
+    denyUrls: [
+      // Chrome extensions
+      /extensions\//i,
+      /^chrome/i,
+    ],
+  });
 };

@@ -15,12 +15,12 @@ import { styles as s } from './styles';
  * @returns React component.
  */
 export const Footer = (): ReactElement => {
-    const [css] = useStyletron();
+  const [css] = useStyletron();
 
-    return (
-        <footer className={css(s.footer)}>
-            <SocialLinks socialLinks={socialLinks} />
-            <Copyright />
-        </footer>
-    );
+  return (
+    <footer className={css(s.footer)}>
+      <SocialLinks socialLinks={socialLinks} />
+      <Copyright />
+    </footer>
+  );
 };

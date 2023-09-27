@@ -17,8 +17,8 @@ type LegendData = LineData | BarData | WhitespaceData;
  * Props.
  */
 type ChartLegendProps = {
-    name: string;
-    currentData?: LegendData;
+  name: string;
+  currentData?: LegendData;
 };
 
 /**
@@ -28,19 +28,19 @@ type ChartLegendProps = {
  * @returns React component.
  */
 export const ChartLegend = ({ name, currentData }: ChartLegendProps): ReactElement => {
-    if (currentData === undefined) {
-        return <></>;
-    }
+  if (currentData === undefined) {
+    return <></>;
+  }
 
-    return (
-        <div className={styles.chartLegend}>
-            <strong className={styles.chartName}>{name.toUpperCase()}</strong>
-            {currentData.time && (
-                <span>{formatUTCTimestamp(currentData.time as number, 'DD.MM HH:mm')}</span>
-            )}
-            <LegendViewFactory data={currentData} />
-        </div>
-    );
+  return (
+    <div className={styles.chartLegend}>
+      <strong className={styles.chartName}>{name.toUpperCase()}</strong>
+      {currentData.time && (
+        <span>{formatUTCTimestamp(currentData.time as number, 'DD.MM HH:mm')}</span>
+      )}
+      <LegendViewFactory data={currentData} />
+    </div>
+  );
 };
 
 /**
@@ -50,29 +50,29 @@ export const ChartLegend = ({ name, currentData }: ChartLegendProps): ReactEleme
  * @returns React element.
  */
 const LegendViewFactory = ({ data }: { data: LegendData }) => {
-    switch (true) {
-        case isLineData(data):
-            return <div className="text-muted">{(data as LineData)?.value?.toFixed(2)}</div>;
-        case isBarData(data):
-            return (
-                <>
-                    {(Object.keys(data) as Array<keyof BarData>).map(
-                        x =>
-                            x !== 'time' &&
-                            x !== 'color' && (
-                                <div
-                                    className="text-muted"
-                                    key={x}
-                                >
-                                    {`${x}: ${(data as BarData)[x].toFixed(2)}`}
-                                </div>
-                            ),
-                    )}
-                </>
-            );
-        default:
-            return <></>;
-    }
+  switch (true) {
+    case isLineData(data):
+      return <div className="text-muted">{(data as LineData)?.value?.toFixed(2)}</div>;
+    case isBarData(data):
+      return (
+        <>
+          {(Object.keys(data) as Array<keyof BarData>).map(
+            x =>
+              x !== 'time' &&
+              x !== 'color' && (
+                <div
+                  className="text-muted"
+                  key={x}
+                >
+                  {`${x}: ${(data as BarData)[x].toFixed(2)}`}
+                </div>
+              ),
+          )}
+        </>
+      );
+    default:
+      return <></>;
+  }
 };
 
 /**
@@ -80,7 +80,7 @@ const LegendViewFactory = ({ data }: { data: LegendData }) => {
  * @returns True if value is {@link BarData}.
  */
 const isBarData = (data: LegendData): data is BarData => {
-    return !!('open' in data);
+  return !!('open' in data);
 };
 
 /**
@@ -88,5 +88,5 @@ const isBarData = (data: LegendData): data is BarData => {
  * @returns True if value is {@link LineData}.
  */
 const isLineData = (data: LegendData): data is LineData => {
-    return !!('value' in data);
+  return !!('value' in data);
 };

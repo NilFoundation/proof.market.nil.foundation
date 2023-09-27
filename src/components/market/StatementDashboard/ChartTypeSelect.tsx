@@ -12,9 +12,9 @@ import { useBreakpoint } from '@/features/shared';
  * Props.
  */
 type ChartTypeSelectProps = {
-    chartType: ChartType;
-    onSelectChartType: (chartType: ChartType) => void;
-    disabled: boolean;
+  chartType: ChartType;
+  onSelectChartType: (chartType: ChartType) => void;
+  disabled: boolean;
 };
 
 /**
@@ -24,27 +24,27 @@ type ChartTypeSelectProps = {
  * @returns React component.
  */
 export const ChartTypeSelect = ({
-    chartType,
-    onSelectChartType,
-    disabled,
+  chartType,
+  onSelectChartType,
+  disabled,
 }: ChartTypeSelectProps): ReactElement => {
-    const bp = useBreakpoint();
+  const bp = useBreakpoint();
 
-    return (
-        <Nav
-            tabs
-            vertical={bp === 'sm'}
+  return (
+    <Nav
+      tabs
+      vertical={bp === 'sm'}
+    >
+      {Object.values(ChartType).map(x => (
+        <Nav.Item
+          key={x}
+          active={x === chartType}
+          onClick={() => onSelectChartType(x)}
+          disabled={disabled}
         >
-            {Object.values(ChartType).map(x => (
-                <Nav.Item
-                    key={x}
-                    active={x === chartType}
-                    onClick={() => onSelectChartType(x)}
-                    disabled={disabled}
-                >
-                    {x}
-                </Nav.Item>
-            ))}
-        </Nav>
-    );
+          {x}
+        </Nav.Item>
+      ))}
+    </Nav>
+  );
 };

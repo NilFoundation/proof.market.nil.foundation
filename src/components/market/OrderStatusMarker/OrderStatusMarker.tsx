@@ -12,18 +12,18 @@ import styles from './OrderStatusMarker.module.scss';
  * Props.
  */
 type OrderStatusMarkerProps = {
-    status: TradeOrderStatus;
-    className?: string;
+  status: TradeOrderStatus;
+  className?: string;
 };
 
 /**
  * Color by order status.
  */
 const OrderStatusColorRepresentation = {
-    created: colors.successColor,
-    completed: colors.primaryColor,
-    processing: colors.infoColor,
-    withdrawn: colors.dangerColor,
+  created: colors.successColor,
+  completed: colors.primaryColor,
+  processing: colors.infoColor,
+  withdrawn: colors.dangerColor,
 } satisfies Record<TradeOrderStatus, string>;
 
 /**
@@ -33,11 +33,11 @@ const OrderStatusColorRepresentation = {
  * @returns {ReactElement} - Component.
  */
 export const OrderStatusMarker = ({ status, className }: OrderStatusMarkerProps): ReactElement => {
-    return (
-        <div
-            className={`${className ?? ''} ${styles.status}`}
-            style={{ backgroundColor: OrderStatusColorRepresentation[status] }}
-            title={status}
-        />
-    );
+  return (
+    <div
+      className={`${className ?? ''} ${styles.status}`}
+      style={{ backgroundColor: OrderStatusColorRepresentation[status] }}
+      title={status}
+    />
+  );
 };

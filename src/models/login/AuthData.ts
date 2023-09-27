@@ -7,8 +7,8 @@
  * Login Dto.
  */
 export type AuthData = {
-    /**
-     * Jwt.
-     */
-    jwt: string;
+  /**
+   * Jwt.
+   */
+  jwt: string;
 };

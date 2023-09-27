@@ -21,7 +21,7 @@ import { OrdersTableItem } from '../OrdersTableItem';
  * Props.
  */
 type ActiveOrdersTableItemProps = {
-    data: Row<ManageOrdersData>;
+  data: Row<ManageOrdersData>;
 };
 
 /**
@@ -31,72 +31,72 @@ type ActiveOrdersTableItemProps = {
  * @returns React component.
  */
 export const ActiveOrdersTableItem = forwardRef<HTMLDivElement, ActiveOrdersTableItemProps>(
-    function ActiveOrdersTableItem({ data }, ref): ReactElement {
-        const [showConfirmationCard, setShowConfirmationCard] = useState(false);
-        const [error, setError] = useState('');
-        const [processing, setProcessing] = useState(false);
-        const dispatch = useDispatch();
+  function ActiveOrdersTableItem({ data }, ref): ReactElement {
+    const [showConfirmationCard, setShowConfirmationCard] = useState(false);
+    const [error, setError] = useState('');
+    const [processing, setProcessing] = useState(false);
+    const dispatch = useDispatch();
 
-        const { values } = data;
-        const { type, orderId, ...restData } = values as ManageOrdersData;
+    const { values } = data;
+    const { type, orderId, ...restData } = values as ManageOrdersData;
 
-        const confirmationCardRef = useRef(null);
-        const closeConfirmationCard = useCallback(() => setShowConfirmationCard(false), []);
-        useOnClickOutside(confirmationCardRef, closeConfirmationCard);
+    const confirmationCardRef = useRef(null);
+    const closeConfirmationCard = useCallback(() => setShowConfirmationCard(false), []);
+    useOnClickOutside(confirmationCardRef, closeConfirmationCard);
 
-        const onAcceptRemoveOrder = useCallback(async () => {
-            setProcessing(true);
-            setError('');
+    const onAcceptRemoveOrder = useCallback(async () => {
+      setProcessing(true);
+      setError('');
 
-            try {
-                const fetcher = type === TradeOrderType.buy ? removeRequest : removeProposal;
-                const action = type === TradeOrderType.buy ? RemoveUserRequest : RemoveUserProposal;
+      try {
+        const fetcher = type === TradeOrderType.buy ? removeRequest : removeProposal;
+        const action = type === TradeOrderType.buy ? RemoveUserRequest : RemoveUserProposal;
 
-                await fetcher(orderId);
-                dispatch(action(orderId));
-                setError('');
-                setShowConfirmationCard(false);
-            } catch (e) {
-                setError('Encountered error during order removing');
-            } finally {
-                setProcessing(false);
-            }
-        }, [setProcessing, setShowConfirmationCard, dispatch, orderId, type]);
+        await fetcher(orderId);
+        dispatch(action(orderId));
+        setError('');
+        setShowConfirmationCard(false);
+      } catch (e) {
+        setError('Encountered error during order removing');
+      } finally {
+        setProcessing(false);
+      }
+    }, [setProcessing, setShowConfirmationCard, dispatch, orderId, type]);
 
-        const onDeclineRemoveOrder = useCallback(() => {
-            setShowConfirmationCard(false);
-        }, [setShowConfirmationCard]);
+    const onDeclineRemoveOrder = useCallback(() => {
+      setShowConfirmationCard(false);
+    }, [setShowConfirmationCard]);
 
-        useEffect(() => {
-            !showConfirmationCard && setError('');
-        }, [setError, showConfirmationCard]);
+    useEffect(() => {
+      !showConfirmationCard && setError('');
+    }, [setError, showConfirmationCard]);
 
-        return (
-            <ListGroup.Item>
-                <OrdersTableItem
-                    ref={ref}
-                    onClickRemoveIcon={() => setShowConfirmationCard(true)}
-                    type={type}
-                    {...restData}
-                >
-                    <CSSTransition
-                        classNames="slide"
-                        timeout={300}
-                        in={showConfirmationCard}
-                        unmountOnExit
-                        nodeRef={confirmationCardRef}
-                    >
-                        <RemoveOrderConfirmationCard
-                            onAccept={onAcceptRemoveOrder}
-                            onDecline={onDeclineRemoveOrder}
-                            processing={processing}
-                            message="Proceed removing? This action could not be undone."
-                            error={error}
-                            ref={confirmationCardRef}
-                        />
-                    </CSSTransition>
-                </OrdersTableItem>
-            </ListGroup.Item>
-        );
-    },
+    return (
+      <ListGroup.Item>
+        <OrdersTableItem
+          ref={ref}
+          onClickRemoveIcon={() => setShowConfirmationCard(true)}
+          type={type}
+          {...restData}
+        >
+          <CSSTransition
+            classNames="slide"
+            timeout={300}
+            in={showConfirmationCard}
+            unmountOnExit
+            nodeRef={confirmationCardRef}
+          >
+            <RemoveOrderConfirmationCard
+              onAccept={onAcceptRemoveOrder}
+              onDecline={onDeclineRemoveOrder}
+              processing={processing}
+              message="Proceed removing? This action could not be undone."
+              error={error}
+              ref={confirmationCardRef}
+            />
+          </CSSTransition>
+        </OrdersTableItem>
+      </ListGroup.Item>
+    );
+  },
 );

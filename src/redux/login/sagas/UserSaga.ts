@@ -9,10 +9,10 @@ import { getUserBalance } from '@/api';
 import type { UserBalance } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import {
-    UpdateUserBalance,
-    UpdateUserBalanceIsLoading,
-    UpdateUserBalanceIsLoadingError,
-    UpdateUserName,
+  UpdateUserBalance,
+  UpdateUserBalanceIsLoading,
+  UpdateUserBalanceIsLoadingError,
+  UpdateUserName,
 } from '../actions';
 import { ProtectedCall } from './ProtectedCall';
 import { AddUserRequest, RemoveUserProposal, RemoveUserRequest } from '../../market';
@@ -24,10 +24,10 @@ import { selectUserName } from '../selectors';
  * @yields
  */
 export function* UserSaga(): SagaIterator<void> {
-    yield takeLatest(
-        [UpdateUserName, AddUserRequest, RemoveUserProposal, RemoveUserRequest],
-        GetUserBalance,
-    );
+  yield takeLatest(
+    [UpdateUserName, AddUserRequest, RemoveUserProposal, RemoveUserRequest],
+    GetUserBalance,
+  );
 }
 
 /**
@@ -36,22 +36,22 @@ export function* UserSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetUserBalance(): SagaIterator<void> {
-    const user = yield select(selectUserName);
-    const isReadonly = user === getRuntimeConfigOrThrow().READONLY_USER;
+  const user = yield select(selectUserName);
+  const isReadonly = user === getRuntimeConfigOrThrow().READONLY_USER;
 
-    if (isReadonly || !user) {
-        return;
-    }
+  if (isReadonly || !user) {
+    return;
+  }
 
-    try {
-        yield put(UpdateUserBalanceIsLoading(true));
-        yield put(UpdateUserBalanceIsLoadingError(false));
+  try {
+    yield put(UpdateUserBalanceIsLoading(true));
+    yield put(UpdateUserBalanceIsLoadingError(false));
 
-        const balance: UserBalance | undefined = yield call(ProtectedCall, getUserBalance, user);
-        yield put(UpdateUserBalance(balance));
-    } catch {
-        yield put(UpdateUserBalanceIsLoadingError(true));
-    } finally {
-        yield put(UpdateUserBalanceIsLoading(false));
-    }
+    const balance: UserBalance | undefined = yield call(ProtectedCall, getUserBalance, user);
+    yield put(UpdateUserBalance(balance));
+  } catch {
+    yield put(UpdateUserBalanceIsLoadingError(true));
+  } finally {
+    yield put(UpdateUserBalanceIsLoading(false));
+  }
 }

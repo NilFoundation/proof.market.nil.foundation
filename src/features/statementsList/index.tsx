@@ -7,7 +7,7 @@ import loadable from '@loadable/component';
 import { Spinner } from '@nilfoundation/react-components';
 
 const StatementsList = loadable(() => import('./components/StatementsList'), {
-    fallback: <Spinner grow />,
+  fallback: <Spinner grow />,
 });
 
 export { StatementsList };

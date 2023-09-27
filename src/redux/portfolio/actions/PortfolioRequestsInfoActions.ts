@@ -10,26 +10,26 @@ import type { PortfolioRequestsInfo } from '@/models';
  * Update portfolio requests info.
  */
 export const UpdatePortfolioRequestsInfo = createAction<PortfolioRequestsInfo[]>(
-    '@portfolioRequestsInfo/UPDATE',
+  '@portfolioRequestsInfo/UPDATE',
 );
 
 /**
  * Update portfolio requests info loading state.
  */
 export const UpdateIsLoadingPortfolioRequestsInfo = createAction<boolean>(
-    '@portfolioRequestsInfo/UPDATE_IS_LOADING',
+  '@portfolioRequestsInfo/UPDATE_IS_LOADING',
 );
 
 /**
  * Update portfolio requests info error state.
  */
 export const UpdateIsErrorPortfolioRequestsInfo = createAction<boolean>(
-    '@portfolioRequestsInfo/UPDATE_ERROR',
+  '@portfolioRequestsInfo/UPDATE_ERROR',
 );
 
 /**
  * Update selected portfolio requests info key.
  */
 export const UpdateSelectedPortfolioRequestsInfoKey = createAction<PortfolioRequestsInfo['_key']>(
-    '@portfolioRequestsInfo/UPDATE_SELECTED_KEY',
+  '@portfolioRequestsInfo/UPDATE_SELECTED_KEY',
 );

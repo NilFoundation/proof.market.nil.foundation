@@ -10,10 +10,10 @@ import { ProtectedCall } from '@/redux';
 import type { Proposal } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import {
-    UpdateSelectedStatementKey,
-    UpdateChartsData,
-    UpdateIsErrorGettingChartsData,
-    UpdateIsLoadingChartsData,
+  UpdateSelectedStatementKey,
+  UpdateChartsData,
+  UpdateIsErrorGettingChartsData,
+  UpdateIsLoadingChartsData,
 } from '../actions';
 import { selectCurrentStatementKey } from '../selectors';
 import { RevalidateSaga } from '../../common';
@@ -26,11 +26,11 @@ const revalidateDataDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INT
  * @yields
  */
 export function* ChartsSaga(): SagaIterator<void> {
-    yield takeLatest(UpdateSelectedStatementKey, function* () {
-        yield put(UpdateChartsData([]));
-        yield fork(GetChartsDataSaga);
-    });
-    yield fork(RevalidateSaga, GetChartsDataSaga, revalidateDataDelay);
+  yield takeLatest(UpdateSelectedStatementKey, function* () {
+    yield put(UpdateChartsData([]));
+    yield fork(GetChartsDataSaga);
+  });
+  yield fork(RevalidateSaga, GetChartsDataSaga, revalidateDataDelay);
 }
 
 /**
@@ -39,39 +39,39 @@ export function* ChartsSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetChartsDataSaga(): SagaIterator<void> {
-    const currentStatementKey: string | undefined = yield select(selectCurrentStatementKey);
+  const currentStatementKey: string | undefined = yield select(selectCurrentStatementKey);
 
-    if (currentStatementKey === undefined) {
-        return;
+  if (currentStatementKey === undefined) {
+    return;
+  }
+
+  const apiCallParameters = {
+    statement_key: currentStatementKey,
+    status: 'completed',
+  };
+
+  try {
+    yield put(UpdateIsErrorGettingChartsData(false));
+    yield put(UpdateIsLoadingChartsData(true));
+
+    const completedProposals: Proposal[] = yield call(
+      ProtectedCall,
+      getProposals,
+      apiCallParameters,
+    );
+
+    const currentKey = yield select(selectCurrentStatementKey);
+
+    // TODO - remove after RevalidateSaga refactor
+    // At the moment that fixes updating redux with outtadet api call bug
+    const shouldUpdateChartsData =
+      completedProposals !== undefined && currentStatementKey === currentKey;
+    if (shouldUpdateChartsData) {
+      yield put(UpdateChartsData(completedProposals));
     }
-
-    const apiCallParameters = {
-        statement_key: currentStatementKey,
-        status: 'completed',
-    };
-
-    try {
-        yield put(UpdateIsErrorGettingChartsData(false));
-        yield put(UpdateIsLoadingChartsData(true));
-
-        const completedProposals: Proposal[] = yield call(
-            ProtectedCall,
-            getProposals,
-            apiCallParameters,
-        );
-
-        const currentKey = yield select(selectCurrentStatementKey);
-
-        // TODO - remove after RevalidateSaga refactor
-        // At the moment that fixes updating redux with outtadet api call bug
-        const shouldUpdateChartsData =
-            completedProposals !== undefined && currentStatementKey === currentKey;
-        if (shouldUpdateChartsData) {
-            yield put(UpdateChartsData(completedProposals));
-        }
-    } catch (e) {
-        yield put(UpdateIsErrorGettingChartsData(true));
-    } finally {
-        yield put(UpdateIsLoadingChartsData(false));
-    }
+  } catch (e) {
+    yield put(UpdateIsErrorGettingChartsData(true));
+  } finally {
+    yield put(UpdateIsLoadingChartsData(false));
+  }
 }

@@ -13,4 +13,4 @@ import dayjs from 'dayjs';
  * @returns Formatted timestamp string.
  */
 export const formatUTCTimestamp = (timestamp: number, format: string): string =>
-    dayjs(timestamp * 1000).format(format);
+  dayjs(timestamp * 1000).format(format);

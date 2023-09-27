@@ -22,24 +22,24 @@ export const apiBaseUrl = `${baseUrl}/_db/${db}/${apiVersion}`;
  * @returns New url to get orders by parameters.
  */
 export const getApiUrlByParameters = <T extends Record<string, unknown>>(
-    parameters: T,
-    limit?: number,
-    startFrom?: number,
-    baseUrl = '',
+  parameters: T,
+  limit?: number,
+  startFrom?: number,
+  baseUrl = '',
 ): string => {
-    let resultStr = baseUrl + '?';
+  let resultStr = baseUrl + '?';
 
-    if (limit !== undefined) {
-        resultStr += `limit=${limit}&`;
-    }
+  if (limit !== undefined) {
+    resultStr += `limit=${limit}&`;
+  }
 
-    if (startFrom !== undefined) {
-        resultStr += `skipped=${startFrom}&`;
-    }
+  if (startFrom !== undefined) {
+    resultStr += `skipped=${startFrom}&`;
+  }
 
-    const stringWithParams = `q=[${Object.entries(parameters)
-        .map(([x, y]) => `{"key": "${x}", "value": "${y}"}`)
-        .join(', ')}]`;
+  const stringWithParams = `q=[${Object.entries(parameters)
+    .map(([x, y]) => `{"key": "${x}", "value": "${y}"}`)
+    .join(', ')}]`;
 
-    return resultStr + stringWithParams;
+  return resultStr + stringWithParams;
 };

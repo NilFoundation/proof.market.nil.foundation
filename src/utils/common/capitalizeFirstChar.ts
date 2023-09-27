@@ -10,4 +10,4 @@
  * @returns Sitring with capitalized first char.
  */
 export const capitalizeFirstChar = (string: string) =>
-    string.charAt(0).toUpperCase() + string.slice(1);
+  string.charAt(0).toUpperCase() + string.slice(1);

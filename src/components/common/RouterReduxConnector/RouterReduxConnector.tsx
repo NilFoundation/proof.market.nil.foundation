@@ -15,19 +15,19 @@ import { SetLocation, SetParams } from '@/redux';
  * @returns React component.
  */
 const RouterReduxConnector = (): ReactElement => {
-    const location = useLocation();
-    const params = useParams();
-    const dispatch = useDispatch();
+  const location = useLocation();
+  const params = useParams();
+  const dispatch = useDispatch();
 
-    useDeepCompareEffect(() => {
-        dispatch(SetLocation(location));
-    }, [dispatch, location]);
+  useDeepCompareEffect(() => {
+    dispatch(SetLocation(location));
+  }, [dispatch, location]);
 
-    useDeepCompareEffect(() => {
-        dispatch(SetParams(params));
-    }, [dispatch, params]);
+  useDeepCompareEffect(() => {
+    dispatch(SetParams(params));
+  }, [dispatch, params]);
 
-    return <Outlet />;
+  return <Outlet />;
 };
 
 export default RouterReduxConnector;

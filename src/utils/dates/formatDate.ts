@@ -13,4 +13,4 @@ import dayjs from 'dayjs';
  * @returns Formatted date string representation.
  */
 export const formatDate = (date: string | number, format: string): string =>
-    dayjs(date).format(format);
+  dayjs(date).format(format);

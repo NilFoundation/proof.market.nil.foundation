@@ -11,10 +11,10 @@ import { createUrlParamSelector } from '@/redux/common';
 import { RouterParam } from '@/enums';
 import { ProtectedCall, selectUserName } from '../../login';
 import {
-    UpdateIsErrorPortfolioRequestsInfo,
-    UpdateIsLoadingPortfolioRequestsInfo,
-    UpdateSelectedPortfolioRequestsInfoKey,
-    UpdatePortfolioRequestsInfo,
+  UpdateIsErrorPortfolioRequestsInfo,
+  UpdateIsLoadingPortfolioRequestsInfo,
+  UpdateSelectedPortfolioRequestsInfoKey,
+  UpdatePortfolioRequestsInfo,
 } from '../actions';
 
 /**
@@ -23,26 +23,26 @@ import {
  * @yields
  */
 export function* PortfolioRequestsInfoSaga(): SagaIterator<void> {
-    const user: ReturnType<typeof selectUserName> = yield select(selectUserName);
+  const user: ReturnType<typeof selectUserName> = yield select(selectUserName);
 
-    if (!user) {
-        return;
+  if (!user) {
+    return;
+  }
+
+  try {
+    yield put(UpdateIsErrorPortfolioRequestsInfo(false));
+    yield put(UpdateIsLoadingPortfolioRequestsInfo(true));
+
+    const requestsInfo = yield call(ProtectedCall, getPortfolioRequestsInfo);
+
+    if (requestsInfo !== undefined) {
+      yield put(UpdatePortfolioRequestsInfo(requestsInfo));
     }
-
-    try {
-        yield put(UpdateIsErrorPortfolioRequestsInfo(false));
-        yield put(UpdateIsLoadingPortfolioRequestsInfo(true));
-
-        const requestsInfo = yield call(ProtectedCall, getPortfolioRequestsInfo);
-
-        if (requestsInfo !== undefined) {
-            yield put(UpdatePortfolioRequestsInfo(requestsInfo));
-        }
-    } catch (e) {
-        yield put(UpdateIsErrorPortfolioRequestsInfo(true));
-    } finally {
-        yield put(UpdateIsLoadingPortfolioRequestsInfo(false));
-    }
+  } catch (e) {
+    yield put(UpdateIsErrorPortfolioRequestsInfo(true));
+  } finally {
+    yield put(UpdateIsLoadingPortfolioRequestsInfo(false));
+  }
 }
 
 /**
@@ -52,29 +52,29 @@ export function* PortfolioRequestsInfoSaga(): SagaIterator<void> {
  * @yields
  */
 export function* SelectPortfolioRequestsInfoSaga({
-    payload: portfolioRequestsInfo,
+  payload: portfolioRequestsInfo,
 }: ReturnType<typeof UpdatePortfolioRequestsInfo>): SagaIterator<void> {
-    const currentSelectedKey = yield select(
-        (s: RootStateType) => s.portfolioRequestsInfo.selectedKey,
-    );
+  const currentSelectedKey = yield select(
+    (s: RootStateType) => s.portfolioRequestsInfo.selectedKey,
+  );
 
-    if (currentSelectedKey !== undefined) {
-        return;
-    }
+  if (currentSelectedKey !== undefined) {
+    return;
+  }
 
-    if (!portfolioRequestsInfo.length) {
-        return;
-    }
+  if (!portfolioRequestsInfo.length) {
+    return;
+  }
 
-    const urlParamName: string = yield select(
-        createUrlParamSelector(RouterParam.portfolioRequestsInfoStatementName),
-    );
+  const urlParamName: string = yield select(
+    createUrlParamSelector(RouterParam.portfolioRequestsInfoStatementName),
+  );
 
-    const infoWithNameFromUrl = portfolioRequestsInfo.find(x => x.name === urlParamName);
-    const shouldSelectFromUrl = !!infoWithNameFromUrl;
-    const keyToSelect = shouldSelectFromUrl
-        ? infoWithNameFromUrl._key
-        : portfolioRequestsInfo[0]._key;
+  const infoWithNameFromUrl = portfolioRequestsInfo.find(x => x.name === urlParamName);
+  const shouldSelectFromUrl = !!infoWithNameFromUrl;
+  const keyToSelect = shouldSelectFromUrl
+    ? infoWithNameFromUrl._key
+    : portfolioRequestsInfo[0]._key;
 
-    yield put(UpdateSelectedPortfolioRequestsInfoKey(keyToSelect));
+  yield put(UpdateSelectedPortfolioRequestsInfoKey(keyToSelect));
 }

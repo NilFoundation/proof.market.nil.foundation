@@ -23,26 +23,26 @@ type PartalState<T extends Record<string, unknown>> = Partial<TableState<T>>;
  * InitialState is taken from localStorage and can be rewrited with setInitialState.
  */
 export const useInitialTableState = <T extends Record<string, unknown>>(
-    name: LocalStorageKey,
-    defaultState: PartalState<T> = {},
+  name: LocalStorageKey,
+  defaultState: PartalState<T> = {},
 ): [PartalState<T>, (newState: PartalState<T>) => void] => {
-    const [initialState, setInitialState] = useLocalStorage(name, defaultState);
+  const [initialState, setInitialState] = useLocalStorage(name, defaultState);
 
-    const setNewState = useCallback(
-        (input: PartalState<T>) => {
-            const { sortBy, filters, hiddenColumns, columnOrder, groupBy } = input;
-            setInitialState({
-                columnOrder,
-                filters,
-                hiddenColumns,
-                sortBy,
-                groupBy,
-            });
-        },
-        [setInitialState],
-    );
+  const setNewState = useCallback(
+    (input: PartalState<T>) => {
+      const { sortBy, filters, hiddenColumns, columnOrder, groupBy } = input;
+      setInitialState({
+        columnOrder,
+        filters,
+        hiddenColumns,
+        sortBy,
+        groupBy,
+      });
+    },
+    [setInitialState],
+  );
 
-    const value = deepEqual(initialState, defaultState) ? defaultState : initialState;
+  const value = deepEqual(initialState, defaultState) ? defaultState : initialState;
 
-    return [value, setNewState];
+  return [value, setNewState];
 };

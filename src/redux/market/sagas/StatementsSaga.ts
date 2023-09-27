@@ -10,21 +10,21 @@ import type { Statement, StatementInfo, StatementStats } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import { RouterParam } from '@/enums';
 import {
-    UpdateStatementsError,
-    UpdateStatementsInfoList,
-    UpdateStatementsList,
-    UpdateStatementsStats,
-    UpdateIsLoadingStatements,
-    UpdateIsLoadingStatementsInfo,
-    UpdateIsLoadingStatementsStats,
-    UpdateSelectedStatementKey,
+  UpdateStatementsError,
+  UpdateStatementsInfoList,
+  UpdateStatementsList,
+  UpdateStatementsStats,
+  UpdateIsLoadingStatements,
+  UpdateIsLoadingStatementsInfo,
+  UpdateIsLoadingStatementsStats,
+  UpdateSelectedStatementKey,
 } from '../actions';
 import { ProtectedCall, UpdateUserName } from '../../login';
 import { selectCurrentStatementKey } from '../selectors';
 import { RevalidateSaga, createUrlParamSelector } from '../../common';
 
 const revalidateStatementsInfoInterval =
-    Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
+  Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_INTERVAL) || 3000;
 
 /**
  * Statements main saga.
@@ -32,9 +32,9 @@ const revalidateStatementsInfoInterval =
  * @yields
  */
 export function* StatementsSaga(): SagaIterator<void> {
-    yield takeLatest(UpdateUserName, GetStatementsSaga);
-    yield takeLatest(UpdateStatementsList, SelectStatementSaga);
-    yield fork(RevalidateSaga, GetStatementsAdditionalData, revalidateStatementsInfoInterval);
+  yield takeLatest(UpdateUserName, GetStatementsSaga);
+  yield takeLatest(UpdateStatementsList, SelectStatementSaga);
+  yield fork(RevalidateSaga, GetStatementsAdditionalData, revalidateStatementsInfoInterval);
 }
 
 /**
@@ -44,26 +44,26 @@ export function* StatementsSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetStatementsSaga({
-    payload: user,
+  payload: user,
 }: ReturnType<typeof UpdateUserName>): SagaIterator<void> {
-    if (!user) {
-        return;
+  if (!user) {
+    return;
+  }
+
+  try {
+    yield put(UpdateIsLoadingStatements(true));
+    yield put(UpdateStatementsError(false));
+
+    const statementsList: Statement[] = yield call(ProtectedCall, getStatements);
+
+    if (statementsList !== undefined) {
+      yield put(UpdateStatementsList(statementsList));
     }
-
-    try {
-        yield put(UpdateIsLoadingStatements(true));
-        yield put(UpdateStatementsError(false));
-
-        const statementsList: Statement[] = yield call(ProtectedCall, getStatements);
-
-        if (statementsList !== undefined) {
-            yield put(UpdateStatementsList(statementsList));
-        }
-    } catch {
-        yield put(UpdateStatementsError(true));
-    } finally {
-        yield put(UpdateIsLoadingStatements(false));
-    }
+  } catch {
+    yield put(UpdateStatementsError(true));
+  } finally {
+    yield put(UpdateIsLoadingStatements(false));
+  }
 }
 
 /**
@@ -73,28 +73,26 @@ function* GetStatementsSaga({
  * @yields
  */
 function* SelectStatementSaga({
-    payload: statementsList,
+  payload: statementsList,
 }: ReturnType<typeof UpdateStatementsList>): SagaIterator<void> {
-    const currentStatementKey = yield select(selectCurrentStatementKey);
-    const urlParamStatementName: string = yield select(
-        createUrlParamSelector(RouterParam.statementName),
-    );
+  const currentStatementKey = yield select(selectCurrentStatementKey);
+  const urlParamStatementName: string = yield select(
+    createUrlParamSelector(RouterParam.statementName),
+  );
 
-    if (currentStatementKey) {
-        return;
-    }
+  if (currentStatementKey) {
+    return;
+  }
 
-    if (!statementsList.length) {
-        return;
-    }
+  if (!statementsList.length) {
+    return;
+  }
 
-    const statementWithNameFromUrl = statementsList.find(x => x.name === urlParamStatementName);
-    const shouldSelectFromUrl = !!statementWithNameFromUrl;
-    const keyToSelect = shouldSelectFromUrl
-        ? statementWithNameFromUrl._key
-        : statementsList[0]._key;
+  const statementWithNameFromUrl = statementsList.find(x => x.name === urlParamStatementName);
+  const shouldSelectFromUrl = !!statementWithNameFromUrl;
+  const keyToSelect = shouldSelectFromUrl ? statementWithNameFromUrl._key : statementsList[0]._key;
 
-    yield put(UpdateSelectedStatementKey(keyToSelect));
+  yield put(UpdateSelectedStatementKey(keyToSelect));
 }
 
 /**
@@ -103,15 +101,15 @@ function* SelectStatementSaga({
  * @yields
  */
 function* GetStatementsInfoSaga() {
-    try {
-        yield put(UpdateIsLoadingStatementsInfo(true));
-        const statementsInfo: StatementInfo[] = yield call(ProtectedCall, getStatementsInfo);
-        yield put(UpdateStatementsInfoList(statementsInfo));
-    } catch {
-        // Do nothing
-    } finally {
-        yield put(UpdateIsLoadingStatementsInfo(false));
-    }
+  try {
+    yield put(UpdateIsLoadingStatementsInfo(true));
+    const statementsInfo: StatementInfo[] = yield call(ProtectedCall, getStatementsInfo);
+    yield put(UpdateStatementsInfoList(statementsInfo));
+  } catch {
+    // Do nothing
+  } finally {
+    yield put(UpdateIsLoadingStatementsInfo(false));
+  }
 }
 
 /**
@@ -120,15 +118,15 @@ function* GetStatementsInfoSaga() {
  * @yields
  */
 function* GetStatementsStatsSaga() {
-    try {
-        yield put(UpdateIsLoadingStatementsStats(true));
-        const statementsInfo: StatementStats[] = yield call(ProtectedCall, getStatementsStats);
-        yield put(UpdateStatementsStats(statementsInfo));
-    } catch {
-        // Do nothing
-    } finally {
-        yield put(UpdateIsLoadingStatementsStats(false));
-    }
+  try {
+    yield put(UpdateIsLoadingStatementsStats(true));
+    const statementsInfo: StatementStats[] = yield call(ProtectedCall, getStatementsStats);
+    yield put(UpdateStatementsStats(statementsInfo));
+  } catch {
+    // Do nothing
+  } finally {
+    yield put(UpdateIsLoadingStatementsStats(false));
+  }
 }
 
 /**
@@ -137,5 +135,5 @@ function* GetStatementsStatsSaga() {
  * @yields
  */
 function* GetStatementsAdditionalData() {
-    yield all([fork(GetStatementsInfoSaga), fork(GetStatementsStatsSaga)]);
+  yield all([fork(GetStatementsInfoSaga), fork(GetStatementsStatsSaga)]);
 }

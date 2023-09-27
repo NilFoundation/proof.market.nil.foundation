@@ -9,9 +9,9 @@ import { getLastProofProducerData } from '@/api';
 import type { LastProofProducer } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import {
-    UpdateLastProofProducer,
-    UpdateIsLoadingLastProofProducer,
-    UpdateIsErrorLastProofProducer,
+  UpdateLastProofProducer,
+  UpdateIsLoadingLastProofProducer,
+  UpdateIsErrorLastProofProducer,
 } from '../actions';
 import { ProtectedCall, UpdateUserName } from '../../login';
 import { RevalidateSaga } from '../../common';
@@ -24,11 +24,11 @@ const revalidateDataInterval = Number(getRuntimeConfigOrThrow().REVALIDATE_DATA_
  * @yields
  */
 export function* LastProofProducerSaga(): SagaIterator<void> {
-    yield takeLatest(UpdateUserName, function* () {
-        yield put(UpdateLastProofProducer(undefined));
-        yield fork(GetLastProofProducerSaga);
-    });
-    yield fork(RevalidateSaga, GetLastProofProducerSaga, revalidateDataInterval);
+  yield takeLatest(UpdateUserName, function* () {
+    yield put(UpdateLastProofProducer(undefined));
+    yield fork(GetLastProofProducerSaga);
+  });
+  yield fork(RevalidateSaga, GetLastProofProducerSaga, revalidateDataInterval);
 }
 
 /**
@@ -37,19 +37,19 @@ export function* LastProofProducerSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetLastProofProducerSaga(): SagaIterator<void> {
-    try {
-        yield put(UpdateIsLoadingLastProofProducer(true));
-        yield put(UpdateIsErrorLastProofProducer(false));
+  try {
+    yield put(UpdateIsLoadingLastProofProducer(true));
+    yield put(UpdateIsErrorLastProofProducer(false));
 
-        const apiCallResult: Array<LastProofProducer> | undefined = yield call(
-            ProtectedCall,
-            getLastProofProducerData,
-        );
+    const apiCallResult: Array<LastProofProducer> | undefined = yield call(
+      ProtectedCall,
+      getLastProofProducerData,
+    );
 
-        yield put(UpdateLastProofProducer(apiCallResult));
-    } catch (e) {
-        yield put(UpdateIsErrorLastProofProducer(true));
-    } finally {
-        yield put(UpdateIsLoadingLastProofProducer(false));
-    }
+    yield put(UpdateLastProofProducer(apiCallResult));
+  } catch (e) {
+    yield put(UpdateIsErrorLastProofProducer(true));
+  } finally {
+    yield put(UpdateIsLoadingLastProofProducer(false));
+  }
 }

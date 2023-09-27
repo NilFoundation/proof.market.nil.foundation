@@ -14,22 +14,22 @@ type Breakpoint = 'sm' | 'md' | 'lg';
  * @returns Matched breakpoint.
  */
 export const useBreakpoint = () => {
-    const [breakpoint, setBreakpoint] = useState<Breakpoint>();
-    const { width } = useWindowDimensions();
+  const [breakpoint, setBreakpoint] = useState<Breakpoint>();
+  const { width } = useWindowDimensions();
 
-    useEffect(() => {
-        if (width < 768) {
-            setBreakpoint('sm');
-            return;
-        }
+  useEffect(() => {
+    if (width < 768) {
+      setBreakpoint('sm');
+      return;
+    }
 
-        if (width >= 1400) {
-            setBreakpoint('lg');
-            return;
-        }
+    if (width >= 1400) {
+      setBreakpoint('lg');
+      return;
+    }
 
-        setBreakpoint('md');
-    }, [width]);
+    setBreakpoint('md');
+  }, [width]);
 
-    return breakpoint;
+  return breakpoint;
 };

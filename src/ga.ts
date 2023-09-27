@@ -10,18 +10,18 @@ import { getRuntimeConfigOrThrow } from './utils';
  * Ga initialize options.
  */
 const gaInitOptions = {
-    testMode: !import.meta.env.PROD,
+  testMode: !import.meta.env.PROD,
 };
 
 /**
  * Configures ga for the app. Should be called before any other tracking functions will record any data.
  */
 export default function configureGA(): void {
-    const measurementId = getRuntimeConfigOrThrow().GA_TRACKING_ID;
+  const measurementId = getRuntimeConfigOrThrow().GA_TRACKING_ID;
 
-    if (!measurementId) {
-        return;
-    }
+  if (!measurementId) {
+    return;
+  }
 
-    ReactGa.initialize(measurementId, gaInitOptions);
+  ReactGa.initialize(measurementId, gaInitOptions);
 }

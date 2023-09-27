@@ -15,17 +15,17 @@ import { ReadonlyAccessProvider, FullScreenLoader } from '../components';
  * @returns React element.
  */
 const MainLayout = (): ReactElement => {
-    return (
-        <Layout
-            header={<Navbar />}
-            footer={<Footer />}
-            stickyHeader
-        >
-            <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
-                <Outlet />
-            </ReadonlyAccessProvider>
-        </Layout>
-    );
+  return (
+    <Layout
+      header={<Navbar />}
+      footer={<Footer />}
+      stickyHeader
+    >
+      <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
+        <Outlet />
+      </ReadonlyAccessProvider>
+    </Layout>
+  );
 };
 
 export default MainLayout;

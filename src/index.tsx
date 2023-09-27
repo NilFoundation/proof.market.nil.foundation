@@ -29,20 +29,20 @@ const engine = new Styletron();
 const { theme } = createTheme(engine, { enableDefaultFonts: false });
 
 render(
-    <React.StrictMode>
-        <HelmetProvider>
-            <Provider store={store}>
-                <HashRouter>
-                    <StyletronProvider value={engine}>
-                        <BaseProvider theme={theme}>
-                            <App />
-                        </BaseProvider>
-                    </StyletronProvider>
-                </HashRouter>
-            </Provider>
-        </HelmetProvider>
-    </React.StrictMode>,
-    document.getElementById('root'),
+  <React.StrictMode>
+    <HelmetProvider>
+      <Provider store={store}>
+        <HashRouter>
+          <StyletronProvider value={engine}>
+            <BaseProvider theme={theme}>
+              <App />
+            </BaseProvider>
+          </StyletronProvider>
+        </HashRouter>
+      </Provider>
+    </HelmetProvider>
+  </React.StrictMode>,
+  document.getElementById('root'),
 );
 
 // TODO - enable service-workier in vite build

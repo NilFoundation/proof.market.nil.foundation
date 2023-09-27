@@ -15,7 +15,7 @@ import styles from './AuthContainer.module.scss';
  * Props.
  */
 type AuthContainerProps = {
-    children: ReactNode;
+  children: ReactNode;
 };
 
 /**
@@ -25,27 +25,27 @@ type AuthContainerProps = {
  * @returns React component.
  */
 export const AuthContainer = ({ children }: AuthContainerProps): ReactElement => {
-    const bp = useBreakpoint();
+  const bp = useBreakpoint();
 
-    return (
-        <FullScreenView
-            showFullScreen
-            className={styles.loginContainer}
-        >
-            {children}
-            {bp === 'md' ||
-                (bp === 'lg' && (
-                    <Link
-                        className={styles.back}
-                        to={Path.market}
-                    >
-                        <Icon iconName="fa-solid fa-chevron-left" />
-                        Back to Market
-                    </Link>
-                ))}
-            <div className={styles.copyright}>
-                <Copyright />
-            </div>
-        </FullScreenView>
-    );
+  return (
+    <FullScreenView
+      showFullScreen
+      className={styles.loginContainer}
+    >
+      {children}
+      {bp === 'md' ||
+        (bp === 'lg' && (
+          <Link
+            className={styles.back}
+            to={Path.market}
+          >
+            <Icon iconName="fa-solid fa-chevron-left" />
+            Back to Market
+          </Link>
+        ))}
+      <div className={styles.copyright}>
+        <Copyright />
+      </div>
+    </FullScreenView>
+  );
 };

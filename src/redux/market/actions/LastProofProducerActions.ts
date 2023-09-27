@@ -10,19 +10,19 @@ import type { LastProofProducer } from '@/models';
  * Update last proof producer data.
  */
 export const UpdateLastProofProducer = createAction<Array<LastProofProducer | null> | undefined>(
-    '@lastProofProducer/UPDATE_DATA',
+  '@lastProofProducer/UPDATE_DATA',
 );
 
 /**
  * Update loading last proof producer data state.
  */
 export const UpdateIsLoadingLastProofProducer = createAction<boolean>(
-    '@lastProofProducer/UPDATE_IS_LOADING',
+  '@lastProofProducer/UPDATE_IS_LOADING',
 );
 
 /**
  * Update getting last proof producer data error state.
  */
 export const UpdateIsErrorLastProofProducer = createAction<boolean>(
-    '@lastProofProducer/UPDATE_IS_ERROR',
+  '@lastProofProducer/UPDATE_IS_ERROR',
 );
