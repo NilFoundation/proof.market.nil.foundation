@@ -6,7 +6,7 @@
 import type { ReactElement } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Path } from '@/features/routing';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/features/auth';
 
 /**
  * Props.

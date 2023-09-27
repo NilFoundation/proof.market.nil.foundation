@@ -1,6 +1,6 @@
 /**
- * @file Index.
+ * @file Typings.
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './Header';
+declare module 'inline-style-expand-shorthand';

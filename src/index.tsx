@@ -6,6 +6,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { createTheme } from '@nilfoundation/ui-kit';
 // TODO - replace HashRouter with BrowserRouter after migrating from gh pages
 import { HashRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -19,14 +20,13 @@ import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { checkRuntimeConfig } from './utils';
-import { theme } from './baseuiTheme';
-import './index.scss';
 
 checkRuntimeConfig();
 configureSentry();
 configureGA();
 
 const engine = new Styletron();
+const { theme } = createTheme(engine, { enableDefaultFonts: false });
 
 render(
     <React.StrictMode>

@@ -9,7 +9,7 @@ import { Dropdown } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import type { OrderBookPriceStepType } from '@/enums';
 import { OrderBookPriceStep } from '@/enums';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/features/auth';
 import { selectOrderBookPriceStep, UpdateOrderBookPriceStep, useAppSelector } from '@/redux';
 import { OrderBookSettingsContext } from './OrderBookSettingsContext';
 import styles from './OrderBook.module.scss';

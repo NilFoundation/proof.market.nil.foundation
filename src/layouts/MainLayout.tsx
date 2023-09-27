@@ -6,7 +6,8 @@
 import type { ReactElement } from 'react';
 import { Layout } from '@nilfoundation/react-components';
 import { Outlet } from 'react-router-dom';
-import { Header, Footer, ReadonlyAccessProvider, FullScreenLoader } from '../components';
+import { Footer, Navbar } from '@/features/shared';
+import { ReadonlyAccessProvider, FullScreenLoader } from '../components';
 
 /**
  * Main app layout.
@@ -16,7 +17,7 @@ import { Header, Footer, ReadonlyAccessProvider, FullScreenLoader } from '../com
 const MainLayout = (): ReactElement => {
     return (
         <Layout
-            header={<Header />}
+            header={<Navbar />}
             footer={<Footer />}
             stickyHeader
         >

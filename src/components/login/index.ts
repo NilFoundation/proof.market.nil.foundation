@@ -7,5 +7,3 @@ export * from './LoginForm';
 export * from './AuthContainer';
 export * from './RegisterForm';
 export * from './ReadonlyAccessProvider';
-export * from './UserMenu';
-export * from './ProtectedContent';

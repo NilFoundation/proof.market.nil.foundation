@@ -21,11 +21,11 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation } from 'react-router-dom';
 import { Path } from '@/features/routing';
 import { login } from '@/api';
-import { useLogin } from '@/hooks';
+import { useLogin } from '@/features/auth';
 import type { LoginData } from '@/models';
+import { getApiErrorMessage } from '@/utils';
 import { AuthCard } from '../AuthCard';
 import styles from './LoginForm.module.scss';
-import { getApiErrorMessage } from '@/utils';
 
 /**
  * Password input type.

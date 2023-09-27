@@ -6,7 +6,7 @@
 import type { ReactElement, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import { login } from '@/api';
-import { useAuth, useLogin } from '@/hooks';
+import { useAuth, useLogin } from '@/features/auth';
 import { getRuntimeConfigOrThrow } from '@/utils';
 
 /**

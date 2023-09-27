@@ -5,11 +5,12 @@
 
 import type { ReactElement, ReactNode } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, Size, Variant } from '@nilfoundation/react-components';
+import { useStyletron } from 'styletron-react';
+import { BUTTON_KIND, Button } from '@nilfoundation/ui-kit';
 import { Path } from '@/features/routing';
-import { useAuth } from '@/hooks';
+import { useAuth } from '@/features/auth';
 import { Overlay } from '@/components/common';
-import styles from './ProtectedContent.module.scss';
+import { styles as s } from './styles';
 
 /**
  * Props.
@@ -24,8 +25,6 @@ type ProtectedComponentProps = {
  * Component to restrict non-authorized and readonly users access.
  * Renders an overlay with a link to login page.
  *
- * Consider to add position: relative to parent container.
- *
  * @param {ProtectedComponentProps} props - Props.
  * @returns React component.
  */
@@ -37,16 +36,16 @@ export const ProtectedContent = ({
     const { isAuthorized, isReadonly } = useAuth();
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const [css] = useStyletron();
 
     return (
         <>
             {(!isAuthorized || isReadonly) && (
                 <Overlay>
-                    <div className={styles.container}>
-                        {overlayTitle && <h4 className="text-center">{overlayTitle}</h4>}
+                    <div className={css(s.container)}>
+                        {overlayTitle && <div className={css(s.title)}>{overlayTitle}</div>}
                         <Button
-                            variant={Variant.success}
-                            size={Size.lg}
+                            kind={BUTTON_KIND.primary}
                             onClick={() => navigate(Path.login, { state: { from: pathname } })}
                         >
                             {overlayButtonText}

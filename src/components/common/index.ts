@@ -3,9 +3,6 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './Footer';
-export * from './Header';
-export * from './BreadCrumbs';
 export * from './Details';
 export * from './DashboardCard';
 export * from './ReactTable';
@@ -18,7 +15,6 @@ export * from './Copyright';
 export * from './Overlay';
 export * from './ObjectAsPlainTextViewer';
 export * from './GALocationTracker';
-export * from './VirtualList';
 export * from './PageVisibilityDetector';
 export * from './ProgressBar';
 export * from './RouterLink';
