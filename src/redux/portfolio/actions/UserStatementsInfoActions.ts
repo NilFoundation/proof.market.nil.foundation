@@ -10,26 +10,26 @@ import type { UserStatementInfo } from '@/models';
  * Update user statements info.
  */
 export const UpdateUserStatementsInfo = createAction<UserStatementInfo[]>(
-    '@userStatementInfo/UPDATE',
+  '@userStatementInfo/UPDATE',
 );
 
 /**
  * Update user statement info loading state.
  */
 export const UpdateIsLoadingUserStatementsInfo = createAction<boolean>(
-    '@userStatementInfo/UPDATE_IS_LOADING',
+  '@userStatementInfo/UPDATE_IS_LOADING',
 );
 
 /**
  * Update user statement info error state.
  */
 export const UpdateIsErrorUserStatementsInfo = createAction<boolean>(
-    '@userStatementInfo/UPDATE_IS_ERROR',
+  '@userStatementInfo/UPDATE_IS_ERROR',
 );
 
 /**
  * Update selected user statement info key.
  */
 export const UpdateSelectedUserStatementsInfoKey = createAction<UserStatementInfo['_key']>(
-    '@userStatementInfo/UPDATE_SELECTED_KEY',
+  '@userStatementInfo/UPDATE_SELECTED_KEY',
 );

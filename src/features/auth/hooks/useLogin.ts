@@ -21,52 +21,52 @@ const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
  * @returns Login callback.
  */
 export const useLogin = (redirectPath = Path.market) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const processCredentialsLogin = useCallback(
-        async (jwt: string) => {
-            setItemIntoLocalStorage('userToken', jwt);
+  const processCredentialsLogin = useCallback(
+    async (jwt: string) => {
+      setItemIntoLocalStorage('userToken', jwt);
 
-            const user = getUserFromJwt(jwt);
-            const timeout = calculateRenewJwtTimeGap(jwt);
+      const user = getUserFromJwt(jwt);
+      const timeout = calculateRenewJwtTimeGap(jwt);
 
-            dispatch(SetJwtRevalidateTimeout(timeout));
+      dispatch(SetJwtRevalidateTimeout(timeout));
 
-            return user;
-        },
-        [dispatch],
-    );
+      return user;
+    },
+    [dispatch],
+  );
 
-    const processLogin = useCallback(
-        async (data: string, errorCb?: () => void) => {
-            try {
-                const user = await processCredentialsLogin(data);
+  const processLogin = useCallback(
+    async (data: string, errorCb?: () => void) => {
+      try {
+        const user = await processCredentialsLogin(data);
 
-                if (!user) {
-                    return;
-                }
+        if (!user) {
+          return;
+        }
 
-                navigate(redirectPath, { replace: true });
+        navigate(redirectPath, { replace: true });
 
-                dispatch(UpdateUserName(user));
-                dispatch(UpdateIsAuthorized(true));
+        dispatch(UpdateUserName(user));
+        dispatch(UpdateIsAuthorized(true));
 
-                if (user === readonlyUser) {
-                    return;
-                }
+        if (user === readonlyUser) {
+          return;
+        }
 
-                notificationActions?.create({
-                    title: 'Login success',
-                    message: `Successfully login as ${user}`,
-                    variant: Variant.success,
-                });
-            } catch {
-                errorCb && errorCb();
-            }
-        },
-        [processCredentialsLogin, navigate, redirectPath, dispatch],
-    );
+        notificationActions?.create({
+          title: 'Login success',
+          message: `Successfully login as ${user}`,
+          variant: Variant.success,
+        });
+      } catch {
+        errorCb && errorCb();
+      }
+    },
+    [processCredentialsLogin, navigate, redirectPath, dispatch],
+  );
 
-    return processLogin;
+  return processLogin;
 };

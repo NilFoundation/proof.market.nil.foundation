@@ -13,8 +13,8 @@ import dayjs from 'dayjs';
  * @returns True if second date is previous day for the first date.
  */
 export const isPreviousDay = (first: string, second: string): boolean => {
-    const firstDate = dayjs(first);
-    const secondDate = dayjs(second);
+  const firstDate = dayjs(first);
+  const secondDate = dayjs(second);
 
-    return firstDate.get('day') !== secondDate.get('day') && firstDate > secondDate;
+  return firstDate.get('day') !== secondDate.get('day') && firstDate > secondDate;
 };

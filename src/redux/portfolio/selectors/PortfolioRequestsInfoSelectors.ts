@@ -10,7 +10,7 @@ import type { RootStateType } from '@/redux';
  * Select current selected portfolio requests info.
  */
 export const selectSelectedPortfolioRequestsInfo = createSelector(
-    (s: RootStateType) => s.portfolioRequestsInfo.info,
-    (s: RootStateType) => s.portfolioRequestsInfo.selectedKey,
-    (requestsInfo, key) => requestsInfo.find(s => s._key === key),
+  (s: RootStateType) => s.portfolioRequestsInfo.info,
+  (s: RootStateType) => s.portfolioRequestsInfo.selectedKey,
+  (requestsInfo, key) => requestsInfo.find(s => s._key === key),
 );

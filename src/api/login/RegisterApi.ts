@@ -7,8 +7,8 @@ import { createApiClient } from '../common';
 import type { RegisterData } from '../../models';
 
 const httpFetcher = createApiClient({
-    baseUrl: '/user',
-    injectToken: false,
+  baseUrl: '/user',
+  injectToken: false,
 });
 
 /**
@@ -18,7 +18,7 @@ const httpFetcher = createApiClient({
  * @returns .
  */
 export const signUp = (registerData: RegisterData): Promise<RegisterData> =>
-    httpFetcher.post('signup', { json: registerData }).json();
+  httpFetcher.post('signup', { json: registerData }).json();
 
 /**
  * Check if username is unique.
@@ -27,4 +27,4 @@ export const signUp = (registerData: RegisterData): Promise<RegisterData> =>
  * @returns True if username is unique.
  */
 export const checkIsUsernameUnique = (userNameToCheck: string): Promise<boolean> =>
-    httpFetcher.head(userNameToCheck).json();
+  httpFetcher.head(userNameToCheck).json();

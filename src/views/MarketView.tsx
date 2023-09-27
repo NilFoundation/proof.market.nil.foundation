@@ -8,14 +8,14 @@ import { Container, Row, Col } from '@nilfoundation/react-components';
 import { Helmet } from 'react-helmet-async';
 import { StatementsList } from '@/features/statementsList';
 import {
-    OrderManagementContextProvider,
-    StatementDashboard,
-    OrderBook,
-    CreateOrdersPanel,
-    TradeHistory,
-    ManageOrdersPanel,
-    StatementInfoPanel,
-    LastProofProducer,
+  OrderManagementContextProvider,
+  StatementDashboard,
+  OrderBook,
+  CreateOrdersPanel,
+  TradeHistory,
+  ManageOrdersPanel,
+  StatementInfoPanel,
+  LastProofProducer,
 } from '../components';
 
 /**
@@ -24,42 +24,42 @@ import {
  * @returns React component.
  */
 const MarketView = (): ReactElement => (
-    <Container
-        as="main"
-        fluid
-        data-sb="mainView"
-    >
-        <Helmet>
-            <title>Market</title>
-        </Helmet>
-        <Row>
-            <Col
-                xs={12}
-                md={3}
-            >
-                <StatementsList />
-                <TradeHistory />
-                <LastProofProducer />
-            </Col>
-            <OrderManagementContextProvider>
-                <Col
-                    xs={12}
-                    md={6}
-                >
-                    <StatementInfoPanel />
-                    <StatementDashboard />
-                    <OrderBook />
-                </Col>
-                <Col
-                    xs={12}
-                    md={3}
-                >
-                    <CreateOrdersPanel />
-                    <ManageOrdersPanel />
-                </Col>
-            </OrderManagementContextProvider>
-        </Row>
-    </Container>
+  <Container
+    as="main"
+    fluid
+    data-sb="mainView"
+  >
+    <Helmet>
+      <title>Market</title>
+    </Helmet>
+    <Row>
+      <Col
+        xs={12}
+        md={3}
+      >
+        <StatementsList />
+        <TradeHistory />
+        <LastProofProducer />
+      </Col>
+      <OrderManagementContextProvider>
+        <Col
+          xs={12}
+          md={6}
+        >
+          <StatementInfoPanel />
+          <StatementDashboard />
+          <OrderBook />
+        </Col>
+        <Col
+          xs={12}
+          md={3}
+        >
+          <CreateOrdersPanel />
+          <ManageOrdersPanel />
+        </Col>
+      </OrderManagementContextProvider>
+    </Row>
+  </Container>
 );
 
 export default MarketView;

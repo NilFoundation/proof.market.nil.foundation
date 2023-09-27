@@ -8,11 +8,11 @@
  * Key should exist in LocalStorageKey type to enable autocompletion and typos checking throughover the app.
  */
 export type LocalStorageKey =
-    | 'userToken'
-    | 'orderBookPriceStep'
-    | 'userBalanceHidden'
-    | 'statementDashboardDataRange'
-    | 'displayUserOrdersInOrderbook'
-    | 'statementDashboardDisplayVolumes'
-    | `${string}TableState`
-    | 'selectedStatementsTags';
+  | 'userToken'
+  | 'orderBookPriceStep'
+  | 'userBalanceHidden'
+  | 'statementDashboardDataRange'
+  | 'displayUserOrdersInOrderbook'
+  | 'statementDashboardDisplayVolumes'
+  | `${string}TableState`
+  | 'selectedStatementsTags';

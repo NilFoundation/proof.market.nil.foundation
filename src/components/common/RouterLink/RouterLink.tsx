@@ -12,8 +12,8 @@ import type { Path } from '@/features/routing';
  * Props.
  */
 type RouterLinkProps = {
-    title: ReactNode;
-    to: Path | string;
+  title: ReactNode;
+  to: Path | string;
 };
 
 /**
@@ -23,23 +23,23 @@ type RouterLinkProps = {
  * @returns React component.
  */
 export const RouterLink = ({ title, to }: RouterLinkProps): ReactElement => {
-    const match = useMatch({
-        path: to,
-        end: false,
-    });
+  const match = useMatch({
+    path: to,
+    end: false,
+  });
 
-    return (
-        <Nav.Item
-            key={to}
-            active={!!match}
-            renderLink={({ active: _, ...props }) => (
-                <Link
-                    to={to}
-                    {...props}
-                >
-                    <span>{title}</span>
-                </Link>
-            )}
-        />
-    );
+  return (
+    <Nav.Item
+      key={to}
+      active={!!match}
+      renderLink={({ active: _, ...props }) => (
+        <Link
+          to={to}
+          {...props}
+        >
+          <span>{title}</span>
+        </Link>
+      )}
+    />
+  );
 };

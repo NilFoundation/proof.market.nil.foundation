@@ -22,26 +22,26 @@ type ProofTimeGenChartProps = ChartBaseProps;
  * @returns React component.
  */
 export const ProofTimeGenChart = (props: ProofTimeGenChartProps): ReactElement => {
-    const seriesOptions = useMemo(
-        () => ({
-            color: colors.infoColor,
-        }),
-        [],
-    );
-    const {
-        chartData: { proofGenTimeData, volumesData },
-        loadingData: isLoadingChartData,
-    } = useGetStatementDashboardData(props.displayVolumes, props.dataRange);
+  const seriesOptions = useMemo(
+    () => ({
+      color: colors.infoColor,
+    }),
+    [],
+  );
+  const {
+    chartData: { proofGenTimeData, volumesData },
+    loadingData: isLoadingChartData,
+  } = useGetStatementDashboardData(props.displayVolumes, props.dataRange);
 
-    return (
-        <ChartTemplate
-            loadingData={isLoadingChartData}
-            chartName="Proof Generation Time, min"
-            seriesData={proofGenTimeData}
-            seriesType="Line"
-            seriesOptions={seriesOptions}
-            volumesData={volumesData}
-            {...props}
-        />
-    );
+  return (
+    <ChartTemplate
+      loadingData={isLoadingChartData}
+      chartName="Proof Generation Time, min"
+      seriesData={proofGenTimeData}
+      seriesType="Line"
+      seriesOptions={seriesOptions}
+      volumesData={volumesData}
+      {...props}
+    />
+  );
 };

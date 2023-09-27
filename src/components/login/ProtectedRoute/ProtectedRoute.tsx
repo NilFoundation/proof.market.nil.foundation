@@ -12,8 +12,8 @@ import { useAuth } from '@/features/auth';
  * Props.
  */
 type ProtectedRouteProps = {
-    readonlyAccess?: boolean;
-    redirectPath?: Path;
+  readonlyAccess?: boolean;
+  redirectPath?: Path;
 };
 
 /**
@@ -23,25 +23,25 @@ type ProtectedRouteProps = {
  * @returns React component.
  */
 const ProtectedRoute = ({
-    readonlyAccess = false,
-    redirectPath = Path.login,
+  readonlyAccess = false,
+  redirectPath = Path.login,
 }: ProtectedRouteProps): ReactElement => {
-    const { isAuthorized, isReadonly } = useAuth();
-    const { pathname } = useLocation();
+  const { isAuthorized, isReadonly } = useAuth();
+  const { pathname } = useLocation();
 
-    return (
-        <>
-            {isAuthorized && (readonlyAccess ? true : !isReadonly) ? (
-                <Outlet />
-            ) : (
-                <Navigate
-                    replace
-                    to={redirectPath}
-                    state={{ from: pathname }}
-                />
-            )}
-        </>
-    );
+  return (
+    <>
+      {isAuthorized && (readonlyAccess ? true : !isReadonly) ? (
+        <Outlet />
+      ) : (
+        <Navigate
+          replace
+          to={redirectPath}
+          state={{ from: pathname }}
+        />
+      )}
+    </>
+  );
 };
 
 export default ProtectedRoute;

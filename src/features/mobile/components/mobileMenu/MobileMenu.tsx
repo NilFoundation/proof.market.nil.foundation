@@ -10,8 +10,8 @@ import type { MobileMenuItem } from '../../enums/MobileMenuItem';
 import styles from './MobileMenu.module.scss';
 
 type MobileMenuProps = {
-    selectedMenuOption?: MobileMenuItem;
-    onSetMenuOption: (item: MobileMenuItem) => void;
+  selectedMenuOption?: MobileMenuItem;
+  onSetMenuOption: (item: MobileMenuItem) => void;
 };
 
 /**
@@ -21,23 +21,23 @@ type MobileMenuProps = {
  * @returns React element.
  */
 export const MobileMenu = ({
-    selectedMenuOption,
-    onSetMenuOption,
+  selectedMenuOption,
+  onSetMenuOption,
 }: MobileMenuProps): ReactElement => {
-    return (
-        <Nav
-            className={styles.menu}
-            justified
+  return (
+    <Nav
+      className={styles.menu}
+      justified
+    >
+      {mobileMenuConfig.map(({ key }) => (
+        <Nav.Item
+          key={key}
+          active={selectedMenuOption === key}
+          onClick={() => onSetMenuOption(key)}
         >
-            {mobileMenuConfig.map(({ key }) => (
-                <Nav.Item
-                    key={key}
-                    active={selectedMenuOption === key}
-                    onClick={() => onSetMenuOption(key)}
-                >
-                    {key}
-                </Nav.Item>
-            ))}
-        </Nav>
-    );
+          {key}
+        </Nav.Item>
+      ))}
+    </Nav>
+  );
 };

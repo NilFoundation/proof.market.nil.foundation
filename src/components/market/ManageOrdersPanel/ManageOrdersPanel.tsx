@@ -23,36 +23,36 @@ import styles from './ManageOrdersPanel.module.scss';
  * @returns React component.
  */
 export const ManageOrdersPanel = (): ReactElement => {
-    const [tab, setTab] = useState<ManageOrdersTab>(ManageOrdersTab.active);
-    const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
-    const { isError, loadingData, activeOrdersData, historyOrdersData } = useGetManageOrdersData();
+  const [tab, setTab] = useState<ManageOrdersTab>(ManageOrdersTab.active);
+  const selectedStatementKey = useAppSelector(s => s.statementsState.selectedKey);
+  const { isError, loadingData, activeOrdersData, historyOrdersData } = useGetManageOrdersData();
 
-    return (
-        <DashboardCard>
-            <h4>Manage orders</h4>
-            <div
-                className={styles.manageOrdersPanel}
-                data-sb="manageOrdersPanel"
-            >
-                <ProtectedContent overlayTitle="Authorization is required to manage orders">
-                    <ManageOrdersPanelTabs
-                        currentTab={tab}
-                        onSetTab={setTab}
-                    />
-                    {selectedStatementKey !== undefined ? (
-                        viewFactory(
-                            tab,
-                            isError,
-                            loadingData,
-                            tab === ManageOrdersTab.active ? activeOrdersData : historyOrdersData,
-                        )
-                    ) : (
-                        <h5>Please, select statement to display orders.</h5>
-                    )}
-                </ProtectedContent>
-            </div>
-        </DashboardCard>
-    );
+  return (
+    <DashboardCard>
+      <h4>Manage orders</h4>
+      <div
+        className={styles.manageOrdersPanel}
+        data-sb="manageOrdersPanel"
+      >
+        <ProtectedContent overlayTitle="Authorization is required to manage orders">
+          <ManageOrdersPanelTabs
+            currentTab={tab}
+            onSetTab={setTab}
+          />
+          {selectedStatementKey !== undefined ? (
+            viewFactory(
+              tab,
+              isError,
+              loadingData,
+              tab === ManageOrdersTab.active ? activeOrdersData : historyOrdersData,
+            )
+          ) : (
+            <h5>Please, select statement to display orders.</h5>
+          )}
+        </ProtectedContent>
+      </div>
+    </DashboardCard>
+  );
 };
 
 /**
@@ -65,25 +65,25 @@ export const ManageOrdersPanel = (): ReactElement => {
  * @returns React Element.
  */
 const viewFactory = (
-    tab: ManageOrdersTab,
-    error: boolean,
-    loading: boolean,
-    data: ManageOrdersData[],
+  tab: ManageOrdersTab,
+  error: boolean,
+  loading: boolean,
+  data: ManageOrdersData[],
 ) => {
-    if (error) {
-        return <h5>Error while loading data.</h5>;
-    }
+  if (error) {
+    return <h5>Error while loading data.</h5>;
+  }
 
-    if (data.length === 0) {
-        return loading ? <Spinner grow /> : <h5>No orders.</h5>;
-    }
+  if (data.length === 0) {
+    return loading ? <Spinner grow /> : <h5>No orders.</h5>;
+  }
 
-    switch (tab) {
-        case ManageOrdersTab.active:
-            return <ActiveOrdersTable data={data} />;
-        case ManageOrdersTab.history:
-            return <HistoryOrdersTable data={data} />;
-        default:
-            return <></>;
-    }
+  switch (tab) {
+    case ManageOrdersTab.active:
+      return <ActiveOrdersTable data={data} />;
+    case ManageOrdersTab.history:
+      return <HistoryOrdersTable data={data} />;
+    default:
+      return <></>;
+  }
 };

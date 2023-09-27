@@ -7,6 +7,6 @@
  * React router search param.
  */
 export const enum RouterSearchParam {
-    chartDataRange = 'range',
-    chartDisplayVolumes = 'volumes',
+  chartDataRange = 'range',
+  chartDisplayVolumes = 'volumes',
 }

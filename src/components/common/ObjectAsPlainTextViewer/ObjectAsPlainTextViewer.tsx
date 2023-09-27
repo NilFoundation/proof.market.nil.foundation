@@ -10,8 +10,8 @@ import styles from './ObjectAsPlainTextViewer.module.scss';
  * Props.
  */
 type ObjectAsPlainTextViewerProps<T extends Record<string, unknown>> = {
-    data: T;
-    className?: string;
+  data: T;
+  className?: string;
 };
 
 /**
@@ -21,26 +21,26 @@ type ObjectAsPlainTextViewerProps<T extends Record<string, unknown>> = {
  * @returns React component.
  */
 export const ObjectAsPlainTextViewer = <T extends Record<string, unknown>>({
-    data,
-    className,
+  data,
+  className,
 }: ObjectAsPlainTextViewerProps<T>): ReactElement => {
-    return (
-        <ul className={`${styles.viewer} ${className ?? ''}`}>
-            {Object.entries(data).map(([x, y]) =>
-                y === undefined ? null : (
-                    <li
-                        key={x}
-                        className={styles.item}
-                    >
-                        {!!x && !!y && (
-                            <>
-                                <strong>{x}</strong>
-                                <span>{`: ${y}`}</span>
-                            </>
-                        )}
-                    </li>
-                ),
+  return (
+    <ul className={`${styles.viewer} ${className ?? ''}`}>
+      {Object.entries(data).map(([x, y]) =>
+        y === undefined ? null : (
+          <li
+            key={x}
+            className={styles.item}
+          >
+            {!!x && !!y && (
+              <>
+                <strong>{x}</strong>
+                <span>{`: ${y}`}</span>
+              </>
             )}
-        </ul>
-    );
+          </li>
+        ),
+      )}
+    </ul>
+  );
 };

@@ -13,13 +13,13 @@ import jwt_decode from 'jwt-decode';
  * @returns Username or null.
  */
 export const getUserFromJwt = (jwt: string): string => {
-    const decoded = decodeJwt(jwt);
+  const decoded = decodeJwt(jwt);
 
-    if (!decoded.preferred_username) {
-        throw new Error('Invalid token!');
-    }
+  if (!decoded.preferred_username) {
+    throw new Error('Invalid token!');
+  }
 
-    return decoded.preferred_username as string;
+  return decoded.preferred_username as string;
 };
 
 /**
@@ -30,13 +30,13 @@ export const getUserFromJwt = (jwt: string): string => {
  * @returns Expired at.
  */
 export const getExpiredAtFromJwt = (jwt: string): number => {
-    const decoded = decodeJwt(jwt);
+  const decoded = decodeJwt(jwt);
 
-    if (!decoded.exp) {
-        throw new Error('Invalid token!');
-    }
+  if (!decoded.exp) {
+    throw new Error('Invalid token!');
+  }
 
-    return decoded.exp as number;
+  return decoded.exp as number;
 };
 
 /**
@@ -46,12 +46,12 @@ export const getExpiredAtFromJwt = (jwt: string): number => {
  * @returns .
  */
 const decodeJwt = (jwt: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const decoded: any = jwt_decode(jwt);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const decoded: any = jwt_decode(jwt);
 
-    if (!decoded) {
-        throw new Error('Invalid token!');
-    }
+  if (!decoded) {
+    throw new Error('Invalid token!');
+  }
 
-    return decoded;
+  return decoded;
 };

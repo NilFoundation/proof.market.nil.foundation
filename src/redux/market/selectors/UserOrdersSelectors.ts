@@ -27,26 +27,26 @@ export const selectUserRequests = (s: RootStateType): Proposal[] => s.userOrders
  * Select proposals with 'created' or 'processing' status.
  */
 export const selectUserActiveProposals = createSelector(selectUserProposals, proposals =>
-    proposals.filter(x => x.status === 'created' || x.status === 'processing'),
+  proposals.filter(x => x.status === 'created' || x.status === 'processing'),
 );
 
 /**
  * Select proposals with 'created' or 'processing' status.
  */
 export const selectUserActiveRequests = createSelector(selectUserRequests, requests =>
-    requests.filter(x => x.status === 'created' || x.status === 'processing'),
+  requests.filter(x => x.status === 'created' || x.status === 'processing'),
 );
 
 /**
  * Select proposals with 'compelted' status.
  */
 export const selectUserCompletedProposals = createSelector(selectUserProposals, proposals =>
-    proposals.filter(x => x.status === 'completed'),
+  proposals.filter(x => x.status === 'completed'),
 );
 
 /**
  * Select requests with 'compelted' status.
  */
 export const selectUserCompletedRequests = createSelector(selectUserRequests, requests =>
-    requests.filter(x => x.status === 'completed'),
+  requests.filter(x => x.status === 'completed'),
 );

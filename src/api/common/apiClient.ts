@@ -13,10 +13,10 @@ import { apiBaseUrl } from './apiHelpers';
  * Create api client settings.
  */
 type CreateApiClientSettings = {
-    baseUrl?: string;
-    injectToken?: boolean;
-    options?: Omit<Options, 'prefixUrl'>;
-    shouldUseApiBaseUrl?: boolean;
+  baseUrl?: string;
+  injectToken?: boolean;
+  options?: Omit<Options, 'prefixUrl'>;
+  shouldUseApiBaseUrl?: boolean;
 };
 
 /**
@@ -33,39 +33,36 @@ const defaultTimeout = 20000;
  * @returns Api client.
  */
 export const createApiClient = (params: CreateApiClientParameters) => {
-    let baseOptions = {
-        baseUrl: '',
-        injectToken: true,
-        options: {},
-        shouldUseApiBaseUrl: true,
-    };
+  let baseOptions = {
+    baseUrl: '',
+    injectToken: true,
+    options: {},
+    shouldUseApiBaseUrl: true,
+  };
 
-    if (typeof params === 'string') {
-        baseOptions.baseUrl = params;
-    } else {
-        baseOptions = Object.assign(baseOptions, params);
-    }
+  if (typeof params === 'string') {
+    baseOptions.baseUrl = params;
+  } else {
+    baseOptions = Object.assign(baseOptions, params);
+  }
 
-    const { shouldUseApiBaseUrl, baseUrl, options, injectToken } = baseOptions;
-    const { API_RESPONSE_WAIT_TIMEOUT } = getRuntimeConfigOrThrow();
+  const { shouldUseApiBaseUrl, baseUrl, options, injectToken } = baseOptions;
+  const { API_RESPONSE_WAIT_TIMEOUT } = getRuntimeConfigOrThrow();
 
-    return ky.create({
-        prefixUrl: `${shouldUseApiBaseUrl ? apiBaseUrl : ''}${baseUrl}`,
-        hooks: {
-            beforeRequest: [
-                request => {
-                    if (!injectToken) {
-                        return request;
-                    }
+  return ky.create({
+    prefixUrl: `${shouldUseApiBaseUrl ? apiBaseUrl : ''}${baseUrl}`,
+    hooks: {
+      beforeRequest: [
+        request => {
+          if (!injectToken) {
+            return request;
+          }
 
-                    request.headers.set(
-                        'Authorization',
-                        `Bearer ${getItemFromLocalStorage('userToken')}`,
-                    );
-                },
-            ],
+          request.headers.set('Authorization', `Bearer ${getItemFromLocalStorage('userToken')}`);
         },
-        timeout: Number(API_RESPONSE_WAIT_TIMEOUT) ?? defaultTimeout,
-        ...options,
-    });
+      ],
+    },
+    timeout: Number(API_RESPONSE_WAIT_TIMEOUT) ?? defaultTimeout,
+    ...options,
+  });
 };

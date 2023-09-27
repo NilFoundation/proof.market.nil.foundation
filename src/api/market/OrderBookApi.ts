@@ -11,8 +11,8 @@ import type { Statement, OrderBookData } from '../../models';
  * Get orderbook data options.
  */
 export type OrderBookDataOptions = {
-    priceStep?: OrderBookPriceStepType;
-    evalTimeStep?: number;
+  priceStep?: OrderBookPriceStepType;
+  evalTimeStep?: number;
 };
 
 const httpFetcher = createApiClient('/book');
@@ -25,21 +25,21 @@ const httpFetcher = createApiClient('/book');
  * @returns Orderbook data.
  */
 export const getOrderBookData = (
-    statementKey: Statement['_key'],
-    options?: OrderBookDataOptions,
+  statementKey: Statement['_key'],
+  options?: OrderBookDataOptions,
 ): Promise<OrderBookData> =>
-    httpFetcher.get(`${statementKey}${options ? getUrlFromOptions(options) : ''}`).json();
+  httpFetcher.get(`${statementKey}${options ? getUrlFromOptions(options) : ''}`).json();
 
 const getUrlFromOptions = ({ priceStep, evalTimeStep }: OrderBookDataOptions): string => {
-    let url = '/?';
+  let url = '/?';
 
-    if (priceStep) {
-        url += `dc=${priceStep}${evalTimeStep ? '&' : ''}`;
-    }
+  if (priceStep) {
+    url += `dc=${priceStep}${evalTimeStep ? '&' : ''}`;
+  }
 
-    if (evalTimeStep) {
-        url += `dt=${evalTimeStep}`;
-    }
+  if (evalTimeStep) {
+    url += `dt=${evalTimeStep}`;
+  }
 
-    return url;
+  return url;
 };

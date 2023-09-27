@@ -18,13 +18,13 @@ type TableProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivEleme
  * @returns React component.
  */
 export const Table = ({ className, children, ...rest }: TableProps): ReactElement => {
-    return (
-        <div
-            role="table"
-            className={`${styles.table} ${className ?? ''}`}
-            {...rest}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      role="table"
+      className={`${styles.table} ${className ?? ''}`}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 };

@@ -16,20 +16,20 @@ import { MobileMenuContext } from '../mobileLayout/MobileMenuContext';
  * @returns React element.
  */
 const MobileViewFactory = (): ReactElement => {
-    const { selectedMenuOption } = useContext(MobileMenuContext);
+  const { selectedMenuOption } = useContext(MobileMenuContext);
 
-    switch (selectedMenuOption) {
-        case MobileMenuItem.statements:
-            return <StatementsList />;
-        case MobileMenuItem.charts:
-            return <StatementDashboard />;
-        case MobileMenuItem.trades:
-            return <TradeHistory />;
-        case MobileMenuItem.lastProofProducer:
-            return <LastProofProducer />;
-        default:
-            return <></>;
-    }
+  switch (selectedMenuOption) {
+    case MobileMenuItem.statements:
+      return <StatementsList />;
+    case MobileMenuItem.charts:
+      return <StatementDashboard />;
+    case MobileMenuItem.trades:
+      return <TradeHistory />;
+    case MobileMenuItem.lastProofProducer:
+      return <LastProofProducer />;
+    default:
+      return <></>;
+  }
 };
 
 export default MobileViewFactory;

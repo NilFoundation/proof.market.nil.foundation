@@ -17,7 +17,7 @@ import styles from './ProofList.module.scss';
  * Props.
  */
 type ProofListItemProps = {
-    proof: Proof;
+  proof: Proof;
 } & HTMLAttributes<HTMLDivElement>;
 
 /**
@@ -27,67 +27,67 @@ type ProofListItemProps = {
  * @returns React component.
  */
 export const ProofListItem = memo(function ProofListItem({
-    proof,
-    ...restProps
+  proof,
+  ...restProps
 }: ProofListItemProps): ReactElement {
-    const [showProgress, setShowProgress] = useState(false);
-    const [downloadPergent, setDownloadPercent] = useState(0);
+  const [showProgress, setShowProgress] = useState(false);
+  const [downloadPergent, setDownloadPercent] = useState(0);
 
-    const fetcher = useCallback(async () => {
-        setShowProgress(true);
-        const result = await getProofById(proof!._key, ({ percent }) =>
-            setDownloadPercent(percent * 100),
-        );
-        setDownloadPercent(0);
-        setShowProgress(false);
-
-        return result;
-    }, [proof, setDownloadPercent, setShowProgress]);
-
-    const { downloadJson, loading } = useDownloadJson({
-        fileName: `proof-${proof?._key}`,
-        fetcher: proof?._key !== undefined ? fetcher : undefined,
-    });
-
-    const keyDownHandler: KeyboardEventHandler = e => {
-        if (e.key !== 'Enter' && e.key !== ' ') {
-            return;
-        }
-
-        downloadJson();
-    };
-
-    return (
-        <div
-            {...restProps}
-            className={styles.item}
-        >
-            <Button
-                variant={Variant.primary}
-                disabled={proof === undefined || loading}
-                onClick={downloadJson}
-                onKeyDown={keyDownHandler}
-                aria-label="Download proof as JSON file"
-                className={styles.button}
-            >
-                JSON
-                {loading && <Spinner />}
-            </Button>
-            {showProgress && (
-                <div className={styles.progressContainer}>
-                    <ProgressBar
-                        className={styles.progress}
-                        showPercent={false}
-                        percent={Number(downloadPergent.toFixed(2))}
-                    />
-                </div>
-            )}
-            <ObjectAsPlainTextViewer data={mapToHumanReadableProof(proof)} />
-        </div>
+  const fetcher = useCallback(async () => {
+    setShowProgress(true);
+    const result = await getProofById(proof!._key, ({ percent }) =>
+      setDownloadPercent(percent * 100),
     );
+    setDownloadPercent(0);
+    setShowProgress(false);
+
+    return result;
+  }, [proof, setDownloadPercent, setShowProgress]);
+
+  const { downloadJson, loading } = useDownloadJson({
+    fileName: `proof-${proof?._key}`,
+    fetcher: proof?._key !== undefined ? fetcher : undefined,
+  });
+
+  const keyDownHandler: KeyboardEventHandler = e => {
+    if (e.key !== 'Enter' && e.key !== ' ') {
+      return;
+    }
+
+    downloadJson();
+  };
+
+  return (
+    <div
+      {...restProps}
+      className={styles.item}
+    >
+      <Button
+        variant={Variant.primary}
+        disabled={proof === undefined || loading}
+        onClick={downloadJson}
+        onKeyDown={keyDownHandler}
+        aria-label="Download proof as JSON file"
+        className={styles.button}
+      >
+        JSON
+        {loading && <Spinner />}
+      </Button>
+      {showProgress && (
+        <div className={styles.progressContainer}>
+          <ProgressBar
+            className={styles.progress}
+            showPercent={false}
+            percent={Number(downloadPergent.toFixed(2))}
+          />
+        </div>
+      )}
+      <ObjectAsPlainTextViewer data={mapToHumanReadableProof(proof)} />
+    </div>
+  );
 },
 arePropsEqual);
 
 function arePropsEqual(prevProps: ProofListItemProps, nextprops: ProofListItemProps) {
-    return prevProps.proof._key === nextprops.proof._key;
+  return prevProps.proof._key === nextprops.proof._key;
 }

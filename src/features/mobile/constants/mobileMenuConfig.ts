@@ -6,23 +6,23 @@
 import { MobileMenuItem } from '../enums/MobileMenuItem';
 
 type MobileMenuElement = {
-    key: MobileMenuItem;
+  key: MobileMenuItem;
 };
 
 /**
  * Mobile menu configuration.
  */
 export const mobileMenuConfig: MobileMenuElement[] = [
-    {
-        key: MobileMenuItem.statements,
-    },
-    {
-        key: MobileMenuItem.charts,
-    },
-    {
-        key: MobileMenuItem.trades,
-    },
-    {
-        key: MobileMenuItem.lastProofProducer,
-    },
+  {
+    key: MobileMenuItem.statements,
+  },
+  {
+    key: MobileMenuItem.charts,
+  },
+  {
+    key: MobileMenuItem.trades,
+  },
+  {
+    key: MobileMenuItem.lastProofProducer,
+  },
 ];

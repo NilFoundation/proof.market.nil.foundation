@@ -13,9 +13,9 @@ const sagaMiddleware = createSagaMiddleware();
 const middlewares: Middleware[] = [sagaMiddleware];
 
 export const store = configureStore({
-    reducer: RootReducer,
-    middleware: getDefaultMiddleware => [...getDefaultMiddleware({ thunk: false }), ...middlewares],
-    devTools: import.meta.env.DEV,
+  reducer: RootReducer,
+  middleware: getDefaultMiddleware => [...getDefaultMiddleware({ thunk: false }), ...middlewares],
+  devTools: import.meta.env.DEV,
 });
 
 sagaMiddleware.run(RootSaga);

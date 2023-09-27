@@ -11,8 +11,8 @@ import styles from './Table.module.scss';
  * Props.
  */
 type THeadProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
-    sticky?: boolean;
-    isFooterHeader?: boolean;
+  sticky?: boolean;
+  isFooterHeader?: boolean;
 };
 
 /**
@@ -22,26 +22,26 @@ type THeadProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivEleme
  * @returns React component.
  */
 export const THead = ({
-    sticky,
-    className,
-    children,
-    isFooterHeader,
-    ...rest
+  sticky,
+  className,
+  children,
+  isFooterHeader,
+  ...rest
 }: THeadProps): ReactElement => {
-    const tHeadClassName = clsx(
-        styles.tableHead,
-        className,
-        sticky && styles.stickyHead,
-        isFooterHeader && styles.footerHead,
-    );
+  const tHeadClassName = clsx(
+    styles.tableHead,
+    className,
+    sticky && styles.stickyHead,
+    isFooterHeader && styles.footerHead,
+  );
 
-    return (
-        <div
-            role="rowgroup"
-            className={tHeadClassName}
-            {...rest}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      role="rowgroup"
+      className={tHeadClassName}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 };

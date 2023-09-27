@@ -13,25 +13,23 @@ import { mainSiteUrl } from '@/constants';
  * @returns React component.
  */
 const ErrorView = (): ReactElement => (
-    <Container
-        as="main"
-        fluid
-    >
-        <Row>
-            <Col
-                xs={12}
-                className="text-center"
-            >
-                <h4>Sorry, unknown error occured.</h4>
-                <p className="text-muted">
-                    Please, try to reload page or leave message to support.
-                </p>
-                <p>
-                    <a href={mainSiteUrl}>{mainSiteUrl}</a>
-                </p>
-            </Col>
-        </Row>
-    </Container>
+  <Container
+    as="main"
+    fluid
+  >
+    <Row>
+      <Col
+        xs={12}
+        className="text-center"
+      >
+        <h4>Sorry, unknown error occured.</h4>
+        <p className="text-muted">Please, try to reload page or leave message to support.</p>
+        <p>
+          <a href={mainSiteUrl}>{mainSiteUrl}</a>
+        </p>
+      </Col>
+    </Row>
+  </Container>
 );
 
 export default ErrorView;

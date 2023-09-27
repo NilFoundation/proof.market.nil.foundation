@@ -17,12 +17,12 @@ type TCellProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivEleme
  * @returns React component.
  */
 export const TCell = ({ children, ...rest }: TCellProps): ReactElement => {
-    return (
-        <div
-            role="cell"
-            {...rest}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      role="cell"
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 };

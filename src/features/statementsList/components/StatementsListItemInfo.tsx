@@ -15,9 +15,9 @@ import styles from './StatementsList.module.scss';
  * Props.
  */
 type StatementsListItemInfoProps = {
-    cost?: number | null;
-    change?: number | null;
-    isSelected?: boolean;
+  cost?: number | null;
+  change?: number | null;
+  isSelected?: boolean;
 };
 
 /**
@@ -27,27 +27,25 @@ type StatementsListItemInfoProps = {
  * @returns React component.
  */
 export const StatementsListItemInfo = memo(function StatementsListItemInfo({
-    cost,
-    change,
-    isSelected,
+  cost,
+  change,
+  isSelected,
 }: StatementsListItemInfoProps): ReactElement {
-    const isLoadingInfo = useAppSelector(s => s.statementsState.isLoadingStatementsInfo);
+  const isLoadingInfo = useAppSelector(s => s.statementsState.isLoadingStatementsInfo);
 
-    return (
-        <Media.Item position="right">
-            {cost && (
-                <div className={styles.cost}>{`${cost.toFixed(
-                    4,
-                )} ${siteMoneyTickerAbbreviation}`}</div>
-            )}
-            {!!change && (
-                <PriceChangeIndicator
-                    change={change}
-                    className={styles.dailyChangeIndicator}
-                    plainColor={isSelected}
-                />
-            )}
-            {isLoadingInfo && cost === undefined && change === undefined && <Spinner />}
-        </Media.Item>
-    );
+  return (
+    <Media.Item position="right">
+      {cost && (
+        <div className={styles.cost}>{`${cost.toFixed(4)} ${siteMoneyTickerAbbreviation}`}</div>
+      )}
+      {!!change && (
+        <PriceChangeIndicator
+          change={change}
+          className={styles.dailyChangeIndicator}
+          plainColor={isSelected}
+        />
+      )}
+      {isLoadingInfo && cost === undefined && change === undefined && <Spinner />}
+    </Media.Item>
+  );
 });

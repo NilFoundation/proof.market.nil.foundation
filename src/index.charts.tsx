@@ -21,31 +21,31 @@ import Page404 from './views/404';
 checkRuntimeConfig();
 
 const routes: RouteObject[] = [
-    {
-        element: <ChartsLayout />,
-        errorElement: <ErrorView />,
-        children: [
-            {
-                path: `:${RouterParam.statementName}/:${RouterParam.chartType}`,
-                element: <ChartsView />,
-            },
-            {
-                path: Path.any,
-                element: <Page404 showGoBackButton={false} />,
-            },
-        ],
-    },
+  {
+    element: <ChartsLayout />,
+    errorElement: <ErrorView />,
+    children: [
+      {
+        path: `:${RouterParam.statementName}/:${RouterParam.chartType}`,
+        element: <ChartsView />,
+      },
+      {
+        path: Path.any,
+        element: <Page404 showGoBackButton={false} />,
+      },
+    ],
+  },
 ];
 
 const router = createHashRouter(routes);
 
 render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <HelmetProvider>
-                <RouterProvider router={router} />
-            </HelmetProvider>
-        </Provider>
-    </React.StrictMode>,
-    document.getElementById('root'),
+  <React.StrictMode>
+    <Provider store={store}>
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root'),
 );

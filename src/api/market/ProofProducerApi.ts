@@ -14,4 +14,4 @@ const httpFetcher = createApiClient('/producer');
  * @returns .
  */
 export const getLastProofProducerData = (): Promise<Array<LastProofProducer | null>> =>
-    httpFetcher.get('last').json();
+  httpFetcher.get('last').json();

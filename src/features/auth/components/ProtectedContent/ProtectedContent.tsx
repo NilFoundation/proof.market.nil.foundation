@@ -16,9 +16,9 @@ import { styles as s } from './styles';
  * Props.
  */
 type ProtectedComponentProps = {
-    children: ReactNode;
-    overlayTitle?: string;
-    overlayButtonText?: string;
+  children: ReactNode;
+  overlayTitle?: string;
+  overlayButtonText?: string;
 };
 
 /**
@@ -29,31 +29,31 @@ type ProtectedComponentProps = {
  * @returns React component.
  */
 export const ProtectedContent = ({
-    children,
-    overlayTitle,
-    overlayButtonText = 'Sign in',
+  children,
+  overlayTitle,
+  overlayButtonText = 'Sign in',
 }: ProtectedComponentProps): ReactElement => {
-    const { isAuthorized, isReadonly } = useAuth();
-    const { pathname } = useLocation();
-    const navigate = useNavigate();
-    const [css] = useStyletron();
+  const { isAuthorized, isReadonly } = useAuth();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const [css] = useStyletron();
 
-    return (
-        <>
-            {(!isAuthorized || isReadonly) && (
-                <Overlay>
-                    <div className={css(s.container)}>
-                        {overlayTitle && <div className={css(s.title)}>{overlayTitle}</div>}
-                        <Button
-                            kind={BUTTON_KIND.primary}
-                            onClick={() => navigate(Path.login, { state: { from: pathname } })}
-                        >
-                            {overlayButtonText}
-                        </Button>
-                    </div>
-                </Overlay>
-            )}
-            {children}
-        </>
-    );
+  return (
+    <>
+      {(!isAuthorized || isReadonly) && (
+        <Overlay>
+          <div className={css(s.container)}>
+            {overlayTitle && <div className={css(s.title)}>{overlayTitle}</div>}
+            <Button
+              kind={BUTTON_KIND.primary}
+              onClick={() => navigate(Path.login, { state: { from: pathname } })}
+            >
+              {overlayButtonText}
+            </Button>
+          </div>
+        </Overlay>
+      )}
+      {children}
+    </>
+  );
 };

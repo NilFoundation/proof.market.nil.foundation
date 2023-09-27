@@ -13,11 +13,11 @@ import { AuthContainer } from '@/components';
  * @returns React element.
  */
 const AuthLayout = (): ReactElement => {
-    return (
-        <AuthContainer>
-            <Outlet />
-        </AuthContainer>
-    );
+  return (
+    <AuthContainer>
+      <Outlet />
+    </AuthContainer>
+  );
 };
 
 export default AuthLayout;

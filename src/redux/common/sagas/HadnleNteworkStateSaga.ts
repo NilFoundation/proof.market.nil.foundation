@@ -16,7 +16,7 @@ let offlineNotificationId: string | undefined = undefined;
  * @yields
  */
 export function* HadnleNetworkStateSaga(): SagaIterator<void> {
-    yield takeLatest(SetIsOnline, HandleOnlineStatusChange);
+  yield takeLatest(SetIsOnline, HandleOnlineStatusChange);
 }
 
 /**
@@ -25,23 +25,23 @@ export function* HadnleNetworkStateSaga(): SagaIterator<void> {
  * @param {ReturnType<typeof SetIsOnline>} action Action return type.
  */
 function* HandleOnlineStatusChange({
-    payload: isOnline,
+  payload: isOnline,
 }: ReturnType<typeof SetIsOnline>): SagaIterator<void> {
-    if (!isOnline) {
-        if (offlineNotificationId !== undefined) {
-            return;
-        }
-
-        offlineNotificationId = notificationActions?.create({
-            title: 'Network error',
-            message:
-                'Something is temporarily wrong with receiving site data. You could wait for a reconnect or try to reload the page.',
-            variant: Variant.danger,
-        });
-
-        return;
+  if (!isOnline) {
+    if (offlineNotificationId !== undefined) {
+      return;
     }
 
-    offlineNotificationId && notificationActions?.remove(offlineNotificationId);
-    offlineNotificationId = undefined;
+    offlineNotificationId = notificationActions?.create({
+      title: 'Network error',
+      message:
+        'Something is temporarily wrong with receiving site data. You could wait for a reconnect or try to reload the page.',
+      variant: Variant.danger,
+    });
+
+    return;
+  }
+
+  offlineNotificationId && notificationActions?.remove(offlineNotificationId);
+  offlineNotificationId = undefined;
 }

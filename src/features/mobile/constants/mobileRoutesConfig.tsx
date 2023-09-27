@@ -19,42 +19,42 @@ const Page404 = lazy(() => import('../../../views/404'));
  * Mobile version routes.
  */
 export const mobileRoutesConfig: RouteObject[] = [
-    {
-        element: <RouterReduxConnector />,
+  {
+    element: <RouterReduxConnector />,
+    children: [
+      {
+        path: Path.root,
+        element: (
+          <Navigate
+            to={Path.market}
+            replace
+          />
+        ),
+      },
+      {
+        element: <MobileLayout />,
         children: [
-            {
-                path: Path.root,
-                element: (
-                    <Navigate
-                        to={Path.market}
-                        replace
-                    />
-                ),
-            },
-            {
-                element: <MobileLayout />,
+          {
+            element: <ProtectedRoute readonlyAccess />,
+            children: [
+              {
+                path: Path.market,
+                element: <MobileViewFactory />,
                 children: [
-                    {
-                        element: <ProtectedRoute readonlyAccess />,
-                        children: [
-                            {
-                                path: Path.market,
-                                element: <MobileViewFactory />,
-                                children: [
-                                    {
-                                        path: `:${RouterParam.statementName}`,
-                                        element: <MobileViewFactory />,
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        path: Path.any,
-                        element: <Page404 />,
-                    },
+                  {
+                    path: `:${RouterParam.statementName}`,
+                    element: <MobileViewFactory />,
+                  },
                 ],
-            },
+              },
+            ],
+          },
+          {
+            path: Path.any,
+            element: <Page404 />,
+          },
         ],
-    },
+      },
+    ],
+  },
 ];

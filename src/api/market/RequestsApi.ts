@@ -17,11 +17,11 @@ const httpFetcher = createApiClient('/request');
  * @returns Requests.
  */
 export const getRequests = (
-    parameters: Partial<TradeOrder>,
-    limit?: number,
-    startFrom?: number,
+  parameters: Partial<TradeOrder>,
+  limit?: number,
+  startFrom?: number,
 ): Promise<Request[]> =>
-    httpFetcher.get(getApiUrlByParameters(parameters, limit, startFrom)).json();
+  httpFetcher.get(getApiUrlByParameters(parameters, limit, startFrom)).json();
 
 /**
  * Create Request.
@@ -30,7 +30,7 @@ export const getRequests = (
  * @returns Request.
  */
 export const createRequest = (data: CreateRequest): Promise<Request> =>
-    httpFetcher.post('', { json: data }).json();
+  httpFetcher.post('', { json: data }).json();
 
 /**
  * Remove Request.
@@ -39,4 +39,4 @@ export const createRequest = (data: CreateRequest): Promise<Request> =>
  * @returns Proposal.
  */
 export const removeRequest = (requestToRemoveKey: Request['_key']): Promise<void> =>
-    httpFetcher.delete(requestToRemoveKey).json();
+  httpFetcher.delete(requestToRemoveKey).json();

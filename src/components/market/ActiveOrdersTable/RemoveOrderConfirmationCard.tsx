@@ -12,11 +12,11 @@ import styles from './ActiveOrdersTable.module.scss';
  * Props.
  */
 type RemoveOrderConfirmationCardProps = {
-    onAccept: () => void;
-    onDecline: () => void;
-    processing: boolean;
-    message: string;
-    error?: string;
+  onAccept: () => void;
+  onDecline: () => void;
+  processing: boolean;
+  message: string;
+  error?: string;
 };
 
 /**
@@ -26,37 +26,37 @@ type RemoveOrderConfirmationCardProps = {
  * @returns React component.
  */
 export const RemoveOrderConfirmationCard = forwardRef<
-    HTMLDivElement,
-    RemoveOrderConfirmationCardProps
+  HTMLDivElement,
+  RemoveOrderConfirmationCardProps
 >(function RemoveOrderConfirmationCard(
-    { onAccept, onDecline, processing, message, error },
-    ref,
+  { onAccept, onDecline, processing, message, error },
+  ref,
 ): ReactElement {
-    return (
-        <div
-            className={styles.confirmationCard}
-            ref={ref}
+  return (
+    <div
+      className={styles.confirmationCard}
+      ref={ref}
+    >
+      <div className={`${styles.confirmationCardMessage} ${error ? styles.error : ''}`}>
+        {error ? error : message}
+      </div>
+      <div className={styles.confirmationCardButtons}>
+        <Button
+          onClick={onAccept}
+          variant={Variant.success}
+          disabled={processing}
         >
-            <div className={`${styles.confirmationCardMessage} ${error ? styles.error : ''}`}>
-                {error ? error : message}
-            </div>
-            <div className={styles.confirmationCardButtons}>
-                <Button
-                    onClick={onAccept}
-                    variant={Variant.success}
-                    disabled={processing}
-                >
-                    Remove
-                    {processing && <Spinner />}
-                </Button>
-                <Button
-                    onClick={onDecline}
-                    variant={Variant.danger}
-                    disabled={processing}
-                >
-                    Cancel
-                </Button>
-            </div>
-        </div>
-    );
+          Remove
+          {processing && <Spinner />}
+        </Button>
+        <Button
+          onClick={onDecline}
+          variant={Variant.danger}
+          disabled={processing}
+        >
+          Cancel
+        </Button>
+      </div>
+    </div>
+  );
 });

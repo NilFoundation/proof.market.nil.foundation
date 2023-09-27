@@ -7,9 +7,9 @@
  * Statements list table data.
  */
 export type StatementsListData = {
-    _key: string;
-    name: string;
-    cost?: number | null;
-    change?: number | null;
-    tag?: string;
+  _key: string;
+  name: string;
+  cost?: number | null;
+  change?: number | null;
+  tag?: string;
 };

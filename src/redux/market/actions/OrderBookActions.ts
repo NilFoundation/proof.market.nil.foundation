@@ -16,7 +16,7 @@ export const UpdateOrderBookData = createAction<OrderBookData>('@orderBook/UPDAT
  * Update orderbook data loading state.
  */
 export const UpdateOrderBookDataIsLoading = createAction<boolean>(
-    '@orderBook/UPDATE_DATA_IS_LOADING',
+  '@orderBook/UPDATE_DATA_IS_LOADING',
 );
 
 /**
@@ -28,12 +28,12 @@ export const UpdateOrderBookDataError = createAction<boolean>('@orderBook/UPDATE
  * Update orderbook price step.
  */
 export const UpdateOrderBookPriceStep = createAction<OrderBookPriceStepType>(
-    '@orderBook/UPDATE_PRICE_STEP',
+  '@orderBook/UPDATE_PRICE_STEP',
 );
 
 /**
  * Update orderbook last order data.
  */
 export const UpdateOrderBookLastOrderData = createAction<LastOrderData | undefined>(
-    '@orderBook/UPDATE_LAST_ORDER_DATA',
+  '@orderBook/UPDATE_LAST_ORDER_DATA',
 );

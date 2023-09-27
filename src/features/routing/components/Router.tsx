@@ -10,7 +10,7 @@ import { useRoutes } from 'react-router-dom';
  * Props.
  */
 type RouterProps = {
-    config: RouteObject[];
+  config: RouteObject[];
 };
 
 /**
@@ -20,7 +20,7 @@ type RouterProps = {
  * @returns Routes.
  */
 export const Router = ({ config }: RouterProps): ReturnType<typeof useRoutes> => {
-    const routes = useRoutes(config);
+  const routes = useRoutes(config);
 
-    return routes;
+  return routes;
 };

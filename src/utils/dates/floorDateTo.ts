@@ -13,44 +13,44 @@ import { DateUnit } from '@/enums';
  * @returns Date.
  */
 export const floorDateTo = (dateTimestamp: number, floorTo: DateUnit): Date => {
-    const date = new Date(dateTimestamp);
+  const date = new Date(dateTimestamp);
 
-    switch (floorTo) {
-        case DateUnit.minute:
-            date.setSeconds(0, 0);
-            break;
-        case DateUnit.quaterMinute:
-            floorToQuaterMinute(date);
-            break;
-        case DateUnit.halfHour:
-            date.setMinutes(date.getMinutes() >= 30 ? 30 : 0, 0, 0);
-            break;
-        case DateUnit.hour:
-            date.setMinutes(0, 0, 0);
-            break;
-        case DateUnit.day:
-            date.setHours(0, 0, 0, 0);
-            break;
-    }
+  switch (floorTo) {
+    case DateUnit.minute:
+      date.setSeconds(0, 0);
+      break;
+    case DateUnit.quaterMinute:
+      floorToQuaterMinute(date);
+      break;
+    case DateUnit.halfHour:
+      date.setMinutes(date.getMinutes() >= 30 ? 30 : 0, 0, 0);
+      break;
+    case DateUnit.hour:
+      date.setMinutes(0, 0, 0);
+      break;
+    case DateUnit.day:
+      date.setHours(0, 0, 0, 0);
+      break;
+  }
 
-    return date;
+  return date;
 };
 
 const floorToQuaterMinute = (date: Date): void => {
-    const minutes = date.getMinutes();
-    let minutesToSet = 0;
+  const minutes = date.getMinutes();
+  let minutesToSet = 0;
 
-    if (minutes >= 15 && minutes < 30) {
-        minutesToSet = 15;
-    }
+  if (minutes >= 15 && minutes < 30) {
+    minutesToSet = 15;
+  }
 
-    if (minutes >= 30 && minutes < 45) {
-        minutesToSet = 30;
-    }
+  if (minutes >= 30 && minutes < 45) {
+    minutesToSet = 30;
+  }
 
-    if (minutes >= 45) {
-        minutesToSet = 45;
-    }
+  if (minutes >= 45) {
+    minutesToSet = 45;
+  }
 
-    date.setMinutes(minutesToSet, 0, 0);
+  date.setMinutes(minutesToSet, 0, 0);
 };

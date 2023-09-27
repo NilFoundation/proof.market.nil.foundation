@@ -18,24 +18,24 @@ import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/Loc
  * @returns Persisited state.
  */
 export const useLocalStorage = <T,>(
-    key: LocalStorageKey,
-    initialValue: T,
+  key: LocalStorageKey,
+  initialValue: T,
 ): [T, (value: T) => void] => {
-    const [storedValue, setStoredValue] = useState<T>(
-        () => getItemFromLocalStorage(key) ?? initialValue,
-    );
+  const [storedValue, setStoredValue] = useState<T>(
+    () => getItemFromLocalStorage(key) ?? initialValue,
+  );
 
-    const setValue = useCallback(
-        (value: T) => {
-            if (deepEqual(storedValue, value)) {
-                return;
-            }
+  const setValue = useCallback(
+    (value: T) => {
+      if (deepEqual(storedValue, value)) {
+        return;
+      }
 
-            setStoredValue(value);
-            setItemIntoLocalStorage(key, value);
-        },
-        [key, storedValue],
-    );
+      setStoredValue(value);
+      setItemIntoLocalStorage(key, value);
+    },
+    [key, storedValue],
+  );
 
-    return [storedValue, setValue];
+  return [storedValue, setValue];
 };

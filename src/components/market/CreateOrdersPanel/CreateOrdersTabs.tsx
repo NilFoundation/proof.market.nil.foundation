@@ -13,8 +13,8 @@ import { OrderManagementContext } from '../OrderManagementContextProvider';
  * Props.
  */
 type OrderManagementTabsProps = {
-    currentTab: TradeOrderType;
-    onSetTab: (t: TradeOrderType) => void;
+  currentTab: TradeOrderType;
+  onSetTab: (t: TradeOrderType) => void;
 };
 
 /**
@@ -24,23 +24,23 @@ type OrderManagementTabsProps = {
  * @returns React component.
  */
 export const CreateOrdersTabs = ({
-    currentTab,
-    onSetTab,
+  currentTab,
+  onSetTab,
 }: OrderManagementTabsProps): ReactElement => {
-    const { processing } = useContext(OrderManagementContext);
+  const { processing } = useContext(OrderManagementContext);
 
-    return (
-        <Nav justified>
-            {Object.values(TradeOrderType).map(t => (
-                <Nav.Item
-                    key={t}
-                    onClick={() => onSetTab(t)}
-                    active={t === currentTab}
-                    disabled={processing}
-                >
-                    {t}
-                </Nav.Item>
-            ))}
-        </Nav>
-    );
+  return (
+    <Nav justified>
+      {Object.values(TradeOrderType).map(t => (
+        <Nav.Item
+          key={t}
+          onClick={() => onSetTab(t)}
+          active={t === currentTab}
+          disabled={processing}
+        >
+          {t}
+        </Nav.Item>
+      ))}
+    </Nav>
+  );
 };

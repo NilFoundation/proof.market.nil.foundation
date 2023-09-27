@@ -12,7 +12,7 @@ import { OrderManagementContext } from './OrderManagementContext';
  * Props.
  */
 type OrderManagementContextProviderProps = {
-    children?: ReactNode;
+  children?: ReactNode;
 };
 
 /**
@@ -22,16 +22,16 @@ type OrderManagementContextProviderProps = {
  * @returns React component.
  */
 export const OrderManagementContextProvider = ({
-    children,
+  children,
 }: OrderManagementContextProviderProps): ReactElement => {
-    const [processing, setProcessing] = useState(false);
-    const [selectedValues, setSelectedValues] = useState<CostAndEvalTime>();
+  const [processing, setProcessing] = useState(false);
+  const [selectedValues, setSelectedValues] = useState<CostAndEvalTime>();
 
-    return (
-        <OrderManagementContext.Provider
-            value={{ processing, setProcessing, selectedValues, setSelectedValues }}
-        >
-            {children}
-        </OrderManagementContext.Provider>
-    );
+  return (
+    <OrderManagementContext.Provider
+      value={{ processing, setProcessing, selectedValues, setSelectedValues }}
+    >
+      {children}
+    </OrderManagementContext.Provider>
+  );
 };

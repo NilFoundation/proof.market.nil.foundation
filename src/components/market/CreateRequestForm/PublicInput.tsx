@@ -20,48 +20,48 @@ import styles from './PublicInput.module.scss';
  * @returns React component.
  */
 export const PublicInput = (): ReactElement => {
-    const [errorMessage, setErrorMessage] = useState('');
-    const { processing } = useContext(OrderManagementContext);
-    const {
-        control,
-        formState: { errors },
-    } = useFormContext<CreateRequest>();
+  const [errorMessage, setErrorMessage] = useState('');
+  const { processing } = useContext(OrderManagementContext);
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<CreateRequest>();
 
-    return (
-        <BaseFormGroup
-            hasError={!!errors['input']}
-            labelText="Public Input"
-            className="publicInput"
-        >
-            {() => (
-                <>
-                    <Controller<CreateRequest, 'input'>
-                        name="input"
-                        control={control}
-                        rules={{
-                            validate: val => val !== null && !!val,
-                        }}
-                        render={({ field: { ref: _, ...rest } }) => (
-                            <FileUploader
-                                {...rest}
-                                disabled={processing}
-                                setErrorMessage={setErrorMessage}
-                            />
-                        )}
-                    />
-                    {errorMessage && <div className="errorMessage">{errorMessage}</div>}
-                </>
+  return (
+    <BaseFormGroup
+      hasError={!!errors['input']}
+      labelText="Public Input"
+      className="publicInput"
+    >
+      {() => (
+        <>
+          <Controller<CreateRequest, 'input'>
+            name="input"
+            control={control}
+            rules={{
+              validate: val => val !== null && !!val,
+            }}
+            render={({ field: { ref: _, ...rest } }) => (
+              <FileUploader
+                {...rest}
+                disabled={processing}
+                setErrorMessage={setErrorMessage}
+              />
             )}
-        </BaseFormGroup>
-    );
+          />
+          {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+        </>
+      )}
+    </BaseFormGroup>
+  );
 };
 
 /**
  * Props.
  */
 type FileUploaderProps = {
-    disabled?: boolean;
-    setErrorMessage: Dispatch<SetStateAction<string>>;
+  disabled?: boolean;
+  setErrorMessage: Dispatch<SetStateAction<string>>;
 } & Omit<ControllerRenderProps<CreateRequest, 'input'>, 'ref'>;
 
 /**
@@ -71,54 +71,54 @@ type FileUploaderProps = {
  * @returns Recat component.
  */
 const FileUploader = ({ onChange, disabled, setErrorMessage }: FileUploaderProps): ReactElement => {
-    const handleJsonFile = useCallback(
-        (acceptedFiles: File[], fileRejections: FileRejection[]) => {
-            if (fileRejections.length !== 0) {
-                setErrorMessage('Please submit only JSON files');
-                onChange(null);
-            }
+  const handleJsonFile = useCallback(
+    (acceptedFiles: File[], fileRejections: FileRejection[]) => {
+      if (fileRejections.length !== 0) {
+        setErrorMessage('Please submit only JSON files');
+        onChange(null);
+      }
 
-            const reader = new FileReader();
+      const reader = new FileReader();
 
-            reader.onload = ({ target }) => {
-                if (!target || !target.result) {
-                    return;
-                }
+      reader.onload = ({ target }) => {
+        if (!target || !target.result) {
+          return;
+        }
 
-                try {
-                    const obj = JSON.parse(target.result as string);
-                    onChange(obj);
-                    setErrorMessage('');
-                } catch (e) {
-                    setErrorMessage('File is not a valid JSON');
-                    onChange(null);
-                }
-            };
+        try {
+          const obj = JSON.parse(target.result as string);
+          onChange(obj);
+          setErrorMessage('');
+        } catch (e) {
+          setErrorMessage('File is not a valid JSON');
+          onChange(null);
+        }
+      };
 
-            reader.onerror = () => {
-                setErrorMessage('Error while reading file');
-                onChange(null);
-            };
-            reader.onabort = () => {
-                /*Do nothing*/
-            };
+      reader.onerror = () => {
+        setErrorMessage('Error while reading file');
+        onChange(null);
+      };
+      reader.onabort = () => {
+        /*Do nothing*/
+      };
 
-            const file = acceptedFiles.at(0);
-            file && reader.readAsText(file);
-        },
-        [onChange, setErrorMessage],
-    );
+      const file = acceptedFiles.at(0);
+      file && reader.readAsText(file);
+    },
+    [onChange, setErrorMessage],
+  );
 
-    return (
-        <FileUploaderTemplate
-            className={styles.fileUploader}
-            multiple={false}
-            disabled={disabled}
-            accept={{
-                'application/json': ['.json'],
-            }}
-            onDrop={handleJsonFile}
-            placeholder="Drag'n drop some json files here, or click to select files"
-        />
-    );
+  return (
+    <FileUploaderTemplate
+      className={styles.fileUploader}
+      multiple={false}
+      disabled={disabled}
+      accept={{
+        'application/json': ['.json'],
+      }}
+      onDrop={handleJsonFile}
+      placeholder="Drag'n drop some json files here, or click to select files"
+    />
+  );
 };

@@ -17,13 +17,13 @@ type TBodyProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivEleme
  * @returns React component.
  */
 export const TBody = ({ children, className, ...rest }: TBodyProps): ReactElement => {
-    return (
-        <div
-            role="rowgroup"
-            className={`tableBody ${className ?? ''}`}
-            {...rest}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      role="rowgroup"
+      className={`tableBody ${className ?? ''}`}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 };

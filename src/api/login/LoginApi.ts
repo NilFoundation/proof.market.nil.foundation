@@ -15,7 +15,7 @@ const httpFetcher = createApiClient('/user');
  * @returns .
  */
 export const login = (loginData: LoginData): Promise<AuthData> =>
-    httpFetcher.post('signin', { json: loginData }).json();
+  httpFetcher.post('signin', { json: loginData }).json();
 
 /**
  * Renew jtw token.
@@ -24,4 +24,4 @@ export const login = (loginData: LoginData): Promise<AuthData> =>
  * @returns .
  */
 export const renewJwt = (username: string): Promise<AuthData | Record<string, never>> =>
-    httpFetcher.post('renew', { json: username }).json();
+  httpFetcher.post('renew', { json: username }).json();

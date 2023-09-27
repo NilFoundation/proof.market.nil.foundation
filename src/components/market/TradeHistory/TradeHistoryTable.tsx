@@ -18,22 +18,22 @@ import styles from './TradeHistory.module.scss';
  * Props.
  */
 type TradeHistoryTableProps = {
-    selectedStatementKey: string;
+  selectedStatementKey: string;
 };
 
 /**
  * Table head configuration.
  */
 const tradeHistoryTableHeadConfig: Array<Record<'Header', string>> = [
-    {
-        Header: 'Time',
-    },
-    {
-        Header: 'Cost',
-    },
-    {
-        Header: 'Generation time',
-    },
+  {
+    Header: 'Time',
+  },
+  {
+    Header: 'Cost',
+  },
+  {
+    Header: 'Generation time',
+  },
 ];
 
 /**
@@ -43,70 +43,70 @@ const tradeHistoryTableHeadConfig: Array<Record<'Header', string>> = [
  * @returns React component.
  */
 export const TradeHistoryTable = memo(function TradeHistoryTable({
-    selectedStatementKey,
+  selectedStatementKey,
 }: TradeHistoryTableProps): ReactElement {
-    const { items, loadMoreItems, loading, error, hasMore, listRef } = useInfiniteLoadTrades({
-        selectedStatementKey,
-    });
+  const { items, loadMoreItems, loading, error, hasMore, listRef } = useInfiniteLoadTrades({
+    selectedStatementKey,
+  });
 
-    const isItemLoaded = (index: number) => !hasMore || !!items.at(index);
-    const itemCount = hasMore ? items.length + 1 : items.length;
+  const isItemLoaded = (index: number) => !hasMore || !!items.at(index);
+  const itemCount = hasMore ? items.length + 1 : items.length;
 
-    const Element = ({ index, style }: ListChildComponentProps<Proposal>) => {
-        if (!isItemLoaded(index)) {
-            return (
-                <TRow style={style}>
-                    <Spinner grow />
-                </TRow>
-            );
-        }
+  const Element = ({ index, style }: ListChildComponentProps<Proposal>) => {
+    if (!isItemLoaded(index)) {
+      return (
+        <TRow style={style}>
+          <Spinner grow />
+        </TRow>
+      );
+    }
 
-        const currentItem = items.at(index)!;
-        const { cost, generation_time, updatedOn } = currentItem;
-        const nextItem = items.at(index + 1);
+    const currentItem = items.at(index)!;
+    const { cost, generation_time, updatedOn } = currentItem;
+    const nextItem = items.at(index + 1);
 
-        const className = nextItem ? getRowClass(nextItem, currentItem) : '';
-
-        return (
-            <TRow
-                style={style}
-                className={className}
-                role="row"
-            >
-                <TCell>{formatDate(updatedOn!, 'DD.MM HH:mm')}</TCell>
-                <TCell>{cost.toFixed(4)}</TCell>
-                <TCell>{renderDashOnEmptyValue(generation_time)}</TCell>
-            </TRow>
-        );
-    };
+    const className = nextItem ? getRowClass(nextItem, currentItem) : '';
 
     return (
-        <Table className={styles.table}>
-            <THead sticky>
-                <TRow>
-                    {tradeHistoryTableHeadConfig.map(({ Header }, i) => (
-                        <THeader key={i}>{Header}</THeader>
-                    ))}
-                </TRow>
-            </THead>
-            <TBody>
-                {error && items.length === 0 && <h5>Error while getting trades data.</h5>}
-                {!loading && !error && items.length === 0 && <h5>Empty data.</h5>}
-                <VirtualList
-                    isItemLoaded={isItemLoaded}
-                    itemCount={itemCount}
-                    // eslint-disable-next-line @typescript-eslint/no-empty-function
-                    loadMoreItems={loading ? () => {} : loadMoreItems}
-                    height={446}
-                    itemSize={28}
-                    className={styles.virtualList}
-                    ref={listRef}
-                >
-                    {Element}
-                </VirtualList>
-            </TBody>
-        </Table>
+      <TRow
+        style={style}
+        className={className}
+        role="row"
+      >
+        <TCell>{formatDate(updatedOn!, 'DD.MM HH:mm')}</TCell>
+        <TCell>{cost.toFixed(4)}</TCell>
+        <TCell>{renderDashOnEmptyValue(generation_time)}</TCell>
+      </TRow>
     );
+  };
+
+  return (
+    <Table className={styles.table}>
+      <THead sticky>
+        <TRow>
+          {tradeHistoryTableHeadConfig.map(({ Header }, i) => (
+            <THeader key={i}>{Header}</THeader>
+          ))}
+        </TRow>
+      </THead>
+      <TBody>
+        {error && items.length === 0 && <h5>Error while getting trades data.</h5>}
+        {!loading && !error && items.length === 0 && <h5>Empty data.</h5>}
+        <VirtualList
+          isItemLoaded={isItemLoaded}
+          itemCount={itemCount}
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          loadMoreItems={loading ? () => {} : loadMoreItems}
+          height={446}
+          itemSize={28}
+          className={styles.virtualList}
+          ref={listRef}
+        >
+          {Element}
+        </VirtualList>
+      </TBody>
+    </Table>
+  );
 });
 
 /**
@@ -117,13 +117,13 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
  * @returns ClassName.
  */
 const getRowClass = (prevItem: Proposal, currentItem: Proposal): string => {
-    if (prevItem.cost > currentItem.cost) {
-        return 'lossTextColor';
-    }
+  if (prevItem.cost > currentItem.cost) {
+    return 'lossTextColor';
+  }
 
-    if (prevItem.cost < currentItem.cost) {
-        return 'growTextColor';
-    }
+  if (prevItem.cost < currentItem.cost) {
+    return 'growTextColor';
+  }
 
-    return '';
+  return '';
 };

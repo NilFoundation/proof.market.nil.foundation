@@ -23,65 +23,65 @@ import './StatementDashboard.scss';
  * @returns React component.
  */
 export const StatementDashboard = (): ReactElement => {
-    const currentStatement = useAppSelector(selectCurrentStatement);
-    const [chartType, setChartType] = useState(ChartType.proofCostChart);
-    const [fullScreen, setFullScreen] = useState(false);
-    const windowHeight = useWindowHeight();
+  const currentStatement = useAppSelector(selectCurrentStatement);
+  const [chartType, setChartType] = useState(ChartType.proofCostChart);
+  const [fullScreen, setFullScreen] = useState(false);
+  const windowHeight = useWindowHeight();
 
-    const [dataRange, setDataRange] = useLocalStorage<DateUnit>(
-        'statementDashboardDataRange',
-        DateUnit.hour,
-    );
+  const [dataRange, setDataRange] = useLocalStorage<DateUnit>(
+    'statementDashboardDataRange',
+    DateUnit.hour,
+  );
 
-    const [displayVolumes, setDisplayVolumes] = useLocalStorage(
-        'statementDashboardDisplayVolumes',
-        false,
-    );
+  const [displayVolumes, setDisplayVolumes] = useLocalStorage(
+    'statementDashboardDisplayVolumes',
+    false,
+  );
 
-    return (
-        <DashboardCard>
-            <div className="statementDashboard">
-                <ChartTypeSelect
-                    chartType={chartType}
-                    onSelectChartType={setChartType}
-                    disabled={!currentStatement}
-                />
-                <FullScreenView
-                    showFullScreen={fullScreen}
-                    className="fullScreenChartContainer"
-                >
-                    {fullScreen && <StatementInfoPanel />}
-                    <div className="statementDashboard__toolbar">
-                        <DataRangeSelect
-                            disabled={!currentStatement}
-                            dataRange={dataRange}
-                            setDataRange={setDataRange}
-                        />
-                        <DashboardToolbar
-                            disabled={!currentStatement}
-                            isFullscreen={fullScreen}
-                            setFullScreen={setFullScreen}
-                            displayVolumes={displayVolumes}
-                            setDisplayVolumes={setDisplayVolumes}
-                        >
-                            <CopyToClipboardNavItem
-                                disabled={!currentStatement}
-                                chartType={chartType}
-                                chartDataRange={dataRange}
-                                displayVolumes={displayVolumes}
-                            />
-                        </DashboardToolbar>
-                    </div>
-                    <ChartFactory
-                        chartType={chartType}
-                        dataRange={dataRange}
-                        displayVolumes={displayVolumes}
-                        height={fullScreen ? windowHeight - 283 : 454}
-                    />
-                </FullScreenView>
-            </div>
-        </DashboardCard>
-    );
+  return (
+    <DashboardCard>
+      <div className="statementDashboard">
+        <ChartTypeSelect
+          chartType={chartType}
+          onSelectChartType={setChartType}
+          disabled={!currentStatement}
+        />
+        <FullScreenView
+          showFullScreen={fullScreen}
+          className="fullScreenChartContainer"
+        >
+          {fullScreen && <StatementInfoPanel />}
+          <div className="statementDashboard__toolbar">
+            <DataRangeSelect
+              disabled={!currentStatement}
+              dataRange={dataRange}
+              setDataRange={setDataRange}
+            />
+            <DashboardToolbar
+              disabled={!currentStatement}
+              isFullscreen={fullScreen}
+              setFullScreen={setFullScreen}
+              displayVolumes={displayVolumes}
+              setDisplayVolumes={setDisplayVolumes}
+            >
+              <CopyToClipboardNavItem
+                disabled={!currentStatement}
+                chartType={chartType}
+                chartDataRange={dataRange}
+                displayVolumes={displayVolumes}
+              />
+            </DashboardToolbar>
+          </div>
+          <ChartFactory
+            chartType={chartType}
+            dataRange={dataRange}
+            displayVolumes={displayVolumes}
+            height={fullScreen ? windowHeight - 283 : 454}
+          />
+        </FullScreenView>
+      </div>
+    </DashboardCard>
+  );
 };
 
 /**
@@ -91,12 +91,12 @@ export const StatementDashboard = (): ReactElement => {
  * @returns Chart.
  */
 const ChartFactory = ({ chartType, ...rest }: { chartType: ChartType } & ChartBaseProps) => {
-    switch (chartType) {
-        case ChartType.proofCostChart:
-            return <ProofCostChart {...rest} />;
-        case ChartType.proofGetTimeChart:
-            return <ProofTimeGenChart {...rest} />;
-        default:
-            return <></>;
-    }
+  switch (chartType) {
+    case ChartType.proofCostChart:
+      return <ProofCostChart {...rest} />;
+    case ChartType.proofGetTimeChart:
+      return <ProofTimeGenChart {...rest} />;
+    default:
+      return <></>;
+  }
 };

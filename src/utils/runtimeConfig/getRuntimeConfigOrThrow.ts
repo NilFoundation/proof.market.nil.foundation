@@ -13,11 +13,11 @@ const getRuntimeConfig = () => window.RUNTIME_CONFIG;
  * @throws
  */
 export const getRuntimeConfigOrThrow = () => {
-    const config = getRuntimeConfig();
+  const config = getRuntimeConfig();
 
-    if (!config) {
-        throw new Error('Runtime config is not set');
-    }
+  if (!config) {
+    throw new Error('Runtime config is not set');
+  }
 
-    return config;
+  return config;
 };

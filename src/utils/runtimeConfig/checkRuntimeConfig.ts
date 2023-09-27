@@ -8,13 +8,13 @@ import { getRuntimeConfigOrThrow } from '..';
 const runtimeConfig = getRuntimeConfigOrThrow();
 
 const requiredEnvs: Array<keyof typeof window.RUNTIME_CONFIG> = [
-    'BASE_API_URL',
-    'API_VERSION',
-    'DBMS_DEFAULT_DATABASE',
-    'READONLY_USER',
-    'PROOFMARKET_TOOLCHAIN_REPO',
-    'SITE_DEFAULT_TITLE',
-    'CIRCUIT_DEVELOPER_GUIDE_URL',
+  'BASE_API_URL',
+  'API_VERSION',
+  'DBMS_DEFAULT_DATABASE',
+  'READONLY_USER',
+  'PROOFMARKET_TOOLCHAIN_REPO',
+  'SITE_DEFAULT_TITLE',
+  'CIRCUIT_DEVELOPER_GUIDE_URL',
 ];
 
 /**
@@ -23,13 +23,13 @@ const requiredEnvs: Array<keyof typeof window.RUNTIME_CONFIG> = [
  * @throws
  */
 export const checkRuntimeConfig = () => {
-    requiredEnvs.forEach(x => {
-        if (!runtimeConfig[x]) {
-            throw new Error(`${x} runtimeConfig value is required but not set`);
-        }
-    });
-
-    if (!import.meta.env.PROD) {
-        console.log('Required runtimeConfig values are set.');
+  requiredEnvs.forEach(x => {
+    if (!runtimeConfig[x]) {
+      throw new Error(`${x} runtimeConfig value is required but not set`);
     }
+  });
+
+  if (!import.meta.env.PROD) {
+    console.log('Required runtimeConfig values are set.');
+  }
 };

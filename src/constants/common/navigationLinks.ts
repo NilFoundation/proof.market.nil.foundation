@@ -9,12 +9,12 @@ import { Path } from '@/features/routing';
  * App navigation links.
  */
 export const navigationLinks = [
-    {
-        title: 'Market',
-        path: Path.market,
-    },
-    {
-        title: 'Portfolio',
-        path: Path.portfolio,
-    },
+  {
+    title: 'Market',
+    path: Path.market,
+  },
+  {
+    title: 'Portfolio',
+    path: Path.portfolio,
+  },
 ];

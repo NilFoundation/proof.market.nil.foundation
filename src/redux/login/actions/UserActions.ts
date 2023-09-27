@@ -25,7 +25,7 @@ export const UpdateUserBalanceIsLoading = createAction<boolean>('@user/UPDATE_BA
  * Update user balance error status.
  */
 export const UpdateUserBalanceIsLoadingError = createAction<boolean>(
-    '@user/UPDATE_BALANCE_IS_LOADING_ERROR',
+  '@user/UPDATE_BALANCE_IS_LOADING_ERROR',
 );
 
 /**

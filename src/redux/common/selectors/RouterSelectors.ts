@@ -21,7 +21,7 @@ export const selectLocation = (s: RootStateType) => s.routerState.location;
  * @returns Router param selector.
  */
 export const createUrlParamSelector = (routerParam: RouterParam) => (s: RootStateType) =>
-    selectUrlParamByKey(s, routerParam);
+  selectUrlParamByKey(s, routerParam);
 /**
  * Select param from state.
  *
@@ -30,7 +30,7 @@ export const createUrlParamSelector = (routerParam: RouterParam) => (s: RootStat
  * @returns Param value or undefined.
  */
 const selectUrlParamByKey = (s: RootStateType, param: RouterParam) => {
-    const params = s.routerState.params;
+  const params = s.routerState.params;
 
-    return params ? params[param] : undefined;
+  return params ? params[param] : undefined;
 };

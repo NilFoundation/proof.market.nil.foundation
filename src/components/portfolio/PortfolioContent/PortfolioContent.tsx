@@ -12,8 +12,8 @@ import styles from './PortfolioContent.module.scss';
  * Props.
  */
 type PortfolioContentProps = {
-    list: ReactNode;
-    content: ReactNode;
+  list: ReactNode;
+  content: ReactNode;
 };
 
 /**
@@ -23,22 +23,22 @@ type PortfolioContentProps = {
  * @returns React component.
  */
 export const PortfolioContent = ({ list, content }: PortfolioContentProps): ReactElement => {
-    return (
-        <Row>
-            <Col
-                xs={12}
-                md={3}
-            >
-                {list}
-            </Col>
-            <Col
-                xs={12}
-                md={9}
-            >
-                <DashboardCard>
-                    <div className={styles.container}>{content}</div>
-                </DashboardCard>
-            </Col>
-        </Row>
-    );
+  return (
+    <Row>
+      <Col
+        xs={12}
+        md={3}
+      >
+        {list}
+      </Col>
+      <Col
+        xs={12}
+        md={9}
+      >
+        <DashboardCard>
+          <div className={styles.container}>{content}</div>
+        </DashboardCard>
+      </Col>
+    </Row>
+  );
 };

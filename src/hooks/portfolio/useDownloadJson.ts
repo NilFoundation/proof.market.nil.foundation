@@ -9,17 +9,17 @@ import { useCallback, useState } from 'react';
  * Hook params.
  */
 type UseDownloadJsonParams<T extends Record<string, unknown>> = {
-    fileName: string;
-    source?: T;
-    fetcher?: () => Promise<T>;
+  fileName: string;
+  source?: T;
+  fetcher?: () => Promise<T>;
 };
 
 /**
  * Hook return type.
  */
 type UseDownloadJsonReturnType = {
-    downloadJson: () => void;
-    loading: boolean;
+  downloadJson: () => void;
+  loading: boolean;
 };
 
 /**
@@ -29,29 +29,29 @@ type UseDownloadJsonReturnType = {
  * @returns Callback to download data as json file and loading data state.
  */
 export const useDownloadJson = <T extends Record<string, unknown>>({
-    fileName,
-    source,
-    fetcher,
+  fileName,
+  source,
+  fetcher,
 }: UseDownloadJsonParams<T>): UseDownloadJsonReturnType => {
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    const downloadJson = useCallback(async () => {
-        switch (true) {
-            case !!source: {
-                processDownload(fileName, source!);
-                return;
-            }
-            case !!fetcher: {
-                setLoading(true);
-                const remoteData = await fetcher!();
-                processDownload(fileName, remoteData);
-                setLoading(false);
-                return;
-            }
-        }
-    }, [source, fileName, setLoading, fetcher]);
+  const downloadJson = useCallback(async () => {
+    switch (true) {
+      case !!source: {
+        processDownload(fileName, source!);
+        return;
+      }
+      case !!fetcher: {
+        setLoading(true);
+        const remoteData = await fetcher!();
+        processDownload(fileName, remoteData);
+        setLoading(false);
+        return;
+      }
+    }
+  }, [source, fileName, setLoading, fetcher]);
 
-    return { downloadJson, loading };
+  return { downloadJson, loading };
 };
 
 /**
@@ -61,17 +61,17 @@ export const useDownloadJson = <T extends Record<string, unknown>>({
  * @param data Data.
  */
 const processDownload = <T extends Record<string, unknown>>(fileName: string, data: T) => {
-    const a = document.createElement('a');
+  const a = document.createElement('a');
 
-    a.download = `${fileName}.json`;
-    a.href = window.URL.createObjectURL(new Blob([JSON.stringify(data)], { type: 'text/json' }));
+  a.download = `${fileName}.json`;
+  a.href = window.URL.createObjectURL(new Blob([JSON.stringify(data)], { type: 'text/json' }));
 
-    const clickEvt = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true,
-    });
+  const clickEvt = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true,
+  });
 
-    a.dispatchEvent(clickEvt);
-    a.remove();
+  a.dispatchEvent(clickEvt);
+  a.remove();
 };

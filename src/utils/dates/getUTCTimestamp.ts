@@ -15,7 +15,7 @@ import { floorDateTo } from './floorDateTo';
  * @returns UTCTimestamp.
  */
 export const getUTCTimestamp = (dateTimestamp: number, floorTo?: DateUnit): UTCTimestamp => {
-    const date = floorTo ? floorDateTo(dateTimestamp, floorTo) : new Date(dateTimestamp);
+  const date = floorTo ? floorDateTo(dateTimestamp, floorTo) : new Date(dateTimestamp);
 
-    return Math.trunc(date.getTime() / 1000) as UTCTimestamp;
+  return Math.trunc(date.getTime() / 1000) as UTCTimestamp;
 };

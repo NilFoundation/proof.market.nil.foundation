@@ -11,11 +11,11 @@ import { Form, uniqueId } from '@nilfoundation/react-components';
  * Props.
  */
 type BaseFormGroupProps = {
-    hasError: boolean;
-    children: ({ placeholder, id }: { placeholder?: string; id?: string }) => ReactNode;
-    hintText?: string;
-    labelText?: string;
-    className?: string;
+  hasError: boolean;
+  children: ({ placeholder, id }: { placeholder?: string; id?: string }) => ReactNode;
+  hintText?: string;
+  labelText?: string;
+  className?: string;
 };
 
 /**
@@ -25,24 +25,24 @@ type BaseFormGroupProps = {
  * @returns React component.
  */
 export const BaseFormGroup = ({
-    hasError,
-    children,
-    hintText,
-    labelText,
-    className,
+  hasError,
+  children,
+  hintText,
+  labelText,
+  className,
 }: BaseFormGroupProps): ReactElement => {
-    const { current } = useRef(uniqueId(labelText));
+  const { current } = useRef(uniqueId(labelText));
 
-    return (
-        <Form.Group
-            hasError={hasError}
-            className={className}
-        >
-            {labelText && <Form.Label htmlFor={current}>{labelText}</Form.Label>}
-            {children({
-                placeholder: hintText,
-                id: current,
-            })}
-        </Form.Group>
-    );
+  return (
+    <Form.Group
+      hasError={hasError}
+      className={className}
+    >
+      {labelText && <Form.Label htmlFor={current}>{labelText}</Form.Label>}
+      {children({
+        placeholder: hintText,
+        id: current,
+      })}
+    </Form.Group>
+  );
 };

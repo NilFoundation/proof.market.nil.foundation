@@ -13,26 +13,26 @@ import { useEffect } from 'react';
  * @param closeHandler Close handler.
  */
 export const useOnClickOutside = <T extends HTMLElement>(
-    ref: RefObject<T>,
-    closeHandler: () => void,
+  ref: RefObject<T>,
+  closeHandler: () => void,
 ) => {
-    useEffect(() => {
-        const listener: EventListenerOrEventListenerObject = event => {
-            const { current } = ref;
+  useEffect(() => {
+    const listener: EventListenerOrEventListenerObject = event => {
+      const { current } = ref;
 
-            if (current && event.target instanceof Node && !current.contains(event.target)) {
-                if (!(event.target.nextSibling === ref.current)) {
-                    closeHandler();
-                }
-            }
-        };
+      if (current && event.target instanceof Node && !current.contains(event.target)) {
+        if (!(event.target.nextSibling === ref.current)) {
+          closeHandler();
+        }
+      }
+    };
 
-        document.addEventListener('mousedown', listener);
-        document.addEventListener('touchstart', listener);
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
 
-        return () => {
-            document.removeEventListener('mousedown', listener);
-            document.removeEventListener('touchstart', listener);
-        };
-    }, [ref, closeHandler]);
+    return () => {
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
+    };
+  }, [ref, closeHandler]);
 };

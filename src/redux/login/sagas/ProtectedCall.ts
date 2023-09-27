@@ -26,27 +26,27 @@ import { UpdateIsAuthorized } from '../actions';
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function* ProtectedCall<T extends (...args: any[]) => any>(
-    fn: T,
-    ...args: Parameters<T>
+  fn: T,
+  ...args: Parameters<T>
 ): Generator<StrictEffect, unknown, unknown> {
-    try {
-        const result: unknown = yield call(fn, ...args);
+  try {
+    const result: unknown = yield call(fn, ...args);
 
-        yield put(SetIsOnline(true));
+    yield put(SetIsOnline(true));
 
-        return result;
-    } catch (e) {
-        if (!e.response) {
-            yield put(SetIsOnline(false));
-        } else {
-            yield put(SetIsOnline(true));
-        }
-
-        if (e.response?.status === 401) {
-            yield put(UpdateIsAuthorized(false));
-            clearAuthLocalStorageState();
-        }
-
-        throw e;
+    return result;
+  } catch (e) {
+    if (!e.response) {
+      yield put(SetIsOnline(false));
+    } else {
+      yield put(SetIsOnline(true));
     }
+
+    if (e.response?.status === 401) {
+      yield put(UpdateIsAuthorized(false));
+      clearAuthLocalStorageState();
+    }
+
+    throw e;
+  }
 }

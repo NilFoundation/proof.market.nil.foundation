@@ -13,8 +13,8 @@ import styles from './FileUploader.module.scss';
  * Props.
  */
 type FileUploaderProps = {
-    placeholder?: string;
-    className?: string;
+  placeholder?: string;
+  className?: string;
 } & DropzoneOptions;
 
 /**
@@ -23,35 +23,33 @@ type FileUploaderProps = {
  * @returns React component.
  */
 export const FileUploader = ({
-    placeholder = "Drag'n drop some files here, or click to select files",
-    className,
-    ...restOptions
+  placeholder = "Drag'n drop some files here, or click to select files",
+  className,
+  ...restOptions
 }: FileUploaderProps): ReactElement => {
-    const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
-        ...restOptions,
-    });
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
+    ...restOptions,
+  });
 
-    return (
-        <div
-            className={`${styles.container} ${isDragActive ? styles.dragActive : ''} ${
-                className ?? ''
-            }`}
-            {...getRootProps()}
-        >
-            <input {...getInputProps()} />
-            {acceptedFiles.length !== 0 ? (
-                <span>
-                    {acceptedFiles.map(x => (
-                        <span key={x.name}>{x.name}</span>
-                    ))}
-                </span>
-            ) : (
-                <span className={styles.placeholder}>{placeholder}</span>
-            )}
-            <Icon
-                className={styles.icon}
-                iconName="fa-solid fa-circle-arrow-up"
-            />
-        </div>
-    );
+  return (
+    <div
+      className={`${styles.container} ${isDragActive ? styles.dragActive : ''} ${className ?? ''}`}
+      {...getRootProps()}
+    >
+      <input {...getInputProps()} />
+      {acceptedFiles.length !== 0 ? (
+        <span>
+          {acceptedFiles.map(x => (
+            <span key={x.name}>{x.name}</span>
+          ))}
+        </span>
+      ) : (
+        <span className={styles.placeholder}>{placeholder}</span>
+      )}
+      <Icon
+        className={styles.icon}
+        iconName="fa-solid fa-circle-arrow-up"
+      />
+    </div>
+  );
 };

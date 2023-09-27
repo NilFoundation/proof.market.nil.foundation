@@ -28,4 +28,4 @@ export const getStatementsInfo = (): Promise<StatementInfo[]> => httpFetcher.get
  * @returns .
  */
 export const getStatementsStats = (): Promise<StatementStats[]> =>
-    httpFetcher.get('?statistics').json();
+  httpFetcher.get('?statistics').json();

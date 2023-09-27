@@ -24,18 +24,18 @@ export const selectOrderBookData = (s: RootStateType): OrderBookData => s.orderB
  * @returns Orderbook price step.
  */
 export const selectOrderBookPriceStep = (s: RootStateType): OrderBookPriceStepType =>
-    s.orderBookState.priceStep;
+  s.orderBookState.priceStep;
 
 /**
  * Returns orderBook max volume.
  */
 export const selectOrderBookMaxVolume = createSelector(
-    selectOrderBookData,
-    ({ proposals, requests }) =>
-        Math.max(
-            sum(proposals.map(x => x.ordersAmount)) ?? 0,
-            sum(requests.map(x => x.ordersAmount)) ?? 0,
-        ),
+  selectOrderBookData,
+  ({ proposals, requests }) =>
+    Math.max(
+      sum(proposals.map(x => x.ordersAmount)) ?? 0,
+      sum(requests.map(x => x.ordersAmount)) ?? 0,
+    ),
 );
 
 /**
@@ -45,4 +45,4 @@ export const selectOrderBookMaxVolume = createSelector(
  * @returns Last order data.
  */
 export const selectLastOrderData = (s: RootStateType): LastOrderData | undefined =>
-    s.orderBookState.lastOrderData;
+  s.orderBookState.lastOrderData;

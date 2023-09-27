@@ -17,11 +17,11 @@ const httpFetcher = createApiClient('/proposal');
  * @returns Proposals.
  */
 export const getProposals = (
-    parameters: Partial<TradeOrder>,
-    limit?: number,
-    startFrom?: number,
+  parameters: Partial<TradeOrder>,
+  limit?: number,
+  startFrom?: number,
 ): Promise<Proposal[]> =>
-    httpFetcher.get(getApiUrlByParameters(parameters, limit, startFrom)).json();
+  httpFetcher.get(getApiUrlByParameters(parameters, limit, startFrom)).json();
 
 /**
  * Remove proposal.
@@ -30,4 +30,4 @@ export const getProposals = (
  * @returns Proposal.
  */
 export const removeProposal = (proposalToRemoveId: Proposal['_key']): Promise<void> =>
-    httpFetcher.delete(proposalToRemoveId).json();
+  httpFetcher.delete(proposalToRemoveId).json();

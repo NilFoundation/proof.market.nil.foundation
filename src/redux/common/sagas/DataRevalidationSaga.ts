@@ -18,7 +18,7 @@ let dataRevalidationIsStopped = false;
  * @yields
  */
 export function* DataRevalidationSaga(): SagaIterator<void> {
-    yield takeLatest(SetPageIsVisible, HandlePageVisibilityChange);
+  yield takeLatest(SetPageIsVisible, HandlePageVisibilityChange);
 }
 
 /**
@@ -28,27 +28,27 @@ export function* DataRevalidationSaga(): SagaIterator<void> {
  * @yields
  */
 function* HandlePageVisibilityChange({
-    payload: isUserOnThePage,
+  payload: isUserOnThePage,
 }: ReturnType<typeof SetPageIsVisible>): SagaIterator<void> {
-    if (isUserOnThePage) {
-        if (!dataRevalidationIsStopped) {
-            return;
-        }
-
-        dataRevalidationIsStopped = false;
-
-        yield put(StartDataRevalidation());
-
-        notificationActions?.create({
-            title: 'Network warning',
-            message: 'Please, wait before data updates',
-            variant: Variant.warning,
-        });
-
-        return;
+  if (isUserOnThePage) {
+    if (!dataRevalidationIsStopped) {
+      return;
     }
 
-    yield delay(stopApiCallsAfterUserLeavesPageTimeout);
-    yield put(StopDataRevalidation());
-    dataRevalidationIsStopped = true;
+    dataRevalidationIsStopped = false;
+
+    yield put(StartDataRevalidation());
+
+    notificationActions?.create({
+      title: 'Network warning',
+      message: 'Please, wait before data updates',
+      variant: Variant.warning,
+    });
+
+    return;
+  }
+
+  yield delay(stopApiCallsAfterUserLeavesPageTimeout);
+  yield put(StopDataRevalidation());
+  dataRevalidationIsStopped = true;
 }

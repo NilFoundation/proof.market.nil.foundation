@@ -16,7 +16,7 @@ const renewExpiraitionDifference = 0.25 * 60;
  * @returns Milliseconds.
  */
 export const calculateRenewJwtTimeGap = (jwt: string): number => {
-    const expiredAt = getExpiredAtFromJwt(jwt);
+  const expiredAt = getExpiredAtFromJwt(jwt);
 
-    return (expiredAt - dayjs().unix() - renewExpiraitionDifference) * 1000;
+  return (expiredAt - dayjs().unix() - renewExpiraitionDifference) * 1000;
 };

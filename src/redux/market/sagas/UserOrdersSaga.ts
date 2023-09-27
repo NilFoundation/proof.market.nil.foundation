@@ -10,11 +10,11 @@ import { ProtectedCall, selectUserName } from '@/redux/login';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import type { TradeOrder } from '@/models';
 import {
-    UpdateSelectedStatementKey,
-    UpdateUserProposalsList,
-    UpdateUserRequestsList,
-    UpdateGettingUserOrdersError,
-    UpdateIsLoadingUserOrders,
+  UpdateSelectedStatementKey,
+  UpdateUserProposalsList,
+  UpdateUserRequestsList,
+  UpdateGettingUserOrdersError,
+  UpdateIsLoadingUserOrders,
 } from '../actions';
 import { selectCurrentStatementKey } from '../selectors';
 import { RevalidateSaga } from '../../common';
@@ -27,12 +27,12 @@ const revalidateProposalsDelay = Number(getRuntimeConfigOrThrow().REVALIDATE_DAT
  * @yields
  */
 export function* UserOrdersSaga(): SagaIterator<void> {
-    yield takeLatest(UpdateSelectedStatementKey, function* () {
-        yield put(UpdateUserProposalsList([]));
-        yield put(UpdateUserRequestsList([]));
-        yield fork(GetUserOrdersSaga);
-    });
-    yield fork(RevalidateSaga, GetUserOrdersSaga, revalidateProposalsDelay);
+  yield takeLatest(UpdateSelectedStatementKey, function* () {
+    yield put(UpdateUserProposalsList([]));
+    yield put(UpdateUserRequestsList([]));
+    yield fork(GetUserOrdersSaga);
+  });
+  yield fork(RevalidateSaga, GetUserOrdersSaga, revalidateProposalsDelay);
 }
 
 /**
@@ -41,37 +41,37 @@ export function* UserOrdersSaga(): SagaIterator<void> {
  * @yields
  */
 function* GetUserOrdersSaga(): SagaIterator<void> {
-    const selectedStatementKey: string | undefined = yield select(selectCurrentStatementKey);
-    const currentUser = yield select(selectUserName);
+  const selectedStatementKey: string | undefined = yield select(selectCurrentStatementKey);
+  const currentUser = yield select(selectUserName);
 
-    if (selectedStatementKey === undefined || !currentUser) {
-        return;
+  if (selectedStatementKey === undefined || !currentUser) {
+    return;
+  }
+
+  const apiCallOptions: Partial<TradeOrder> = {
+    statement_key: selectedStatementKey,
+    sender: currentUser,
+  };
+
+  try {
+    yield put(UpdateGettingUserOrdersError(false));
+    yield put(UpdateIsLoadingUserOrders(true));
+
+    const [userProposals, userRequests] = yield all([
+      call(ProtectedCall, getProposals, apiCallOptions),
+      call(ProtectedCall, getRequests, apiCallOptions),
+    ]);
+
+    if (userProposals !== undefined) {
+      yield put(UpdateUserProposalsList(userProposals));
     }
 
-    const apiCallOptions: Partial<TradeOrder> = {
-        statement_key: selectedStatementKey,
-        sender: currentUser,
-    };
-
-    try {
-        yield put(UpdateGettingUserOrdersError(false));
-        yield put(UpdateIsLoadingUserOrders(true));
-
-        const [userProposals, userRequests] = yield all([
-            call(ProtectedCall, getProposals, apiCallOptions),
-            call(ProtectedCall, getRequests, apiCallOptions),
-        ]);
-
-        if (userProposals !== undefined) {
-            yield put(UpdateUserProposalsList(userProposals));
-        }
-
-        if (userRequests !== undefined) {
-            yield put(UpdateUserRequestsList(userRequests));
-        }
-    } catch (e) {
-        yield put(UpdateGettingUserOrdersError(true));
-    } finally {
-        yield put(UpdateIsLoadingUserOrders(false));
+    if (userRequests !== undefined) {
+      yield put(UpdateUserRequestsList(userRequests));
     }
+  } catch (e) {
+    yield put(UpdateGettingUserOrdersError(true));
+  } finally {
+    yield put(UpdateIsLoadingUserOrders(false));
+  }
 }

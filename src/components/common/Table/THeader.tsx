@@ -9,7 +9,7 @@ import type { DetailedHTMLProps, HTMLAttributes, ReactElement } from 'react';
  * Props.
  */
 type THeaderProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
-    sticky?: boolean;
+  sticky?: boolean;
 };
 
 /**
@@ -19,12 +19,12 @@ type THeaderProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivEle
  * @returns React component.
  */
 export const THeader = ({ children, ...rest }: THeaderProps): ReactElement => {
-    return (
-        <div
-            role="columnheader"
-            {...rest}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div
+      role="columnheader"
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 };

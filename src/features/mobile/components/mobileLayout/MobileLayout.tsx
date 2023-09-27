@@ -19,26 +19,26 @@ import styles from './MobileLayout.module.scss';
  * @returns React element.
  */
 const MobileLayout = (): ReactElement => {
-    const [selectedMenuOption, setSeleectedMenuOption] = useState<MobileMenuItem>(
-        MobileMenuItem.statements,
-    );
+  const [selectedMenuOption, setSeleectedMenuOption] = useState<MobileMenuItem>(
+    MobileMenuItem.statements,
+  );
 
-    return (
-        <div className={styles.layout}>
-            <Navbar />
-            <div className={styles.content}>
-                <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
-                    <MobileMenuContext.Provider value={{ selectedMenuOption }}>
-                        <Outlet />
-                    </MobileMenuContext.Provider>
-                </ReadonlyAccessProvider>
-            </div>
-            <MobileMenu
-                selectedMenuOption={selectedMenuOption}
-                onSetMenuOption={setSeleectedMenuOption}
-            />
-        </div>
-    );
+  return (
+    <div className={styles.layout}>
+      <Navbar />
+      <div className={styles.content}>
+        <ReadonlyAccessProvider fallback={<FullScreenLoader />}>
+          <MobileMenuContext.Provider value={{ selectedMenuOption }}>
+            <Outlet />
+          </MobileMenuContext.Provider>
+        </ReadonlyAccessProvider>
+      </div>
+      <MobileMenu
+        selectedMenuOption={selectedMenuOption}
+        onSetMenuOption={setSeleectedMenuOption}
+      />
+    </div>
+  );
 };
 
 export default MobileLayout;

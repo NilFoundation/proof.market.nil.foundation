@@ -14,7 +14,7 @@ const httpFetcher = createApiClient('/statement');
  * @returns Requests info.
  */
 export const getPortfolioRequestsInfo = (): Promise<UserStatementInfo[]> =>
-    httpFetcher.get('requested').json();
+  httpFetcher.get('requested').json();
 
 /**
  * Get portfolio proposals info.
@@ -22,7 +22,7 @@ export const getPortfolioRequestsInfo = (): Promise<UserStatementInfo[]> =>
  * @returns Proposals info.
  */
 export const getPortfolioProposalsInfo = (): Promise<UserStatementInfo[]> =>
-    httpFetcher.get('proposed').json();
+  httpFetcher.get('proposed').json();
 
 /**
  * Get current user statements info.
@@ -30,4 +30,4 @@ export const getPortfolioProposalsInfo = (): Promise<UserStatementInfo[]> =>
  * @returns .
  */
 export const getUserStatementsInfo = (): Promise<UserStatementInfo[]> =>
-    httpFetcher.get('owner').json();
+  httpFetcher.get('owner').json();

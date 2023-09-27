@@ -10,7 +10,7 @@ import type { Proposal, Request } from '@/models';
  * Update user proposals list.
  */
 export const UpdateUserProposalsList = createAction<Proposal[]>(
-    '@userOrders/UPDATE_USER_PROPOSALS',
+  '@userOrders/UPDATE_USER_PROPOSALS',
 );
 
 /**

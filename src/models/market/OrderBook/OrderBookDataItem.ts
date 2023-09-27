@@ -7,8 +7,8 @@
  * Order book data item.
  */
 export type OrderBookDataItem = {
-    ordersAmount: number;
-    userOrdersAmount: number;
-    cost: number;
-    eval_time?: number;
+  ordersAmount: number;
+  userOrdersAmount: number;
+  cost: number;
+  eval_time?: number;
 };

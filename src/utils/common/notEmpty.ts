@@ -10,5 +10,5 @@
  * @returns True if value is not nullable.
  */
 export const notEmpty = <T>(value: T): value is NonNullable<T> => {
-    return value !== null && value !== undefined;
+  return value !== null && value !== undefined;
 };

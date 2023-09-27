@@ -9,10 +9,10 @@ import { getUserStatementsInfo } from '@/api';
 import { createUrlParamSelector } from '@/redux/common';
 import { RouterParam } from '@/enums';
 import {
-    UpdateUserStatementsInfo,
-    UpdateIsLoadingUserStatementsInfo,
-    UpdateIsErrorUserStatementsInfo,
-    UpdateSelectedUserStatementsInfoKey,
+  UpdateUserStatementsInfo,
+  UpdateIsLoadingUserStatementsInfo,
+  UpdateIsErrorUserStatementsInfo,
+  UpdateSelectedUserStatementsInfoKey,
 } from '../actions';
 import { ProtectedCall, selectUserName } from '../../login';
 import type { RootStateType } from '../../RootStateType';
@@ -23,26 +23,26 @@ import type { RootStateType } from '../../RootStateType';
  * @yields
  */
 export function* UserStatementsInfoSaga(): SagaIterator<void> {
-    const user: ReturnType<typeof selectUserName> = yield select(selectUserName);
+  const user: ReturnType<typeof selectUserName> = yield select(selectUserName);
 
-    if (!user) {
-        return;
+  if (!user) {
+    return;
+  }
+
+  try {
+    yield put(UpdateIsErrorUserStatementsInfo(false));
+    yield put(UpdateIsLoadingUserStatementsInfo(true));
+
+    const statementsInfo = yield call(ProtectedCall, getUserStatementsInfo);
+
+    if (statementsInfo !== undefined) {
+      yield put(UpdateUserStatementsInfo(statementsInfo));
     }
-
-    try {
-        yield put(UpdateIsErrorUserStatementsInfo(false));
-        yield put(UpdateIsLoadingUserStatementsInfo(true));
-
-        const statementsInfo = yield call(ProtectedCall, getUserStatementsInfo);
-
-        if (statementsInfo !== undefined) {
-            yield put(UpdateUserStatementsInfo(statementsInfo));
-        }
-    } catch (e) {
-        yield put(UpdateIsErrorUserStatementsInfo(true));
-    } finally {
-        yield put(UpdateIsLoadingUserStatementsInfo(false));
-    }
+  } catch (e) {
+    yield put(UpdateIsErrorUserStatementsInfo(true));
+  } finally {
+    yield put(UpdateIsLoadingUserStatementsInfo(false));
+  }
 }
 
 /**
@@ -52,26 +52,26 @@ export function* UserStatementsInfoSaga(): SagaIterator<void> {
  * @yields
  */
 export function* SelectUserStatementSaga({
-    payload: statementInfo,
+  payload: statementInfo,
 }: ReturnType<typeof UpdateUserStatementsInfo>): SagaIterator<void> {
-    const currentSelectedStatementInfoKey = yield select(
-        (s: RootStateType) => s.userStatementInfoState.selectedUserStatementInfoKey,
-    );
+  const currentSelectedStatementInfoKey = yield select(
+    (s: RootStateType) => s.userStatementInfoState.selectedUserStatementInfoKey,
+  );
 
-    if (currentSelectedStatementInfoKey) {
-        return;
-    }
+  if (currentSelectedStatementInfoKey) {
+    return;
+  }
 
-    if (!statementInfo.length) {
-        return;
-    }
+  if (!statementInfo.length) {
+    return;
+  }
 
-    const urlParamKey: string = yield select(
-        createUrlParamSelector(RouterParam.portfolioUserStatementsInfoName),
-    );
+  const urlParamKey: string = yield select(
+    createUrlParamSelector(RouterParam.portfolioUserStatementsInfoName),
+  );
 
-    const shouldSelectFromUrl = statementInfo.some(x => x._key === urlParamKey);
-    const keyToSelect = shouldSelectFromUrl ? urlParamKey : statementInfo[0]._key;
+  const shouldSelectFromUrl = statementInfo.some(x => x._key === urlParamKey);
+  const keyToSelect = shouldSelectFromUrl ? urlParamKey : statementInfo[0]._key;
 
-    yield put(UpdateSelectedUserStatementsInfoKey(keyToSelect));
+  yield put(UpdateSelectedUserStatementsInfoKey(keyToSelect));
 }

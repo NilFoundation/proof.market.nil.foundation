@@ -11,38 +11,38 @@ import viteCompression from 'vite-plugin-compression';
 import { createMpaPlugin, createPages } from 'vite-plugin-virtual-mpa';
 
 const pages = createPages([
-    {
-        name: 'index',
-        entry: '/src/index.tsx',
-    },
-    {
-        name: 'charts',
-        entry: '/src/index.charts.tsx',
-    },
+  {
+    name: 'index',
+    entry: '/src/index.tsx',
+  },
+  {
+    name: 'charts',
+    entry: '/src/index.charts.tsx',
+  },
 ]);
 
 export default defineConfig({
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, './src'),
-        },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    plugins: [
-        createMpaPlugin({
-            htmlMinify: true,
-            pages,
-            verbose: true,
-            template: 'index.html',
-        }),
-        react(),
-        eslint(),
-        legacy({
-            targets: ['defaults'],
-            additionalLegacyPolyfills: ['core-js/stable'],
-        }),
-        viteCompression(),
-    ],
-    build: {
-        outDir: 'build',
-    },
+  },
+  plugins: [
+    createMpaPlugin({
+      htmlMinify: true,
+      pages,
+      verbose: true,
+      template: 'index.html',
+    }),
+    react(),
+    eslint(),
+    legacy({
+      targets: ['defaults'],
+      additionalLegacyPolyfills: ['core-js/stable'],
+    }),
+    viteCompression(),
+  ],
+  build: {
+    outDir: 'build',
+  },
 });

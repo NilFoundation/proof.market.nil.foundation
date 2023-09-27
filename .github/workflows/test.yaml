@@ -4,7 +4,7 @@ on:
   # Triggers the workflow on every pull-request
   push:
     branches:
-      - "master"
+      - 'master'
   # Allows to trigger workflow manually
   workflow_dispatch:
     inputs:

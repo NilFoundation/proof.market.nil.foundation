@@ -9,7 +9,7 @@ import type { DateUnit } from '@/enums';
  * Base chart props.
  */
 export type ChartBaseProps = {
-    dataRange: DateUnit;
-    displayVolumes: boolean;
-    height: number;
+  dataRange: DateUnit;
+  displayVolumes: boolean;
+  height: number;
 };

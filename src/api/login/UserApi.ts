@@ -14,4 +14,4 @@ const httpFetcher = createApiClient('/user');
  * @returns .
  */
 export const getUserBalance = (user: string): Promise<number | undefined> =>
-    httpFetcher.get(`${user}/balance`).json();
+  httpFetcher.get(`${user}/balance`).json();

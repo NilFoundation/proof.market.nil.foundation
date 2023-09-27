@@ -13,12 +13,12 @@ import { RegisterForm } from '@/components';
  * @returns React component.
  */
 const RegisterView = (): ReactElement => (
-    <>
-        <Helmet>
-            <title>Register</title>
-        </Helmet>
-        <RegisterForm />
-    </>
+  <>
+    <Helmet>
+      <title>Register</title>
+    </Helmet>
+    <RegisterForm />
+  </>
 );
 
 export default RegisterView;

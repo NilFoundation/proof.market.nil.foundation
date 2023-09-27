@@ -13,4 +13,4 @@ import { longDash } from './longDashSymbol';
  * @returns Value or long dash symbol.
  */
 export const renderDashOnEmptyValue = (value?: number | null, fractionDigits = 4): string =>
-    value ? value?.toFixed(fractionDigits) : longDash;
+  value ? value?.toFixed(fractionDigits) : longDash;
