@@ -20,7 +20,7 @@ import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { checkRuntimeConfig } from './utils';
-import './style';
+import './styles/global';
 
 checkRuntimeConfig();
 configureSentry();

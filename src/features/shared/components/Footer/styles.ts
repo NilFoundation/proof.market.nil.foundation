@@ -8,7 +8,7 @@ import { expandProperty } from 'inline-style-expand-shorthand';
 
 const footer: StyleObject = {
     ...expandProperty('padding', '8rem'),
-    borderTop: `1px solid ${PRIMITIVE_COLORS.primary600}`,
+    borderTop: `1px solid ${PRIMITIVE_COLORS.gray600}`,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
