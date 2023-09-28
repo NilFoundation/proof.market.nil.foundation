@@ -8,6 +8,8 @@ on:
       - master
     paths:
       - "src/**"
+      - "package.json"
+      - "index.html"
 
 jobs:
   build:
