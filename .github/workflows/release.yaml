@@ -1,9 +1,8 @@
 name: Version
-# This workflow is triggered on push to master branch and can be triggered manually.
+# This workflow is triggered on push to master branch.
 # It pushes new package version to external storage.
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - master
@@ -12,20 +11,31 @@ on:
 
 jobs:
   build:
-    name: Version
+    uses: ./.github/workflows/build.yaml
+    secrets: inherit
+    with:
+      environment: test
+      commit: ${{ github.sha }}
+      fill_config: false
+
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
-    - name: Update version
+    - uses: actions/checkout@v3
+
+    - name: Get version
+      id: get_version
       run: |
-        npm version ${{ inputs.release_type || 'patch' }}
-    - name: Push changes
-      uses: ad-m/github-push-action@master
+        full_version=$(git describe)
+        version=$(echo $full_version | awk '{split($0,a,"-"); print a[2]}')
+        echo ::set-output name=version::$version
+
+    - uses: actions/download-artifact@v3
       with:
-        github_token: ${{ secrets.PUSH_TOKEN }}
-        branch: master
-        tags: true
+        name: build-${{ github.sha }}
+
+    - name: Extract build results
+      run: tar -xf build-${{ github.sha }}.tar.gz
+
+# TODO - app push to external storage with version
