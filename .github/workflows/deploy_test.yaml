@@ -1,11 +1,11 @@
-name: Test
+name: Deploy Test Stand
+# This workflow is triggered on push to master branch and can be triggered manually.
+# It deploys app to test stand.
 
 on:
-  # Triggers the workflow on every pull-request
   push:
     branches:
       - 'master'
-  # Allows to trigger workflow manually
   workflow_dispatch:
     inputs:
       commit:
@@ -24,7 +24,7 @@ jobs:
 
   update_test_stand:
     name: Update test stand
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     environment: test
     needs: [build]
     steps:

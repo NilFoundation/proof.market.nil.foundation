@@ -1,10 +1,8 @@
 name: Deploy
+# This workflow is triggered manually.
+# It deploys the app to GitHub Pages and optionally updates proof.market repository.
 
 on:
-  # Triggers the workflow on push to master branch
-  # push:
-  #   branches: [ master ]
-  # Allows to trigger workflow manually
   workflow_dispatch:
     inputs:
       update-proof-market:
@@ -27,7 +25,7 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     environment: github-pages
     needs: [build]
     steps:
