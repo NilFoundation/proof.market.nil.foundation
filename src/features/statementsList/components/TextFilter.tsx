@@ -5,11 +5,11 @@
 
 import type { ReactElement } from 'react';
 import { useRef, useState } from 'react';
-import { Icon, Input, InputGroup } from '@nilfoundation/react-components';
 import debounce from 'lodash/debounce';
 import type { FilterProps } from 'react-table';
+import { Input, SearchIcon } from '@nilfoundation/ui-kit';
 import type { StatementsListData } from '@/models';
-import styles from './StatementsList.module.scss';
+import { getTextFilterOverrides } from './overrides';
 
 /**
  * Search statements by text filter component.
@@ -17,10 +17,10 @@ import styles from './StatementsList.module.scss';
  * @param {FilterProps<StatementsListData>} props - Filter props.
  * @returns Search by text filter component.
  */
-export const StatementsListTextFilter = ({
+export const TextFilter = ({
   column: { setFilter },
 }: FilterProps<StatementsListData>): ReactElement => {
-  const [filterValue, setFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState(''); // TODO - maybe this is redundant.
   const debouncedSearch = useRef(
     debounce(value => {
       setFilter(value || undefined);
@@ -28,19 +28,15 @@ export const StatementsListTextFilter = ({
   ).current;
 
   return (
-    <InputGroup className={styles.inputGroup}>
-      <InputGroup.Addon>
-        <Icon iconName="fa-solid fa-search" />
-      </InputGroup.Addon>
-      <Input
-        placeholder="Search statements"
-        type="text"
-        value={filterValue}
-        onChange={e => {
-          setFilterValue(e.target.value);
-          debouncedSearch(e.target.value);
-        }}
-      />
-    </InputGroup>
+    <Input
+      overrides={getTextFilterOverrides()}
+      placeholder="Search statements"
+      value={filterValue}
+      onChange={e => {
+        setFilterValue(e.target.value);
+        debouncedSearch(e.target.value);
+      }}
+      startEnhancer={<SearchIcon />}
+    />
   );
 };

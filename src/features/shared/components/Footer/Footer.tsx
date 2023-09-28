@@ -5,9 +5,10 @@
 
 import type { ReactElement } from 'react';
 import { useStyletron } from 'styletron-react';
-import { Copyright, SocialLinks } from '@/components';
+import { Copyright } from '@/components';
 import { socialLinks } from '@/constants';
 import { styles as s } from './styles';
+import { SocialLinks } from '../SocialLinks/SocialLinks';
 
 /**
  * Footer.

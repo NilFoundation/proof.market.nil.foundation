@@ -5,19 +5,17 @@
 
 import type { ReactElement } from 'react';
 import { memo, useCallback, useMemo } from 'react';
-import { ListGroup } from '@nilfoundation/react-components';
 import { dequal as deepEqual } from 'dequal';
 import type { TableInstance, TableState } from 'react-table';
-import type { Option } from 'baseui/select';
-import { Select } from 'baseui/select';
-import { useDispatch } from 'react-redux';
-import { UpdateSelectedStatementTags, selectAllStatementsTags, useAppSelector } from '@/redux';
+import { useStyletron } from 'styletron-react';
+import { useAppSelector } from '@/redux';
 import { ReactTable } from '@/components';
 import type { Statement, StatementsListData, StatementsListTableColumn } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
-import { CurcuitsListItem } from './StatementsListItem';
-import { StatementsListTextFilter } from './StatementsListTextFilter';
-import styles from './StatementsList.module.scss';
+import { globalStyles as s } from '@/styles/globalStyles';
+import { CurcuitsListItem } from './ListItem';
+import { TextFilter } from './TextFilter';
+import { TagsSelector } from './TagsSelector';
 
 const { CIRCUIT_DEVELOPER_GUIDE_URL } = getRuntimeConfigOrThrow();
 
@@ -35,7 +33,7 @@ const columns: StatementsListTableColumn[] = [
   {
     Header: 'Name',
     accessor: 'name',
-    Filter: StatementsListTextFilter,
+    Filter: TextFilter,
   },
   {
     accessor: 'cost',
@@ -77,18 +75,7 @@ const defaultTableState: Partial<TableState<StatementsListData>> = {
 export const StatementsListTable = memo(function StatementsListTable({
   statementsList,
 }: StatementsListTableProps): ReactElement {
-  const dispatch = useDispatch();
   const statementsInfo = useAppSelector(s => s.statementsState.statementsInfo, deepEqual);
-  const avialiableTags = useAppSelector(selectAllStatementsTags);
-  const selectedTags = useAppSelector(s => s.statementsState.selectedStatementTags);
-
-  const selectOptions: Option[] = useMemo(() => {
-    return avialiableTags.map(x => ({ label: x, id: x }));
-  }, [avialiableTags]);
-  const selectValues: Option[] = useMemo(() => {
-    return selectedTags.map(x => ({ label: x, id: x }));
-  }, [selectedTags]);
-
   const tableData: StatementsListData[] = useMemo(() => {
     return statementsList.map(x => {
       const info = statementsInfo && statementsInfo.find(y => y._key === x._key);
@@ -107,45 +94,23 @@ export const StatementsListTable = memo(function StatementsListTable({
     ({ rows, prepareRow, visibleColumns }: TableInstance<StatementsListData>) => (
       <>
         {visibleColumns.find(x => x.canFilter)?.render('Filter')}
-        <Select
-          options={selectOptions}
-          value={selectValues}
-          multi
-          onChange={params => {
-            dispatch(UpdateSelectedStatementTags(params.value.map(x => x.id as string)));
-          }}
-          placeholder="Select statements tags"
-        />
-        <ListGroup className={styles.listGroup}>
-          {rows.length === 0 ? (
-            <>
-              <div className="text-muted">No statements found</div>
-              <div className="text-muted">
-                Create your own statement using{' '}
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  href={CIRCUIT_DEVELOPER_GUIDE_URL}
-                >
-                  this guide
-                </a>
-              </div>
-            </>
-          ) : (
-            rows.map(row => {
-              prepareRow(row);
-              return (
-                <CurcuitsListItem
-                  key={row.id}
-                  data={row.values as StatementsListData}
-                />
-              );
-            })
-          )}
-        </ListGroup>
+        <TagsSelector />
+        {rows.length === 0 ? (
+          <EmptyList />
+        ) : (
+          rows.map(row => {
+            prepareRow(row);
+            return (
+              <CurcuitsListItem
+                key={row.id}
+                data={row.values as StatementsListData}
+              />
+            );
+          })
+        )}
       </>
     ),
-    [selectValues, dispatch, selectOptions],
+    [],
   );
 
   return (
@@ -157,5 +122,25 @@ export const StatementsListTable = memo(function StatementsListTable({
       initialState={defaultTableState}
       showTableHeader={false}
     />
+  );
+});
+
+const EmptyList = memo(function EmptyList(): ReactElement {
+  const [css] = useStyletron();
+
+  return (
+    <>
+      <div className={css(s.textMuted)}>No statements found</div>
+      <div className={css(s.textMuted)}>
+        Create your own statement using{' '}
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href={CIRCUIT_DEVELOPER_GUIDE_URL}
+        >
+          this guide
+        </a>
+      </div>
+    </>
   );
 });

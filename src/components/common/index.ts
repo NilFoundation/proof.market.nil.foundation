@@ -10,7 +10,6 @@ export * from './FileUploader';
 export * from './Table';
 export * from './FullScreenView';
 export * from './ClickableIcon';
-export * from './SocialLinks';
 export * from './Copyright';
 export * from './Overlay';
 export * from './ObjectAsPlainTextViewer';
