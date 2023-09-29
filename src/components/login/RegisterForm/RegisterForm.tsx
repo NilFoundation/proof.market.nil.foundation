@@ -22,7 +22,7 @@ import debounce from 'lodash/debounce';
 import { useForm } from 'react-hook-form';
 import { Path } from '@/features/routing';
 import { socialLinks } from '@/constants';
-import { SocialLinks } from '@/components';
+import { SocialLinks } from '@/features/shared';
 import type { RegisterData } from '@/models';
 import { signUp, checkIsUsernameUnique } from '@/api';
 import { getApiErrorMessage } from '@/utils';

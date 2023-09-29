@@ -4,7 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
-import { SPINNER_SIZE, Spinner } from '@nilfoundation/ui-kit';
+import { Card, SPINNER_SIZE, Spinner } from '@nilfoundation/ui-kit';
 import { dequal as deepEqual } from 'dequal';
 import {
   selectCurrentStatement,
@@ -14,9 +14,8 @@ import {
 } from '@/redux';
 import { useSyncUrlAndSelectedItem } from '@/hooks';
 import { RouterParam } from '@/enums';
-import { DashboardCard } from '@/components';
 import { StatementsListTable } from './StatementsListTable';
-import styles from './StatementsList.module.scss';
+import { getStatementsCardOverrides } from './overrides';
 
 /**
  * Statements list.
@@ -35,16 +34,17 @@ const StatementsList = (): ReactElement => {
   });
 
   return (
-    <DashboardCard className={styles.wrapper}>
-      <h4>Statement list</h4>
-      <div className={styles.container}>
-        {loadingStatements && !statementsList.length ? (
-          <Spinner size={SPINNER_SIZE.large} />
-        ) : (
-          <StatementsListTable statementsList={statementsList} />
-        )}
-      </div>
-    </DashboardCard>
+    <Card
+      title="Statements"
+      headline
+      overrides={getStatementsCardOverrides()}
+    >
+      {loadingStatements && !statementsList.length ? (
+        <Spinner size={SPINNER_SIZE.large} />
+      ) : (
+        <StatementsListTable statementsList={statementsList} />
+      )}
+    </Card>
   );
 };
 
