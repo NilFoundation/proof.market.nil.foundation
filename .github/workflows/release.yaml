@@ -1,15 +1,43 @@
-name: Release
+name: Version
+# This workflow is triggered on push to master branch.
+# It pushes new package version to external storage.
+
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - master
+    paths:
+      - "src/**"
+      - "package.json"
+      - "index.html"
+
 jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
+    secrets: inherit
+    with:
+      environment: test
+      commit: ${{ github.sha }}
+      fill_config: false
+
   release:
+    name: Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: ncipollo/release-action@v1
-        with:
-          generateReleaseNotes: true
+    - uses: actions/checkout@v3
+
+    - name: Get version
+      id: get_version
+      run: |
+        full_version=$(git describe)
+        version=$(echo $full_version | awk '{split($0,a,"-"); print a[2]}')
+        echo ::set-output name=version::$version
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: build-${{ github.sha }}
+
+    - name: Extract build results
+      run: tar -xf build-${{ github.sha }}.tar.gz
+
+# TODO - app push to external storage with version
