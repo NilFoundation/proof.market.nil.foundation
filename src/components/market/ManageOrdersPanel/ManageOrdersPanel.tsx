@@ -72,9 +72,9 @@ const viewFactory = (
   data: ManageOrdersData[],
 ) => {
   return match([tab, error, loading, data])
-    .with([P._, true, false, P._], () => <h5>Error while loading data.</h5>)
+    .with([P._, true, false, []], () => <h5>Error while loading data.</h5>)
     .with([P._, false, true, []], () => <Spinner grow />)
-    .with([ManageOrdersTab.active, false, false, P._], () => <ActiveOrdersTable data={data} />)
-    .with([ManageOrdersTab.history, false, false, P._], () => <HistoryOrdersTable data={data} />)
+    .with([ManageOrdersTab.active, P._, P._, P.array()], () => <ActiveOrdersTable data={data} />)
+    .with([ManageOrdersTab.history, P._, P._, P.array()], () => <HistoryOrdersTable data={data} />)
     .otherwise(() => <h5>No orders.</h5>);
 };

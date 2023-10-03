@@ -49,7 +49,7 @@ const LastProofProducerViewFactory = function LastProofProducerViewFactory({
   return match([loadingData, errorGettingData, lastProofProducer])
     .with([true, false, undefined], () => <Spinner grow />)
     .with([P._, true, undefined], () => <h5>Error while getting data.</h5>)
-    .with([false, false, P._], () => (
+    .with([false, false, P.string], () => (
       <h5>
         <span className="text-muted">Username:</span>
         {` ${lastProofProducer}`}
