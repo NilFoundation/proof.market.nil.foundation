@@ -4,8 +4,8 @@
  */
 
 import type { ReactElement } from 'react';
-import { useCallback, memo } from 'react';
 import { ListGroup, Spinner } from '@nilfoundation/react-components';
+import { P, match } from 'ts-pattern';
 import { DashboardCard } from '@/components/common';
 import { Path } from '@/features/routing';
 import { PortfolioInfoListItem } from './PortfolioInfoListItem';
@@ -35,8 +35,37 @@ export const PortfolioInfoList = <T extends { _key: string; name: string }>({
   itemsLinksSubPath,
   title,
 }: PortfolioInfoListProps<T>): ReactElement => {
-  const renderItemsList = useCallback(
-    () => (
+  return (
+    <DashboardCard>
+      <h4>{title}</h4>
+      <div className={styles.container}>
+        <PortfolioInfoListViewFactory
+          items={items}
+          isLoadingItems={isLoadingItems}
+          getItemsError={isError}
+          itemsLinksSubPath={itemsLinksSubPath}
+        />
+      </div>
+    </DashboardCard>
+  );
+};
+
+const PortfolioInfoListViewFactory = <T extends { _key: string; name: string }>({
+  items,
+  isLoadingItems,
+  getItemsError,
+  itemsLinksSubPath,
+}: {
+  items: T[];
+  isLoadingItems: boolean;
+  getItemsError: boolean;
+  itemsLinksSubPath: Path;
+}) => {
+  return match([isLoadingItems, getItemsError, items])
+    .with([true, false, []], () => <Spinner grow />)
+    .with([false, true, []], () => <h5>Error while getting statements info.</h5>)
+    .with([false, false, []], () => <h5>No statements found.</h5>)
+    .with([false, false, P.array({ _key: P.string })], () => (
       <ListGroup className={styles.list}>
         {items.map(({ name, _key }) => (
           <PortfolioInfoListItem
@@ -46,46 +75,6 @@ export const PortfolioInfoList = <T extends { _key: string; name: string }>({
           />
         ))}
       </ListGroup>
-    ),
-    [items, itemsLinksSubPath],
-  );
-
-  return (
-    <DashboardCard>
-      <h4>{title}</h4>
-      <div className={styles.container}>
-        <PortfolioInfoListViewFactory
-          itemsLength={items.length}
-          isLoadingItems={isLoadingItems}
-          getItemsError={isError}
-          renderItemsList={renderItemsList}
-        />
-      </div>
-    </DashboardCard>
-  );
+    ))
+    .otherwise(() => <></>);
 };
-
-const PortfolioInfoListViewFactory = memo(function ListViewFactory({
-  itemsLength,
-  isLoadingItems,
-  getItemsError,
-  renderItemsList,
-}: {
-  itemsLength: number;
-  isLoadingItems: boolean;
-  getItemsError: boolean;
-  renderItemsList: () => ReactElement;
-}) {
-  switch (true) {
-    case isLoadingItems && !itemsLength:
-      return <Spinner grow />;
-    case getItemsError:
-      return <h5>Error while getting statements info.</h5>;
-    case itemsLength === 0:
-      return <h5>No statements found.</h5>;
-    case !!itemsLength:
-      return renderItemsList();
-    default:
-      return <></>;
-  }
-});

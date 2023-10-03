@@ -4,9 +4,10 @@
  */
 
 import type { ReactElement } from 'react';
-import { useMemo, memo } from 'react';
+import { useMemo } from 'react';
 import { dequal as deepEqual } from 'dequal';
 import { Spinner } from '@nilfoundation/react-components';
+import { P, match } from 'ts-pattern';
 import {
   selectCurrentStatementName,
   selectSelectedPortfolioProposalsInfo,
@@ -74,10 +75,7 @@ const PortfolioProposalsInfoContent = (): ReactElement => {
 
 export default PortfolioProposalsInfoContent;
 
-/**
- * Conditionally renders data.
- */
-const ProposalContentViewFactory = memo(function StatementInfoViewFactory({
+const ProposalContentViewFactory = ({
   info,
   isLoadingInfo,
   isError,
@@ -85,22 +83,15 @@ const ProposalContentViewFactory = memo(function StatementInfoViewFactory({
   info?: PortfolioProposalsInfo;
   isLoadingInfo: boolean;
   isError: boolean;
-}) {
+}) => {
   const humanReadbleInfo = useMemo(
     () => (info ? mapToHumanReadablePortfolioProposalsInfo(info) : undefined),
     [info],
   );
 
-  switch (true) {
-    case isLoadingInfo && info === undefined:
-      return <Spinner grow />;
-    case isError:
-      return <h5>Error while getting data.</h5>;
-    case info !== undefined:
-      return <ObjectAsPlainTextViewer data={humanReadbleInfo!} />;
-    case info === undefined:
-      return <h5>No proof producer info was found.</h5>;
-    default:
-      return <></>;
-  }
-});
+  return match([isLoadingInfo, isError, humanReadbleInfo])
+    .with([true, false, undefined], () => <Spinner grow />)
+    .with([P._, true, undefined], () => <h5>Error while getting data.</h5>)
+    .with([P._, false, P.not(undefined)], ([_, , info]) => <ObjectAsPlainTextViewer data={info} />)
+    .otherwise(() => <h5>No proposal info was found.</h5>);
+};

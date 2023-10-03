@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import { Container, Row, Col } from '@nilfoundation/react-components';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { match } from 'ts-pattern';
 import { ChartType, DateUnit, RouterParam, RouterSearchParam } from '@/enums';
 import type { ChartBaseProps } from '@/components';
 import { ProofTimeGenChart, ProofCostChart } from '@/components';
@@ -63,12 +64,8 @@ const ChartsView = (): ReactElement => {
 export default ChartsView;
 
 const ChartsViewFactory = ({ chartType, ...rest }: { chartType?: string } & ChartBaseProps) => {
-  switch (chartType) {
-    case ChartType.proofCostChart:
-      return <ProofCostChart {...rest} />;
-    case ChartType.proofGetTimeChart:
-      return <ProofTimeGenChart {...rest} />;
-    default:
-      return <></>;
-  }
+  return match(chartType)
+    .with(ChartType.proofCostChart, () => <ProofCostChart {...rest} />)
+    .with(ChartType.proofGetTimeChart, () => <ProofTimeGenChart {...rest} />)
+    .otherwise(() => <></>);
 };

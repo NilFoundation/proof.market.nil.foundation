@@ -4,9 +4,9 @@
  */
 
 import type { ReactElement } from 'react';
-import { memo } from 'react';
 import { dequal as deepEqual } from 'dequal';
 import { Spinner } from '@nilfoundation/react-components';
+import { match, P } from 'ts-pattern';
 import {
   selectSelectedPortfolioRequestsInfo,
   UpdateSelectedPortfolioRequestsInfoKey,
@@ -62,10 +62,7 @@ const PortfolioRequestsInfoContent = (): ReactElement => {
 
 export default PortfolioRequestsInfoContent;
 
-/**
- * Conditionally renders data.
- */
-const ViewFactory = memo(function StatementInfoViewFactory({
+const ViewFactory = ({
   info,
   isLoadingInfo,
   isError,
@@ -73,17 +70,11 @@ const ViewFactory = memo(function StatementInfoViewFactory({
   info?: PortfolioRequestsInfo;
   isLoadingInfo: boolean;
   isError: boolean;
-}) {
-  switch (true) {
-    case isLoadingInfo && info === undefined:
-      return <Spinner grow />;
-    case isError:
-      return <h5>Error while getting data.</h5>;
-    case info !== undefined:
-      return <RequestsInfoCard info={info!} />;
-    case info === undefined:
-      return <h5>No proof producer info was found.</h5>;
-    default:
-      return <></>;
-  }
-});
+}) => {
+  return match([isLoadingInfo, isError, info])
+    .with([true, false, undefined], () => <Spinner grow />)
+    .with([P._, true, undefined], () => <h5>Error while getting data.</h5>)
+    .with([P._, false, P.not(undefined)], ([_, , info]) => <RequestsInfoCard info={info} />)
+    .with([false, false, undefined], () => <h5>No proof producer info was found.</h5>)
+    .otherwise(() => <></>);
+};

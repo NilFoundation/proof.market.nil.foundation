@@ -6,6 +6,7 @@
 import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
+import { P, match } from 'ts-pattern';
 import { useAppSelector } from '@/redux';
 import { useGetManageOrdersData } from '@/hooks';
 import type { ManageOrdersData } from '@/models';
@@ -70,20 +71,10 @@ const viewFactory = (
   loading: boolean,
   data: ManageOrdersData[],
 ) => {
-  if (error) {
-    return <h5>Error while loading data.</h5>;
-  }
-
-  if (data.length === 0) {
-    return loading ? <Spinner grow /> : <h5>No orders.</h5>;
-  }
-
-  switch (tab) {
-    case ManageOrdersTab.active:
-      return <ActiveOrdersTable data={data} />;
-    case ManageOrdersTab.history:
-      return <HistoryOrdersTable data={data} />;
-    default:
-      return <></>;
-  }
+  return match([tab, error, loading, data])
+    .with([P._, true, false, P._], () => <h5>Error while loading data.</h5>)
+    .with([P._, false, true, []], () => <Spinner grow />)
+    .with([ManageOrdersTab.active, false, false, P._], () => <ActiveOrdersTable data={data} />)
+    .with([ManageOrdersTab.history, false, false, P._], () => <HistoryOrdersTable data={data} />)
+    .otherwise(() => <h5>No orders.</h5>);
 };

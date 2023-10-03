@@ -6,6 +6,7 @@
 import type { ReactElement } from 'react';
 import { ArrowUpIcon, PRIMITIVE_COLORS } from '@nilfoundation/ui-kit';
 import { useStyletron } from 'styletron-react';
+import { match } from 'ts-pattern';
 import { globalStyles } from '@/styles/globalStyles';
 import { styles as s } from './styles';
 
@@ -31,16 +32,16 @@ export const PriceChangeIndicator = ({
 }: PriceChangeIndicatorProps): ReactElement => {
   const [css] = useStyletron();
   const isGrow = !!change && change > 0;
-  const computedClassName = plainColor
-    ? {}
-    : isGrow
-    ? globalStyles.successText
-    : globalStyles.dangerText;
-  const computedIconColor = plainColor
-    ? undefined
-    : isGrow
-    ? PRIMITIVE_COLORS.green300
-    : PRIMITIVE_COLORS.red300;
+
+  const computedClassName = match([plainColor, isGrow])
+    .with([false, true], () => globalStyles.successText)
+    .with([false, false], () => globalStyles.dangerText)
+    .otherwise(() => ({}));
+
+  const computedIconColor = match([plainColor, isGrow])
+    .with([false, true], () => PRIMITIVE_COLORS.green300)
+    .with([false, false], () => PRIMITIVE_COLORS.red300)
+    .otherwise(() => undefined);
 
   return (
     <div className={css({ ...computedClassName, ...s.container })}>

@@ -6,6 +6,7 @@
 import type { ReactElement } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import { dequal as deepEqual } from 'dequal';
+import { P, match } from 'ts-pattern';
 import { useLocalStorage } from '@/hooks';
 import { siteMoneyTickerAbbreviation } from '@/constants';
 import { selectLastOrderData, selectOrderBookData, useAppSelector } from '@/redux';
@@ -75,37 +76,33 @@ const OrderBookViewFactory = ({
 }) => {
   const { proposals, requests } = data;
 
-  switch (true) {
-    case isLoading && !proposals.length && !requests.length:
-      return <Spinner grow />;
-    case isError:
-      return <h5>Error while loading data.</h5>;
-    case !!proposals.length || !!requests.length:
-      return (
-        <>
-          <OrderBookTable
-            type="requests"
-            data={requests}
-          />
-          <div className={styles.lastDeal}>
-            {lastOrderData && (
-              <>
-                <div className={styles.lastDealTitle}>Last deal:</div>
-                {lastOrderData.cost && (
-                  <div className={`${lastOrderData.type}TextColor`}>
-                    {`${lastOrderData.cost.toFixed(4)} ${siteMoneyTickerAbbreviation}`}
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-          <OrderBookTable
-            type="proposals"
-            data={proposals}
-          />
-        </>
-      );
-    default:
-      return <h5>No orders.</h5>;
-  }
+  return match([isLoading, isError, proposals, requests])
+    .with([true, false, [], []], () => <Spinner grow />)
+    .with([false, true, [], []], () => <h5>Error while loading data.</h5>)
+    .with([false, false, [], []], () => <h5>No orders.</h5>)
+    .with([P.any, P.any, P.array({ cost: P.number }), P.array({ cost: P.number })], () => (
+      <>
+        <OrderBookTable
+          type="requests"
+          data={requests}
+        />
+        <div className={styles.lastDeal}>
+          {lastOrderData && (
+            <>
+              <div className={styles.lastDealTitle}>Last deal:</div>
+              {lastOrderData.cost && (
+                <div className={`${lastOrderData.type}TextColor`}>
+                  {`${lastOrderData.cost.toFixed(4)} ${siteMoneyTickerAbbreviation}`}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        <OrderBookTable
+          type="proposals"
+          data={proposals}
+        />
+      </>
+    ))
+    .otherwise(() => <h5>No orders.</h5>);
 };
