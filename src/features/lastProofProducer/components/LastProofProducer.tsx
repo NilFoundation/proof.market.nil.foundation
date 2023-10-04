@@ -6,16 +6,18 @@
 import type { ReactElement } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import { P, match } from 'ts-pattern';
-import { DashboardCard } from '@/components';
+import { Card } from '@nilfoundation/ui-kit';
+import { useStyletron } from 'styletron-react';
 import { useAppSelector } from '@/redux';
-import styles from './LastProofProdcuer.module.scss';
+import { globalStyles } from '@/styles/globalStyles';
+import { getCardOverrides } from './overrides';
 
 /**
  * Displays last proof producer.
  *
  * @returns React component.
  */
-export const LastProofProducer = (): ReactElement => {
+const LastProofProducer = (): ReactElement => {
   const loadingData = useAppSelector(s => s.lastProofProducerState.isLoading);
   const errorGettingData = useAppSelector(s => s.lastProofProducerState.isError);
   const lastProofProducer = useAppSelector(
@@ -26,14 +28,17 @@ export const LastProofProducer = (): ReactElement => {
   );
 
   return (
-    <DashboardCard className={styles.container}>
-      <h4>Last proof producer:</h4>
+    <Card
+      title="Last proof producer"
+      headline
+      overrides={getCardOverrides()}
+    >
       <LastProofProducerViewFactory
         loadingData={loadingData}
         errorGettingData={errorGettingData}
         lastProofProducer={lastProofProducer}
       />
-    </DashboardCard>
+    </Card>
   );
 };
 
@@ -46,14 +51,18 @@ const LastProofProducerViewFactory = function LastProofProducerViewFactory({
   errorGettingData: boolean;
   lastProofProducer?: string;
 }) {
+  const [css] = useStyletron();
+
   return match([loadingData, errorGettingData, lastProofProducer])
     .with([true, false, undefined], () => <Spinner grow />)
     .with([P._, true, undefined], () => <h5>Error while getting data.</h5>)
     .with([false, false, P.string], () => (
       <h5>
-        <span className="text-muted">Username:</span>
+        <span className={css(globalStyles.textMuted)}>Username:</span>
         {` ${lastProofProducer}`}
       </h5>
     ))
     .otherwise(() => <h5>No last proof producer data was found.</h5>);
 };
+
+export default LastProofProducer;

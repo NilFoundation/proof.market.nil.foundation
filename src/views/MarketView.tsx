@@ -7,15 +7,15 @@ import type { ReactElement } from 'react';
 import { Container, Row, Col } from '@nilfoundation/react-components';
 import { Helmet } from 'react-helmet-async';
 import { StatementsList } from '@/features/statementsList';
+import { TradeHistory } from '@/features/trades';
+import { LastProofProducer } from '@/features/lastProofProducer';
 import {
   OrderManagementContextProvider,
   StatementDashboard,
   OrderBook,
   CreateOrdersPanel,
-  TradeHistory,
   ManageOrdersPanel,
   StatementInfoPanel,
-  LastProofProducer,
 } from '../components';
 
 /**

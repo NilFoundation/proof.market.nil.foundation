@@ -6,8 +6,8 @@
 import loadable from '@loadable/component';
 import { Spinner } from '@nilfoundation/ui-kit';
 
-const StatementsList = loadable(() => import('./components/StatementsList'), {
+const TradeHistory = loadable(() => import('./components/TradeHistory'), {
   fallback: <Spinner animation />,
 });
 
-export { StatementsList };
+export { TradeHistory };

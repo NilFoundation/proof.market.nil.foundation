@@ -4,6 +4,7 @@
 
 import { PRIMITIVE_COLORS } from '@nilfoundation/ui-kit';
 import type { StyleObject } from 'styletron-react';
+import { hideScrollbar } from './hideScrollbar';
 
 const textMuted: StyleObject = {
   color: PRIMITIVE_COLORS.gray500,
@@ -21,4 +22,5 @@ export const globalStyles = {
   textMuted,
   dangerText,
   successText,
+  hideScrollbar,
 };

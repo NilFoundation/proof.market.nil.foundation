@@ -6,9 +6,9 @@
 import type { ReactElement } from 'react';
 import { memo, useCallback, useMemo } from 'react';
 import type { Row, TableInstance, TableState, SortByFn } from 'react-table';
-import { ReactTable } from '@/components';
 import type { LastOrderData, OrderBookTableColumn, OrderBookDataItem } from '@/models';
 import { selectOrderBookMaxVolume, useAppSelector } from '@/redux';
+import { ReactTable } from '@/features/reactTable';
 import { OrderBookTableRow } from './OrderBookTableRow';
 import styles from './OrderBook.module.scss';
 
