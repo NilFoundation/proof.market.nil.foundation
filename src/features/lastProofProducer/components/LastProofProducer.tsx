@@ -4,9 +4,8 @@
  */
 
 import type { ReactElement } from 'react';
-import { Spinner } from '@nilfoundation/react-components';
 import { P, match } from 'ts-pattern';
-import { Card } from '@nilfoundation/ui-kit';
+import { Card, Spinner } from '@nilfoundation/ui-kit';
 import { useStyletron } from 'styletron-react';
 import { useAppSelector } from '@/redux';
 import { globalStyles } from '@/styles/globalStyles';
@@ -54,7 +53,7 @@ const LastProofProducerViewFactory = function LastProofProducerViewFactory({
   const [css] = useStyletron();
 
   return match([loadingData, errorGettingData, lastProofProducer])
-    .with([true, false, undefined], () => <Spinner grow />)
+    .with([true, false, undefined], () => <Spinner animation />)
     .with([P._, true, undefined], () => <h5>Error while getting data.</h5>)
     .with([false, false, P.string], () => (
       <h5>
