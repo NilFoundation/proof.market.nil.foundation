@@ -4,9 +4,8 @@
  */
 
 import type { ReactElement } from 'react';
-import { Spinner } from '@nilfoundation/react-components';
 import { P, match } from 'ts-pattern';
-import { Card } from '@nilfoundation/ui-kit';
+import { Card, Spinner } from '@nilfoundation/ui-kit';
 import { useStyletron } from 'styletron-react';
 import { selectCurrentStatementKey, useAppSelector } from '@/redux';
 import { TradeHistoryTable } from './TradeHistoryTable';
@@ -47,7 +46,7 @@ const TradeHistoryViewFactory = ({
   loadingStatements: boolean;
 }) => {
   return match([loadingStatements, selectedStatementKey])
-    .with([true, undefined], () => <Spinner grow />)
+    .with([true, undefined], () => <Spinner animation />)
     .with([false, undefined], () => <h5>Select statement to display trade history.</h5>)
     .with([P._, P.string], ([, selectedStatementKey]) => (
       <TradeHistoryTable
