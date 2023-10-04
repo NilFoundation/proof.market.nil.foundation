@@ -4,9 +4,10 @@
  */
 
 import type { ReactElement } from 'react';
-import { useMemo, memo } from 'react';
+import { useMemo } from 'react';
 import { dequal as deepEqual } from 'dequal';
 import { Spinner } from '@nilfoundation/react-components';
+import { P, match } from 'ts-pattern';
 import {
   selectSelectedUserStatementInfo,
   UpdateSelectedUserStatementsInfoKey,
@@ -69,10 +70,7 @@ const UserStatementInfoContent = (): ReactElement => {
 
 export default UserStatementInfoContent;
 
-/**
- * Conditionally renders data.
- */
-const StatementInfoViewFactory = memo(function StatementInfoViewFactory({
+const StatementInfoViewFactory = ({
   info,
   isLoadingInfo,
   isError,
@@ -80,22 +78,15 @@ const StatementInfoViewFactory = memo(function StatementInfoViewFactory({
   info?: UserStatementInfo;
   isLoadingInfo: boolean;
   isError: boolean;
-}) {
+}) => {
   const dataToDisplay = useMemo(
     () => (info ? mapToHumanReadableUserStatementInfo(info) : undefined),
     [info],
   );
 
-  switch (true) {
-    case isLoadingInfo && dataToDisplay === undefined:
-      return <Spinner grow />;
-    case isError:
-      return <h5>Error while getting data.</h5>;
-    case dataToDisplay !== undefined:
-      return <ObjectAsPlainTextViewer data={dataToDisplay!} />;
-    case dataToDisplay === undefined:
-      return <h5>No statement info was found.</h5>;
-    default:
-      return <></>;
-  }
-});
+  return match([isLoadingInfo, isError, dataToDisplay])
+    .with([true, false, undefined], () => <Spinner grow />)
+    .with([P._, true, undefined], () => <h5>Error while getting data.</h5>)
+    .with([false, false, P._], () => <ObjectAsPlainTextViewer data={dataToDisplay!} />)
+    .otherwise(() => <h5>No statement info was found.</h5>);
+};

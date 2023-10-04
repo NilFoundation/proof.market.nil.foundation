@@ -4,8 +4,8 @@
  */
 
 import type { ReactElement } from 'react';
-import { memo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
+import { P, match } from 'ts-pattern';
 import { selectCurrentStatementKey, useAppSelector } from '@/redux';
 import { DashboardCard } from '../../common';
 import { TradeHistoryTable } from './TradeHistoryTable';
@@ -33,29 +33,21 @@ export const TradeHistory = (): ReactElement => {
   );
 };
 
-/**
- * Renders trade history view, based on loading/data state.
- */
-const TradeHistoryViewFactory = memo(function TradeHistoryViewFactory({
+const TradeHistoryViewFactory = ({
   selectedStatementKey,
   loadingStatements,
 }: {
   selectedStatementKey?: string;
   loadingStatements: boolean;
-}) {
-  switch (true) {
-    case loadingStatements && selectedStatementKey === undefined:
-      return <Spinner grow />;
-    case selectedStatementKey === undefined:
-      return <h5>Select statement to display trade history.</h5>;
-    case selectedStatementKey !== undefined:
-      return (
-        <TradeHistoryTable
-          key={selectedStatementKey}
-          selectedStatementKey={selectedStatementKey!}
-        />
-      );
-    default:
-      return <></>;
-  }
-});
+}) => {
+  return match([loadingStatements, selectedStatementKey])
+    .with([true, undefined], () => <Spinner grow />)
+    .with([false, undefined], () => <h5>Select statement to display trade history.</h5>)
+    .with([P._, P.string], ([, selectedStatementKey]) => (
+      <TradeHistoryTable
+        key={selectedStatementKey}
+        selectedStatementKey={selectedStatementKey}
+      />
+    ))
+    .otherwise(() => <></>);
+};

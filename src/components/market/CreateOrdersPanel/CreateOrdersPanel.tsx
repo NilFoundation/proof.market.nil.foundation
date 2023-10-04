@@ -5,6 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { useState } from 'react';
+import { match } from 'ts-pattern';
 import { useAppSelector } from '@/redux';
 import { TradeOrderType } from '@/models';
 import { socialLinks as links } from '@/constants';
@@ -44,6 +45,31 @@ export const CreateOrdersPanel = (): ReactElement => {
 };
 
 /**
+ * Proposal tab.
+ *
+ * @returns React component.
+ */
+const ProposalTab = () => {
+  return (
+    <div className="text-center">
+      If you wish to generate proofs, please see instructions on our{' '}
+      <a
+        target="_blank"
+        rel="noreferrer"
+        href={getRuntimeConfigOrThrow().PROOFMARKET_TOOLCHAIN_REPO}
+      >
+        <strong>toolchain repository</strong>
+      </a>
+      <p></p>
+      <div>
+        or join us on Discord or Telegram:
+        <SocialLinks socialLinks={socialLinks} />
+      </div>
+    </div>
+  );
+};
+
+/**
  * Renders tab content conditionally.
  *
  * @param tab Selected tab.
@@ -55,28 +81,8 @@ const tabFactory = (tab: TradeOrderType, selectedStatementKey?: string) => {
     return <h5>Please, select statement to create orders.</h5>;
   }
 
-  switch (tab) {
-    case TradeOrderType.buy:
-      return <CreateRequestForm />;
-    case TradeOrderType.sell:
-      return (
-        <div className="text-center">
-          If you wish to generate proofs, please see instructions on our{' '}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={getRuntimeConfigOrThrow().PROOFMARKET_TOOLCHAIN_REPO}
-          >
-            <strong>toolchain repository</strong>
-          </a>
-          <p></p>
-          <div>
-            or join us on Discord or Telegram:
-            <SocialLinks socialLinks={socialLinks} />
-          </div>
-        </div>
-      );
-    default:
-      return <></>;
-  }
+  return match(tab)
+    .with(TradeOrderType.buy, () => <CreateRequestForm />)
+    .with(TradeOrderType.sell, () => <ProposalTab />)
+    .otherwise(() => <></>);
 };

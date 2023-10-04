@@ -5,6 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { useContext } from 'react';
+import { match } from 'ts-pattern';
 import { StatementsList } from '@/features/statementsList';
 import { StatementDashboard, TradeHistory, LastProofProducer } from '@/components';
 import { MobileMenuItem } from '../../enums/MobileMenuItem';
@@ -18,18 +19,12 @@ import { MobileMenuContext } from '../mobileLayout/MobileMenuContext';
 const MobileViewFactory = (): ReactElement => {
   const { selectedMenuOption } = useContext(MobileMenuContext);
 
-  switch (selectedMenuOption) {
-    case MobileMenuItem.statements:
-      return <StatementsList />;
-    case MobileMenuItem.charts:
-      return <StatementDashboard />;
-    case MobileMenuItem.trades:
-      return <TradeHistory />;
-    case MobileMenuItem.lastProofProducer:
-      return <LastProofProducer />;
-    default:
-      return <></>;
-  }
+  return match(selectedMenuOption)
+    .with(MobileMenuItem.statements, () => <StatementsList />)
+    .with(MobileMenuItem.charts, () => <StatementDashboard />)
+    .with(MobileMenuItem.trades, () => <TradeHistory />)
+    .with(MobileMenuItem.lastProofProducer, () => <LastProofProducer />)
+    .otherwise(() => <></>);
 };
 
 export default MobileViewFactory;

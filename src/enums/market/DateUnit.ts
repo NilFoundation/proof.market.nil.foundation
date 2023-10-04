@@ -3,6 +3,8 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
+import { match } from 'ts-pattern';
+
 /**
  * Date range variant.
  */
@@ -21,15 +23,11 @@ export enum DateUnit {
  * @returns Date format.
  */
 export const getDateFormatBasedOnDateUnit = (unit: DateUnit): string => {
-  switch (unit) {
-    case DateUnit.minute:
-    case DateUnit.quaterMinute:
-    case DateUnit.halfHour:
-    case DateUnit.hour:
-      return 'DD.MM HH:mm';
-    case DateUnit.day:
-      return 'DD.MM';
-    default:
-      return '';
-  }
+  return match(unit)
+    .with(DateUnit.minute, () => 'HH:mm')
+    .with(DateUnit.quaterMinute, () => 'HH:mm')
+    .with(DateUnit.halfHour, () => 'HH:mm')
+    .with(DateUnit.hour, () => 'HH:mm')
+    .with(DateUnit.day, () => 'DD.MM')
+    .otherwise(() => '');
 };

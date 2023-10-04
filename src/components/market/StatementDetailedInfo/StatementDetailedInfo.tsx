@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { Spinner } from '@nilfoundation/react-components';
+import { P, match } from 'ts-pattern';
 import { selectCurrentStatement, useAppSelector } from '@/redux';
 import type { Statement } from '@/models';
 import styles from './StatementDetailedInfo.module.scss';
@@ -39,32 +40,28 @@ const StatementInfoViewFactory = ({
   loading: boolean;
   data?: Statement;
 }): ReactElement => {
-  switch (true) {
-    case loading && !data:
-      return <Spinner grow />;
-    case data !== undefined:
-      return (
-        <>
+  return match([loading, data])
+    .with([true, undefined], () => <Spinner grow />)
+    .with([false, undefined], () => <h4>No statement info was provided.</h4>)
+    .with([P.any, P.not(undefined)], ([, data]) => (
+      <>
+        <div className={styles.text}>
+          <span className="text-muted">Description:</span>
+          {data!.description}
+        </div>
+        {data?.url && (
           <div className={styles.text}>
-            <span className="text-muted">Description:</span>
-            {data!.description}
+            <span className="text-muted">Url:</span>
+            <a
+              href={data.url}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {data.url}
+            </a>
           </div>
-          {data?.url && (
-            <div className={styles.text}>
-              <span className="text-muted">Url:</span>
-              <a
-                href={data.url}
-                rel="noreferrer"
-                target="_blank"
-              >
-                {data.url}
-              </a>
-            </div>
-          )}
-        </>
-      );
-    case data === undefined:
-    default:
-      return <h4>No statement info was provided.</h4>;
-  }
+        )}
+      </>
+    ))
+    .otherwise(() => <></>);
 };

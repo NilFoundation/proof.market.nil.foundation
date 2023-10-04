@@ -4,8 +4,8 @@
  */
 
 import type { ReactElement } from 'react';
-import { memo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
+import { P, match } from 'ts-pattern';
 import { DashboardCard } from '@/components';
 import { useAppSelector } from '@/redux';
 import styles from './LastProofProdcuer.module.scss';
@@ -37,10 +37,7 @@ export const LastProofProducer = (): ReactElement => {
   );
 };
 
-/**
- * Renders last proof producer data.
- */
-const LastProofProducerViewFactory = memo(function LastProofProducerViewFactory({
+const LastProofProducerViewFactory = function LastProofProducerViewFactory({
   loadingData,
   errorGettingData,
   lastProofProducer,
@@ -49,20 +46,14 @@ const LastProofProducerViewFactory = memo(function LastProofProducerViewFactory(
   errorGettingData: boolean;
   lastProofProducer?: string;
 }) {
-  switch (true) {
-    case loadingData && !lastProofProducer:
-      return <Spinner grow />;
-    case !!lastProofProducer:
-      return (
-        <h5>
-          <span className="text-muted">Username:</span>
-          {` ${lastProofProducer}`}
-        </h5>
-      );
-    case errorGettingData && !lastProofProducer:
-      return <h5>No last proof producer data was found.</h5>;
-    case !lastProofProducer:
-    default:
-      return <h5>No last proof producer data was found.</h5>;
-  }
-});
+  return match([loadingData, errorGettingData, lastProofProducer])
+    .with([true, false, undefined], () => <Spinner grow />)
+    .with([P._, true, undefined], () => <h5>Error while getting data.</h5>)
+    .with([false, false, P.string], () => (
+      <h5>
+        <span className="text-muted">Username:</span>
+        {` ${lastProofProducer}`}
+      </h5>
+    ))
+    .otherwise(() => <h5>No last proof producer data was found.</h5>);
+};

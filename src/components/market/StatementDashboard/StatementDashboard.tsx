@@ -5,6 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { useState } from 'react';
+import { match } from 'ts-pattern';
 import { ChartType, DateUnit } from '@/enums';
 import { selectCurrentStatement, useAppSelector } from '@/redux';
 import { useLocalStorage, useWindowHeight } from '@/hooks';
@@ -91,12 +92,8 @@ export const StatementDashboard = (): ReactElement => {
  * @returns Chart.
  */
 const ChartFactory = ({ chartType, ...rest }: { chartType: ChartType } & ChartBaseProps) => {
-  switch (chartType) {
-    case ChartType.proofCostChart:
-      return <ProofCostChart {...rest} />;
-    case ChartType.proofGetTimeChart:
-      return <ProofTimeGenChart {...rest} />;
-    default:
-      return <></>;
-  }
+  return match(chartType)
+    .with(ChartType.proofCostChart, () => <ProofCostChart {...rest} />)
+    .with(ChartType.proofGetTimeChart, () => <ProofTimeGenChart {...rest} />)
+    .otherwise(() => <></>);
 };
