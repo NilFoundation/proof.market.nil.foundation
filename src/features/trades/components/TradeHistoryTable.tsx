@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { memo } from 'react';
-import { Spinner } from '@nilfoundation/react-components';
+import { Spinner } from '@nilfoundation/ui-kit';
 import type { ListChildComponentProps } from 'react-window';
 import type { StyleObject } from 'styletron-react';
 import { useStyletron } from 'styletron-react';
@@ -14,7 +14,7 @@ import type { Proposal } from '@/models';
 import { useInfiniteLoadTrades } from '@/hooks';
 import { VirtualList, Table, TRow, TBody, THeader, THead, TCell } from '@/features/shared';
 import { globalStyles } from '@/styles/globalStyles';
-import styles from './TradeHistory.module.scss';
+import { styles as s } from './styles';
 
 /**
  * Props.
@@ -59,7 +59,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
     if (!isItemLoaded(index)) {
       return (
         <TRow style={style}>
-          <Spinner grow />
+          <Spinner animation />
         </TRow>
       );
     }
@@ -84,7 +84,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
   };
 
   return (
-    <Table className={styles.table}>
+    <Table>
       <THead sticky>
         <TRow>
           {tradeHistoryTableHeadConfig.map(({ Header }, i) => (
@@ -102,7 +102,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
           loadMoreItems={loading ? () => {} : loadMoreItems}
           height={446}
           itemSize={28}
-          className={styles.virtualList}
+          className={css(s.list)}
           ref={listRef}
         >
           {Element}

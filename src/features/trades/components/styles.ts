@@ -7,7 +7,9 @@ import { hideScrollbar } from '@/styles/hideScrollbar';
 
 const list: StyleObject = { ...hideScrollbar };
 
-const container: StyleObject = {};
+const container: StyleObject = {
+  height: '100%',
+};
 
 export const styles = {
   list,
