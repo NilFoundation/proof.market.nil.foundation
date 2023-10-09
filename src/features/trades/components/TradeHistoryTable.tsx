@@ -5,14 +5,16 @@
 
 import type { ReactElement } from 'react';
 import { memo } from 'react';
-import { Spinner } from '@nilfoundation/react-components';
+import { Spinner } from '@nilfoundation/ui-kit';
 import type { ListChildComponentProps } from 'react-window';
-import { Table, TRow, TCell, THead, THeader, TBody } from '@/components';
+import type { StyleObject } from 'styletron-react';
+import { useStyletron } from 'styletron-react';
 import { formatDate, renderDashOnEmptyValue } from '@/utils';
 import type { Proposal } from '@/models';
 import { useInfiniteLoadTrades } from '@/hooks';
-import { VirtualList } from '@/features/shared';
-import styles from './TradeHistory.module.scss';
+import { VirtualList, Table, TRow, TBody, THeader, THead, TCell } from '@/features/shared';
+import { globalStyles } from '@/styles/globalStyles';
+import { styles as s } from './styles';
 
 /**
  * Props.
@@ -45,6 +47,7 @@ const tradeHistoryTableHeadConfig: Array<Record<'Header', string>> = [
 export const TradeHistoryTable = memo(function TradeHistoryTable({
   selectedStatementKey,
 }: TradeHistoryTableProps): ReactElement {
+  const [css] = useStyletron();
   const { items, loadMoreItems, loading, error, hasMore, listRef } = useInfiniteLoadTrades({
     selectedStatementKey,
   });
@@ -56,7 +59,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
     if (!isItemLoaded(index)) {
       return (
         <TRow style={style}>
-          <Spinner grow />
+          <Spinner animation />
         </TRow>
       );
     }
@@ -65,7 +68,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
     const { cost, generation_time, updatedOn } = currentItem;
     const nextItem = items.at(index + 1);
 
-    const className = nextItem ? getRowClass(nextItem, currentItem) : '';
+    const className = nextItem ? css(getRowClass(nextItem, currentItem)) : '';
 
     return (
       <TRow
@@ -81,7 +84,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
   };
 
   return (
-    <Table className={styles.table}>
+    <Table>
       <THead sticky>
         <TRow>
           {tradeHistoryTableHeadConfig.map(({ Header }, i) => (
@@ -99,7 +102,7 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
           loadMoreItems={loading ? () => {} : loadMoreItems}
           height={446}
           itemSize={28}
-          className={styles.virtualList}
+          className={css(s.list)}
           ref={listRef}
         >
           {Element}
@@ -114,16 +117,16 @@ export const TradeHistoryTable = memo(function TradeHistoryTable({
  *
  * @param prevItem Previous item.
  * @param currentItem CurrentItem.
- * @returns ClassName.
+ * @returns Style object.
  */
-const getRowClass = (prevItem: Proposal, currentItem: Proposal): string => {
+const getRowClass = (prevItem: Proposal, currentItem: Proposal): StyleObject => {
   if (prevItem.cost > currentItem.cost) {
-    return 'lossTextColor';
+    return globalStyles.dangerText;
   }
 
   if (prevItem.cost < currentItem.cost) {
-    return 'growTextColor';
+    return globalStyles.successText;
   }
 
-  return '';
+  return {};
 };

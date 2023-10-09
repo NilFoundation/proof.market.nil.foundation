@@ -1,13 +1,13 @@
 /**
- * @file Public feature interfaces.
+ * @file Exports public feature interfaces.
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
 import loadable from '@loadable/component';
 import { Spinner } from '@nilfoundation/ui-kit';
 
-const StatementsList = loadable(() => import('./components/StatementsList'), {
+const LastProofProducer = loadable(() => import('./components/LastProofProducer'), {
   fallback: <Spinner animation />,
 });
 
-export { StatementsList };
+export { LastProofProducer };

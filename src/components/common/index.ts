@@ -5,9 +5,7 @@
 
 export * from './Details';
 export * from './DashboardCard';
-export * from './ReactTable';
 export * from './FileUploader';
-export * from './Table';
 export * from './FullScreenView';
 export * from './ClickableIcon';
 export * from './Copyright';

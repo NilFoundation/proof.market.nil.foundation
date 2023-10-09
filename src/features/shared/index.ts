@@ -11,3 +11,4 @@ export * from './components/VirtualList/VirtualList';
 export * from './components/Footer/Footer';
 export * from './components/SocialLinks/SocialLinks';
 export * from './components/PriceChangeIndicator/PriceChangeIndicator';
+export * from './components/Table';

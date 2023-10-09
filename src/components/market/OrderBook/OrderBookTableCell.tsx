@@ -6,9 +6,9 @@
 import type { ReactElement } from 'react';
 import { Label } from '@nilfoundation/react-components';
 import type { Cell } from 'react-table';
-import { TCell } from '@/components';
 import { renderDashOnEmptyValue } from '@/utils';
 import type { OrderBookDataItem } from '@/models';
+import { TCell } from '@/features/shared';
 
 /**
  * Props.

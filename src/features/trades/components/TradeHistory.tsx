@@ -4,32 +4,37 @@
  */
 
 import type { ReactElement } from 'react';
-import { Spinner } from '@nilfoundation/react-components';
 import { P, match } from 'ts-pattern';
+import { Card, Spinner } from '@nilfoundation/ui-kit';
+import { useStyletron } from 'styletron-react';
 import { selectCurrentStatementKey, useAppSelector } from '@/redux';
-import { DashboardCard } from '../../common';
 import { TradeHistoryTable } from './TradeHistoryTable';
-import styles from './TradeHistory.module.scss';
+import { getCardOverrides } from './overrides';
+import { styles as s } from './styles';
 
 /**
  * Trade history component.
  *
  * @returns React component.
  */
-export const TradeHistory = (): ReactElement => {
+const TradeHistory = (): ReactElement => {
   const selectedStatementKey = useAppSelector(selectCurrentStatementKey);
   const loadingStatements = useAppSelector(s => s.statementsState.isLoading);
+  const [css] = useStyletron();
 
   return (
-    <DashboardCard>
-      <h4>Trades</h4>
-      <div className={styles.container}>
+    <Card
+      title="Trades"
+      overrides={getCardOverrides()}
+      headline
+    >
+      <div className={css(s.container)}>
         <TradeHistoryViewFactory
           loadingStatements={loadingStatements}
           selectedStatementKey={selectedStatementKey}
         />
       </div>
-    </DashboardCard>
+    </Card>
   );
 };
 
@@ -41,7 +46,7 @@ const TradeHistoryViewFactory = ({
   loadingStatements: boolean;
 }) => {
   return match([loadingStatements, selectedStatementKey])
-    .with([true, undefined], () => <Spinner grow />)
+    .with([true, undefined], () => <Spinner animation />)
     .with([false, undefined], () => <h5>Select statement to display trade history.</h5>)
     .with([P._, P.string], ([, selectedStatementKey]) => (
       <TradeHistoryTable
@@ -51,3 +56,5 @@ const TradeHistoryViewFactory = ({
     ))
     .otherwise(() => <></>);
 };
+
+export default TradeHistory;

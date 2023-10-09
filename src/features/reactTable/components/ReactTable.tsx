@@ -9,8 +9,8 @@ import { useFilters, useSortBy, useTable } from 'react-table';
 import type { ColumnInstance, TableInstance, TableOptions } from 'react-table';
 import { notEmpty } from '@/utils';
 import { useDebounce, useInitialTableState } from '@/hooks';
+import { Table, TBody, THead, TRow } from '@/features/shared';
 import { ReactTableHeader } from './ReactTableHeader';
-import { Table, TBody, THead, TRow } from '../Table';
 
 /**
  * Props.

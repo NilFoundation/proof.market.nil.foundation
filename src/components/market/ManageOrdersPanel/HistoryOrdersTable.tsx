@@ -7,9 +7,10 @@ import type { ReactElement } from 'react';
 import { memo, useCallback } from 'react';
 import type { Cell, Column, TableInstance, TableState } from 'react-table';
 import { TradeOrderType } from '@/models';
-import { ReactTable, TRow, TCell } from '@/components';
 import { renderDashOnEmptyValue } from '@/utils';
 import type { ManageOrdersData } from '@/models';
+import { ReactTable } from '@/features/reactTable';
+import { TCell, TRow } from '@/features/shared';
 import styles from './ManageOrdersPanel.module.scss';
 
 /**

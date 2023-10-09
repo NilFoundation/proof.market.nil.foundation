@@ -6,7 +6,7 @@
 import type { KeyboardEventHandler, ReactElement } from 'react';
 import { Icon } from '@nilfoundation/react-components';
 import type { ColumnInstance } from 'react-table';
-import { THeader } from '../Table';
+import { THeader } from '../../shared/components/Table';
 import styles from './ReactTable.module.scss';
 
 /**

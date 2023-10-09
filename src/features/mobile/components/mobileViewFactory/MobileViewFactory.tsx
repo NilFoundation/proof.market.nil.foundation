@@ -7,7 +7,9 @@ import type { ReactElement } from 'react';
 import { useContext } from 'react';
 import { match } from 'ts-pattern';
 import { StatementsList } from '@/features/statementsList';
-import { StatementDashboard, TradeHistory, LastProofProducer } from '@/components';
+import { StatementDashboard } from '@/components';
+import { TradeHistory } from '@/features/trades';
+import { LastProofProducer } from '@/features/lastProofProducer';
 import { MobileMenuItem } from '../../enums/MobileMenuItem';
 import { MobileMenuContext } from '../mobileLayout/MobileMenuContext';
 
