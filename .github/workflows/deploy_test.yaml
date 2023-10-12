@@ -14,6 +14,14 @@ on:
         default: ''
         type: string
 
+concurrency:
+  group: ${{
+    ( github.ref == 'refs/heads/master' &&
+    format('{0}/{1}', github.run_id, github.run_attempt) )
+    ||
+    format('{0}/{1}', github.workflow, github.ref) }}
+  cancel-in-progress: true
+
 jobs:
   build:
     uses: ./.github/workflows/build.yaml
