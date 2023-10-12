@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { ListItem, ListItemLabel } from '@nilfoundation/ui-kit';
+import { ListItem as BaseListItem, ListItemLabel } from '@nilfoundation/ui-kit';
 import { useAppSelector } from '@/redux';
 import { Path } from '@/features/routing';
 import type { StatementsListData } from '@/models';
@@ -15,24 +15,24 @@ import { ListItemInfo } from './ListItemInfo';
 /**
  * Props.
  */
-type CurcuitsListItemProps = {
+type ListItemProps = {
   data: StatementsListData;
 };
 
 /**
  * Currencies list item.
  *
- * @param {CurcuitsListItemProps} props - Props.
+ * @param {ListItemProps} props - Props.
  * @returns React component.
  */
-export const CurcuitsListItem = ({
+export const ListItem = ({
   data: { _key, cost, change, name, tag },
-}: CurcuitsListItemProps): ReactElement => {
+}: ListItemProps): ReactElement => {
   const isSelected = useAppSelector(s => s.statementsState.selectedKey === _key);
 
   return (
     <Link to={`${Path.market}/${name}`}>
-      <ListItem
+      <BaseListItem
         isActive={isSelected}
         endEnhancer={() => (
           <ListItemInfo
@@ -43,7 +43,7 @@ export const CurcuitsListItem = ({
         )}
       >
         <ListItemLabel description={tag}>{`${name}/${siteMoneyTickerAbbreviation}`}</ListItemLabel>
-      </ListItem>
+      </BaseListItem>
     </Link>
   );
 };
