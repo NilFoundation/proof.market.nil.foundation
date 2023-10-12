@@ -3,6 +3,7 @@ FROM node:18
 
 WORKDIR /home
 
-RUN chown node:node /home
+RUN useradd --system ${uid+--uid "$uid"} --user-group --shell /sbin/nologin --create-home --home-dir /home builder \
+  && chown -R builder:builder /home
 
-USER node
+USER builder

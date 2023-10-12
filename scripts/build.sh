@@ -9,18 +9,20 @@ DOCKER="docker"
 DOCKER_OPTS=""
 
 USE_DOCKER=false
-OUT_DIR="build"
+NPM_LOCAL_CACHE_DIR="$REPO_ROOT/.npm"
 
 build() {
   cd "$REPO_ROOT"
 
-  if [ ! -d node_modules ]; then
-    npm ci --ignore-scripts
-  fi
+  export npm_config_cache="$NPM_LOCAL_CACHE_DIR"
+
+  npm ci --ignore-scripts
 
   npm run lint:ts
-  npm run lint:editorconfig
-  npm run build -- --outDir "$OUT_DIR"
+  npm run build
+
+  rm -rf "$NPM_LOCAL_CACHE_DIR"
+
   cd -
 }
 
@@ -30,7 +32,7 @@ run_build() {
 
     $DOCKER build -t frontend-env scripts/docker
     $DOCKER run $DOCKER_OPTS --rm \
-      --volume ${PWD}:/home:Z -w /home \
+      --volume ${PWD}:/home:Z \
       -u $(id -u ${USER}):$(id -g ${USER}) \
       frontend-env ./scripts/build.sh
     cd -
