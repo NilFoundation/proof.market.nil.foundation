@@ -54,7 +54,7 @@
     "preview": "vite preview",
     "prettier": "prettier --write",
     "lint:ts": "eslint --ext=ts,tsx src",
-    "lint:editorconfig": "npx editorconfig-checker",
+    "lint:editorconfig": "npx --yes editorconfig-checker",
     "prepare": "husky install",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
