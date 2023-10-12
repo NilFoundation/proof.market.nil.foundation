@@ -18,7 +18,7 @@ import styles from './StatementInfoPanel.module.scss';
  *
  * @returns React component.
  */
-export const StatementInfoPanel = (): ReactElement => {
+const StatementInfoPanel = (): ReactElement => {
   const currentStatement = useAppSelector(selectCurrentStatement);
   const stats = useAppSelector(
     s => s.statementsState.statementsStats.find(x => x._key === currentStatement?._key),
@@ -55,3 +55,5 @@ export const StatementInfoPanel = (): ReactElement => {
     </DashboardCard>
   );
 };
+
+export default StatementInfoPanel;

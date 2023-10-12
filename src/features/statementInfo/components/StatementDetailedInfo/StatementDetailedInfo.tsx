@@ -47,7 +47,7 @@ const StatementInfoViewFactory = ({
       <>
         <div className={styles.text}>
           <span className="text-muted">Description:</span>
-          {data!.description}
+          {data?.description}
         </div>
         {data?.url && (
           <div className={styles.text}>

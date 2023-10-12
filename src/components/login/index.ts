@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './LoginForm';
+export * from '../../features/auth/components/LoginForm';
 export * from './AuthContainer';
-export * from './RegisterForm';
-export * from './ReadonlyAccessProvider';
+export * from '../../features/auth/components/RegisterForm';
+export * from '../../features/auth/components/ReadonlyAccessProvider';

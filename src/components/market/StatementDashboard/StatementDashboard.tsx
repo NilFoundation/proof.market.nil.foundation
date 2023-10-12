@@ -9,12 +9,12 @@ import { match } from 'ts-pattern';
 import { ChartType, DateUnit } from '@/enums';
 import { selectCurrentStatement, useAppSelector } from '@/redux';
 import { useLocalStorage, useWindowHeight } from '@/hooks';
+import { StatementInfoPanel } from '@/features/statementInfo';
 import type { ChartBaseProps } from '../../common';
 import { DashboardCard, FullScreenView, ProofCostChart, ProofTimeGenChart } from '../../common';
 import { ChartTypeSelect } from './ChartTypeSelect';
 import { DataRangeSelect } from './DataRangeSelect';
 import { DashboardToolbar } from './DashboardToolbar';
-import { StatementInfoPanel } from '../StatementInfoPanel';
 import { CopyToClipboardNavItem } from './CopyToClipboardNavItem';
 import './StatementDashboard.scss';
 
