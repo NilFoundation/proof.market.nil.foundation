@@ -1,6 +1,9 @@
 name: Version
 # This workflow is triggered on push to master branch.
-# It pushes new package version to external storage.
+# It patches version in package.json and pushes changes to master branch.
+# It also creates a new tag and pushes it to GitHub.
+# It is used to make a new release.
+# If you need to bump package minor or major version, you should do it manually.
 
 on:
   push:
@@ -23,23 +26,35 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [build]
     steps:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        token: ${{ secrets.PUSH_THIS_REPO_TOKEN }}
 
-    - name: Get version
-      id: get_version
+    - name: Set git user
       run: |
-        full_version=$(git describe)
-        version=$(echo $full_version | awk '{split($0,a,"-"); print a[2]}')
-        echo ::set-output name=version::$version
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'bot@nil.foundation'
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/setup-node@v3
       with:
-        name: build-${{ github.sha }}
+        node-version: 18
 
-    - name: Extract build results
-      run: tar -xf build-${{ github.sha }}.tar.gz
+    - name: Update version
+      run: npm version patch # creates new commit with tag automatically
 
-# TODO - app push to external storage with version
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PUSH_THIS_REPO_TOKEN }}
+        branch: master
+        tags: true
+
+    - uses: ncipollo/release-action@v1
+      with:
+        generateReleaseNotes: true
+        token: ${{ secrets.PUSH_THIS_REPO_TOKEN }}
