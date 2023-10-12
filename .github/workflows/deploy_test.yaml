@@ -20,7 +20,7 @@ jobs:
     secrets: inherit
     with:
       environment: test
-      commit: ${{ inputs.commit }}
+      commit: ${{ inputs.commit || github.sha }}
 
   update_test_stand:
     name: Update test stand
