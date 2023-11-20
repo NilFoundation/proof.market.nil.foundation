@@ -6,7 +6,7 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
-import ProtectedRoute from '@/components/login/ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from '@/features/auth/components/ProtectedRoute/ProtectedRoute';
 import RouterReduxConnector from '@/components/common/RouterReduxConnector/RouterReduxConnector';
 import { Path } from '@/features/routing';
 import { RouterParam } from '@/enums';

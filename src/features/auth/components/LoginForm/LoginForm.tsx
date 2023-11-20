@@ -24,7 +24,7 @@ import { login } from '@/api';
 import { useLogin } from '@/features/auth';
 import type { LoginData } from '@/models';
 import { getApiErrorMessage } from '@/utils';
-import { AuthCard } from '../AuthCard';
+import { AuthCard } from '../AuthCard/AuthCard';
 import styles from './LoginForm.module.scss';
 
 /**
