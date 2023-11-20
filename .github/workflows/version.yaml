@@ -1,0 +1,53 @@
+name: Version
+# This workflow is triggered on push to master branch.
+# It patches version in package.json and pushes changes to master branch.
+# It also creates a new tag and pushes it to GitHub.
+# If you need to bump package minor or major version, you should do it manually.
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "src/**"
+      - "index.html"
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
+    secrets: inherit
+    with:
+      environment: test
+      commit: ${{ github.sha }}
+      fill_config: false
+
+  version:
+    name: Version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [build]
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.PUSH_THIS_REPO_TOKEN }}
+
+    - name: Set git user
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'bot@nil.foundation'
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Update version
+      run: npm version patch # creates new commit with tag automatically
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.PUSH_THIS_REPO_TOKEN }}
+        branch: master
+        tags: true
