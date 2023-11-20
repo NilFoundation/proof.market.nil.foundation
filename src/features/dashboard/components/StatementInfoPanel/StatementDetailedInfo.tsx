@@ -3,7 +3,9 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
+import { globalStyles } from '@/styles/globalStyles';
 import type { ReactElement } from 'react';
+import { useStyletron } from 'styletron-react';
 
 type StatementDetailedInfoProps = {
   description?: string;
@@ -20,15 +22,17 @@ export const StatementDetailedInfo = ({
   description,
   url,
 }: StatementDetailedInfoProps): ReactElement => {
+  const [css] = useStyletron();
+
   return (
     <div>
       <div>
-        <span className="text-muted">Description:</span>
-        {description ? description : 'No description'}
+        <span className={css(globalStyles.textMuted)}>Description:</span>
+        {description ? ` ${description}` : 'No description'}
       </div>
       {url && (
         <div>
-          <span className="text-muted">Url:</span>
+          <span className={css(globalStyles.textMuted)}>Url:</span>{' '}
           <a
             href={url}
             rel="noreferrer"

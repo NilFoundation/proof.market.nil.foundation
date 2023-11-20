@@ -4,6 +4,7 @@
 
 import type { StyleObject } from 'styletron-react';
 import { globalStyles } from '@/styles/globalStyles';
+import { SPACE } from '@nilfoundation/ui-kit';
 
 const container: StyleObject = {
   display: 'flex',
@@ -20,6 +21,7 @@ const title: StyleObject = {
 const infoContainer: StyleObject = {
   display: 'flex',
   justifyContent: 'flex-start',
+  gap: SPACE[16],
 };
 
 export const styles = {
