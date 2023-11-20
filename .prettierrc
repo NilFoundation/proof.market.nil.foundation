@@ -5,14 +5,5 @@
   "singleQuote": true,
   "arrowParens": "avoid",
   "jsxSingleQuote": false,
-  "singleAttributePerLine": true,
-  "overrides": [
-    {
-      "files": "**/*.scss",
-      "options": {
-        "singleQuote": false,
-        "printWidth": 80
-      }
-    }
-  ]
+  "singleAttributePerLine": true
 }

@@ -4,3 +4,4 @@ coverage
 scripts
 .github
 .husky
+.vscode

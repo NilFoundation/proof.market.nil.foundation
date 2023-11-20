@@ -24,3 +24,6 @@ yarn-error.log*
 
 # runtime configuration in development mode
 runtime-config.dev.toml
+
+.vscode/*
+!.vscode/settings.json
