@@ -3,11 +3,11 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { removeItemFromLocalStorage } from '@/packages/LocalStorage';
+import { LocalStorageAPI } from '@/packages/localStorage';
 
 /**
  * Clears localStorage values related to auth state.
  */
 export const clearAuthLocalStorageState = () => {
-  removeItemFromLocalStorage('userToken');
+  LocalStorageAPI.removeItem('userToken');
 };

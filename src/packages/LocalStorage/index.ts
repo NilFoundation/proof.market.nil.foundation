@@ -3,5 +3,5 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-export * from './LocalStorage';
-export * from './LocalStorageKey';
+export { LocalStorageAPI } from './LocalStorage';
+export type { LocalStorageKey } from './LocalStorageKey';

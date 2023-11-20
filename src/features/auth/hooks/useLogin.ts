@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { SetJwtRevalidateTimeout, UpdateIsAuthorized, UpdateUserName } from '@/redux';
 import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from '@/utils';
 import { Path } from '@/features/routing';
-import { setItemIntoLocalStorage } from '@/packages/LocalStorage';
+import { LocalStorageAPI } from '@/packages/localStorage';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 
@@ -26,7 +26,7 @@ export const useLogin = (redirectPath = Path.market) => {
 
   const processCredentialsLogin = useCallback(
     async (jwt: string) => {
-      setItemIntoLocalStorage('userToken', jwt);
+      LocalStorageAPI.setItem('userToken', jwt);
 
       const user = getUserFromJwt(jwt);
       const timeout = calculateRenewJwtTimeGap(jwt);
