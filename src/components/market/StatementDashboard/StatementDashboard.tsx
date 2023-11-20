@@ -9,7 +9,7 @@ import { match } from 'ts-pattern';
 import { ChartType, DateUnit } from '@/enums';
 import { selectCurrentStatement, useAppSelector } from '@/redux';
 import { useLocalStorage, useWindowHeight } from '@/hooks';
-import { StatementInfoPanel } from '@/features/statementInfo';
+import { StatementInfoPanel } from '@/features/dashboard';
 import type { ChartBaseProps } from '../../common';
 import { DashboardCard, FullScreenView, ProofCostChart, ProofTimeGenChart } from '../../common';
 import { ChartTypeSelect } from './ChartTypeSelect';

@@ -8,3 +8,4 @@ export { useLogout } from './hooks/useLogout';
 export { useLogin } from './hooks/useLogin';
 
 export * from './components/ProtectedContent/ProtectedContent';
+export * from './components/ReadonlyAccessProvider/ReadonlyAccessProvider';

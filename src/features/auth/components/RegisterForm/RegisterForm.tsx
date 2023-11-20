@@ -26,7 +26,7 @@ import { SocialLinks } from '@/features/shared';
 import type { RegisterData } from '@/models';
 import { signUp, checkIsUsernameUnique } from '@/api';
 import { getApiErrorMessage } from '@/utils';
-import { AuthCard } from '../../../features/auth/components/AuthCard';
+import { AuthCard } from '../AuthCard/AuthCard';
 import styles from './RegisterForm.module.scss';
 
 const usernameRequiredMinLength = 3;

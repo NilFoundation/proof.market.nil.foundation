@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet-async';
 import { StatementsList } from '@/features/statementsList';
 import { TradeHistory } from '@/features/trades';
 import { LastProofProducer } from '@/features/lastProofProducer';
-import { StatementInfoPanel } from '@/features/statementInfo';
+import { StatementInfoPanel } from '@/features/dashboard';
 import {
   OrderManagementContextProvider,
   StatementDashboard,
