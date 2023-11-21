@@ -4,9 +4,14 @@
  */
 
 import { useEffect, useState } from 'react';
+import {
+  smScreenSize,
+  mdScreenSize,
+  lgScreenSize,
+  xlScreenSize,
+  BREAKPOINT,
+} from '@/styles/Breakpoint';
 import { useWindowDimensions } from './useWindowDimensions';
-
-type Breakpoint = 'sm' | 'md' | 'lg';
 
 /**
  * Hook to get current breakpoint based on screen width.
@@ -14,21 +19,34 @@ type Breakpoint = 'sm' | 'md' | 'lg';
  * @returns Matched breakpoint.
  */
 export const useBreakpoint = () => {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>();
+  const [breakpoint, setBreakpoint] = useState<BREAKPOINT>();
   const { width } = useWindowDimensions();
 
   useEffect(() => {
-    if (width < 768) {
-      setBreakpoint('sm');
+    if (width <= smScreenSize) {
+      setBreakpoint(BREAKPOINT.SM);
       return;
     }
 
-    if (width >= 1400) {
-      setBreakpoint('lg');
+    if (width > smScreenSize && width <= mdScreenSize) {
+      setBreakpoint(BREAKPOINT.MD);
       return;
     }
 
-    setBreakpoint('md');
+    if (width > mdScreenSize && width <= lgScreenSize) {
+      setBreakpoint(BREAKPOINT.LG);
+      return;
+    }
+
+    if (width > lgScreenSize && width <= xlScreenSize) {
+      setBreakpoint(BREAKPOINT.XL);
+      return;
+    }
+
+    if (width > xlScreenSize) {
+      setBreakpoint(BREAKPOINT.XXL);
+      return;
+    }
   }, [width]);
 
   return breakpoint;

@@ -3,7 +3,7 @@
  */
 
 import type { StyleObject } from 'styletron-react';
-import { BREAKPOINT } from './Breakpoint';
+import { lgScreenSize, mdScreenSize, smScreenSize, xlScreenSize } from './Breakpoint';
 
 const getStyles = (styles: StyleObject, query: string): StyleObject => ({
   [query]: styles,
@@ -17,22 +17,22 @@ const getStyles = (styles: StyleObject, query: string): StyleObject => ({
  */
 export const breakpointStyles = {
   sm: (styles: StyleObject): StyleObject =>
-    getStyles(styles, `@media screen and (max-width: ${BREAKPOINT.SM}px)`),
+    getStyles(styles, `@media screen and (max-width: ${smScreenSize}px)`),
   md: (styles: StyleObject): StyleObject =>
     getStyles(
       styles,
-      `@media screen and (min-width: ${BREAKPOINT.SM + 1}) and (max-width: ${BREAKPOINT.MD})`,
+      `@media screen and (min-width: ${smScreenSize + 1}) and (max-width: ${mdScreenSize})`,
     ),
   lg: (styles: StyleObject): StyleObject =>
     getStyles(
       styles,
-      `@media screen and (min-width: ${BREAKPOINT.MD + 1}) and (max-width: ${BREAKPOINT.LG})`,
+      `@media screen and (min-width: ${mdScreenSize + 1}) and (max-width: ${lgScreenSize})`,
     ),
   xl: (styles: StyleObject): StyleObject =>
     getStyles(
       styles,
-      `@media screen and (min-width: ${BREAKPOINT.LG + 1}) and (max-width: ${BREAKPOINT.XL})`,
+      `@media screen and (min-width: ${lgScreenSize + 1}) and (max-width: ${xlScreenSize})`,
     ),
   xxl: (styles: StyleObject): StyleObject =>
-    getStyles(styles, `@media screen and (min-width: ${BREAKPOINT.XL + 1})`),
+    getStyles(styles, `@media screen and (min-width: ${xlScreenSize + 1})`),
 };

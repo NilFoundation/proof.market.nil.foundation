@@ -95,7 +95,6 @@ export const LoginForm = (): ReactElement => {
             placeholder="password"
             autoComplete="off"
             error={!!errors['password']}
-            endEnhancer={<Button onClick={switchPwdInputType}></Button>}
             {...register('password')}
           />
         </FormControl>

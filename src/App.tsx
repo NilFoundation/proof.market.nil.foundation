@@ -14,6 +14,7 @@ import { getRuntimeConfigOrThrow } from './utils';
 import { useBreakpoint } from './features/shared';
 import { MobileRouter } from './features/mobile';
 import { NotificationContainer } from './features/notifications';
+import { BREAKPOINT } from './styles/Breakpoint';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
 
@@ -31,7 +32,7 @@ function App(): ReactElement {
       />
       <NotificationContainer>
         <Suspense fallback={<FullScreenLoader />}>
-          {bp === 'sm' ? <MobileRouter /> : <Router config={desktopRoutesConfig} />}
+          {bp === BREAKPOINT.SM ? <MobileRouter /> : <Router config={desktopRoutesConfig} />}
         </Suspense>
       </NotificationContainer>
       <GALocationTracker />

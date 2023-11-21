@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { FullScreenView } from '@/components';
 import { Path } from '@/features/routing';
 import { Copyright, useBreakpoint } from '@/features/shared';
+import { BREAKPOINT } from '@/styles/Breakpoint';
 import styles from './AuthContainer.module.scss';
 
 /**
@@ -33,8 +34,8 @@ export const AuthContainer = ({ children }: AuthContainerProps): ReactElement =>
       className={styles.loginContainer}
     >
       {children}
-      {bp === 'md' ||
-        (bp === 'lg' && (
+      {bp === BREAKPOINT.MD ||
+        (bp === BREAKPOINT.LG && (
           <Link
             className={styles.back}
             to={Path.market}

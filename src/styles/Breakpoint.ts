@@ -10,11 +10,10 @@ export const xlScreenSize = 1600;
 /**
  * Breakpoints.
  */
-export const BREAKPOINT = {
-  SM: smScreenSize,
-  MD: mdScreenSize,
-  LG: lgScreenSize,
-  XL: xlScreenSize,
-} as const;
-
-Object.freeze(BREAKPOINT);
+export const enum BREAKPOINT {
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+  XL = 'xl',
+  XXL = 'xxl',
+}
