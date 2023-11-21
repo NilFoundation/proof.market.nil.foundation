@@ -7,7 +7,7 @@ import type { StyleObject } from 'styletron-react';
 export const hideScrollbar: StyleObject = {
   scrollbarWidth: 'none',
   msOverflowStyle: 'none',
-  '&::-webkit-scrollbar': {
+  '::-webkit-scrollbar': {
     display: 'none',
   },
 };

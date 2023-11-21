@@ -4,6 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
+import { LabelMedium } from '@nilfoundation/ui-kit';
 
 /**
  * Copyright text.
@@ -11,5 +12,5 @@ import type { ReactElement } from 'react';
  * @returns React component.
  */
 export const Copyright = (): ReactElement => {
-  return <>{`Copyright © =nil; Foundation ${new Date().getFullYear()}`}</>;
+  return <LabelMedium>{`Copyright © =nil; Foundation ${new Date().getFullYear()}`}</LabelMedium>;
 };

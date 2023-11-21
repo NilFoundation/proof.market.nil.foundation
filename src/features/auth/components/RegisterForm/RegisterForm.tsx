@@ -14,19 +14,20 @@ import {
   Variant,
   Form,
   Spinner,
-  notificationActions,
 } from '@nilfoundation/react-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import debounce from 'lodash/debounce';
 import { useForm } from 'react-hook-form';
+import { NOTIFICATION_KIND } from '@nilfoundation/ui-kit';
 import { Path } from '@/features/routing';
 import { socialLinks } from '@/constants';
 import { SocialLinks } from '@/features/shared';
-import type { RegisterData } from '@/models';
 import { signUp, checkIsUsernameUnique } from '@/api';
 import { getApiErrorMessage } from '@/utils';
+import { notificationActions } from '@/features/notifications';
 import { AuthCard } from '../AuthCard/AuthCard';
+import type { RegisterData } from '../../models/RegisterData';
 import styles from './RegisterForm.module.scss';
 
 const usernameRequiredMinLength = 3;
@@ -68,10 +69,9 @@ export const RegisterForm = (): ReactElement => {
     try {
       await signUp(data);
 
-      notificationActions?.create({
-        title: 'Registration success',
+      notificationActions.create({
         message: `Successfully register new user ${data.user}`,
-        variant: Variant.success,
+        kind: NOTIFICATION_KIND.positive,
       });
 
       navigate(Path.login, { state });

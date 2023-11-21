@@ -4,13 +4,14 @@
  */
 
 import { useCallback } from 'react';
-import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { NOTIFICATION_KIND } from '@nilfoundation/ui-kit';
 import { SetJwtRevalidateTimeout, UpdateIsAuthorized, UpdateUserName } from '@/redux';
 import { Path } from '@/features/routing';
 import { LocalStorageAPI } from '@/packages/localStorage';
 import { getRuntimeConfigOrThrow } from '@/utils';
+import { notificationActions } from '@/features/notifications';
 import { calculateRenewJwtTimeGap } from '../utils/calculateRevalidateJwtTimeout';
 import { getUserFromJwt } from '../utils/jwtHelpers';
 
@@ -58,10 +59,9 @@ export const useLogin = (redirectPath = Path.market) => {
           return;
         }
 
-        notificationActions?.create({
-          title: 'Login success',
+        notificationActions.create({
           message: `Successfully login as ${user}`,
-          variant: Variant.success,
+          kind: NOTIFICATION_KIND.positive,
         });
       } catch {
         errorCb && errorCb();

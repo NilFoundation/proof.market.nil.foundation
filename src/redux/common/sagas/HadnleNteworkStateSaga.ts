@@ -3,9 +3,10 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { takeLatest } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
+import { NOTIFICATION_KIND } from '@nilfoundation/ui-kit';
+import { notificationActions } from '@/features/notifications';
 import { SetIsOnline } from '../actions';
 
 let offlineNotificationId: string | undefined = undefined;
@@ -32,11 +33,10 @@ function* HandleOnlineStatusChange({
       return;
     }
 
-    offlineNotificationId = notificationActions?.create({
-      title: 'Network error',
+    offlineNotificationId = notificationActions.create({
       message:
-        'Something is temporarily wrong with receiving site data. You could wait for a reconnect or try to reload the page.',
-      variant: Variant.danger,
+        'Something is temporarily wrong with receiving data. You could wait for a reconnect or try to reload the page.',
+      kind: NOTIFICATION_KIND.negative,
     });
 
     return;

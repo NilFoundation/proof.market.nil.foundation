@@ -12,3 +12,4 @@ export * from './components/Footer/Footer';
 export * from './components/SocialLinks/SocialLinks';
 export * from './components/PriceChangeIndicator/PriceChangeIndicator';
 export * from './components/Table';
+export * from './components/Copyright/Copyright';

@@ -6,9 +6,9 @@
 import type { ReactElement, ReactNode } from 'react';
 import { Icon } from '@nilfoundation/react-components';
 import { Link } from 'react-router-dom';
-import { Copyright, FullScreenView } from '@/components';
+import { FullScreenView } from '@/components';
 import { Path } from '@/features/routing';
-import { useBreakpoint } from '@/features/shared';
+import { Copyright, useBreakpoint } from '@/features/shared';
 import styles from './AuthContainer.module.scss';
 
 /**

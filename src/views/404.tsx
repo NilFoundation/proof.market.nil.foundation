@@ -4,7 +4,6 @@
  */
 
 import type { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ErrorPage } from '@nilfoundation/ui-kit';
 import { Path } from '../features/routing';

@@ -7,11 +7,12 @@ import type { ReactElement } from 'react';
 import { useContext, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { notificationActions, Variant } from '@nilfoundation/react-components';
+import { NOTIFICATION_KIND } from '@nilfoundation/ui-kit';
 import { AddUserRequest, useAppSelector } from '@/redux';
 import { createRequest } from '@/api/market/RequestsApi';
 import type { CreateRequest } from '@/models';
 import { getApiErrorMessage } from '@/utils';
+import { notificationActions } from '@/features/notifications';
 import { OrderManagementContext } from '../OrderManagementContextProvider';
 import { CreateTradeOrderForm } from '../CreateTradeOrderForm';
 import { PublicInput } from './PublicInput';
@@ -42,10 +43,11 @@ export const CreateRequestForm = (): ReactElement => {
 
       const { cost, eval_time } = data;
 
-      notificationActions?.create({
-        title: 'Order successfully created',
-        message: `Cost: ${cost}${eval_time ? `, eval_time: ${eval_time}` : ''}`,
-        variant: Variant.success,
+      notificationActions.create({
+        message: `Order successfully created. Cost: ${cost}${
+          eval_time ? `, eval_time: ${eval_time}` : ''
+        }`,
+        kind: NOTIFICATION_KIND.positive,
       });
       form.reset();
     } catch (e) {

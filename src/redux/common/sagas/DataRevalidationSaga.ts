@@ -3,9 +3,10 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { delay, put, takeLatest } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
+import { NOTIFICATION_KIND } from '@nilfoundation/ui-kit';
+import { notificationActions } from '@/features/notifications';
 import { SetPageIsVisible, StartDataRevalidation, StopDataRevalidation } from '../actions';
 
 const stopApiCallsAfterUserLeavesPageTimeout = 25000;
@@ -39,10 +40,9 @@ function* HandlePageVisibilityChange({
 
     yield put(StartDataRevalidation());
 
-    notificationActions?.create({
-      title: 'Network warning',
-      message: 'Please, wait before data updates',
-      variant: Variant.warning,
+    notificationActions.create({
+      message: 'Connection restored. Please, wait before data updates',
+      kind: NOTIFICATION_KIND.warning,
     });
 
     return;
