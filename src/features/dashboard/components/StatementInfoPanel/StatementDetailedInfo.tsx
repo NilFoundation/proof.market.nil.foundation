@@ -3,9 +3,9 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { globalStyles } from '@/styles/globalStyles';
 import type { ReactElement } from 'react';
 import { useStyletron } from 'styletron-react';
+import { globalStyles } from '@/styles/globalStyles';
 
 type StatementDetailedInfoProps = {
   description?: string;

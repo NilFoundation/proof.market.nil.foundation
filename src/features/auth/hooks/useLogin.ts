@@ -8,9 +8,11 @@ import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { SetJwtRevalidateTimeout, UpdateIsAuthorized, UpdateUserName } from '@/redux';
-import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from '@/utils';
 import { Path } from '@/features/routing';
 import { LocalStorageAPI } from '@/packages/localStorage';
+import { getRuntimeConfigOrThrow } from '@/utils';
+import { calculateRenewJwtTimeGap } from '../utils/calculateRevalidateJwtTimeout';
+import { getUserFromJwt } from '../utils/jwtHelpers';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 

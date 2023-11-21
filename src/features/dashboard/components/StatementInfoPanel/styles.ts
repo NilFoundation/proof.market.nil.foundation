@@ -3,8 +3,8 @@
  */
 
 import type { StyleObject } from 'styletron-react';
-import { globalStyles } from '@/styles/globalStyles';
 import { SPACE } from '@nilfoundation/ui-kit';
+import { globalStyles } from '@/styles/globalStyles';
 
 const container: StyleObject = {
   display: 'flex',

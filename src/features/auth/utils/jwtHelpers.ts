@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import jwt_decode from 'jwt-decode';
+import { JwtDecoder } from '@/packages/jwtDecoder';
 
 /**
  * Parse jwt to get username.
@@ -13,7 +13,7 @@ import jwt_decode from 'jwt-decode';
  * @returns Username or null.
  */
 export const getUserFromJwt = (jwt: string): string => {
-  const decoded = decodeJwt(jwt);
+  const decoded = JwtDecoder.decode(jwt);
 
   if (!decoded.preferred_username) {
     throw new Error('Invalid token!');
@@ -30,28 +30,11 @@ export const getUserFromJwt = (jwt: string): string => {
  * @returns Expired at.
  */
 export const getExpiredAtFromJwt = (jwt: string): number => {
-  const decoded = decodeJwt(jwt);
+  const decoded = JwtDecoder.decode(jwt);
 
   if (!decoded.exp) {
     throw new Error('Invalid token!');
   }
 
   return decoded.exp as number;
-};
-
-/**
- * Returns decoded jwt token.
- *
- * @param jwt - Jwt.
- * @returns .
- */
-const decodeJwt = (jwt: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const decoded: any = jwt_decode(jwt);
-
-  if (!decoded) {
-    throw new Error('Invalid token!');
-  }
-
-  return decoded;
 };

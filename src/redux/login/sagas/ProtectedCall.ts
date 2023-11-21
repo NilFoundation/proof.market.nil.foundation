@@ -6,7 +6,7 @@
 import { call, put } from 'redux-saga/effects';
 import type { StrictEffect } from 'redux-saga/effects';
 import { SetIsOnline } from '@/redux';
-import { clearAuthLocalStorageState } from '@/utils';
+import { clearAuthLocalStorageState } from '@/features/auth';
 import { UpdateIsAuthorized } from '../actions';
 
 /**

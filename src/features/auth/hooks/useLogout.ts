@@ -6,7 +6,7 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { UpdateIsAuthorized, UpdateUserName } from '@/redux';
-import { clearAuthLocalStorageState } from '@/utils';
+import { clearAuthLocalStorageState } from '../utils/clearAuthLocalStorageState';
 
 /**
  * Returns callback to logout existed user.
