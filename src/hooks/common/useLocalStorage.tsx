@@ -7,8 +7,8 @@
 
 import { useCallback, useState } from 'react';
 import { dequal as deepEqual } from 'dequal';
-import type { LocalStorageKey } from '@/packages/LocalStorage';
-import { getItemFromLocalStorage, setItemIntoLocalStorage } from '@/packages/LocalStorage';
+import type { LocalStorageKey } from '@/packages/localStorage';
+import { LocalStorageAPI } from '@/packages/localStorage';
 
 /**
  * Hook to use localStorage in a useState() hook way.
@@ -22,7 +22,7 @@ export const useLocalStorage = <T,>(
   initialValue: T,
 ): [T, (value: T) => void] => {
   const [storedValue, setStoredValue] = useState<T>(
-    () => getItemFromLocalStorage(key) ?? initialValue,
+    () => LocalStorageAPI.getItem(key) ?? initialValue,
   );
 
   const setValue = useCallback(
@@ -32,7 +32,7 @@ export const useLocalStorage = <T,>(
       }
 
       setStoredValue(value);
-      setItemIntoLocalStorage(key, value);
+      LocalStorageAPI.setItem(key, value);
     },
     [key, storedValue],
   );

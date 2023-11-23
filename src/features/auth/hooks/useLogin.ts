@@ -4,13 +4,16 @@
  */
 
 import { useCallback } from 'react';
-import { notificationActions, Variant } from '@nilfoundation/react-components';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { NOTIFICATION_KIND } from '@nilfoundation/ui-kit';
 import { SetJwtRevalidateTimeout, UpdateIsAuthorized, UpdateUserName } from '@/redux';
-import { calculateRenewJwtTimeGap, getRuntimeConfigOrThrow, getUserFromJwt } from '@/utils';
 import { Path } from '@/features/routing';
-import { setItemIntoLocalStorage } from '@/packages/LocalStorage';
+import { LocalStorageAPI } from '@/packages/localStorage';
+import { getRuntimeConfigOrThrow } from '@/utils';
+import { notificationActions } from '@/features/notifications';
+import { getUserFromJwt } from '@/packages/jwt';
+import { calculateRenewJwtTimeGap } from '../utils/calculateRevalidateJwtTimeout';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 
@@ -26,7 +29,7 @@ export const useLogin = (redirectPath = Path.market) => {
 
   const processCredentialsLogin = useCallback(
     async (jwt: string) => {
-      setItemIntoLocalStorage('userToken', jwt);
+      LocalStorageAPI.setItem('userToken', jwt);
 
       const user = getUserFromJwt(jwt);
       const timeout = calculateRenewJwtTimeGap(jwt);
@@ -56,10 +59,9 @@ export const useLogin = (redirectPath = Path.market) => {
           return;
         }
 
-        notificationActions?.create({
-          title: 'Login success',
+        notificationActions.create({
           message: `Successfully login as ${user}`,
-          variant: Variant.success,
+          kind: NOTIFICATION_KIND.positive,
         });
       } catch {
         errorCb && errorCb();

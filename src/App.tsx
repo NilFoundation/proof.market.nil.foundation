@@ -13,6 +13,8 @@ import ErrorView from './views/ErrorView';
 import { getRuntimeConfigOrThrow } from './utils';
 import { useBreakpoint } from './features/shared';
 import { MobileRouter } from './features/mobile';
+import { NotificationContainer } from './features/notifications';
+import { BREAKPOINT } from './styles/Breakpoint';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
 
@@ -28,9 +30,11 @@ function App(): ReactElement {
         titleTemplate={`${baseDocumentTitle} | %s`}
         defaultTitle={baseDocumentTitle}
       />
-      <Suspense fallback={<FullScreenLoader />}>
-        {bp === 'sm' ? <MobileRouter /> : <Router config={desktopRoutesConfig} />}
-      </Suspense>
+      <NotificationContainer>
+        <Suspense fallback={<FullScreenLoader />}>
+          {bp === BREAKPOINT.SM ? <MobileRouter /> : <Router config={desktopRoutesConfig} />}
+        </Suspense>
+      </NotificationContainer>
       <GALocationTracker />
       <PageVisibilityDetector />
     </ErrorBoundary>

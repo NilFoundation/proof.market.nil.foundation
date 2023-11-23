@@ -5,37 +5,30 @@
 
 import type { ReactElement } from 'react';
 import { useRef, useState, useEffect, useMemo } from 'react';
-import {
-  InputGroup,
-  Icon,
-  Input,
-  Size,
-  Button,
-  Variant,
-  Form,
-  Spinner,
-  notificationActions,
-} from '@nilfoundation/react-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import debounce from 'lodash/debounce';
 import { useForm } from 'react-hook-form';
+import {
+  BUTTON_KIND,
+  Button,
+  FormControl,
+  Input,
+  LabelMedium,
+  NOTIFICATION_KIND,
+  ParagraphMedium,
+} from '@nilfoundation/ui-kit';
+import { useStyletron } from 'styletron-react';
 import { Path } from '@/features/routing';
 import { socialLinks } from '@/constants';
 import { SocialLinks } from '@/features/shared';
-import type { RegisterData } from '@/models';
 import { signUp, checkIsUsernameUnique } from '@/api';
 import { getApiErrorMessage } from '@/utils';
+import { notificationActions } from '@/features/notifications';
 import { AuthCard } from '../AuthCard/AuthCard';
-import styles from './RegisterForm.module.scss';
-
-const usernameRequiredMinLength = 3;
-const usernameAndPwdMaxLength = 30;
-
-/**
- * Password input type.
- */
-type PwdInputType = 'password' | 'text';
+import type { RegisterData } from '../../models/RegisterData';
+import { getButtonOevrrides } from './overrides';
+import { styles } from './styles';
 
 /**
  * Register form.
@@ -43,18 +36,15 @@ type PwdInputType = 'password' | 'text';
  * @returns React component.
  */
 export const RegisterForm = (): ReactElement => {
+  const usernameRequiredMinLength = 3;
+  const usernameAndPwdMaxLength = 30;
+  const [css] = useStyletron();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [userNameIsUnique, setUserNameIsUnique] = useState(true);
   const { state } = useLocation();
-  const [pwdInputType, setPwdInputType] = useState<PwdInputType>('password');
-  const pwdInputIconName = pwdInputType === 'password' ? 'fa-eye-slash' : 'fa-eye';
-  const switchPwdInputType = () =>
-    setPwdInputType(pwdInputType === 'password' ? 'text' : 'password');
-
   const inputAnimationRef = useRef(null);
   const buttonAnimationRef = useRef(null);
   const errorMsgAnimationRef = useRef(null);
-  const userNameInputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -68,10 +58,9 @@ export const RegisterForm = (): ReactElement => {
     try {
       await signUp(data);
 
-      notificationActions?.create({
-        title: 'Registration success',
+      notificationActions.create({
         message: `Successfully register new user ${data.user}`,
-        variant: Variant.success,
+        kind: NOTIFICATION_KIND.positive,
       });
 
       navigate(Path.login, { state });
@@ -88,15 +77,6 @@ export const RegisterForm = (): ReactElement => {
     }
   });
 
-  useEffect(() => {
-    userNameInputRef.current && userNameInputRef.current.focus();
-  }, []);
-
-  const { ref, ...restRegister } = register('user', {
-    required: true,
-    minLength: usernameRequiredMinLength,
-    maxLength: usernameAndPwdMaxLength,
-  });
   const showPasswdInput = useMemo(() => !!dirtyFields.user, [dirtyFields.user]);
   const showSubmitButton = useMemo(() => !!dirtyFields.passwd, [dirtyFields.passwd]);
 
@@ -124,35 +104,26 @@ export const RegisterForm = (): ReactElement => {
 
   return (
     <AuthCard>
-      <Form className={styles.form}>
+      <form className={css(styles.form)}>
         <div>
-          <h4 className={styles.title}>Welcome to Proof Market!</h4>
+          <h4 className={css(styles.title)}>Welcome to Proof Market!</h4>
           <div className={`${styles.heading} text-muted`}>Create new account</div>
-          <Form.Group hasError={!!errors['user'] || !userNameIsUnique}>
-            <InputGroup
-              size={Size.lg}
-              className={styles.control}
-            >
-              <InputGroup.Addon>
-                <Icon
-                  iconName="fa-solid fa-user"
-                  className={styles.icon}
-                />
-              </InputGroup.Addon>
-              <Input
-                type="text"
-                id="userName"
-                placeholder="username"
-                aria-label="username"
-                ref={e => {
-                  ref(e);
-                  userNameInputRef.current = e;
-                }}
-                {...restRegister}
-              />
-            </InputGroup>
-            {!userNameIsUnique && <Form.Hint>Username should be unique</Form.Hint>}
-          </Form.Group>
+          <FormControl>
+            <Input
+              type="text"
+              id="userName"
+              error={!!errors['user']}
+              placeholder="username"
+              aria-label="username"
+              {...register('user', {
+                required: true,
+                minLength: usernameRequiredMinLength,
+                maxLength: usernameAndPwdMaxLength,
+              })}
+              min={0}
+              max={usernameAndPwdMaxLength}
+            />
+          </FormControl>
           <CSSTransition
             classNames="fade"
             timeout={300}
@@ -161,38 +132,22 @@ export const RegisterForm = (): ReactElement => {
             nodeRef={inputAnimationRef}
           >
             <div ref={inputAnimationRef}>
-              <Form.Group hasError={!!errors['passwd']}>
-                <InputGroup
-                  size={Size.lg}
-                  className={styles.control}
-                >
-                  <InputGroup.Addon>
-                    <Icon
-                      iconName="fa-solid fa-lock"
-                      className={styles.icon}
-                    />
-                  </InputGroup.Addon>
-                  <Input
-                    type={pwdInputType}
-                    id="password"
-                    placeholder="password"
-                    aria-label="password"
-                    autoComplete="off"
-                    {...register('passwd', {
-                      required: true,
-                      maxLength: usernameAndPwdMaxLength,
-                    })}
-                  />
-                  <InputGroup.Buttons>
-                    <Button onClick={switchPwdInputType}>
-                      <Icon
-                        iconName={`fa-solid ${pwdInputIconName}`}
-                        className={styles.icon}
-                      />
-                    </Button>
-                  </InputGroup.Buttons>
-                </InputGroup>
-              </Form.Group>
+              <FormControl>
+                <Input
+                  type="password"
+                  id="password"
+                  error={!!errors['passwd']}
+                  aria-label="password"
+                  placeholder="password"
+                  autoComplete="off"
+                  {...register('passwd', {
+                    required: true,
+                    maxLength: usernameAndPwdMaxLength,
+                  })}
+                  min={0}
+                  max={usernameAndPwdMaxLength}
+                />
+              </FormControl>
             </div>
           </CSSTransition>
           <CSSTransition
@@ -204,18 +159,17 @@ export const RegisterForm = (): ReactElement => {
           >
             <div ref={buttonAnimationRef}>
               <Button
-                block
-                variant={Variant.success}
-                size={Size.lg}
+                kind={BUTTON_KIND.primary}
+                overrides={getButtonOevrrides()}
                 disabled={isSubmitting || !isValid || !userNameIsUnique}
                 onClick={onSubmitLogin}
+                isLoading={isSubmitting}
               >
                 Register
-                {isSubmitting && <Spinner />}
               </Button>
             </div>
           </CSSTransition>
-          <div className={styles.errorMsg}>
+          <div className={css(styles.errorMsg)}>
             <CSSTransition
               in={!!errorMessage}
               timeout={300}
@@ -232,28 +186,27 @@ export const RegisterForm = (): ReactElement => {
             </CSSTransition>
           </div>
         </div>
-        <div className={styles.bottomBlock}>
-          <div className={styles.social}>
-            <h5 className={styles.title}>
+        <div className={css(styles.bottomBlock)}>
+          <div>
+            <ParagraphMedium className={css(styles.title)}>
               {"Join our Discord's proof-market channel/Telegram for questions/to stay updated"}
-            </h5>
+            </ParagraphMedium>
             <SocialLinks socialLinks={socialLinks} />
           </div>
-          <h5 className="text-center text-muted">{'Already have an account? '}</h5>
+          <LabelMedium className={css(styles.label)}>{'Already have an account? '}</LabelMedium>
           <Link
             to={Path.login}
             state={state}
           >
             <Button
-              block
-              variant={Variant.success}
-              size={Size.lg}
+              kind={BUTTON_KIND.primary}
+              overrides={getButtonOevrrides()}
             >
               Sign in
             </Button>
           </Link>
         </div>
-      </Form>
+      </form>
     </AuthCard>
   );
 };

@@ -4,8 +4,9 @@
  */
 
 import type { ReactElement } from 'react';
-import { Container, Row, Col } from '@nilfoundation/react-components';
-import { mainSiteUrl } from '@/constants';
+import { ErrorPage } from '@nilfoundation/ui-kit';
+import { Helmet } from 'react-helmet-async';
+import { Path } from '@/features/routing';
 
 /**
  * App Error view.
@@ -13,23 +14,17 @@ import { mainSiteUrl } from '@/constants';
  * @returns React component.
  */
 const ErrorView = (): ReactElement => (
-  <Container
-    as="main"
-    fluid
-  >
-    <Row>
-      <Col
-        xs={12}
-        className="text-center"
-      >
-        <h4>Sorry, unknown error occured.</h4>
-        <p className="text-muted">Please, try to reload page or leave message to support.</p>
-        <p>
-          <a href={mainSiteUrl}>{mainSiteUrl}</a>
-        </p>
-      </Col>
-    </Row>
-  </Container>
+  <>
+    <Helmet>
+      <title>Error occured</title>
+    </Helmet>
+    <ErrorPage
+      errorDescription="Something went wrong... Please reload the page or try again later."
+      errorCode={500}
+      redirectPath={Path.market}
+      redirectTitle="Go to the home page"
+    />
+  </>
 );
 
 export default ErrorView;

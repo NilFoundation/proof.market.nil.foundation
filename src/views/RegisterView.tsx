@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { RegisterForm } from '@/components';
+import { RegisterForm } from '@/features/auth';
 
 /**
  * Register user view.

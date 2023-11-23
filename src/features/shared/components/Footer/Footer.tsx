@@ -5,8 +5,8 @@
 
 import type { ReactElement } from 'react';
 import { useStyletron } from 'styletron-react';
-import { Copyright } from '@/components';
 import { socialLinks } from '@/constants';
+import { Copyright } from '../Copyright/Copyright';
 import { styles as s } from './styles';
 import { SocialLinks } from '../SocialLinks/SocialLinks';
 

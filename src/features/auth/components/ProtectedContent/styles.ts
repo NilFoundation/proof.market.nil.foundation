@@ -1,5 +1,5 @@
 /**
- * @file Footer component styles.
+ * @file Styles.
  */
 
 import type { StyleObject } from 'styletron-react';

@@ -5,7 +5,7 @@
 
 import type { Options } from 'ky';
 import ky from 'ky';
-import { getItemFromLocalStorage } from '@/packages/LocalStorage';
+import { LocalStorageAPI } from '@/packages/localStorage';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import { apiBaseUrl } from './apiHelpers';
 
@@ -58,7 +58,7 @@ export const createApiClient = (params: CreateApiClientParameters) => {
             return request;
           }
 
-          request.headers.set('Authorization', `Bearer ${getItemFromLocalStorage('userToken')}`);
+          request.headers.set('Authorization', `Bearer ${LocalStorageAPI.getItem('userToken')}`);
         },
       ],
     },

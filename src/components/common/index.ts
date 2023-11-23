@@ -8,7 +8,6 @@ export * from './DashboardCard';
 export * from './FileUploader';
 export * from './FullScreenView';
 export * from './ClickableIcon';
-export * from './Copyright';
 export * from './Overlay';
 export * from './ObjectAsPlainTextViewer';
 export * from './GALocationTracker';

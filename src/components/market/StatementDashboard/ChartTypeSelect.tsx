@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { Nav } from '@nilfoundation/react-components';
 import { ChartType } from '@/enums';
 import { useBreakpoint } from '@/features/shared';
+import { BREAKPOINT } from '@/styles/Breakpoint';
 
 /**
  * Props.
@@ -33,7 +34,7 @@ export const ChartTypeSelect = ({
   return (
     <Nav
       tabs
-      vertical={bp === 'sm'}
+      vertical={bp === BREAKPOINT.SM}
     >
       {Object.values(ChartType).map(x => (
         <Nav.Item

@@ -4,14 +4,15 @@
  */
 
 import type { ReactElement, ReactNode } from 'react';
-import { Jumbotron } from '@nilfoundation/react-components';
-import styles from './AuthCard.module.scss';
+import { Card } from '@nilfoundation/ui-kit';
+import { getCardOverrides } from './overrides';
 
 /**
  * Props.
  */
 type AuthCardProps = {
   children: ReactNode;
+  img?: string;
 };
 
 /**
@@ -20,6 +21,15 @@ type AuthCardProps = {
  * @param {AuthCardProps} props - Props.
  * @returns React component.
  */
-export const AuthCard = ({ children }: AuthCardProps): ReactElement => {
-  return <Jumbotron className={styles.authCard}>{children}</Jumbotron>;
+export const AuthCard = ({ children, img }: AuthCardProps): ReactElement => {
+  return (
+    <Card
+      border
+      headline
+      overrides={getCardOverrides()}
+      headerImage={img}
+    >
+      {children}
+    </Card>
+  );
 };

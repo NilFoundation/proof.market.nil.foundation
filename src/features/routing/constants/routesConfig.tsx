@@ -12,8 +12,9 @@ import RouterReduxConnector from '@/components/common/RouterReduxConnector/Route
 import RequestsContent from '@/components/portfolio/PortfolioRequestsInfoContent/PortfolioRequestsInfoContent';
 import UserStatementInfoContent from '@/components/portfolio/UserStatementInfoContent/UserStatementInfoContent';
 import ProposalContent from '@/components/portfolio/PortfolioProposalsInfoContent/PortfolioProposalsInfoContent';
-import AuthLayout from '@/layouts/AuthLayout';
-import MainLayout from '@/layouts/MainLayout';
+import AuthContainer from '@/features/auth/components/AuthContainer/AuthContainer';
+import Layout from '@/features/shared/components/Layout/Layout';
+import { Footer, Navbar } from '@/features/shared';
 import { Path } from '../models/Paths';
 
 const MarketView = lazy(
@@ -47,7 +48,7 @@ export const routesConfig: RouteObject[] = [
         ),
       },
       {
-        element: <AuthLayout />,
+        element: <AuthContainer />,
         children: [
           {
             path: Path.login,
@@ -60,7 +61,12 @@ export const routesConfig: RouteObject[] = [
         ],
       },
       {
-        element: <MainLayout />,
+        element: (
+          <Layout
+            header={<Navbar />}
+            footer={<Footer />}
+          />
+        ),
         children: [
           {
             element: <ProtectedRoute readonlyAccess />,

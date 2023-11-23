@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createTheme } from '@nilfoundation/ui-kit';
 // TODO - replace HashRouter with BrowserRouter after migrating from gh pages
@@ -28,7 +28,9 @@ configureGA();
 const engine = new Styletron();
 const { theme } = createTheme(engine, { enableDefaultFonts: false });
 
-render(
+const root = createRoot(document.getElementById('root') || document.body);
+
+root.render(
   <React.StrictMode>
     <HelmetProvider>
       <Provider store={store}>
@@ -42,7 +44,6 @@ render(
       </Provider>
     </HelmetProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
 
 // TODO - enable service-workier in vite build
