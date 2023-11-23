@@ -3,8 +3,8 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
+import type { LoginData, AuthData } from '@/features/auth';
 import { createApiClient } from '../common';
-import type { LoginData, AuthData } from '../../models';
 
 const httpFetcher = createApiClient('/user');
 

@@ -21,6 +21,7 @@ import type {
   HistogramData,
   HistogramStyleOptions,
   ISeriesApi,
+  Time,
 } from 'lightweight-charts';
 import { MismatchDirection } from 'lightweight-charts';
 import { DateUnit } from '@/enums';
@@ -107,7 +108,7 @@ export const useRenderChartData = <T extends SeriesType>({
       bar && setCurrentChartData(bar);
     };
 
-    const crosshairMoveHandler: MouseEventHandler = param => {
+    const crosshairMoveHandler: MouseEventHandler<Time> = param => {
       if (!param?.time) {
         setLastBarChartData();
         return;

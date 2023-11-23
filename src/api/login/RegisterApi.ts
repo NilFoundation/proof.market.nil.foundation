@@ -3,8 +3,8 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
+import type { RegisterData } from '@/features/auth';
 import { createApiClient } from '../common';
-import type { RegisterData } from '../../models';
 
 const httpFetcher = createApiClient({
   baseUrl: '/user',

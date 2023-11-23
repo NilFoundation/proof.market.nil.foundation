@@ -58,7 +58,7 @@ const LegendViewFactory = ({ data }: { data?: LegendData }) => {
                 className="text-muted"
                 key={x}
               >
-                {`${x}: ${data[x].toFixed(2)}`}
+                {`${x}: ${(data[x] as number)?.toFixed(2)}`}
               </div>
             ),
         )}

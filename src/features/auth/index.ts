@@ -13,3 +13,7 @@ export * from './components/LoginForm/LoginForm';
 export * from './components/RegisterForm/RegisterForm';
 
 export * from './utils/clearAuthLocalStorageState';
+
+export * from './models/AuthData';
+export * from './models/LoginData';
+export * from './models/RegisterData';
