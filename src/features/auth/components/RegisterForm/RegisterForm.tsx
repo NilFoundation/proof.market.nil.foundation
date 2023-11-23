@@ -5,15 +5,6 @@
 
 import type { ReactElement } from 'react';
 import { useRef, useState, useEffect, useMemo } from 'react';
-import {
-  InputGroup,
-  Icon,
-  Input,
-  Size,
-  Variant,
-  Form,
-  Spinner,
-} from '@nilfoundation/react-components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import debounce from 'lodash/debounce';
@@ -21,6 +12,8 @@ import { useForm } from 'react-hook-form';
 import {
   BUTTON_KIND,
   Button,
+  FormControl,
+  Input,
   LabelMedium,
   NOTIFICATION_KIND,
   ParagraphMedium,
@@ -37,33 +30,21 @@ import type { RegisterData } from '../../models/RegisterData';
 import { getButtonOevrrides } from './overrides';
 import { styles } from './styles';
 
-const usernameRequiredMinLength = 3;
-const usernameAndPwdMaxLength = 30;
-
-/**
- * Password input type.
- */
-type PwdInputType = 'password' | 'text';
-
 /**
  * Register form.
  *
  * @returns React component.
  */
 export const RegisterForm = (): ReactElement => {
+  const usernameRequiredMinLength = 3;
+  const usernameAndPwdMaxLength = 30;
   const [css] = useStyletron();
   const [errorMessage, setErrorMessage] = useState<string>();
   const [userNameIsUnique, setUserNameIsUnique] = useState(true);
   const { state } = useLocation();
-  const [pwdInputType, setPwdInputType] = useState<PwdInputType>('password');
-  const pwdInputIconName = pwdInputType === 'password' ? 'fa-eye-slash' : 'fa-eye';
-  const switchPwdInputType = () =>
-    setPwdInputType(pwdInputType === 'password' ? 'text' : 'password');
-
   const inputAnimationRef = useRef(null);
   const buttonAnimationRef = useRef(null);
   const errorMsgAnimationRef = useRef(null);
-  const userNameInputRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -96,15 +77,6 @@ export const RegisterForm = (): ReactElement => {
     }
   });
 
-  useEffect(() => {
-    userNameInputRef.current && userNameInputRef.current.focus();
-  }, []);
-
-  const { ref, ...restRegister } = register('user', {
-    required: true,
-    minLength: usernameRequiredMinLength,
-    maxLength: usernameAndPwdMaxLength,
-  });
   const showPasswdInput = useMemo(() => !!dirtyFields.user, [dirtyFields.user]);
   const showSubmitButton = useMemo(() => !!dirtyFields.passwd, [dirtyFields.passwd]);
 
@@ -132,32 +104,26 @@ export const RegisterForm = (): ReactElement => {
 
   return (
     <AuthCard>
-      <Form className={css(styles.form)}>
+      <form className={css(styles.form)}>
         <div>
           <h4 className={css(styles.title)}>Welcome to Proof Market!</h4>
           <div className={`${styles.heading} text-muted`}>Create new account</div>
-          <Form.Group hasError={!!errors['user'] || !userNameIsUnique}>
-            <InputGroup
-              size={Size.lg}
-              className={css(styles.control)}
-            >
-              <InputGroup.Addon>
-                <Icon iconName="fa-solid fa-user" />
-              </InputGroup.Addon>
-              <Input
-                type="text"
-                id="userName"
-                placeholder="username"
-                aria-label="username"
-                ref={e => {
-                  ref(e);
-                  userNameInputRef.current = e;
-                }}
-                {...restRegister}
-              />
-            </InputGroup>
-            {!userNameIsUnique && <Form.Hint>Username should be unique</Form.Hint>}
-          </Form.Group>
+          <FormControl>
+            <Input
+              type="text"
+              id="userName"
+              error={!!errors['user']}
+              placeholder="username"
+              aria-label="username"
+              {...register('user', {
+                required: true,
+                minLength: usernameRequiredMinLength,
+                maxLength: usernameAndPwdMaxLength,
+              })}
+              min={0}
+              max={usernameAndPwdMaxLength}
+            />
+          </FormControl>
           <CSSTransition
             classNames="fade"
             timeout={300}
@@ -166,32 +132,22 @@ export const RegisterForm = (): ReactElement => {
             nodeRef={inputAnimationRef}
           >
             <div ref={inputAnimationRef}>
-              <Form.Group hasError={!!errors['passwd']}>
-                <InputGroup
-                  size={Size.lg}
-                  className={css(styles.control)}
-                >
-                  <InputGroup.Addon>
-                    <Icon iconName="fa-solid fa-lock" />
-                  </InputGroup.Addon>
-                  <Input
-                    type={pwdInputType}
-                    id="password"
-                    placeholder="password"
-                    aria-label="password"
-                    autoComplete="off"
-                    {...register('passwd', {
-                      required: true,
-                      maxLength: usernameAndPwdMaxLength,
-                    })}
-                  />
-                  <InputGroup.Buttons>
-                    <Button onClick={switchPwdInputType}>
-                      <Icon iconName={`fa-solid ${pwdInputIconName}`} />
-                    </Button>
-                  </InputGroup.Buttons>
-                </InputGroup>
-              </Form.Group>
+              <FormControl>
+                <Input
+                  type="password"
+                  id="password"
+                  error={!!errors['passwd']}
+                  aria-label="password"
+                  placeholder="password"
+                  autoComplete="off"
+                  {...register('passwd', {
+                    required: true,
+                    maxLength: usernameAndPwdMaxLength,
+                  })}
+                  min={0}
+                  max={usernameAndPwdMaxLength}
+                />
+              </FormControl>
             </div>
           </CSSTransition>
           <CSSTransition
@@ -250,7 +206,7 @@ export const RegisterForm = (): ReactElement => {
             </Button>
           </Link>
         </div>
-      </Form>
+      </form>
     </AuthCard>
   );
 };

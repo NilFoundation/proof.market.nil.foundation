@@ -8,8 +8,9 @@ import { useState } from 'react';
 import { match } from 'ts-pattern';
 import { ChartType, DateUnit } from '@/enums';
 import { selectCurrentStatement, useAppSelector } from '@/redux';
-import { useLocalStorage, useWindowHeight } from '@/hooks';
+import { useLocalStorage } from '@/hooks';
 import { StatementInfoPanel } from '@/features/dashboard';
+import { useWindowDimensions } from '@/features/shared';
 import type { ChartBaseProps } from '../../common';
 import { DashboardCard, FullScreenView, ProofCostChart, ProofTimeGenChart } from '../../common';
 import { ChartTypeSelect } from './ChartTypeSelect';
@@ -27,7 +28,7 @@ export const StatementDashboard = (): ReactElement => {
   const currentStatement = useAppSelector(selectCurrentStatement);
   const [chartType, setChartType] = useState(ChartType.proofCostChart);
   const [fullScreen, setFullScreen] = useState(false);
-  const windowHeight = useWindowHeight();
+  const { height: windowHeight } = useWindowDimensions();
 
   const [dataRange, setDataRange] = useLocalStorage<DateUnit>(
     'statementDashboardDataRange',

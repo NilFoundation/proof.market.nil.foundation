@@ -12,8 +12,8 @@ import { Path } from '@/features/routing';
 import { LocalStorageAPI } from '@/packages/localStorage';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import { notificationActions } from '@/features/notifications';
+import { getUserFromJwt } from '@/packages/jwt';
 import { calculateRenewJwtTimeGap } from '../utils/calculateRevalidateJwtTimeout';
-import { getUserFromJwt } from '../utils/jwtHelpers';
 
 const readonlyUser = getRuntimeConfigOrThrow().READONLY_USER;
 

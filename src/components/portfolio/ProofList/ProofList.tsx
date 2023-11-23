@@ -8,8 +8,8 @@ import { useMemo } from 'react';
 import { Spinner } from '@nilfoundation/react-components';
 import type { ListChildComponentProps } from 'react-window';
 import type { PortfolioRequestsInfo, Proof } from '@/models';
-import { useInfiniteLoadProofs, useWindowHeight } from '@/hooks';
-import { VirtualList } from '@/features/shared';
+import { useInfiniteLoadProofs } from '@/hooks';
+import { VirtualList, useWindowDimensions } from '@/features/shared';
 import { ProofListItem } from './ProofListItem';
 import styles from './ProofList.module.scss';
 
@@ -27,7 +27,7 @@ type ProofListProps = {
  * @returns React component.
  */
 export const ProofList = ({ selectedRequestsInfoKey }: ProofListProps): ReactElement => {
-  const windowHeight = useWindowHeight();
+  const { height: windowHeight } = useWindowDimensions();
   const listHeight = useMemo(() => windowHeight - 274, [windowHeight]);
   const { items, loadMoreItems, loading, hasMore, error } = useInfiniteLoadProofs({
     selectedRequestsInfoKey,

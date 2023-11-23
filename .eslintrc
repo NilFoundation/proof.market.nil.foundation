@@ -58,7 +58,7 @@
         }
       }
     ],
-    "jsdoc/require-description-complete-sentence": 1,
+    "jsdoc/require-description-complete-sentence": 0,
     "import/newline-after-import": 1,
     "import/no-named-as-default": 0,
     "import/order": [

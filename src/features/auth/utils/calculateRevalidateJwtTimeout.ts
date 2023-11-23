@@ -4,7 +4,7 @@
  */
 
 import dayjs from 'dayjs';
-import { getExpiredAtFromJwt } from './jwtHelpers';
+import { getExpiredAtFromJwt } from '@/packages/jwt';
 
 const renewExpiraitionDifference = 0.25 * 60;
 

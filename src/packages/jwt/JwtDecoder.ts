@@ -4,6 +4,7 @@
  */
 
 import jwt_decode from 'jwt-decode';
+import type { DecodedToken } from './models/DecodedToken';
 
 /**
  * Decodes jwt.
@@ -17,8 +18,8 @@ export class JwtDecoder {
    * @returns Decoded jwt.
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public static decode<T = any>(jwt: string): T {
-    const decoded: T = jwt_decode(jwt);
+  public static decode(jwt: string) {
+    const decoded: DecodedToken = jwt_decode(jwt);
 
     if (!decoded) {
       throw new Error('Invalid token!');

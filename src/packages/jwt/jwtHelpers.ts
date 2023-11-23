@@ -3,7 +3,7 @@
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 
-import { JwtDecoder } from '@/packages/jwtDecoder';
+import { JwtDecoder } from './JwtDecoder';
 
 /**
  * Parse jwt to get username.
@@ -19,7 +19,7 @@ export const getUserFromJwt = (jwt: string): string => {
     throw new Error('Invalid token!');
   }
 
-  return decoded.preferred_username as string;
+  return decoded.preferred_username;
 };
 
 /**
@@ -36,5 +36,5 @@ export const getExpiredAtFromJwt = (jwt: string): number => {
     throw new Error('Invalid token!');
   }
 
-  return decoded.exp as number;
+  return decoded.exp;
 };

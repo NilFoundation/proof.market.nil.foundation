@@ -69,6 +69,8 @@ export const LoginForm = (): ReactElement => {
             aria-label="username"
             type="text"
             error={!!errors['username']}
+            min={0}
+            max={30}
           />
         </FormControl>
         <FormControl>
@@ -80,6 +82,8 @@ export const LoginForm = (): ReactElement => {
             autoComplete="off"
             error={!!errors['password']}
             {...register('password')}
+            min={0}
+            max={30}
           />
         </FormControl>
         <div>
