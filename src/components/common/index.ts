@@ -11,7 +11,6 @@ export * from './ClickableIcon';
 export * from './Overlay';
 export * from './ObjectAsPlainTextViewer';
 export * from './GALocationTracker';
-export * from './PageVisibilityDetector';
 export * from './ProgressBar';
 export * from './RouterLink';
 export * from './ChartTemplate';

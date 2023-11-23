@@ -1,0 +1,130 @@
+@import '@/styles/constants.scss';
+@import '@/styles/mixins/hideScrollbar';
+@import '@/styles/mixins/tableColumns';
+@import '@/styles/mixins/transparentButton';
+
+.orderBook {
+  height: 493px;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem 0 auto;
+}
+
+.checkbox {
+  accent-color: $c-primary;
+  margin: 0 0.5rem 0 0 !important;
+}
+
+.label {
+  margin-bottom: 0 !important;
+  font-weight: 400;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20px;
+  margin-bottom: 10px;
+
+  h4 {
+    margin-bottom: 0;
+  }
+}
+
+.orderBookTable {
+  @include tableColumns(20%, 40%, 40%);
+}
+
+.rowsContainer {
+  height: 196px;
+  overflow: auto;
+  @include hideScrollbar;
+
+  &:first-child {
+    display: flex;
+    flex-direction: column;
+
+    div[role='cell'] {
+      height: 28px;
+    }
+  }
+
+  div[role='row'] {
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $c-base;
+    }
+
+    &::after {
+      opacity: 0.12;
+      content: '';
+      width: 100%;
+      transform: scale(var(--bar-width), 1);
+      transform-origin: left;
+      transition: width 0.2s ease;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    div[role='cell'] {
+      z-index: 2;
+      position: relative;
+
+      > span + span {
+        margin-left: 4px;
+        background-color: $c-base-light !important;
+      }
+    }
+  }
+}
+
+.proposal {
+  div[role='cell']:first-child {
+    color: $c-danger;
+  }
+}
+
+.request {
+  div[role='cell']:first-child {
+    color: $c-success;
+  }
+}
+
+.lastDeal {
+  width: 100%;
+  background-color: $c-base-darker;
+  z-index: 3;
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.lastDealTitle {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.changePriceStepButton {
+  @include transparentButton;
+  color: $c-secondary-darker !important;
+  transition: color 0.1s;
+  padding: 0 !important;
+  height: 25px;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:focus,
+  &:hover {
+    color: $c-secondary !important;
+  }
+}

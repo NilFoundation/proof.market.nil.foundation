@@ -16,7 +16,7 @@ import { getCardOverrides } from './overrides';
  *
  * @returns React component.
  */
-const LastProofProducer = (): ReactElement => {
+const LastProofProducerCard = (): ReactElement => {
   const loadingData = useAppSelector(s => s.lastProofProducerState.isLoading);
   const errorGettingData = useAppSelector(s => s.lastProofProducerState.isError);
   const lastProofProducer = useAppSelector(
@@ -64,4 +64,4 @@ const LastProofProducerViewFactory = function LastProofProducerViewFactory({
     .otherwise(() => <h5>No last proof producer data was found.</h5>);
 };
 
-export default LastProofProducer;
+export default LastProofProducerCard;

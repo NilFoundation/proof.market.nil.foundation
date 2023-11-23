@@ -11,4 +11,3 @@ export * from './OrderBook';
 export * from './ManageOrders';
 export * from './StatementsList';
 export * from './UserBalance';
-export * from './LastProofProducer';

@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { RouterParam } from '@/enums';
 import ProtectedRoute from '@/features/auth/components/ProtectedRoute/ProtectedRoute';
-import RouterReduxConnector from '@/components/common/RouterReduxConnector/RouterReduxConnector';
+import RouterReduxConnector from '@/features/shared/components/RouterReduxConnector/RouterReduxConnector';
 import RequestsContent from '@/components/portfolio/PortfolioRequestsInfoContent/PortfolioRequestsInfoContent';
 import UserStatementInfoContent from '@/components/portfolio/UserStatementInfoContent/UserStatementInfoContent';
 import ProposalContent from '@/components/portfolio/PortfolioProposalsInfoContent/PortfolioProposalsInfoContent';

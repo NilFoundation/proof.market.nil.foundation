@@ -6,8 +6,8 @@
 import { call, put, takeLatest, fork } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
 import { getLastProofProducerData } from '@/api';
-import type { LastProofProducer } from '@/models';
 import { getRuntimeConfigOrThrow } from '@/utils';
+import type { LastProofProducer } from '@/features/lastProofProducer';
 import {
   UpdateLastProofProducer,
   UpdateIsLoadingLastProofProducer,

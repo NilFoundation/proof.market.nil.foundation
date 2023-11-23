@@ -4,7 +4,7 @@
  */
 
 import { createAction } from '@reduxjs/toolkit';
-import type { LastProofProducer } from '@/models';
+import type { LastProofProducer } from '@/features/lastProofProducer/models/LastProofProducer';
 
 /**
  * Update last proof producer data.

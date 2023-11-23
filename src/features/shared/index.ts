@@ -13,3 +13,4 @@ export * from './components/SocialLinks/SocialLinks';
 export * from './components/PriceChangeIndicator/PriceChangeIndicator';
 export * from './components/Table';
 export * from './components/Copyright/Copyright';
+export * from './components/PageVisibilityDetector/PageVisibilityDetector';
