@@ -11,8 +11,9 @@ import { match } from 'ts-pattern';
 import { ChartType, DateUnit, RouterParam, RouterSearchParam } from '@/enums';
 import type { ChartBaseProps } from '@/components';
 import { ProofTimeGenChart, ProofCostChart } from '@/components';
-import { useSyncUrlAndSelectedItem, useWindowHeight } from '@/hooks';
+import { useSyncUrlAndSelectedItem } from '@/hooks';
 import { selectStatements, selectCurrentStatement, UpdateSelectedStatementKey } from '@/redux';
+import { useWindowDimensions } from '@/features/shared';
 
 /**
  * Charts view.
@@ -25,7 +26,7 @@ const ChartsView = (): ReactElement => {
   const chartType = params[RouterParam.chartType];
   const dateRange = searchParams.get(RouterSearchParam.chartDataRange);
   const displayVolumes = searchParams.get(RouterSearchParam.chartDisplayVolumes);
-  const windowHeight = useWindowHeight();
+  const { height: windowHeight } = useWindowDimensions();
 
   const computedDateRange: DateUnit = useMemo(
     () =>

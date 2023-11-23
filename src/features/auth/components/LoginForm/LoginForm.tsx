@@ -4,7 +4,7 @@
  */
 
 import type { ReactElement } from 'react';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { BUTTON_KIND, Button, FormControl, Input, LabelMedium } from '@nilfoundation/ui-kit';
 import { useForm } from 'react-hook-form';
@@ -15,7 +15,6 @@ import { login } from '@/api';
 import { useLogin } from '@/features/auth';
 import { getApiErrorMessage } from '@/utils';
 import { AuthCard } from '../AuthCard/AuthCard';
-import type { PwdInputType } from '../../models/PwdInputType';
 import logoImge from '../../assets/logo512x384.png';
 import type { LoginData } from '../../models/LoginData';
 import { styles } from './styles';
@@ -29,14 +28,9 @@ import { getButtonOevrrides } from './overrides';
 export const LoginForm = (): ReactElement => {
   const [css] = useStyletron();
   const nodeRef = useRef(null);
-  const userNameInputRef = useRef<HTMLInputElement | null>(null);
   const { state } = useLocation();
   const processLogin = useLogin(state?.from);
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [pwdInputType, setPwdInputType] = useState<PwdInputType>('password');
-  const pwdInputIconName = pwdInputType === 'password' ? 'fa-eye-slash' : 'fa-eye';
-  const switchPwdInputType = () =>
-    setPwdInputType(pwdInputType === 'password' ? 'text' : 'password');
 
   const {
     register,
@@ -64,32 +58,22 @@ export const LoginForm = (): ReactElement => {
     }
   });
 
-  useEffect(() => {
-    userNameInputRef.current && userNameInputRef.current.focus();
-  }, []);
-
-  const { ref, ...restRegister } = register('username', { required: true });
-
   return (
     <AuthCard img={logoImge}>
       <form>
         <FormControl>
           <Input
             id="userName"
-            {...restRegister}
+            {...register('username', { required: true })}
             placeholder="username"
             aria-label="username"
             type="text"
             error={!!errors['username']}
-            ref={e => {
-              ref(e);
-              userNameInputRef.current = e;
-            }}
           />
         </FormControl>
         <FormControl>
           <Input
-            type={pwdInputType}
+            type="password"
             id="password"
             aria-label="password"
             placeholder="password"

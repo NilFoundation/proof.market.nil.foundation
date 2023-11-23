@@ -9,5 +9,7 @@ export { useLogin } from './hooks/useLogin';
 
 export * from './components/ProtectedContent/ProtectedContent';
 export * from './components/ReadonlyAccessProvider/ReadonlyAccessProvider';
+export * from './components/LoginForm/LoginForm';
+export * from './components/RegisterForm/RegisterForm';
 
 export * from './utils/clearAuthLocalStorageState';

@@ -17,3 +17,14 @@ export const enum BREAKPOINT {
   XL = 'xl',
   XXL = 'xxl',
 }
+
+/**
+ * Breakpoint size map.
+ */
+export const breakpointSizeMap = new Map<BREAKPOINT, number>([
+  [BREAKPOINT.SM, smScreenSize],
+  [BREAKPOINT.MD, mdScreenSize],
+  [BREAKPOINT.LG, lgScreenSize],
+  [BREAKPOINT.XL, xlScreenSize],
+  [BREAKPOINT.XXL, Number.MAX_SAFE_INTEGER],
+]);

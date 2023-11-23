@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { LoginForm } from '../components';
+import { LoginForm } from '@/features/auth';
 
 /**
  * Login view.

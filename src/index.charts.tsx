@@ -4,42 +4,20 @@
  */
 
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import type { RouteObject } from 'react-router-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { store } from './redux';
 import { checkRuntimeConfig } from './utils';
-import { RouterParam } from './enums';
-import ChartsView from './views/ChartsView';
-import ChartsLayout from './layouts/ChartsLayout';
-import { Path } from './features/routing';
-import ErrorView from './views/ErrorView';
-import Page404 from './views/404';
+import { chartPageRoutes } from './features/chartPage';
 
 checkRuntimeConfig();
 
-const routes: RouteObject[] = [
-  {
-    element: <ChartsLayout />,
-    errorElement: <ErrorView />,
-    children: [
-      {
-        path: `:${RouterParam.statementName}/:${RouterParam.chartType}`,
-        element: <ChartsView />,
-      },
-      {
-        path: Path.any,
-        element: <Page404 showGoBackButton={false} />,
-      },
-    ],
-  },
-];
+const router = createHashRouter(chartPageRoutes);
+const root = createRoot(document.getElementById('root') || document.body);
 
-const router = createHashRouter(routes);
-
-render(
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <HelmetProvider>
@@ -47,5 +25,4 @@ render(
       </HelmetProvider>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root'),
 );
