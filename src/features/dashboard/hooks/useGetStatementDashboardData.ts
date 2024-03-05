@@ -7,18 +7,12 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { dequal as deepEqual } from 'dequal';
 import sum from 'lodash/sum';
-import type {
-  CandlestickData,
-  HistogramData,
-  LineData,
-  UTCTimestamp,
-  WhitespaceData,
-} from 'lightweight-charts';
+import type { CandlestickData, HistogramData, LineData, UTCTimestamp } from 'lightweight-charts';
+import { PRIMITIVE_COLORS } from '@nilfoundation/ui-kit';
 import { useAppSelector, selectSortedChartData } from '@/redux';
 import { getUTCTimestamp } from '@/utils';
-import { DateUnit } from '@/enums';
 import type { Proposal, Request } from '@/models';
-import { PRIMITIVE_COLORS } from '@nilfoundation/ui-kit';
+import { DateUnit } from '../models/DateUnit';
 
 /**
  * Hook return type.
@@ -27,7 +21,7 @@ type UseGetStatementDashboardDataReturnType = {
   chartData: {
     candlestickChartData: CandlestickData[];
     proofGenTimeData: LineData[];
-    volumesData?: Array<WhitespaceData | HistogramData>;
+    volumesData?: HistogramData[];
   };
   loadingData: boolean;
 };
@@ -134,7 +128,7 @@ const getProofGenTimeData = <T extends Request | Proposal>(
  */
 const getVolumesData = <T extends Request | Proposal>(
   ordersGrouppedByDate: Record<string, T[]>,
-): Array<WhitespaceData | HistogramData> => {
+): HistogramData[] => {
   const keys = Object.keys(ordersGrouppedByDate);
 
   return keys.map((x, index) => {

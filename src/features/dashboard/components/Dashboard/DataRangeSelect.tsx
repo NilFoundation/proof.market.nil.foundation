@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Nav } from '@nilfoundation/react-components';
-import { DateUnit } from '@/enums';
+import { DateUnit } from '../../models/DateUnit';
 
 /**
  * Props.

@@ -1,5 +1,5 @@
 /**
- * @file Index.
+ * @file Typings.
  * @copyright Yury Korotovskikh <u.korotovskiy@nil.foundation>
  */
 

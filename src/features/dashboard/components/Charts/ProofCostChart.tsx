@@ -4,10 +4,12 @@
  */
 
 import type { ReactElement } from 'react';
-import { useState } from 'react';
-import { CandlestickSeries, Chart } from '@nilfoundation/ui-kit';
-import type { CandlestickData, CandlestickSeriesPartialOptions } from 'lightweight-charts';
+import { useContext, useRef } from 'react';
+import { CandlestickSeries, Chart, HistogramSeries, Spinner } from '@nilfoundation/ui-kit';
+import type { ISeriesApi } from 'lightweight-charts';
 import { useGetStatementDashboardData } from '../../hooks/useGetStatementDashboardData';
+import { DashboardContext } from '../Dashboard/DashboardContext';
+import { seriesDefaultOptions, volumeSeriesOptions } from './chartsCommonSettings';
 
 /**
  * Proof cost chart.
@@ -15,30 +17,35 @@ import { useGetStatementDashboardData } from '../../hooks/useGetStatementDashboa
  * @returns React component.
  */
 export const ProofCostChart = (): ReactElement => {
-  const [legendData, setLegendData] = useState<CandlestickData | null>(null);
+  const { displayVolume, dateRange } = useContext(DashboardContext);
   const {
     chartData: { candlestickChartData, volumesData },
     loadingData: isLoadingChartData,
-  } = useGetStatementDashboardData(props.displayVolumes, props.dataRange);
+  } = useGetStatementDashboardData(displayVolume, dateRange);
+  const series = useRef<ISeriesApi<'Candlestick'> | null>(null);
 
   return (
-    <Chart>
-      <CandlestickSeries
-        data={candlestickChartData}
-        reactive
-        options={seriesDefaultOptions}
-      />
-    </Chart>
+    <div>
+      {isLoadingChartData && candlestickChartData.length === 0 ? (
+        <Spinner animation />
+      ) : (
+        <Chart>
+          <CandlestickSeries
+            data={candlestickChartData}
+            reactive
+            options={seriesDefaultOptions}
+            onInit={api => {
+              series.current = api;
+            }}
+          />
+          {displayVolume && volumesData?.length && (
+            <HistogramSeries
+              data={volumesData}
+              options={volumeSeriesOptions}
+            />
+          )}
+        </Chart>
+      )}
+    </div>
   );
-};
-
-/**
- * Series default options.
- */
-const seriesDefaultOptions: CandlestickSeriesPartialOptions = {
-  priceFormat: {
-    type: 'price',
-    precision: 4,
-    minMove: 0.0001,
-  },
 };

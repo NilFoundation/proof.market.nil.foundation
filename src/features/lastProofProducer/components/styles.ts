@@ -1,5 +1,5 @@
 /**
- * @file Styles for Trades component.
+ * @file Styles.
  */
 
 import type { StyleObject } from 'styletron-react';

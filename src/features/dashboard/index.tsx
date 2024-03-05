@@ -10,4 +10,12 @@ const Dashboard = loadable(() => import('./components/Dashboard/Dashboard'), {
   fallback: <Spinner animation />,
 });
 
+const StatementInfoPanel = loadable(
+  () => import('./components/StatementInfoPanel/StatementInfoPanel'),
+  {
+    fallback: <Spinner animation />,
+  },
+);
+
 export { Dashboard };
+export { StatementInfoPanel };

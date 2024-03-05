@@ -7,17 +7,17 @@ import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { match } from 'ts-pattern';
 import { Card } from '@nilfoundation/ui-kit';
-import { ChartType, DateUnit } from '@/enums';
+import { ChartType } from '@/enums';
 import { selectCurrentStatement, useAppSelector } from '@/redux';
 import { useLocalStorage } from '@/hooks';
-import { StatementInfoPanel } from '@/features/dashboard';
-import { useWindowDimensions } from '@/features/shared';
 import { ChartTypeSelect } from './ChartTypeSelect';
 import { DataRangeSelect } from './DataRangeSelect';
 import { DashboardToolbar } from './DashboardToolbar';
 import { CopyToClipboardNavItem } from './CopyToClipboardNavItem';
 import { getCardOverrides } from './overrides';
 import { ProofCostChart } from '../Charts/ProofCostChart';
+import { ProofTimeGenChart } from '../Charts/ProofGenTimeChart';
+import { DateUnit } from '../../models/DateUnit';
 
 /**
  * Statement dashboard.
@@ -68,11 +68,7 @@ const StatementDashboard = (): ReactElement => {
             />
           </DashboardToolbar>
         </div>
-        <ChartFactory
-          chartType={chartType}
-          dataRange={dataRange}
-          displayVolumes={displayVolumes}
-        />
+        <ChartFactory chartType={chartType} />
       </div>
     </Card>
   );
@@ -84,10 +80,10 @@ const StatementDashboard = (): ReactElement => {
  * @param {{chartType: ChartType}} props Props.
  * @returns Chart.
  */
-const ChartFactory = ({ chartType, ...rest }: { chartType: ChartType }) => {
+const ChartFactory = ({ chartType }: { chartType: ChartType }) => {
   return match(chartType)
     .with(ChartType.proofCostChart, () => <ProofCostChart />)
-    .with(ChartType.proofGetTimeChart, () => <ProofTimeGenChart {...rest} />)
+    .with(ChartType.proofGetTimeChart, () => <ProofTimeGenChart />)
     .otherwise(() => <></>);
 };
 

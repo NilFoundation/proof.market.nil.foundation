@@ -4,44 +4,43 @@
  */
 
 import type { ReactElement } from 'react';
-import { useMemo } from 'react';
+import { useContext } from 'react';
+import { Chart, HistogramSeries, LineSeries, Spinner } from '@nilfoundation/ui-kit';
 import { useGetStatementDashboardData } from '@/hooks';
-import colors from '@/styles/export.module.scss';
-import { ChartTemplate } from '../ChartTemplate';
-import type { ChartBaseProps } from '../ChartTemplate';
-
-/**
- * Props.
- */
-type ProofTimeGenChartProps = ChartBaseProps;
+import { seriesDefaultOptions, volumeSeriesOptions } from './chartsCommonSettings';
+import { DashboardContext } from '../Dashboard/DashboardContext';
 
 /**
  * Proof cost chart.
  *
- * @param {ProofTimeGenChartProps} props Props.
  * @returns React component.
  */
-export const ProofTimeGenChart = (props: ProofTimeGenChartProps): ReactElement => {
-  const seriesOptions = useMemo(
-    () => ({
-      color: colors.infoColor,
-    }),
-    [],
-  );
+export const ProofTimeGenChart = (): ReactElement => {
+  const { displayVolume, dateRange } = useContext(DashboardContext);
   const {
     chartData: { proofGenTimeData, volumesData },
     loadingData: isLoadingChartData,
-  } = useGetStatementDashboardData(props.displayVolumes, props.dataRange);
+  } = useGetStatementDashboardData(displayVolume, dateRange);
 
   return (
-    <ChartTemplate
-      loadingData={isLoadingChartData}
-      chartName="Proof Generation Time, min"
-      seriesData={proofGenTimeData}
-      seriesType="Line"
-      seriesOptions={seriesOptions}
-      volumesData={volumesData}
-      {...props}
-    />
+    <div>
+      {isLoadingChartData && proofGenTimeData.length === 0 ? (
+        <Spinner animation />
+      ) : (
+        <Chart>
+          <LineSeries
+            data={proofGenTimeData}
+            reactive
+            options={seriesDefaultOptions}
+          />
+          {displayVolume && volumesData?.length && (
+            <HistogramSeries
+              data={volumesData}
+              options={volumeSeriesOptions}
+            />
+          )}
+        </Chart>
+      )}
+    </div>
   );
 };
