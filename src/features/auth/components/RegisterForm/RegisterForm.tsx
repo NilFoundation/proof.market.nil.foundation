@@ -108,11 +108,10 @@ export const RegisterForm = (): ReactElement => {
         <div>
           <h4 className={css(styles.title)}>Welcome to Proof Market!</h4>
           <div className={`${styles.heading} text-muted`}>Create new account</div>
-          <FormControl>
+          <FormControl error={!!errors['user']}>
             <Input
               type="text"
               id="userName"
-              error={!!errors['user']}
               placeholder="username"
               aria-label="username"
               {...register('user', {
@@ -132,11 +131,10 @@ export const RegisterForm = (): ReactElement => {
             nodeRef={inputAnimationRef}
           >
             <div ref={inputAnimationRef}>
-              <FormControl>
+              <FormControl error={!!errors['passwd']}>
                 <Input
                   type="password"
                   id="password"
-                  error={!!errors['passwd']}
                   aria-label="password"
                   placeholder="password"
                   autoComplete="off"

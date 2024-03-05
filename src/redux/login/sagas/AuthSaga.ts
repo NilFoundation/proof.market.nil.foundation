@@ -6,7 +6,7 @@
 
 import { fork, put } from 'redux-saga/effects';
 import type { SagaIterator } from '@redux-saga/core';
-import { LocalStorageAPI } from '@/packages/localStorage';
+import { LocalStorageAPI } from '@/packages/localStorageAdapter';
 import { getUserFromJwt } from '@/packages/jwt';
 import { UpdateIsAuthorized, UpdateUserName } from '../actions';
 
