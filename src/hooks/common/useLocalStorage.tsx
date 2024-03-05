@@ -7,8 +7,8 @@
 
 import { useCallback, useState } from 'react';
 import { dequal as deepEqual } from 'dequal';
-import type { LocalStorageKey } from '@/packages/localStorage';
-import { LocalStorageAPI } from '@/packages/localStorage';
+import type { LocalStorageKey } from '@/packages/localStorageAdapter';
+import { LocalStorageAPI } from '@/packages/localStorageAdapter';
 
 /**
  * Hook to use localStorage in a useState() hook way.

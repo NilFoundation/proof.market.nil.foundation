@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { NOTIFICATION_KIND } from '@nilfoundation/ui-kit';
 import { SetJwtRevalidateTimeout, UpdateIsAuthorized, UpdateUserName } from '@/redux';
 import { Path } from '@/features/routing';
-import { LocalStorageAPI } from '@/packages/localStorage';
+import { LocalStorageAPI } from '@/packages/localStorageAdapter';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import { notificationActions } from '@/features/notifications';
 import { getUserFromJwt } from '@/packages/jwt';

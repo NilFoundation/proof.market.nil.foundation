@@ -5,7 +5,7 @@
 
 import { createReducer } from '@reduxjs/toolkit';
 import type { Statement, StatementInfo, StatementStats } from '@/models';
-import { LocalStorageAPI } from '@/packages/localStorage';
+import { LocalStorageAPI } from '@/packages/localStorageAdapter';
 import {
   UpdateStatementsList,
   UpdateSelectedStatementKey,

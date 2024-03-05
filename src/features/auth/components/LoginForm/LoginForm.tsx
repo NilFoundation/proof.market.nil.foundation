@@ -61,26 +61,24 @@ export const LoginForm = (): ReactElement => {
   return (
     <AuthCard img={logoImge}>
       <form>
-        <FormControl>
+        <FormControl error={!!errors['username']}>
           <Input
             id="userName"
             {...register('username', { required: true })}
             placeholder="username"
             aria-label="username"
             type="text"
-            error={!!errors['username']}
             min={0}
             max={30}
           />
         </FormControl>
-        <FormControl>
+        <FormControl error={!!errors['password']}>
           <Input
             type="password"
             id="password"
             aria-label="password"
             placeholder="password"
             autoComplete="off"
-            error={!!errors['password']}
             {...register('password')}
             min={0}
             max={30}
