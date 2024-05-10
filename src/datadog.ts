@@ -12,9 +12,9 @@ import { getRuntimeConfigOrThrow } from './utils';
  * @see {@link https://docs.datadoghq.com/real_user_monitoring/browser/}
  */
 export const configureDatadogRUM = (): void => {
-  if (!import.meta.env.PROD) {
-    return;
-  }
+  // if (!import.meta.env.PROD) {
+  //   return;
+  // }
 
   const { DATADOG_APPLICATION_ID, DATADOG_CLIENT_TOKEN, DATADOG_SERVICE_NAME, DATADOG_SITE } =
     getRuntimeConfigOrThrow();
@@ -34,5 +34,7 @@ export const configureDatadogRUM = (): void => {
     trackResources: false,
     trackLongTasks: false,
     trackUserInteractions: false,
+    silentMultipleInit: true,
+    allowFallbackToLocalStorage: true,
   });
 };
