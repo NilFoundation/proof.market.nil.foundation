@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
-import { ErrorBoundary, withProfiler } from '@sentry/react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Helmet } from 'react-helmet-async';
 import { FullScreenLoader, GALocationTracker, PageVisibilityDetector } from './components';
 import { Router, routesConfig as desktopRoutesConfig } from './features/routing';
@@ -41,4 +41,4 @@ function App(): ReactElement {
   );
 }
 
-export default withProfiler(App);
+export default App;
