@@ -1,6 +1,6 @@
 {
   "name": "proof-market.frontend",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "dependencies": {
     "@datadog/browser-rum": "^5.17.1",
