@@ -16,19 +16,27 @@ import AuthContainer from '@/features/auth/components/AuthContainer/AuthContaine
 import Layout from '@/features/shared/components/Layout/Layout';
 import { Footer, Navbar } from '@/features/shared';
 import { Path } from '../models/Paths';
+import lazyWithRetry from '../utils/lazyWithRetry';
 
-const MarketView = lazy(
+const MarketView = lazyWithRetry(
   () => import(/* webpackChunkName: "MarketView" */ '../../../views/MarketView'),
+  'MarketView',
 );
-const LoginView = lazy(
+const LoginView = lazyWithRetry(
   () => import(/* webpackChunkName: "LoginView" */ '../../../views/LoginView'),
+  'LoginView',
 );
-const PortfolioView = lazy(
+const PortfolioView = lazyWithRetry(
   () => import(/* webpackChunkName: "PortfolioView" */ '../../../views/PortfolioView'),
+  'PortfolioView',
 );
-const Page404 = lazy(() => import(/* webpackChunkName: "Page404" */ '../../../views/404'));
-const RegisterView = lazy(
+const Page404 = lazyWithRetry(
+  () => import(/* webpackChunkName: "Page404" */ '../../../views/404'),
+  'Page404',
+);
+const RegisterView = lazyWithRetry(
   () => import(/* webpackChunkName: "RegisterView" */ '../../../views/RegisterView'),
+  'RegisterView',
 );
 
 /**
