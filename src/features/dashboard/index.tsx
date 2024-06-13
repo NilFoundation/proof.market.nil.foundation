@@ -6,6 +6,10 @@
 import loadable from '@loadable/component';
 import { Spinner } from '@nilfoundation/ui-kit';
 
+const Dashboard = loadable(() => import('./components/Dashboard/Dashboard'), {
+  fallback: <Spinner animation />,
+});
+
 const StatementInfoPanel = loadable(
   () => import('./components/StatementInfoPanel/StatementInfoPanel'),
   {
@@ -13,4 +17,5 @@ const StatementInfoPanel = loadable(
   },
 );
 
+export { Dashboard };
 export { StatementInfoPanel };

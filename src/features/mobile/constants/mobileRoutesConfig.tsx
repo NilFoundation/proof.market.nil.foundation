@@ -7,7 +7,7 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import ProtectedRoute from '@/features/auth/components/ProtectedRoute/ProtectedRoute';
-import RouterReduxConnector from '@/components/common/RouterReduxConnector/RouterReduxConnector';
+import RouterReduxConnector from '@/features/shared/components/RouterReduxConnector/RouterReduxConnector';
 import { Path } from '@/features/routing';
 import { RouterParam } from '@/enums';
 import MobileLayout from '../components/mobileLayout/MobileLayout';

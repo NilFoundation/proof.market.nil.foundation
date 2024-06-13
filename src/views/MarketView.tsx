@@ -8,11 +8,10 @@ import { Container, Row, Col } from '@nilfoundation/react-components';
 import { Helmet } from 'react-helmet-async';
 import { StatementsList } from '@/features/statementsList';
 import { TradeHistory } from '@/features/trades';
-import { LastProofProducer } from '@/features/lastProofProducer';
-import { StatementInfoPanel } from '@/features/dashboard';
+import { LastProofProducerCard } from '@/features/lastProofProducer';
+import { StatementInfoPanel, Dashboard } from '@/features/dashboard';
 import {
   OrderManagementContextProvider,
-  StatementDashboard,
   OrderBook,
   CreateOrdersPanel,
   ManageOrdersPanel,
@@ -39,7 +38,7 @@ const MarketView = (): ReactElement => (
       >
         <StatementsList />
         <TradeHistory />
-        <LastProofProducer />
+        <LastProofProducerCard />
       </Col>
       <OrderManagementContextProvider>
         <Col
@@ -47,7 +46,7 @@ const MarketView = (): ReactElement => (
           md={6}
         >
           <StatementInfoPanel />
-          <StatementDashboard />
+          <Dashboard />
           <OrderBook />
         </Col>
         <Col

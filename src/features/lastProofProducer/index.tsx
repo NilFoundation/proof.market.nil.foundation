@@ -6,8 +6,10 @@
 import loadable from '@loadable/component';
 import { Spinner } from '@nilfoundation/ui-kit';
 
-const LastProofProducer = loadable(() => import('./components/LastProofProducer'), {
+const LastProofProducerCard = loadable(() => import('./components/LastProofProducerCard'), {
   fallback: <Spinner animation />,
 });
 
-export { LastProofProducer };
+export { LastProofProducerCard };
+
+export type { LastProofProducer } from './models/LastProofProducer';
