@@ -5,7 +5,7 @@
 
 import type { Options } from 'ky';
 import ky from 'ky';
-import { LocalStorageAPI } from '@/packages/localStorage';
+import { LocalStorageAPI } from '@/packages/localStorageAdapter';
 import { getRuntimeConfigOrThrow } from '@/utils';
 import { apiBaseUrl } from './apiHelpers';
 

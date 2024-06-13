@@ -5,7 +5,7 @@
 
 import type { ReactElement } from 'react';
 import { Suspense } from 'react';
-import { ErrorBoundary, withProfiler } from '@sentry/react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Helmet } from 'react-helmet-async';
 import { FullScreenLoader, GALocationTracker } from './components';
 import { Router, routesConfig as desktopRoutesConfig } from './features/routing';
@@ -15,6 +15,7 @@ import { PageVisibilityDetector, useBreakpoint } from './features/shared';
 import { MobileRouter } from './features/mobile';
 import { NotificationContainer } from './features/notifications';
 import { BREAKPOINT } from './styles/Breakpoint';
+import { exportErrorToOtelCollector } from './opentelemetry';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
 
@@ -25,7 +26,10 @@ function App(): ReactElement {
   const bp = useBreakpoint();
 
   return (
-    <ErrorBoundary fallback={<ErrorView />}>
+    <ErrorBoundary
+      fallback={<ErrorView />}
+      onError={e => exportErrorToOtelCollector(e)}
+    >
       <Helmet
         titleTemplate={`${baseDocumentTitle} | %s`}
         defaultTitle={baseDocumentTitle}
@@ -41,4 +45,4 @@ function App(): ReactElement {
   );
 }
 
-export default withProfiler(App);
+export default App;

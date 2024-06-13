@@ -1,17 +1,17 @@
 {
   "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "editor.formatOnType": true,
+  "editor.formatOnType": true
 }
