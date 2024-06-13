@@ -15,15 +15,15 @@ import { Provider as StyletronProvider } from 'styletron-react';
 import { BaseProvider } from 'baseui';
 import App from './App';
 import { store } from './redux';
-import { configureDatadogRUM } from './datadog';
+import { initOpentelemetry } from './opentelemetry';
 import { reportWebVitals } from './reportWebVitals';
 import configureGA from './ga';
 //import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { checkRuntimeConfig } from './utils';
 
 checkRuntimeConfig();
-configureDatadogRUM();
 configureGA();
+initOpentelemetry();
 
 const engine = new Styletron();
 const { theme } = createTheme(engine, { enableDefaultFonts: false });
