@@ -16,10 +16,8 @@ const keys = [
   'GA_TRACKING_ID',
   'CIRCUIT_DEVELOPER_GUIDE_URL',
   'API_RESPONSE_WAIT_TIMEOUT',
-  'DATADOG_APPLICATION_ID',
-  'DATADOG_CLIENT_TOKEN',
-  'DATADOG_SITE',
-  'DATADOG_SERVICE_NAME',
+  'OTEL_TRACE_EXPORTER_URL',
+  'OTEL_SERVICE_NAME',
 ] as const;
 
 type RuntimConfigKeys = (typeof keys)[number];

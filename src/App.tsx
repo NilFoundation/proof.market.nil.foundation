@@ -15,6 +15,7 @@ import { useBreakpoint } from './features/shared';
 import { MobileRouter } from './features/mobile';
 import { NotificationContainer } from './features/notifications';
 import { BREAKPOINT } from './styles/Breakpoint';
+import { exportErrorToOtelCollector } from './opentelemetry';
 
 const baseDocumentTitle = getRuntimeConfigOrThrow().SITE_DEFAULT_TITLE;
 
@@ -25,7 +26,10 @@ function App(): ReactElement {
   const bp = useBreakpoint();
 
   return (
-    <ErrorBoundary fallback={<ErrorView />}>
+    <ErrorBoundary
+      fallback={<ErrorView />}
+      onError={e => exportErrorToOtelCollector(e)}
+    >
       <Helmet
         titleTemplate={`${baseDocumentTitle} | %s`}
         defaultTitle={baseDocumentTitle}
